@@ -1,2 +1,3 @@
 Thêm tính năng:
-lọc theo vị trí, từ khóa,category
+login,logout,edit user
+chọn avatar chứ ko upload
