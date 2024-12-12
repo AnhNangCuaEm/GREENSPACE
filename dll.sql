@@ -4,18 +4,28 @@ USE greenspace;
 CREATE TABLE park (
   park_id INT AUTO_INCREMENT PRIMARY KEY,
   park_name VARCHAR(100) NOT NULL,
-  area INT NOT NULL,
-  location VARCHAR(255) NOT NULL,
+  area VARCHAR(100) NOT NULL,
+  location VARCHAR(500) NOT NULL,
   price DECIMAL(10, 2) NULL,
-  description TEXT
+  description TEXT,
+  created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  update_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-INSERT INTO park (park_id, park_name, area, location, price, description) VALUES
-(1, 'Central Park', 843, 'New York', 0, 'Central Park is an urban park in New York City located between the Upper West and Upper East Sides of Manhattan. It is the fifth-largest park in the city by area, covering 843 acres (341 ha).'),
-(2, 'Golden Gate Park', 1017, 'San Francisco', 0, 'Golden Gate Park, located in San Francisco, California, United States, is a large urban park consisting of 1,017 acres (412 ha) of public grounds.'),
-(3, 'Palm Park', 200, 'Los Angeles', 0, 'Palm Park is a small park located in Los Angeles, California. It is a great place for a picnic or a leisurely walk.'),
-(4, 'City Park', 330, 'New Orleans', 0, 'City Park, a 1,300-acre public park in New Orleans, Louisiana, is the 87th largest and 20th-most-visited urban public park in the United States.'),
-(5, 'Forest Park', 1371, 'St. Louis', 0, 'Forest Park is a public park in western St. Louis, Missouri. It is a prominent civic center and covers 1,371 acres (555 ha).')
+--areaは例えば新宿、渋谷、原宿などのエリアの広さを表す
+--locationは具体的な住所や地名を表す
+INSERT INTO park (park_id, park_name, area, location, price, description) VALUES 
+(1, 'Central Park', 'New York', 'Central Park, New York, NY', 0.00, 'Central Park is an urban park in New York City located between the Upper West Side and Upper East Side. It is the most visited urban park in the United States.'),
+(2, 'Golden Gate Park', 'San Francisco', 'Golden Gate Park, San Francisco, CA', 0.00, 'Golden Gate Park, located in San Francisco, California, is a large urban park consisting of 1,017 acres of public grounds.'),
+(3, 'Palm Park', 'Los Angeles', 'Palm Park, Los Angeles, CA', 0.00, 'Palm Park is a public park in Los Angeles, California, known for its palm trees and picnic areas.'),
+(4, 'City Park', 'Chicago', 'City Park, Chicago, IL', 0.00, 'City Park is a popular park in Chicago, Illinois, with sports fields and recreational facilities.'),
+(5, 'Forest Park', 'St. Louis', 'Forest Park, St. Louis, MO', 0.00, 'Forest Park is a public park in St. Louis, Missouri, known for its museums, gardens, and outdoor activities.')
+(6, 'Yoyogi Park', 'Tokyo', 'Yoyogi Park, Tokyo, Japan', 0.00, 'Yoyogi Park is a large park in Tokyo, Japan, known for its cherry blossoms and cultural events.'),
+(7, 'Hyde Park', 'London', 'Hyde Park, London, UK', 0.00, 'Hyde Park is a historic park in London, United Kingdom, with famous landmarks and recreational areas.'),
+(8, 'Vondelpark', 'Amsterdam', 'Vondelpark, Amsterdam, Netherlands', 0.00, 'Vondelpark is a popular park in Amsterdam, Netherlands, with walking paths and outdoor activities.'),
+(9, 'Tiergarten', 'Berlin', 'Tiergarten, Berlin, Germany', 0.00, 'Tiergarten is a large park in Berlin, Germany, known for its green spaces and cultural attractions.'),
+(10, 'Parc Guell', 'Barcelona', 'Parc Guell, Barcelona, Spain', 0.00, 'Parc Guell is a public park in Barcelona, Spain, designed by architect Antoni Gaudi.')
+;
 
 CREATE TABLE user (
   user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -23,6 +33,7 @@ CREATE TABLE user (
   username VARCHAR(100) UNIQUE NOT NULL,
   email VARCHAR(100) UNIQUE NOT NULL,
   phone VARCHAR(15) NOT NULL,
+  image VARCHAR(255) NULL,
   address VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL
 );
@@ -86,17 +97,6 @@ INSERT INTO park_amenities (park_id, amenity_id) VALUES
 (5, 4),
 (5, 5);
 
-CREATE TABLE review (
-  review_id INT AUTO_INCREMENT PRIMARY KEY,
-  park_id INT NOT NULL,
-  user_id INT NOT NULL,
-  rating INT CHECK (rating BETWEEN 1 AND 5),
-  comment TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (park_id) REFERENCES park(park_id),
-  FOREIGN KEY (user_id) REFERENCES user(user_id)
-);
-
 CREATE TABLE booking (
   booking_id INT AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
@@ -122,4 +122,24 @@ CREATE TABLE favorite_events (
   PRIMARY KEY (user_id, event_id),
   FOREIGN KEY (user_id) REFERENCES user(user_id),
   FOREIGN KEY (event_id) REFERENCES event(event_id)
+);
+
+CREATE TABLE news (
+  news_id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+
+INSERT INTO news (news_id, title, content, created_at) VALUES
+(1, 'New Park Opening', 'We are excited to announce the opening of our new park in downtown! Come and enjoy the beautiful green space.', '2021-08-01 09:00:00'),
+(2, 'Upcoming Events', 'Check out our upcoming events in the parks near you. From concerts to festivals, there is something for everyone.', '2021-08-05 12:00:00'),
+(3, 'Park Renovation', 'We are renovating one of our parks to create a better experience for our visitors. Stay tuned for the grand reopening!', '2021-08-10 10:00:00');
+
+CREATE TABLE feedback (
+  feedback_id INT AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  content TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
