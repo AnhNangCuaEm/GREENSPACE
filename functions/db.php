@@ -1,9 +1,13 @@
 <?php
 
-require_once __DIR__ . '/../env.php';
+$host = getenv('DB_HOST');
+$dbname = getenv('DB_DATABASE');
+$username = getenv('DB_USER');
+$password = getenv('DB_PASSWORD');
 
 try {
    $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
+
    $options = [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
       PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,

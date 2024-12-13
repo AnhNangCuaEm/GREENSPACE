@@ -5,7 +5,9 @@ tìm kiếm ajax\
 
 
 TODO:\
-
+cho nav rộng ra,\
+bỏ icon tim mà thêm vào mypage\
+icon tìm kiếm đẩy sang trái và thêm text search ở giữa\
 
 
 
