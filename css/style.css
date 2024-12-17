@@ -209,7 +209,7 @@ nav {
    border-radius: 35px;
 }
 
-.slideshow-container .text {
+.slideshow-container .name {
    color: #f2f2f2;
    font-size: 15px;
    padding: 8px 12px;
@@ -219,17 +219,10 @@ nav {
    text-align: justify;
 }
 
-.numbertext {
-   color: #f2f2f2;
-   font-size: 12px;
-   padding: 8px 12px;
-   position: absolute;
-   top: 0;
-}
-
 .slideDot-container {
    text-align: center;
    position: relative;
+   font-size: 0;
    top: -60px;
 }
 

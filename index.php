@@ -1,4 +1,7 @@
 <?php
+require_once __DIR__ . '/class/ParkData.php';
+
+$parks = ParkData::getParks();
 
 ?>
 
@@ -14,27 +17,24 @@
       <main>
          <div class="slideshow-container">
             <div class="mySlides">
-               <div class="numbertext">1 / 4</div>
-               <img src="./img/img/dummy.png" style="width: 100%;">
-               <div class="text">Caption Text</div>
+               <a href=""><img src="./img/img/dummy.png" style="width: 100%;"></a>
+               <div class="name">Caption Text</div>
+               <div class="description"></div>
             </div>
 
             <div class="mySlides">
-               <div class="numbertext">2 / 4</div>
                <img src="./img/img/dummy.png" style="width: 100%;">
-               <div class="text">Caption Text</div>
+               <div class="name">Caption Text</div>
             </div>
 
             <div class="mySlides">
-               <div class="numbertext">3 / 4</div>
                <img src="./img/img/dummy.png" style="width: 100%;">
-               <div class="text">Caption Text</div>
+               <div class="name">Caption Text</div>
             </div>
 
             <div class="mySlides">
-               <div class="numbertext">4 / 4</div>
                <img src="./img/img/dummy.png" style="width: 100%;">
-               <div class="text">Caption Text</div>
+               <div class="name">Caption Text</div>
             </div>
 
             <a class="prev" onclick="plusSlides(-1)"><svg fill="#fcf8db" height="15px" width="15px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.753 55.753" xml:space="preserve">

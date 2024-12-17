@@ -1,0 +1,58 @@
+<?php
+
+require_once __DIR__ . '/Database.php';
+require_once __DIR__ . '/Park.php';
+
+class parkData
+{
+   /**
+    * @return Park[]
+    */
+   public static function getParks(): array
+   {
+      $pdo = Database::getConnection();
+
+      $state = $pdo->prepare('SELECT * FROM park');
+      $state->execute();
+
+      $park = [];
+
+      foreach ($state as $row) {
+         $park = new Park();
+         $park->id = $row['id'];
+         $park->name = $row['name'];
+         $park->area = $row['area'];
+         $park->location = $row['location'];
+         $park->description = $row['discription'];
+         $park->image = $row['image'];
+
+         $parks[] = $park;
+      }
+
+      return $parks;
+   }
+
+   public static function getPark(int|string $id): ?Park
+   {
+      $pdo = Database::getConnection();
+
+      $state = $pdo->prepare('SELECT * FROM parks WHERE id = :id');
+      $state->execute(['id' => $id]);
+
+      $row = $state->fetch();
+
+      if (is_null($row)) {
+         return null;
+      }
+
+      $park = new Park();
+      $park->id = $row['id'];
+      $park->name = $row['name'];
+      $park->area = $row['area'];
+      $park->location = $row['location'];
+      $park->description = $row['description'];
+      $park->image = $row['image'];
+
+      return $park;
+   }
+}
