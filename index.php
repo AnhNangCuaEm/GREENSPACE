@@ -9,35 +9,26 @@ $parks = ParkData::getParks();
 <?php include 'include/head.php' ?>
 
 <body>
-   <div id="loading">
+   <!-- tắt tạm trang loading trong lúc đang code -->
+   <!-- <div id="loading">
       <img src="img/img/logo.png" alt="">
-   </div>
+   </div> -->
    <div id="content">
       <?php include 'include/nav.php' ?>
       <main>
          <div class="slideshow-container">
-            <div class="mySlides">
-               <a href=""><img src="./img/img/dummy.png" style="width: 100%;"></a>
-               <div class="name">Caption Text</div>
-               <div class="description"></div>
+            <div id="slideshow-area" class="slideshow-area">
+            <?php foreach ($parks as $park) : ?>
+               <div class="mySlides">
+                  <a href="park.php?id=<?= $park->id ?>"><img src="<?= $park->thumbnail ?>"></a>
+                  <div class="name"><?= $park->name ?></div>
+                  <div class="description"><?= $park->description ?></div>
+               </div>
+            <?php endforeach; ?>
             </div>
+            
 
-            <div class="mySlides">
-               <img src="./img/img/dummy.png" style="width: 100%;">
-               <div class="name">Caption Text</div>
-            </div>
-
-            <div class="mySlides">
-               <img src="./img/img/dummy.png" style="width: 100%;">
-               <div class="name">Caption Text</div>
-            </div>
-
-            <div class="mySlides">
-               <img src="./img/img/dummy.png" style="width: 100%;">
-               <div class="name">Caption Text</div>
-            </div>
-
-            <a class="prev" onclick="plusSlides(-1)"><svg fill="#fcf8db" height="15px" width="15px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.753 55.753" xml:space="preserve">
+            <a class="prev" onclick="prev()"><svg fill="#fcf8db" height="15px" width="15px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.753 55.753" xml:space="preserve">
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                   <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
@@ -46,7 +37,7 @@ $parks = ParkData::getParks();
                      </g>
                   </g>
                </svg></a>
-            <a class="next" onclick="plusSlides(1)"><svg fill="#fcf8db" height="15px" width="15px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.752 55.752" xml:space="preserve">
+            <a class="next" onclick="next()"><svg fill="#fcf8db" height="15px" width="15px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.752 55.752" xml:space="preserve">
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                   <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
@@ -56,11 +47,12 @@ $parks = ParkData::getParks();
                   </g>
                </svg></a>
 
-            <div class="slideDot-container">
+            <div class="slideDot-container" id="slideDot-container">
                <span class="dot" onclick="currentSlide(1)"></span>
                <span class="dot" onclick="currentSlide(2)"></span>
                <span class="dot" onclick="currentSlide(3)"></span>
                <span class="dot" onclick="currentSlide(4)"></span>
+               <span class="dot" onclick="currentSlide(5)"></span>
             </div>
          </div>
 

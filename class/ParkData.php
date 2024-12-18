@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/Database.php';
 require_once __DIR__ . '/Park.php';
+require_once __DIR__ . '/ParkImageData.php';
 
 class parkData
 {
@@ -23,8 +24,8 @@ class parkData
          $park->name = $row['name'];
          $park->area = $row['area'];
          $park->location = $row['location'];
-         $park->description = $row['discription'];
-         $park->image = $row['image'];
+         $park->description = $row['description'];
+         $park->thumbnail = $row['thumbnail'];
 
          $parks[] = $park;
       }
@@ -51,7 +52,7 @@ class parkData
       $park->area = $row['area'];
       $park->location = $row['location'];
       $park->description = $row['description'];
-      $park->image = $row['image'];
+      $park->thumbnail = $row['thumbnail'];
 
       return $park;
    }

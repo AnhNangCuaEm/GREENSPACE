@@ -10,6 +10,7 @@ CREATE TABLE park (
   description TEXT,
   created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   update_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  thumbnail VARCHAR(255)
 );
 
 --areaは例えば新宿、渋谷、原宿などのエリアの広さを表す
@@ -25,6 +26,22 @@ INSERT INTO park (park_id, park_name, area, location, price, description) VALUES
 (8, 'Vondelpark', 'Amsterdam', 'Vondelpark, Amsterdam, Netherlands', 0.00, 'Vondelpark is a popular park in Amsterdam, Netherlands, with walking paths and outdoor activities.'),
 (9, 'Tiergarten', 'Berlin', 'Tiergarten, Berlin, Germany', 0.00, 'Tiergarten is a large park in Berlin, Germany, known for its green spaces and cultural attractions.'),
 (10, 'Parc Guell', 'Barcelona', 'Parc Guell, Barcelona, Spain', 0.00, 'Parc Guell is a public park in Barcelona, Spain, designed by architect Antoni Gaudi.')
+;
+
+CREATE TABLE park_images (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  park_id INT NOT NULL,
+  image_url VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (park_id) REFERENCES park(id)
+);
+
+INSERT INTO park_images (image_id, id, image_url) VALUES
+(1, 1, '/img/img/dummy-blue.png'),
+(2, 2, '/img/img/dummy-green.png'),
+(3, 3, '/img/img/dummy-dark.png'),
+(4, 4, '/img/img/dummy-brown.png'),
+(5, 5, '/img/img/dummy-sapphire.png')
 ;
 
 CREATE TABLE user (
