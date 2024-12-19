@@ -2,31 +2,31 @@ CREATE DATABASE greenspace;
 USE greenspace;
 
 CREATE TABLE park (
-  park_id INT AUTO_INCREMENT PRIMARY KEY,
-  park_name VARCHAR(100) NOT NULL,
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(100) NOT NULL,
   area VARCHAR(100) NOT NULL,
   location VARCHAR(500) NOT NULL,
-  price DECIMAL(10, 2) NULL,
   description TEXT,
   created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   update_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
   thumbnail VARCHAR(255)
+  PRIMARY KEY (id)
 );
 
 --areaは例えば新宿、渋谷、原宿などのエリアの広さを表す
 --locationは具体的な住所や地名を表す
-INSERT INTO park (park_id, park_name, area, location, price, description) VALUES 
-(1, 'Central Park', 'New York', 'Central Park, New York, NY', 0.00, 'Central Park is an urban park in New York City located between the Upper West Side and Upper East Side. It is the most visited urban park in the United States.'),
-(2, 'Golden Gate Park', 'San Francisco', 'Golden Gate Park, San Francisco, CA', 0.00, 'Golden Gate Park, located in San Francisco, California, is a large urban park consisting of 1,017 acres of public grounds.'),
-(3, 'Palm Park', 'Los Angeles', 'Palm Park, Los Angeles, CA', 0.00, 'Palm Park is a public park in Los Angeles, California, known for its palm trees and picnic areas.'),
-(4, 'City Park', 'Chicago', 'City Park, Chicago, IL', 0.00, 'City Park is a popular park in Chicago, Illinois, with sports fields and recreational facilities.'),
-(5, 'Forest Park', 'St. Louis', 'Forest Park, St. Louis, MO', 0.00, 'Forest Park is a public park in St. Louis, Missouri, known for its museums, gardens, and outdoor activities.')
-(6, 'Yoyogi Park', 'Tokyo', 'Yoyogi Park, Tokyo, Japan', 0.00, 'Yoyogi Park is a large park in Tokyo, Japan, known for its cherry blossoms and cultural events.'),
-(7, 'Hyde Park', 'London', 'Hyde Park, London, UK', 0.00, 'Hyde Park is a historic park in London, United Kingdom, with famous landmarks and recreational areas.'),
-(8, 'Vondelpark', 'Amsterdam', 'Vondelpark, Amsterdam, Netherlands', 0.00, 'Vondelpark is a popular park in Amsterdam, Netherlands, with walking paths and outdoor activities.'),
-(9, 'Tiergarten', 'Berlin', 'Tiergarten, Berlin, Germany', 0.00, 'Tiergarten is a large park in Berlin, Germany, known for its green spaces and cultural attractions.'),
-(10, 'Parc Guell', 'Barcelona', 'Parc Guell, Barcelona, Spain', 0.00, 'Parc Guell is a public park in Barcelona, Spain, designed by architect Antoni Gaudi.')
-;
+INSERT INTO park (id, name, area, location, description, thumbnail) VALUES
+(1, 'Central Park', 'New York', 'New York, NY 10024', 'Central Park is an urban park in New York City located between the Upper West and Upper East Sides of Manhattan. It is the most visited urban park in the United States.', '/img/img/central-park.jpg'),
+(2, 'Golden Gate Park', 'San Francisco', 'San Francisco, CA 94121', 'Golden Gate Park is a large urban park consisting of 1,017 acres of public grounds in San Francisco, California. It is a popular destination for locals and tourists alike.', '/img/img/golden-gate-park.jpg'),
+(3, 'Palm Park', 'Los Angeles', 'Los Angeles, CA 90012', 'Palm Park is a small park located in downtown Los Angeles. It is a peaceful oasis in the midst of the bustling city.', '/img/img/palm-park.jpg'),
+(4, 'City Park', 'Chicago', 'Chicago, IL 60614', 'City Park is a historic park in the Lincoln Park neighborhood of Chicago. It offers a variety of recreational activities and events for visitors.', '/img/img/city-park.jpg'),
+(5, 'Forest Park', 'St. Louis', 'St. Louis, MO 63110', 'Forest Park is a public park in St. Louis, Missouri. It is home to several cultural institutions, including the St. Louis Art Museum and the Missouri History Museum.', '/img/img/forest-park.jpg'),
+(6, 'Hyde Park', 'London', 'London W2 2UH, UK', 'Hyde Park is a Grade I-listed major park in Central London. It is the largest of four Royal Parks that form a chain from the entrance of Kensington Palace through Kensington Gardens and Hyde Park, via Hyde Park Corner and Green Park past the main entrance to Buckingham Palace.', '/img/img/hyde-park.jpg'),
+(7, 'Vondelpark', 'Amsterdam', '1071 AA Amsterdam, Netherlands', 'Vondelpark is a public urban park of 47 hectares in Amsterdam, Netherlands. It is part of the borough of Amsterdam-Zuid and situated west from the Leidseplein and the Museumplein.', '/img/img/vondelpark.jpg'),
+(8, 'Ueno Park', 'Tokyo', 'Uenokoen, Taito City, Tokyo 110-0007, Japan', 'Ueno Park is a spacious public park in the Ueno district of Taitō, Tokyo, Japan. The park was established in 1873 on lands formerly belonging to the temple of Kan'ei-ji.', '/img/img/ueno-park.jpg'),
+(9, 'Parc Güell', 'Barcelona', '08024 Barcelona, Spain', 'Parc Güell is a public park system composed of gardens and architectonic elements located on Carmel Hill, in Barcelona, Catalonia, Spain.', '/img/img/parc-guell.jpg'),
+(10, 'Yoyogi Park', 'Tokyo', '2-1 Yoyogikamizonocho, Shibuya City, Tokyo 151-0052, Japan', 'Yoyogi Park is a park in Shibuya, Tokyo, Japan. Yoyogi Park is a popular Tokyo destination and a great spot for hanami during cherry blossom season.', '/img/img/yoyogi-park.jpg'),
+(11, 'Luxembourg Gardens', 'Paris', '75006 Paris, France', 'The Jardin du Luxembourg, also known in English as the Luxembourg Gardens, is located in the 6th arrondissement of Paris, France. It was created beginning in 1612 by Marie de' Medici, the widow of King Henry IV of France, for a new residence she constructed, the Luxembourg Palace.', '/img/img/luxembourg-gardens.jpg');
 
 CREATE TABLE park_images (
   id INT AUTO_INCREMENT PRIMARY KEY,
