@@ -170,6 +170,10 @@ nav {
    top: 10px;
 }
 
+.hamburger.active {
+   background-color: transparent;
+}
+
 .hamburger.active .menuLine {
    background-color: transparent;
 }
@@ -199,7 +203,7 @@ nav {
 .slideshow-area {
    display: flex;
    gap: 0;
-   transition: 2s ease-in-out;
+   will-change: transform;
 }
 
 .prev,
@@ -228,9 +232,9 @@ nav {
 }
 
 .mySlides {
-   transition: 2s ease-in-out;
    overflow: hidden;
    min-width: 100%;
+   will-change: transform;
 }
 
 .mySlides img {
@@ -286,48 +290,4 @@ nav {
 .active,
 .dot:hover {
    background-color: #717171;
-}
-
-
-/* @keyframes nextslide {
-   0% {
-      transform: scale(1) translateX(100%);
-   }
-
-   50% {
-      transform: scale(0.95);
-   }
-
-   100% {
-      transform: scale(1) translateX(0);
-   }
-}
-
-@keyframes prevslide {
-   0% {
-      transform: scale(1) translateX(-100%);
-   }
-
-   50% {
-      transform: scale(0.95);
-   }
-
-   100% {
-      transform: scale(1) translateX(0);
-   }
-} */
-
-
-@keyframes slide {
-   0% {
-      transform: scale(1);
-   }
-
-   50% {
-      transform: scale(0.95);
-   }
-
-   100% {
-      transform: scale(1);
-   }
 }

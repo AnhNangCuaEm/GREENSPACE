@@ -37,7 +37,7 @@ hamburger.addEventListener('click', () => {
 // Hamburger menu
 
 
-
+//Slide move X and scale like ios widget
 /* Slideshow JavaScript */
 let currentSlideIndex = 0;
 const slideshowArea = document.getElementById('slideshow-area');
@@ -46,41 +46,60 @@ const totalSlides = slides.length;
 
 // Function to update slide position
 function updateSlidePosition() {
-    const translateValue = -(currentSlideIndex * 100); // Move by 100% for each slide
-    
-    // Add scaling effect to the whole container
-    slideshowArea.style.transition = 'transform 1s ease-in-out, scale 1s ease-in-out'; // Adjusted animation speed
-    slideshowArea.style.transform = `translateX(${translateValue}%) scale(0.9)`;
+   const translateValue = -(currentSlideIndex * 100); // Move by 100% for each slide
 
-    // Reset scale after transition
-    setTimeout(() => {
-        slideshowArea.style.transform = `translateX(${translateValue}%) scale(1)`;
-    }, 500); // Halfway through the transition
+   // Add scaling effect only to the current slide
+   slides.forEach((slide, index) => {
+      slide.style.transition = 'transform 1s ease-in-out'; // Adjusted animation speed
+      slide.style.transform = index === currentSlideIndex ? 'scale(1)' : 'scale(0.9)'; // Scale current slide
+   });
+
+   // Apply translateX animation to the slideshow area
+   slideshowArea.style.transition = 'transform 1s ease-in-out'; // Ensure transition for the slideshow area
+   slideshowArea.style.transform = `translateX(${translateValue}%)`; // Only translate the slideshow area
 }
 
 // Next slide function
 function next() {
-    if (currentSlideIndex < totalSlides - 1) {
-        currentSlideIndex++;
-    } else {
-        currentSlideIndex = 0; // Loop back to the first slide
-    }
-    updateSlidePosition();
+   if (currentSlideIndex < totalSlides - 1) {
+      currentSlideIndex++;
+   } else {
+      currentSlideIndex = 0; // Loop back to the first slide
+   }
+   updateSlidePosition();
+   updateDotNavigation();
 }
 
 // Previous slide function
 function prev() {
-    if (currentSlideIndex > 0) {
-        currentSlideIndex--;
-    } else {
-        currentSlideIndex = totalSlides - 1; // Loop to the last slide
-    }
-    updateSlidePosition();
+   if (currentSlideIndex > 0) {
+      currentSlideIndex--;
+   } else {
+      currentSlideIndex = totalSlides - 1; // Loop to the last slide
+   }
+   updateSlidePosition();
+   updateDotNavigation();
 }
 
 // Dot navigation function
 function currentSlide(index) {
-    currentSlideIndex = index - 1; // Convert to zero-based index
-    updateSlidePosition();
-    
+   currentSlideIndex = index - 1; // Convert to zero-based index
+   updateSlidePosition();
+   updateDotNavigation();
 }
+
+// Hàm cập nhật dot navigation
+function updateDotNavigation() {
+   const dots = document.querySelectorAll('.dot'); // Lấy tất cả các dot
+   dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === currentSlideIndex); // Thêm class active cho dot hiện tại
+   });
+}
+
+
+window.onload = () => {
+   setTimeout(() => {
+      updateSlidePosition(); // Gọi hàm sau khi trang đã sẵn sàng
+      updateDotNavigation(); // Cập nhật dot navigation
+   }, 100); // Trì hoãn 100ms để đảm bảo DOM được tải xong
+};
