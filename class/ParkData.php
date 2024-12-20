@@ -33,6 +33,30 @@ class parkData
       return $parks;
    }
 
+   public static function getFeatureParks(): array
+   {
+      $pdo = Database::getConnection();
+
+      //get lastest 5 park by update time
+      $state = $pdo->prepare('SELECT * FROM park ORDER BY id DESC LIMIT 5');
+      $state->execute();
+
+      $park = [];
+
+      foreach ($state as $row) {
+         $park = new Park();
+         $park->id = $row['id'];
+         $park->name = $row['name'];
+         $park->location = $row['location'];
+         $park->description = $row['description'];
+         $park->thumbnail = $row['thumbnail'];
+
+         $featureparks[] = $park;
+      }
+
+      return $featureparks;
+   }
+
    public static function getPark(int|string $id): ?Park
    {
       $pdo = Database::getConnection();

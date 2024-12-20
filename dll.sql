@@ -16,17 +16,11 @@ CREATE TABLE park (
 --areaは例えば新宿、渋谷、原宿などのエリアの広さを表す
 --locationは具体的な住所や地名を表す
 INSERT INTO park (id, name, area, location, description, thumbnail) VALUES
-(1, 'Central Park', 'New York', 'New York, NY 10024', 'Central Park is an urban park in New York City located between the Upper West and Upper East Sides of Manhattan. It is the most visited urban park in the United States.', '/img/img/central-park.jpg'),
-(2, 'Golden Gate Park', 'San Francisco', 'San Francisco, CA 94121', 'Golden Gate Park is a large urban park consisting of 1,017 acres of public grounds in San Francisco, California. It is a popular destination for locals and tourists alike.', '/img/img/golden-gate-park.jpg'),
-(3, 'Palm Park', 'Los Angeles', 'Los Angeles, CA 90012', 'Palm Park is a small park located in downtown Los Angeles. It is a peaceful oasis in the midst of the bustling city.', '/img/img/palm-park.jpg'),
-(4, 'City Park', 'Chicago', 'Chicago, IL 60614', 'City Park is a historic park in the Lincoln Park neighborhood of Chicago. It offers a variety of recreational activities and events for visitors.', '/img/img/city-park.jpg'),
-(5, 'Forest Park', 'St. Louis', 'St. Louis, MO 63110', 'Forest Park is a public park in St. Louis, Missouri. It is home to several cultural institutions, including the St. Louis Art Museum and the Missouri History Museum.', '/img/img/forest-park.jpg'),
-(6, 'Hyde Park', 'London', 'London W2 2UH, UK', 'Hyde Park is a Grade I-listed major park in Central London. It is the largest of four Royal Parks that form a chain from the entrance of Kensington Palace through Kensington Gardens and Hyde Park, via Hyde Park Corner and Green Park past the main entrance to Buckingham Palace.', '/img/img/hyde-park.jpg'),
-(7, 'Vondelpark', 'Amsterdam', '1071 AA Amsterdam, Netherlands', 'Vondelpark is a public urban park of 47 hectares in Amsterdam, Netherlands. It is part of the borough of Amsterdam-Zuid and situated west from the Leidseplein and the Museumplein.', '/img/img/vondelpark.jpg'),
-(8, 'Ueno Park', 'Tokyo', 'Uenokoen, Taito City, Tokyo 110-0007, Japan', 'Ueno Park is a spacious public park in the Ueno district of Taitō, Tokyo, Japan. The park was established in 1873 on lands formerly belonging to the temple of Kan'ei-ji.', '/img/img/ueno-park.jpg'),
-(9, 'Parc Güell', 'Barcelona', '08024 Barcelona, Spain', 'Parc Güell is a public park system composed of gardens and architectonic elements located on Carmel Hill, in Barcelona, Catalonia, Spain.', '/img/img/parc-guell.jpg'),
-(10, 'Yoyogi Park', 'Tokyo', '2-1 Yoyogikamizonocho, Shibuya City, Tokyo 151-0052, Japan', 'Yoyogi Park is a park in Shibuya, Tokyo, Japan. Yoyogi Park is a popular Tokyo destination and a great spot for hanami during cherry blossom season.', '/img/img/yoyogi-park.jpg'),
-(11, 'Luxembourg Gardens', 'Paris', '75006 Paris, France', 'The Jardin du Luxembourg, also known in English as the Luxembourg Gardens, is located in the 6th arrondissement of Paris, France. It was created beginning in 1612 by Marie de' Medici, the widow of King Henry IV of France, for a new residence she constructed, the Luxembourg Palace.', '/img/img/luxembourg-gardens.jpg');
+(6, '新宿中央公園', '新宿', '東京都新宿区新宿1-2-3', '新宿駅から徒歩5分の好立地にある公園です。', '/img/img/dummy-blue.png'),
+(7, '渋谷公園', '渋谷', '東京都渋谷区渋谷1-2-3', '渋谷駅から徒歩10分の公園です。', '/img/img/dummy-green.png'),
+(8, '原宿公園', '原宿', '東京都渋谷区神宮前1-2-3', '原宿駅から徒歩3分の公園です。', '/img/img/dummy-dark.png'),
+(9, '代々木公園', '代々木', '東京都渋谷区代々木1-2-3', '代々木駅から徒歩7分の公園です。', '/img/img/dummy-brown.png'),
+(10, '新宿中央公園', '新宿', '東京都新宿区新宿1-2-3', '新宿駅から徒歩5分の好立地にある公園です。', '/img/img/dummy-sapphire.png');
 
 CREATE TABLE park_images (
   id INT AUTO_INCREMENT PRIMARY KEY,

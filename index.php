@@ -2,6 +2,7 @@
 require_once __DIR__ . '/class/ParkData.php';
 
 $parks = ParkData::getParks();
+$featureParks = ParkData::getFeatureParks();
 
 ?>
 
@@ -18,7 +19,7 @@ $parks = ParkData::getParks();
       <main>
          <div class="slideshow-container">
             <div id="slideshow-area" class="slideshow-area">
-            <?php foreach ($parks as $park) : ?>
+            <?php foreach ($featureParks as $park) : ?>
                <div class="mySlides">
                   <a href="park.php?id=<?= $park->id ?>"><img src="<?= $park->thumbnail ?>"></a>
                   <div class="name"><?= $park->name ?></div>
@@ -55,9 +56,20 @@ $parks = ParkData::getParks();
                <span class="dot" onclick="currentSlide(5)"></span>
             </div>
          </div>
-
+         <h1>公園一覧</h1>
+         <div class="park-container">
+            <?php foreach ($parks as $park) : ?>
+               <div class="park-box">
+                  <a href="park.php?id=<?= $park->id ?>"><img src="<?= $park->thumbnail ?>"></a>
+                  <div class="name"><?= $park->name ?></div>
+               </div>
+            <?php endforeach; ?>
+         </div>
+         <button class="view-more-btn">もっと見る</button>
       </main>
    </div>
+   <script src="js/menu.js"></script>
+   <script src="js/slideshow.js"></script>
    <script src="js/index.js"></script>
 </body>
 
