@@ -65,7 +65,7 @@ $featureParks = ParkData::getFeatureParks();
                </div>
             <?php endforeach; ?>
          </div>
-         <button class="view-more-btn">もっと見る</button>
+         <a href="all.php"><button class="view-more-btn">もっと見る</button></a>
       </main>
    </div>
    <script src="js/menu.js"></script>

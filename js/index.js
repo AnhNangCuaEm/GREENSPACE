@@ -27,21 +27,3 @@
 //    };
 // });
 //loading transition
-
-
-document.addEventListener("DOMContentLoaded", () => {
-   const parkContainer = document.querySelector(".park-container");
-   const viewMoreBtn = document.querySelector(".view-more-btn");
-
-   viewMoreBtn.addEventListener("click", () => {
-      parkContainer.classList.toggle("expanded");
-      parkContainer.style.transition = "max-height 0.8s ease-in-out";
-      viewMoreBtn.textContent = parkContainer.classList.contains("expanded")
-         ? "閉じる"
-         : "もっと見る";
-
-         if (parkContainer.classList.contains("expanded")) {
-            parkContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-         }
-   });
-});

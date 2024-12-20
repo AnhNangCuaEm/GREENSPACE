@@ -9,7 +9,7 @@
 
 :root {
    --primary-color: #fcf8db;
-   --secondary-color: #2d8739;
+   --secondary-color: #8fae74;
    --third-color: #f00;
 }
 
@@ -324,18 +324,14 @@ h1 {
    padding: 0;
    overflow: hidden;
    /*TODO: @media querry*/
-   max-height: 400px;
    transition: max-height 1s ease-in-out;
+   border-radius: 25px;
 }
 
-.park-container.expanded {
-   /* TODO: @media querry*/
-   max-height: 1000px; /* Hiện toàn bộ nội dung */
-}
 
 .park-box {
    flex: 1; /* Boxes take equal space */
-   min-width: 200px;
+   min-width: 170px;
    max-width: 300px; /* Adjust the size of each box */
    border-radius: 8px; /* Rounded corners */
    transition: 0.3s ease-in-out; /* Smooth hover effects */

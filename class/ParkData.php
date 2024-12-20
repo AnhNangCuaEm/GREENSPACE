@@ -13,7 +13,31 @@ class parkData
    {
       $pdo = Database::getConnection();
 
-      $state = $pdo->prepare('SELECT * FROM park');
+      $state = $pdo->prepare('SELECT * FROM park ORDER BY RAND() LIMIT 8');
+      $state->execute();
+
+      $park = [];
+
+      foreach ($state as $row) {
+         $park = new Park();
+         $park->id = $row['id'];
+         $park->name = $row['name'];
+         $park->area = $row['area'];
+         $park->location = $row['location'];
+         $park->description = $row['description'];
+         $park->thumbnail = $row['thumbnail'];
+
+         $parks[] = $park;
+      }
+
+      return $parks;
+   }
+
+   public static function getallParks(): array
+   {
+      $pdo = Database::getConnection();
+
+      $state = $pdo->prepare('SELECT * FROM park ORDER BY id DESC');
       $state->execute();
 
       $park = [];
