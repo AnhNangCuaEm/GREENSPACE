@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/class/ParkData.php';
 
+session_start();
+
 $parks = ParkData::getParks();
 $featureParks = ParkData::getFeatureParks();
 
@@ -19,15 +21,15 @@ $featureParks = ParkData::getFeatureParks();
       <main>
          <div class="slideshow-container">
             <div id="slideshow-area" class="slideshow-area">
-            <?php foreach ($featureParks as $park) : ?>
-               <div class="mySlides">
-                  <a href="park.php?id=<?= $park->id ?>"><img src="<?= $park->thumbnail ?>"></a>
-                  <div class="name"><?= $park->name ?></div>
-                  <div class="description"><?= $park->description ?></div>
-               </div>
-            <?php endforeach; ?>
+               <?php foreach ($featureParks as $park) : ?>
+                  <div class="mySlides">
+                     <a href="park.php?id=<?= $park->id ?>"><img src="<?= $park->thumbnail ?>"></a>
+                     <div class="name"><?= $park->name ?></div>
+                     <div class="description"><?= $park->description ?></div>
+                  </div>
+               <?php endforeach; ?>
             </div>
-            
+
 
             <a class="prev" onclick="prev()"><svg fill="#fcf8db" height="15px" width="15px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.753 55.753" xml:space="preserve">
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -66,6 +68,10 @@ $featureParks = ParkData::getFeatureParks();
             <?php endforeach; ?>
          </div>
          <a href="all.php"><button class="view-more-btn">もっと見る</button></a>
+         <h2>イベント</h2>
+         <form action="logout.php" method="post">
+            <button type="submit">サインアウト</button>
+         </form>
       </main>
    </div>
    <script src="js/menu.js"></script>
