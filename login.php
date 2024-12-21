@@ -60,8 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <p style="color: red;"><?= htmlspecialchars($errormessages['password'] ?? '') ?></p>
             </div>
             <p style="color: red;"><?= htmlspecialchars($errormessages['login'] ?? '') ?></p>
-            <button type="submit">ログイン</button>
-            <a href="register.php"><p>録登</p></a>
+            <div class="button-area">
+                <button class="glow-on-hover" type="submit" name="submit-button">ログイン</button>
+            </div>
+            <div class="second-button"><a href="register.php">アカウントを作成</a></div>
         </form>
     </div>
 </body>

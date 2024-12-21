@@ -162,8 +162,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="password" name="password" id="password" placeholder="8文字以上のパスワード" value="<?= htmlspecialchars($password ?? '') ?>">
                 <p style="color: red;"><?= $errormessages['password'] ?? '' ?></p>
             </div>
-            <button type="submit">登録</button>
-            <a href="login.php">ログイン</a>
+            <div class="button-area">
+                <button class="glow-on-hover" type="submit" name="submit-button">登録</button>
+            </div>
+            <div class="second-button"><a href="login.php">ログイン</a></div>
     </div>
 </body>
 
