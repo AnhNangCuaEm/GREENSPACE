@@ -155,12 +155,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div>
                 <label for="email">メールアドレス</label>
                 <input type="email" name="email" id="email" placeholder="abc@gmail.com" value="<?= htmlspecialchars($email ?? '') ?>">
-                <p style="color: red;"><?= $errormessages['email'] ?? '' ?></p>
+                <p><?= $errormessages['email'] ?? '' ?></p>
             </div>
             <div>
                 <label for="password">パスワード</label>
-                <input type="password" name="password" id="password" placeholder="8文字以上のパスワード" value="<?= htmlspecialchars($password ?? '') ?>">
-                <p style="color: red;"><?= $errormessages['password'] ?? '' ?></p>
+                <input type="password" name="password" id="password" placeholder="8文字以上のパスワード" value="<?= htmlspecialchars($password ?? '') ?>" style="margin-bottom: 0;">
+                <p><?= $errormessages['password'] ?? '' ?></p>
             </div>
             <div class="button-area">
                 <button class="glow-on-hover" type="submit" name="submit-button">登録</button>
