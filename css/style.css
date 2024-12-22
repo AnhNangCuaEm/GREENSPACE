@@ -73,10 +73,19 @@ nav {
    z-index: 99;
 }
 
-h1,h2 {
+h1,
+h2 {
    position: relative;
    width: 100%;
    font-size: 1.8rem;
+}
+
+hr {
+   height: 2px;
+   width: 100%;
+   border: none;
+   border-radius: 2px;
+   background-color: #ffffff;
 }
 
 #overlay {
@@ -85,9 +94,12 @@ h1,h2 {
    left: 0;
    width: 100%;
    height: 100%;
-   background-color: rgba(0, 0, 0, 0.5); /* Màu nền tối với độ trong suốt */
-   display: none; /* Ẩn overlay mặc định */
-   z-index: 100; /* Đảm bảo overlay nằm trên các phần tử khác */
+   background-color: rgba(0, 0, 0, 0.5);
+   /* Màu nền tối với độ trong suốt */
+   display: none;
+   /* Ẩn overlay mặc định */
+   z-index: 100;
+   /* Đảm bảo overlay nằm trên các phần tử khác */
 }
 
 #loading {
@@ -408,9 +420,56 @@ h1,h2 {
    background-color: #7f7f7f55;
 }
 
+.credit-container {
+   display: flex;
+   flex-direction: column;
+   max-width: 670px;
+   align-items: center;
+   gap: 10px;
+   border-radius: 35px;
+   position: relative;
+   padding: 0 30px 30px 30px;
+   background-color: rgba(62, 62, 62, 0.262);
+   backdrop-filter: blur(8px);
+   border: solid 1px rgba(255, 255, 255, 0.5);
+}
+
+.credit-container h1 {
+   text-align: justify;
+   font-size: 1.2rem;
+}
+
+.credit-container h2,
+.credit-container h3 {
+   position: relative;
+   width: 100%;
+   font-size: 1.8rem;
+}
+
+.credit-container div {
+   display: flex;
+   gap: 20px;
+}
+
+.credit-container p,
+.credit-container a {
+   align-self: center;
+}
+
+.project-info,
+.maker-info {
+   position: relative;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+}
+
 /* Responsive */
 @media screen and (max-width: 768px) {
-   h1,h2 {
+
+   h1,
+   h2 {
       font-size: 1.5rem;
    }
 
@@ -443,6 +502,7 @@ h1,h2 {
    .park-box .name {
       font-size: 0.8rem;
    }
+
    .park-box img {
       border-radius: 28px;
    }
