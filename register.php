@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/class/UserData.php';
 
+ini_set('session.gc_maxlifetime', 259200);
 session_start();
 
 $errormessages = [];
@@ -46,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-    <div>
+    <div class="logo">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" zoomAndPan="magnify" viewBox="95 100 180 180" height="300" preserveAspectRatio="xMidYMid meet" version="1.0">
             <defs>
                 <g />

@@ -2,7 +2,7 @@
     <div class="navL">
         <a href="index.php"><img class="navLogo" src="img/img/logo.png" alt=""></a>
         <ul>
-            <li><a href="index.php">探る</a></li>
+            <li><a href="all.php">探る</a></li>
             <li><a href="event.php">イベント</a></li>
             <li><a href="services.php">ニュース</a></li>
         </ul>
@@ -43,4 +43,24 @@
             </div>
         </ul>
     </div>
+    <di v class="menu" id="menu">
+        <ul class="menu-ul">
+            <li><a href="index.php">ホーム</a></li>
+            <li><a href="how-to-use.php">使い方</a></li>
+            <li><a href="contact.php">問い合せ</a></li>
+            <li><a href="credit.php">Credit</a></li>
+            <form id="logoutForm" action="logout.php" method="post">
+                <button id="logoutButton" type="submit">サインアウト</button>
+            </form>
+        </ul>
+    </di>
 </nav>
+<div id="confirmationPopup" class="confirmation-popup" style="display: none">
+    <div class="confirmation-popup-content">
+        <p>ログアウトしますか？</p>
+        <div>
+        <button id="confirmCancel" style="background-color: rgb(71, 181, 245);">戻る</button>
+        <button id="confirmOk">確定</button>
+        </div>
+    </div>
+</div>

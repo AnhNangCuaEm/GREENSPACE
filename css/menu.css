@@ -1,0 +1,132 @@
+.menu {
+    position: absolute;
+    top: 65px;
+    border-radius: 20px;
+    right: 0;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    background-color: rgba(62, 62, 62, 0.262);
+    backdrop-filter: blur(20px);
+    border: solid 1px rgba(255, 255, 255, 0.5);
+    z-index: 99;
+}
+
+.menu.show {
+    display: block;
+    opacity: 1;
+}
+
+.menu-ul {
+    width: fit-content;
+    padding: 20px 30px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    gap: 10px;
+    transition: 0.3s ease-in-out;
+    backdrop-filter: blur(20px);
+}
+
+.menu-ul button {
+    background: none;
+    border: none;
+    color: #d67070;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.menu-ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-size: 1.2rem;
+    transition: 0.3s ease-in-out;
+}
+
+ul li:hover {
+    text-shadow: 0 0 10px rgb(255, 255, 255);
+}
+
+li::after {
+    content: "";
+    display: block;
+    width: 100%;
+    border-radius: 2px;
+    height: 2px;
+    background: #3f3f3f;
+}
+
+.confirmation-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    border-radius: 25px;
+    border: solid 1px rgba(255, 255, 255, 0.5);
+    background-color: rgba(62, 62, 62, 0.262);
+    backdrop-filter: blur(8px);
+    transition: 0.3s ease-in-out;
+}
+
+.confirmation-popup-content {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    gap: 20px;
+    font-size: 1.3rem;
+}
+
+.confirmation-popup-content div {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.confirmation-popup-content button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: rgb(255, 108, 46);
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .menu-ul li {
+        font-size: 1rem;
+    }
+
+    .menu-ul button {
+        font-size: 0.8rem;
+    }
+
+    .confirmation-popup-content button {
+        font-size: 1rem;
+        padding: 10px 25px;
+    }
+    
+}

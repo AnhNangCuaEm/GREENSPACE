@@ -73,13 +73,24 @@ nav {
    width: fit-content;
    height: fit-content;
    padding: 10px 15px;
-   z-index: 999;
+   z-index: 99;
 }
 
 h1,h2 {
    position: relative;
    width: 100%;
    font-size: 1.8rem;
+}
+
+#overlay {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-color: rgba(0, 0, 0, 0.5); /* Màu nền tối với độ trong suốt */
+   display: none; /* Ẩn overlay mặc định */
+   z-index: 100; /* Đảm bảo overlay nằm trên các phần tử khác */
 }
 
 #loading {
@@ -125,7 +136,7 @@ h1,h2 {
 }
 
 .navR ul li:hover {
-   filter: drop-shadow(0 0 10px white);
+   filter: drop-shadow(0 0 8px white);
 }
 
 
@@ -356,7 +367,7 @@ h1,h2 {
    min-width: 200px;
    max-width: 300px;
    /* Adjust the size of each box */
-   border-radius: 35px;
+   border-radius: 30px;
    /* Rounded corners */
    transition: 0.3s ease-in-out;
    /* Smooth hover effects */

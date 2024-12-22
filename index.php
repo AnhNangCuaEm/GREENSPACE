@@ -6,6 +6,11 @@ session_start();
 $parks = ParkData::getParks();
 $featureParks = ParkData::getFeatureParks();
 
+if (!isset($_SESSION['email'])) {
+   header('Location: login.php');
+   exit();
+}
+
 ?>
 
 <html>
@@ -69,10 +74,8 @@ $featureParks = ParkData::getFeatureParks();
          </div>
          <a href="all.php"><button class="view-more-btn">もっと見る</button></a>
          <h2>イベント</h2>
-         <form action="logout.php" method="post">
-            <button type="submit">サインアウト</button>
-         </form>
       </main>
+      <div id="overlay"></div>
    </div>
    <script src="js/menu.js"></script>
    <script src="js/slideshow.js"></script>
