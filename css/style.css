@@ -65,11 +65,8 @@ nav {
    border: solid 1px rgba(255, 255, 255, 0.5);
    display: flex;
    justify-content: space-between;
-   position: fixed;
+   position: relative;
    border-radius: 40px;
-   top: 20px;
-   left: 50%;
-   transform: translateX(-50%);
    width: fit-content;
    height: fit-content;
    padding: 10px 15px;
