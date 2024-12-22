@@ -77,7 +77,7 @@ h1,
 h2 {
    position: relative;
    width: 100%;
-   font-size: 1.8rem;
+   font-size: 1.5rem;
 }
 
 hr {
@@ -443,7 +443,8 @@ hr {
 .credit-container h3 {
    position: relative;
    width: 100%;
-   font-size: 1.8rem;
+   font-size: 1.5rem;
+   font-weight: 700;
 }
 
 .credit-container div {
@@ -470,7 +471,7 @@ hr {
 
    h1,
    h2 {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
    }
 
    .navL ul li {
