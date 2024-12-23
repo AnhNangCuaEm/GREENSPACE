@@ -3,6 +3,11 @@ require_once __DIR__ . '/class/ParkData.php';
 
 $parks = ParkData::getallParks();
 
+if (!isset($_SESSION['email'])) {
+   header('Location: login.php');
+   exit();
+}
+
 ?>
 
 <html>
@@ -22,7 +27,9 @@ $parks = ParkData::getallParks();
             <?php endforeach; ?>
          </div>
       </main>
-      <?php include 'include/footer.php' ?>
+      <footer>
+         <?php include 'include/footer.php' ?>
+      </footer>
    </div>
    <script src="js/menu.js"></script>
    <script src="js/index.js"></script>

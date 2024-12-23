@@ -85,7 +85,9 @@ if (!isset($_SESSION['email'])) {
          <h2>イベント</h2>
       </main>
       <div id="overlay"></div>
-      <?php include 'include/footer.php' ?>
+      <footer>
+         <?php include 'include/footer.php' ?>
+      </footer>
    </div>
    <script src="js/menu.js"></script>
    <script src="js/slideshow.js"></script>

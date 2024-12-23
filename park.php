@@ -1,5 +1,12 @@
 <?php
 
+session_start();
+
+if (!isset($_SESSION['email'])) {
+    header('Location: login.php');
+    exit();
+ }
+
 ?>
 <html>
 <?php include 'include/head.php' ?>
@@ -19,7 +26,9 @@
                 <?php endforeach; ?>
             </div>
         </main>
-        <?php include 'include/footer.php' ?>
+        <footer>
+            <?php include 'include/footer.php' ?>
+        </footer>
     </div>
     <script src="js/menu.js"></script>
     <script src="js/slideshow.js"></script>

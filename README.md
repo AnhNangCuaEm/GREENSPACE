@@ -9,6 +9,7 @@ cho nav rộng ra,\
 bỏ icon tim mà thêm vào mypage\
 không dùng màu từ khoảng c1c1c1 đến 616161\
 thêm google map vào db trong bảng park\
+add 404 page\
 
 
 
