@@ -163,7 +163,11 @@ s
 }
 
 @media screen and (max-width: 768px) {
+    .feedback-form {
+        max-width: 100%;
+    }
+
     .feedback-form>h1 {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
 }

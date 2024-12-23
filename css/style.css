@@ -549,4 +549,31 @@ hr {
    .hamburger:hover {
       filter: none;
    }
+
+
+.credit-container {
+   max-width: 100%; 
 }
+
+.credit-container h1 {
+   font-size: 1rem;
+}
+
+/* Adjust SVG sizes for better scaling */
+.credit-container svg {
+   width: 240px;
+   height: auto;
+}
+
+/* Ensure h2 and h3 font sizes are responsive */
+.credit-container h2, .credit-container h3 {
+   font-size: 1.5rem; /* Kept the same but ensure it scales well */
+}
+
+/* Adjust project-info SVG sizes for better visibility */
+.credit-container .project-info svg {
+   width: 50px; /* Increased size for better visibility */
+   height: 50px; /* Increased size for better visibility */
+}
+}
+

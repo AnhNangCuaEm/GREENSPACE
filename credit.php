@@ -8,7 +8,7 @@
     <?php include 'include/nav.php' ?>
     <main>
         <div class="credit-container">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400" zoomAndPan="magnify" viewBox="95 100 180 180" height="300" preserveAspectRatio="xMidYMid meet" version="1.0">
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="300" zoomAndPan="magnify" viewBox="95 100 180 180" height="200" preserveAspectRatio="xMidYMid meet" version="1.0">
                 <defs>
                     <g />
                     <clipPath id="ab2bbe5ed7">
