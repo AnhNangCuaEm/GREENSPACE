@@ -262,6 +262,7 @@
                 </div>
             </div>
     </main>
+    <?php include 'include/footer.php' ?>
     <script src="js/menu.js"></script>
     <script src="js/slideshow.js"></script>
     <script src="js/index.js"></script>

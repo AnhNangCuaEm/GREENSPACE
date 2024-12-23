@@ -22,6 +22,7 @@ $parks = ParkData::getallParks();
             <?php endforeach; ?>
          </div>
       </main>
+      <?php include 'include/footer.php' ?>
    </div>
    <script src="js/menu.js"></script>
    <script src="js/index.js"></script>

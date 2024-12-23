@@ -59,20 +59,6 @@ main {
    max-width: 1100px;
 }
 
-nav {
-   background-color: rgba(62, 62, 62, 0.262);
-   backdrop-filter: blur(8px);
-   border: solid 1px rgba(255, 255, 255, 0.5);
-   display: flex;
-   justify-content: space-between;
-   position: relative;
-   border-radius: 40px;
-   width: fit-content;
-   height: fit-content;
-   padding: 10px 15px;
-   z-index: 99;
-}
-
 h1,
 h2 {
    position: relative;
@@ -88,20 +74,6 @@ hr {
    background-color: #ffffff;
 }
 
-#overlay {
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   background-color: rgba(0, 0, 0, 0.5);
-   /* Màu nền tối với độ trong suốt */
-   display: none;
-   /* Ẩn overlay mặc định */
-   z-index: 100;
-   /* Đảm bảo overlay nằm trên các phần tử khác */
-}
-
 #loading {
    position: fixed;
    top: 0;
@@ -114,142 +86,6 @@ hr {
    align-items: center;
    z-index: 999;
 }
-
-.navL,
-.navR {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-}
-
-.navL ul,
-.navR ul {
-   display: flex;
-   gap: 25px;
-   font-size: 1.2rem;
-   font-weight: bold;
-}
-
-.navL ul li,
-.navR ul li {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-   flex-shrink: 0;
-   transition: 0.3s ease-out;
-
-}
-
-.navL ul li:hover {
-   text-shadow: 0 0 10px rgb(255, 255, 255);
-}
-
-.navR ul li:hover {
-   filter: drop-shadow(0 0 8px white);
-}
-
-
-.navLogo {
-   width: 80px;
-   height: auto;
-   margin-right: 25px;
-}
-
-.searchBtn {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-}
-
-.searchBtn div input {
-   width: 170px;
-   padding: 7px 20px;
-   border-radius: 20px;
-   border: none;
-   outline: none;
-   margin: auto 15px;
-   text-align: center;
-   background-color: rgba(255, 255, 255, 0.62);
-}
-
-.searchBtn div {
-   position: relative;
-}
-
-.search-icon {
-   position: absolute;
-   left: 20px;
-   top: 50%;
-   transform: translateY(-50%);
-   pointer-events: none;
-}
-
-.navR img {
-   width: 30px;
-   height: auto;
-}
-
-
-.hamburger {
-   width: 40px;
-   height: 40px;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   cursor: pointer;
-   transition: 0.3s ease-out;
-}
-
-.hamburger:hover {
-   filter: drop-shadow(0 0 10px white);
-}
-
-.menuLine {
-   width: 25px;
-   height: 3px;
-   background-color: #fcf8db;
-   border-radius: 2px;
-   transition: all 0.3s ease;
-   position: relative;
-}
-
-.menuLine::before,
-.menuLine::after {
-   content: "";
-   width: 25px;
-   height: 3px;
-   background-color: #fcf8db;
-   border-radius: 2px;
-   position: absolute;
-   transition: all 0.3s ease;
-}
-
-.menuLine::before {
-   top: -10px;
-}
-
-.menuLine::after {
-   top: 10px;
-}
-
-.hamburger.active {
-   background-color: transparent;
-}
-
-.hamburger.active .menuLine {
-   background-color: transparent;
-}
-
-.hamburger.active .menuLine::before {
-   transform: rotate(45deg);
-   top: 0;
-}
-
-.hamburger.active .menuLine::after {
-   transform: rotate(-45deg);
-   top: 0;
-}
-
 
 .slideshow-container {
    display: flex;
@@ -386,15 +222,24 @@ hr {
    aspect-ratio: 4/3;
 }
 
-.park-box:hover {
+.park-box img:hover {
    filter: brightness(0.8);
 }
 
 .park-box .name {
    position: absolute;
-   bottom: 20px;
+   bottom: 60px;
    font-size: 1rem;
-   left: 10%;
+   left: 5%;
+   z-index: 50;
+}
+
+.park-box .location {
+   position: relative;
+   bottom: 30px;
+   font-size: 0.9rem;
+   left: 5%;
+   z-index: 50;
 }
 
 .park-box img {
@@ -402,6 +247,7 @@ hr {
    object-fit: cover;
    height: 100%;
    width: 100%;
+   transition: 0.3s ease-in-out;
 }
 
 
@@ -475,27 +321,6 @@ hr {
       font-size: 1.2rem;
    }
 
-   .navL ul li {
-      display: none;
-   }
-
-   .navR ul li {
-      display: none;
-   }
-
-   .navLogo {
-      width: 60px;
-      margin-right: 0;
-   }
-
-   .searchBtn div input {
-      padding: 7px 10px;
-   }
-
-   .navR img {
-      width: 25px;
-   }
-
    .park-box {
       min-width: 150px;
       max-width: 250px;
@@ -547,34 +372,32 @@ hr {
       /* Remove background color */
    }
 
-   .hamburger:hover {
-      filter: none;
+   .credit-container {
+      max-width: 100%;
    }
 
+   .credit-container h1 {
+      font-size: 1rem;
+   }
 
-.credit-container {
-   max-width: 100%; 
-}
+   /* Adjust SVG sizes for better scaling */
+   .credit-container svg {
+      width: 240px;
+      height: auto;
+   }
 
-.credit-container h1 {
-   font-size: 1rem;
-}
+   /* Ensure h2 and h3 font sizes are responsive */
+   .credit-container h2,
+   .credit-container h3 {
+      font-size: 1.5rem;
+      /* Kept the same but ensure it scales well */
+   }
 
-/* Adjust SVG sizes for better scaling */
-.credit-container svg {
-   width: 240px;
-   height: auto;
+   /* Adjust project-info SVG sizes for better visibility */
+   .credit-container .project-info svg {
+      width: 50px;
+      /* Increased size for better visibility */
+      height: 50px;
+      /* Increased size for better visibility */
+   }
 }
-
-/* Ensure h2 and h3 font sizes are responsive */
-.credit-container h2, .credit-container h3 {
-   font-size: 1.5rem; /* Kept the same but ensure it scales well */
-}
-
-/* Adjust project-info SVG sizes for better visibility */
-.credit-container .project-info svg {
-   width: 50px; /* Increased size for better visibility */
-   height: 50px; /* Increased size for better visibility */
-}
-}
-
