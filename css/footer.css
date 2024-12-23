@@ -1,0 +1,143 @@
+footer {
+    padding: 20px;
+    margin: 100px auto 0 auto;
+    height: fit-content;
+    max-width: 1100px;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-hr {
+    width: 2px;
+    height: 150px;
+    border-radius: 2px;
+    align-self: center;
+}
+
+footer>div>div:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    max-width: 300px;
+    text-align: justify;
+    font-size: 0.8rem;
+}
+
+.footer-box {
+    position: relative;
+    top: 0;
+}
+
+.footer-box h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.footer-box ul {
+    font-size: 1rem;
+    text-align: left;
+}
+
+.footer-box ul li {
+    margin-bottom: 5px;
+}
+
+footer > div > div:nth-child(5) > ul > li:nth-child(1) > a > div {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 5px;
+}
+
+footer > div > div:nth-child(5) > ul > li:nth-child(2) > a > div {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 5px;
+}
+
+footer > div > div:nth-child(1) > svg {
+    position: relative;
+    top: -20px;
+    align-self: center;
+}
+
+.footer-box p {
+    position: relative;
+    top: -20px;
+}
+
+@media screen and (max-width: 768px) {
+    footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .footer-container {
+        display: grid;
+        max-width: 90%;
+        grid-template-columns: (2, 1fr);
+        grid-template-rows: (4, 1fr);
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .footer-box:nth-child(1) {
+        grid-column: span 2 / span 2;
+        justify-self: center;
+    }
+
+    .footer-box:nth-child(2) {
+        grid-row-start: 3;
+        /* Second box on the left */
+    }
+
+    .footer-box:nth-child(3) {
+        grid-row-start: 3;
+        /* Third box on the right */
+    }
+
+    .footer-box:nth-child(4) {
+        grid-row-start: 4;
+        /* Fourth box spans full width */
+    }
+
+    .footer-box h3 {
+        text-align: center;
+    }
+    
+    .footer-box ul {
+        text-align: center;
+    }
+
+    .footer-hr {
+        grid-column: span 2 / span 2;
+        justify-self: center;
+        width: 200px;
+        height: 2px;
+        border-radius: 2px;
+        margin: 20px 0;
+    }
+
+    .footer-box p {
+        top: 0;
+    }
+
+    footer > div > div:nth-child(1) > svg {
+        top: 0;
+        align-self: center;
+    }
+
+    footer > div > div:nth-child(5) > ul > li:nth-child(1) > a > div {
+        justify-content: center;
+    }
+    
+    footer > div > div:nth-child(5) > ul > li:nth-child(2) > a > div {
+        justify-content: center;
+    }
+}
