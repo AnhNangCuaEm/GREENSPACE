@@ -148,6 +148,33 @@ textarea {
     border-radius: 12px;
 }
 
+.result-popup {
+    position: fixed;
+    top: 30px;
+    display: flex;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    z-index: 200;
+    border-radius: 25px;
+    background-color: rgba(62, 62, 62, 0.262);
+    backdrop-filter: blur(8px);
+    border: solid 1px rgba(255, 255, 255, 0.5);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    opacity: 0;
+}
+
+.result-popup.slidedown {
+    transform: translateY(100px);
+    opacity: 1;
+}
+
+.result-popup.slideup {
+    transform: translateY(-30px);
+    opacity: 0;
+}
+
 @keyframes glowing {
     0% {
         background-position: 0 0;

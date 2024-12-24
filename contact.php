@@ -18,7 +18,7 @@ if (!isset($_SESSION['email'])) {
             <h1>フィードバック・問い合わせフォーム</h1>
 
             <!-- Phần 1: Bảng đánh giá -->
-            <form action="functions\getfeedback.php" method="POST" enctype="multipart/form-data">
+            <form id="myForm">
                 <table>
                     <thead>
                         <tr>
@@ -67,6 +67,7 @@ if (!isset($_SESSION['email'])) {
                 </div>
             </form>
         </div>
+        <div class="result-popup" id="result"></div>
     </main>
     <footer>
         <?php include 'include/footer.php' ?>
