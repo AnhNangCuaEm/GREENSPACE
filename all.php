@@ -11,15 +11,17 @@ if (!isset($_SESSION['email'])) {
 ?>
 
 <html>
-<?php include 'include/head.php' ?>
 
+<head>
+   <?php include 'include/head.php' ?>
+</head>
 <body>
    <div id="content">
       <?php include 'include/nav.php' ?>
       <main>
          <h1>公園一覧</h1>
          <div class="park-container">
-            <?php foreach ($parks as $park) : ?>
+            <?php foreach ($parks as $park): ?>
                <div class="park-box">
                   <a href="park.php?id=<?= $park->id ?>"><img src="<?= $park->thumbnail ?>"></a>
                   <div class="name"><?= $park->name ?></div>

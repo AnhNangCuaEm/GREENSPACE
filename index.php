@@ -14,7 +14,9 @@ if (!isset($_SESSION['email'])) {
 ?>
 
 <html>
-<?php include 'include/head.php' ?>
+   <head>
+      <?php include 'include/head.php' ?>
+   </head>
 
 <body>
    <!-- tắt tạm trang loading trong lúc đang code -->

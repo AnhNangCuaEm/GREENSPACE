@@ -2,7 +2,6 @@ body {
     background-color: var(--secondary-color);
     color: var(--primary-color);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     min-height: 100vh;
     align-items: center;

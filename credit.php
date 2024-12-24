@@ -9,7 +9,9 @@ if (!isset($_SESSION['email'])) {
 
 ?>
 <html>
-<?php include 'include/head.php' ?>
+    <head>
+        <?php include 'include/head.php' ?>
+    </head>
 
 <body>
     <?php include 'include/nav.php' ?>

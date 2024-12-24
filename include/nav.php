@@ -34,7 +34,7 @@
                                 </path>
                             </g>
                         </svg></a></li>
-                <li><a href="my-page.php"><svg width="30px" height="30px" viewBox="0 0 48.00 48.00" version="1.1"
+                <li><a href="profile.php"><svg width="30px" height="30px" viewBox="0 0 48.00 48.00" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#fcf8db"
                             stroke="#fcf8db">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -84,7 +84,7 @@
                                 </path>
                             </g>
                         </svg></a>
-                    <a href="my-page.php"><svg width="24px" height="24px" viewBox="0 0 48.00 48.00" version="1.1"
+                    <a href="profile.php"><svg width="24px" height="24px" viewBox="0 0 48.00 48.00" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#fcf8db"
                             stroke="#fcf8db">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
