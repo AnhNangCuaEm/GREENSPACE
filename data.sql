@@ -1,22 +1,207 @@
 id,name,area,location,description,price,created_at,update_at,thumbnail
-1,上野恩賜公園,上野,東京都台東区上野公園5-20,東京を代表する歴史的な公園で、美術館や博物館、不忍池や桜の名所として知られています。,入園無料（一部施設有料）
-2,代々木公園,渋谷,東京都渋谷区代々木神園町2-1,東京最大級の緑豊かな公園で、イベントやジョギングに適しています。,入園無料
-3,日比谷公園,千代田,東京都千代田区日比谷公園1-6,日本初の洋風庭園で、四季折々の花壇や噴水が楽しめます。,入園無料
-4,新宿御苑,新宿,東京都新宿区内藤町11,日本庭園や洋風庭園が融合した美しい庭園で、桜の名所です。,大人500円
-5,国営昭和記念公園,立川,東京都立川市緑町3173,広大な敷地に四季折々の花や植物が咲き、レクリエーション施設が充実しています。,大人450円
-6,お台場海浜公園,港区,東京都港区台場1,レインボーブリッジや東京湾を眺められる都会のビーチ公園です。,入園無料
-7,浜離宮恩賜庭園,中央区,東京都中央区浜離宮庭園1-1,江戸時代の大名庭園で、抹茶と庭園の景色が楽しめます。,一般300円
-8,井の頭恩賜公園,武蔵野市,東京都武蔵野市御殿山1-18-31,井の頭池でボート遊びが楽しめる自然豊かな公園です。,入園無料（一部施設有料）
-9,砧公園,世田谷区,東京都世田谷区砧公園1-1,広大な芝生広場とジョギングコースがあり、桜の名所でもあります。,入園無料
-10,小石川後楽園,文京区,東京都文京区後楽1-6-6,日本と中国の庭園様式が融合した江戸時代の庭園です。,一般300円
-11,代官山公園,渋谷区,東京都渋谷区代官山町17-1,静かな住宅地にある小さな公園で、近隣のカフェやショップも魅力です。,入園無料
-12,井の頭恩賜公園,吉祥寺,東京都武蔵野市御殿山1-18-31,吉祥寺駅から徒歩5分の公園です。ボート遊びや散策が楽しめます。,入園無料（一部施設有料）
-13,葛西臨海公園,葛西,東京都江戸川区臨海町6-2-1,東京湾を望む広大な公園で、観覧車や水族館も併設されています。,入園無料
-14,神宮外苑,外苑,東京都港区北青山2-1-1,東京の中心にある広大な緑地で、桜並木やスポーツ施設が整備されています。,入園無料
-15,多摩川緑地,多摩,東京都多摩市南野1-13-2,多摩川沿いに広がる広大な緑地で、散策やサイクリングが楽しめます。,入園無料
-16,中野四季の森公園,中野,東京都中野区中野4-7-1,多様な植物や花が見られる自然豊かな公園です。春には桜が美しく咲きます。,入園無料
-17,東京ドイツ村,袖ケ浦,千葉県袖ケ浦市永吉419,東京近郊にあるドイツの風景を再現したテーマパーク内の広大な公園です。,入園500円
-18,秋ヶ瀬公園,秋ヶ瀬,埼玉県さいたま市桜区上大久保370-1,荒川沿いの自然豊かな公園で、バーベキューやスポーツが楽しめます。,入園無料
-19,東京タワー公園,芝公園,東京都港区芝公園4-2-8,東京タワーのすぐ近くにあり、広場や遊具が整備されています。,入園無料
-20,水元公園,亀有,東京都葛飾区水元公園3-2-1,広大な敷地で自然を感じられる公園で、ボート遊びやバードウォッチングができます。,入園無料
-21,昭和記念公園,昭島,東京都昭島市緑町3173,広大な敷地に四季折々の花やレクリエーション施設が揃った国営公園です。,大人450円
+1, 上野恩賜公園, 上野, 東京都台東区上野公園5-20, 東京を代表する歴史的な公園で、美術館や博物館など文化的な施設が充実しています。不忍池では四季折々の自然を楽しむことができ、特に春には桜の名所として多くの人が訪れます。, 入園無料（一部施設有料）  
+2, 代々木公園, 渋谷, 東京都渋谷区代々木神園町2-1, 東京最大級の緑豊かな公園で、広大な芝生広場やジョギングコースがあります。季節ごとにイベントやフェスティバルが開催され、都会のオアシスとして人気です。, 入園無料  
+3, 日比谷公園, 千代田, 東京都千代田区日比谷公園1-6, 日本初の洋風庭園で、四季折々の花壇や噴水が美しい景観を作り出しています。散策や読書を楽しむのに適した静かな空間です。, 入園無料  
+4, 新宿御苑, 新宿, 東京都新宿区内藤町11, 日本庭園と洋風庭園が融合した広大で美しい庭園です。春には桜が見事で、秋には紅葉も楽しめます。都会の喧騒を忘れる癒しのスポットです。, 大人500円  
+5, 国営昭和記念公園, 立川, 東京都立川市緑町3173, 広大な敷地内には花畑やバーベキュー施設、子供向けの遊具エリアがあります。サイクリングやボート遊びなどアクティブな楽しみ方ができ、家族連れに人気です。, 大人450円  
+6, お台場海浜公園, 港区, 東京都港区台場1, 東京湾を望む都会のビーチで、レインボーブリッジを背景に散策やピクニックが楽しめます。夜景も美しく、デートスポットとしてもおすすめです。, 入園無料  
+7, 浜離宮恩賜庭園, 中央区, 東京都中央区浜離宮庭園1-1, 江戸時代の大名庭園で、美しい池や石灯籠が点在しています。抹茶を味わいながら庭園の景色を堪能することができます。, 一般300円  
+8, 井の頭恩賜公園, 吉祥寺, 東京都武蔵野市御殿山1-18-31, 吉祥寺駅から徒歩5分の便利な立地にある公園です。ボート遊びや動物園が楽しめるほか、散策路や池の風景も魅力的です。, 入園無料（一部施設有料）  
+9, 新宿中央公園, 新宿, 東京都新宿区新宿1-2-3, 新宿駅から徒歩5分の立地にあり、都会の中で気軽に緑を楽しめる公園です。季節の花や広場があり、リフレッシュに最適です。, 入園無料  
+10, 小石川後楽園, 文京区, 東京都文京区後楽1-6-6, 日本庭園と中国庭園の要素を取り入れた歴史的な庭園です。特に紅葉の季節には訪れる人が多く、池を中心とした景観が見事です。, 一般300円  
+11, 原宿公園, 原宿, 東京都渋谷区神宮前1-2-3, 原宿駅から徒歩3分という好立地にある小規模な公園で、買い物や観光の合間に立ち寄るのに便利です。, 入園無料  
+12, 葛西臨海公園, 葛西, 東京都江戸川区臨海町6-2-1, 東京湾沿いに広がる大規模な公園で、観覧車や葛西臨海水族園が併設されています。ピクニックや散策に最適な場所です。, 入園無料  
+13, 芝公園, 東京タワー, 東京都港区芝公園4-2-8, 東京タワーのすぐそばに位置し、広場や遊具が整備された公園です。タワーを背景にした写真スポットとしても人気があります。, 入園無料  
+14, 木場公園, 江東区, 東京都江東区木場4-6-1, 元材木置き場を再開発した公園で、スポーツ施設やイベントスペースが充実しています。桜並木や日本庭園もあり、季節の変化が楽しめます。, 入園無料  
+15, 清澄庭園, 江東区, 東京都江東区清澄3-3-9, 明治時代に造られた回遊式庭園で、池に映る緑や東屋が趣深い景観を作り出しています。静かな時間を過ごすのに最適です。, 一般150円  
+16, 旧古河庭園, 北区, 東京都北区西ヶ原1-27-39, 洋館と日本庭園が調和した大正時代の庭園です。特にバラ園が有名で、春と秋のバラフェスティバルが人気です。, 一般150円  
+17, 砧公園, 世田谷区, 東京都世田谷区砧公園1-1, 広大な芝生広場が特徴で、ピクニックや家族でのんびり過ごすのにぴったりの公園です。子供向けの遊具も充実しています。, 入園無料  
+18, 六義園, 文京区, 東京都文京区本駒込6-16-3, 江戸時代の大名庭園で、春のしだれ桜や秋の紅葉が見どころです。特にライトアップされた夜の庭園は幻想的な雰囲気です。, 一般300円  
+
+
+INSERT INTO event (name, date, time, location, description, price) VALUES
+('代々木公園アースデイ東京2025', '2025年4月19日(土) ~ 4月20日(日)', '10:00 ~ 19:00', '代々木公園イベント広場（東京都渋谷区代々木神園町2−1）', '環境について考えるイベント。フリーマーケットやワークショップ、オーガニックフードの出店など。', 0),
+('東京レインボープライド2025', '2025年6月7日(土)・8日(日)', '', '代々木公園（東京都渋谷区）', 'パレードやステージイベント、飲食ブースなど。LGBTQの祭典。', 0),
+('Tokyo International Anime Fair', '2025年3月21日 ~ 3月24日', '10:00 ~ 18:00', '東京国際展示場', 'アニメ関連企業や作品の展示会。ファン向けイベントやグッズ販売あり。', 1500),
+('東京フードフェスタ2025', '2025年5月15日(金) ~ 5月17日(日)', '11:00 ~ 20:00', '日比谷公園', '日本全国のグルメや地域特産品を楽しめるフードイベント。', 500),
+('江戸切子展', '2025年6月10日 ~ 6月30日', '10:00 ~ 16:00', '浅草文化観光センター', '江戸切子の歴史と作品を展示する特別展。', 0),
+('銀座クリスマスマーケット', '2025年12月1日 ~ 12月24日', '12:00 ~ 20:00', '銀座中央通り', 'クリスマス雑貨や飲食の屋台が並ぶ、家族向けマーケットイベント。', 0),
+('Tokyo Game Show 2025', '2025年9月25日 ~ 9月28日', '10:00 ~ 18:00', '幕張メッセ', '最新ゲームの展示会。試遊台や企業ブースあり。', 2000),
+('隅田川花火大会2025', '2025年7月27日(日)', '19:00 ~ 21:00', '隅田川沿い', '日本最大級の花火大会。川沿いでの鑑賞が人気。', 0),
+('赤坂音楽祭', '2025年11月10日 ~ 11月12日', '13:00 ~ 21:00', '赤坂サカス', 'ジャズやクラシック音楽のライブ演奏。屋台も出店。', 1000),
+('渋谷ハロウィンパーティー2025', '2025年10月31日', '18:00 ~ 深夜', '渋谷スクランブル交差点周辺', 'コスプレパレードやDJイベントなど、盛大なハロウィンイベント。', 0),
+('アートフェア東京2025', '2025年4月10日 ~ 4月13日', '10:00 ~ 18:00', '東京国際フォーラム', '国内外の現代アート作品の展示と販売イベント。', 1500),
+('サマーソニック2025', '2025年8月15日(土)・16日(日)', '10:00 ~ 22:00', 'ZOZOマリンスタジアム＆幕張メッセ', '国内外の有名アーティストが出演する大型音楽フェス。', 12000);
+
+
+INSERT INTO park_images (park_id, image_url) VALUES
+(1, '/GREENSPACE/img/img/dummy-green.png'),
+(2, '/GREENSPACE/img/img/dummy-blue.png'),
+(3, '/GREENSPACE/img/img/dummy.png'),
+(4, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(5, '/GREENSPACE/img/img/dummy-brown.png'),
+(6, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(7, '/GREENSPACE/img/img/dummy-blue.png'),
+(8, '/GREENSPACE/img/img/dummy-green.png'),
+(9, '/GREENSPACE/img/img/dummy-green.png'),
+(10, '/GREENSPACE/img/img/dummy-brown.png'),
+(11, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(12, '/GREENSPACE/img/img/dummy-blue.png'),
+(13, '/GREENSPACE/img/img/dummy.png'),
+(14, '/GREENSPACE/img/img/dummy-brown.png'),
+(15, '/GREENSPACE/img/img/dummy-blue.png'),
+(16, '/GREENSPACE/img/img/dummy.png'),
+(17, '/GREENSPACE/img/img/dummy.png'),
+(1, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(2, '/GREENSPACE/img/img/dummy-green.png'),
+(3, '/GREENSPACE/img/img/dummy-blue.png'),
+(4, '/GREENSPACE/img/img/dummy-brown.png'),
+(5, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(6, '/GREENSPACE/img/img/dummy-green.png'),
+(7, '/GREENSPACE/img/img/dummy-blue.png'),
+(8, '/GREENSPACE/img/img/dummy-green.png'),
+(9, '/GREENSPACE/img/img/dummy-green.png'),
+(10, '/GREENSPACE/img/img/dummy-brown.png'),
+(11, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(12, '/GREENSPACE/img/img/dummy-blue.png'),
+(13, '/GREENSPACE/img/img/dummy.png'),
+(14, '/GREENSPACE/img/img/dummy-brown.png'),
+(15, '/GREENSPACE/img/img/dummy-blue.png'),
+(16, '/GREENSPACE/img/img/dummy.png'),
+(17, '/GREENSPACE/img/img/dummy.png');
+(1, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(2, '/GREENSPACE/img/img/dummy-green.png'),
+(3, '/GREENSPACE/img/img/dummy-blue.png'),
+(4, '/GREENSPACE/img/img/dummy-brown.png'),
+(5, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(6, '/GREENSPACE/img/img/dummy-green.png'),
+(7, '/GREENSPACE/img/img/dummy-blue.png'),
+(8, '/GREENSPACE/img/img/dummy-green.png'),
+(9, '/GREENSPACE/img/img/dummy-green.png'),
+(10, '/GREENSPACE/img/img/dummy-brown.png'),
+(11, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(12, '/GREENSPACE/img/img/dummy-blue.png'),
+(13, '/GREENSPACE/img/img/dummy.png'),
+(14, '/GREENSPACE/img/img/dummy-brown.png'),
+(15, '/GREENSPACE/img/img/dummy-blue.png'),
+(16, '/GREENSPACE/img/img/dummy.png'),
+(17, '/GREENSPACE/img/img/dummy.png');
+(1, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(2, '/GREENSPACE/img/img/dummy-green.png'),
+(3, '/GREENSPACE/img/img/dummy-blue.png'),
+(4, '/GREENSPACE/img/img/dummy-brown.png'),
+(5, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(6, '/GREENSPACE/img/img/dummy-green.png'),
+(7, '/GREENSPACE/img/img/dummy-blue.png'),
+(8, '/GREENSPACE/img/img/dummy-green.png'),
+(9, '/GREENSPACE/img/img/dummy-green.png'),
+(10, '/GREENSPACE/img/img/dummy-brown.png'),
+(11, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(12, '/GREENSPACE/img/img/dummy-blue.png'),
+(13, '/GREENSPACE/img/img/dummy.png'),
+(14, '/GREENSPACE/img/img/dummy-brown.png'),
+(15, '/GREENSPACE/img/img/dummy-blue.png'),
+(16, '/GREENSPACE/img/img/dummy.png'),
+(17, '/GREENSPACE/img/img/dummy.png');
+(1, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(2, '/GREENSPACE/img/img/dummy-green.png'),
+(3, '/GREENSPACE/img/img/dummy-blue.png'),
+(4, '/GREENSPACE/img/img/dummy-brown.png'),
+(5, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(6, '/GREENSPACE/img/img/dummy-green.png'),
+(7, '/GREENSPACE/img/img/dummy-blue.png'),
+(8, '/GREENSPACE/img/img/dummy-green.png'),
+(9, '/GREENSPACE/img/img/dummy-green.png'),
+(10, '/GREENSPACE/img/img/dummy-brown.png'),
+(11, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(12, '/GREENSPACE/img/img/dummy-blue.png'),
+(13, '/GREENSPACE/img/img/dummy.png'),
+(14, '/GREENSPACE/img/img/dummy-brown.png'),
+(15, '/GREENSPACE/img/img/dummy-blue.png'),
+(16, '/GREENSPACE/img/img/dummy.png'),
+(17, '/GREENSPACE/img/img/dummy.png');
+(1, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(2, '/GREENSPACE/img/img/dummy-green.png'),
+(3, '/GREENSPACE/img/img/dummy-blue.png'),
+(4, '/GREENSPACE/img/img/dummy-brown.png'),
+(5, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(6, '/GREENSPACE/img/img/dummy-green.png'),
+(7, '/GREENSPACE/img/img/dummy-blue.png'),
+(8, '/GREENSPACE/img/img/dummy-green.png'),
+(9, '/GREENSPACE/img/img/dummy-green.png'),
+(10, '/GREENSPACE/img/img/dummy-brown.png'),
+(11, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(12, '/GREENSPACE/img/img/dummy-blue.png'),
+(13, '/GREENSPACE/img/img/dummy.png'),
+(14, '/GREENSPACE/img/img/dummy-brown.png'),
+(15, '/GREENSPACE/img/img/dummy-blue.png'),
+(16, '/GREENSPACE/img/img/dummy.png'),
+(17, '/GREENSPACE/img/img/dummy.png');
+(1, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(2, '/GREENSPACE/img/img/dummy-green.png'),
+(3, '/GREENSPACE/img/img/dummy-blue.png'),
+(4, '/GREENSPACE/img/img/dummy-brown.png'),
+(5, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(6, '/GREENSPACE/img/img/dummy-green.png'),
+(7, '/GREENSPACE/img/img/dummy-blue.png'),
+(8, '/GREENSPACE/img/img/dummy-green.png'),
+(9, '/GREENSPACE/img/img/dummy-green.png'),
+(10, '/GREENSPACE/img/img/dummy-brown.png'),
+(11, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(12, '/GREENSPACE/img/img/dummy-blue.png'),
+(13, '/GREENSPACE/img/img/dummy.png'),
+(14, '/GREENSPACE/img/img/dummy-brown.png'),
+(15, '/GREENSPACE/img/img/dummy-blue.png'),
+(16, '/GREENSPACE/img/img/dummy.png'),
+(17, '/GREENSPACE/img/img/dummy.png');
+(1, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(2, '/GREENSPACE/img/img/dummy-green.png'),
+(3, '/GREENSPACE/img/img/dummy-blue.png'),
+(4, '/GREENSPACE/img/img/dummy-brown.png'),
+(5, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(6, '/GREENSPACE/img/img/dummy-green.png'),
+(7, '/GREENSPACE/img/img/dummy-blue.png'),
+(8, '/GREENSPACE/img/img/dummy-green.png'),
+(9, '/GREENSPACE/img/img/dummy-green.png'),
+(10, '/GREENSPACE/img/img/dummy-brown.png'),
+(11, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(12, '/GREENSPACE/img/img/dummy-blue.png'),
+(13, '/GREENSPACE/img/img/dummy.png'),
+(14, '/GREENSPACE/img/img/dummy-brown.png'),
+(15, '/GREENSPACE/img/img/dummy-blue.png'),
+(16, '/GREENSPACE/img/img/dummy.png'),
+(17, '/GREENSPACE/img/img/dummy.png');
+(1, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(2, '/GREENSPACE/img/img/dummy-green.png'),
+(3, '/GREENSPACE/img/img/dummy-blue.png'),
+(4, '/GREENSPACE/img/img/dummy-brown.png'),
+(5, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(6, '/GREENSPACE/img/img/dummy-green.png'),
+(7, '/GREENSPACE/img/img/dummy-blue.png'),
+(8, '/GREENSPACE/img/img/dummy-green.png'),
+(9, '/GREENSPACE/img/img/dummy-green.png'),
+(10, '/GREENSPACE/img/img/dummy-brown.png'),
+(11, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(12, '/GREENSPACE/img/img/dummy-blue.png'),
+(13, '/GREENSPACE/img/img/dummy.png'),
+(14, '/GREENSPACE/img/img/dummy-brown.png'),
+(15, '/GREENSPACE/img/img/dummy-blue.png'),
+(16, '/GREENSPACE/img/img/dummy.png'),
+(17, '/GREENSPACE/img/img/dummy.png');
+(1, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(2, '/GREENSPACE/img/img/dummy-green.png'),
+(3, '/GREENSPACE/img/img/dummy-blue.png'),
+(4, '/GREENSPACE/img/img/dummy-brown.png'),
+(5, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(6, '/GREENSPACE/img/img/dummy-green.png'),
+(7, '/GREENSPACE/img/img/dummy-blue.png'),
+(8, '/GREENSPACE/img/img/dummy-green.png'),
+(9, '/GREENSPACE/img/img/dummy-green.png'),
+(10, '/GREENSPACE/img/img/dummy-brown.png'),
+(11, '/GREENSPACE/img/img/dummy-sapphire.png'),
+(12, '/GREENSPACE/img/img/dummy-blue.png'),
+(13, '/GREENSPACE/img/img/dummy.png'),
+(14, '/GREENSPACE/img/img/dummy-brown.png'),
+(15, '/GREENSPACE/img/img/dummy-blue.png'),
+(16, '/GREENSPACE/img/img/dummy.png'),
+(17, '/GREENSPACE/img/img/dummy.png');

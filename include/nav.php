@@ -1,11 +1,11 @@
 <div class="navigation-div">
     <nav>
         <div class="navL">
-            <a href="index.php"><img class="navLogo" src="img/img/logo.png" alt=""></a>
+            <a href="#"><img class="navLogo" src="img/img/logo.png" alt=""></a>
             <ul>
+                <li><a href="index.php">ホーム</a></li>
                 <li><a href="all.php">探る</a></li>
-                <li><a href="event.php">イベント</a></li>
-                <li><a href="services.php">ニュース</a></li>
+                <li><a href="all-event.php">イベント</a></li>
             </ul>
         </div>
         <div id="search" class="searchBtn">
@@ -60,7 +60,6 @@
     </nav>
     <div class="menu" id="menu">
         <ul class="menu-ul">
-            <li><a href="index.php">ホーム</a></li>
             <li><a href="how-to-use.php">使い方</a></li>
             <li><a href="contact.php">問い合せ</a></li>
             <li><a href="credit.php">Credit</a></li>
@@ -106,8 +105,7 @@
             </li>
             <li><a href="index.php">ホーム</a></li>
             <li><a href="all.php">探る</a></li>
-            <li><a href="event.php">イベント</a></li>
-            <li><a href="news.php">ニュース</a></li>
+            <li><a href="all-event.php">イベント</a></li>
             <li><a href="how-to-use.php">使い方</a></li>
             <li><a href="contact.php">問い合せ</a></li>
             <li><a href="credit.php">Credit</a></li>

@@ -22,9 +22,7 @@ class parkData
          $park = new Park();
          $park->id = $row['id'];
          $park->name = $row['name'];
-         $park->area = $row['area'];
          $park->location = $row['location'];
-         $park->description = $row['description'];
          $park->thumbnail = $row['thumbnail'];
 
          $parks[] = $park;
@@ -48,7 +46,6 @@ class parkData
          $park->name = $row['name'];
          $park->area = $row['area'];
          $park->location = $row['location'];
-         $park->description = $row['description'];
          $park->thumbnail = $row['thumbnail'];
 
          $parks[] = $park;
@@ -71,7 +68,6 @@ class parkData
          $park = new Park();
          $park->id = $row['id'];
          $park->name = $row['name'];
-         $park->location = $row['location'];
          $park->description = $row['description'];
          $park->thumbnail = $row['thumbnail'];
 
@@ -85,7 +81,7 @@ class parkData
    {
       $pdo = Database::getConnection();
 
-      $state = $pdo->prepare('SELECT * FROM parks WHERE id = :id');
+      $state = $pdo->prepare('SELECT * FROM park WHERE id = :id');
       $state->execute(['id' => $id]);
 
       $row = $state->fetch();
@@ -101,6 +97,7 @@ class parkData
       $park->location = $row['location'];
       $park->description = $row['description'];
       $park->thumbnail = $row['thumbnail'];
+      $park->map = $row['map'];
 
       return $park;
    }

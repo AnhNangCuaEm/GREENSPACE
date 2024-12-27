@@ -11,7 +11,7 @@ if (!isset($_SESSION['email'])) {
 }
 
 $email = $_SESSION['email'];
-$user = UserData::getUser();
+$user = UserData::getProfile();
 
 ?>
 
@@ -59,7 +59,6 @@ $user = UserData::getUser();
         <?php include 'include/footer.php' ?>
     </footer>
     <script src="js/menu.js"></script>
-    <script src="js/slideshow.js"></script>
     <script src="js/index.js"></script>
 </body>
 

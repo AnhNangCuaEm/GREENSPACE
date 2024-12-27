@@ -6,7 +6,32 @@ require_once __DIR__ . '/User.php';
 class UserData
 {
 
-    public static function getUser(): ?User
+    public static function getUser(string $email): ?User
+    {
+        $pdo = Database::getConnection();
+
+        $state = $pdo->prepare('SELECT * FROM user WHERE email = :email');
+        $state->bindValue(':email', $email, PDO::PARAM_STR);
+        $state->execute();
+
+        $row = $state->fetch(PDO::FETCH_ASSOC);
+
+        if (!$row) {
+            return null;
+        }
+
+        return new User(
+            $row['id'],
+            $row['email'],
+            $row['password_hash'],
+            $row['name'],
+            $row['phone'],
+            $row['avatar'],
+            $row['address']
+        );
+    }
+
+    public static function getProfile(): ?User
     {
         $pdo = Database::getConnection();
 

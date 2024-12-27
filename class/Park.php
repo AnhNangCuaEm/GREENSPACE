@@ -14,4 +14,6 @@ class Park {
     * @var ParkImage[]
     */
    public array $images;
+
+   public string $map;
 }

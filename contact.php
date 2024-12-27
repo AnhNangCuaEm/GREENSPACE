@@ -76,7 +76,6 @@ if (!isset($_SESSION['email'])) {
         <?php include 'include/footer.php' ?>
     </footer>
     <script src="js/menu.js"></script>
-    <script src="js/slideshow.js"></script>
     <script src="js/index.js"></script>
 </body>
 

@@ -1,7 +1,7 @@
-<?php 
-
-class ParkImage {
-   public int $id;
-   public string $park_id;
+<?php
+class ParkImage
+{
+   public ?int $id = null;
+   public ?int $park_id = null;
    public string $image;
 }

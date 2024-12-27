@@ -1,10 +1,12 @@
 <?php
 require_once __DIR__ . '/class/ParkData.php';
+require_once __DIR__ . '/class/EventData.php';
 
 session_start();
 
 $parks = ParkData::getParks();
 $featureParks = ParkData::getFeatureParks();
+$events = EventData::getEvents();
 
 if (!isset($_SESSION['email'])) {
    header('Location: login.php');
@@ -14,9 +16,10 @@ if (!isset($_SESSION['email'])) {
 ?>
 
 <html>
-   <head>
-      <?php include 'include/head.php' ?>
-   </head>
+
+<head>
+   <?php include 'include/head.php' ?>
+</head>
 
 <body>
    <!-- tắt tạm trang loading trong lúc đang code -->
@@ -73,7 +76,7 @@ if (!isset($_SESSION['email'])) {
                <span class="dot" onclick="currentSlide(5)"></span>
             </div>
          </div>
-         <h1>公園一覧</h1>
+         <h1>公園</h1>
          <div class="park-container">
             <?php foreach ($parks as $park): ?>
                <div class="park-box">
@@ -85,11 +88,28 @@ if (!isset($_SESSION['email'])) {
          </div>
          <a href="all.php"><button class="view-more-btn">もっと見る</button></a>
          <h2>イベント</h2>
-      </main>
-      <div id="overlay"></div>
-      <footer>
-         <?php include 'include/footer.php' ?>
-      </footer>
+         <div class="event-container">
+            <?php foreach ($events as $event): ?>
+               <div class="event-box">
+                  <a href="event.php?id=<?= $event->id ?>"><img src="<?= $event->thumbnail ?>"></a>
+                  <div class="event-text">
+                     <div class="name"><?= $event->name ?></div>
+                     <div class="location"><span>場所:</span>&nbsp;<?= $event->location ?></div>
+                     <div class="date"><span>日付:</span>&nbsp;<?= $event->date ?></div>
+                     <div class="time"><span>時間:</span>&nbsp;<?= $event->time ?></div>
+                     <div class="price"><span>料金:</span>&nbsp;<?= $event->price ?></div>
+                     <div class="description"><span>内容:</span>&nbsp;<?= $event->description ?></div>
+                  </div>
+               </div>
+            <?php endforeach; ?>
+         </div>
+         <a href="all-event.php"><button class="view-more-btn">もっと見る</button></a>
+   </div>
+   </main>
+   <div id="overlay"></div>
+   <footer>
+      <?php include 'include/footer.php' ?>
+   </footer>
    </div>
    <script src="js/menu.js"></script>
    <script src="js/slideshow.js"></script>

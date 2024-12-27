@@ -377,9 +377,6 @@ if (!isset($_SESSION['email'])) {
                 </div>
                 <hr>
                 <div>
-                    <p>本プロジェクトを完成させるにあたり、アドバイスいただいた先生方、友人たち、そしてオープンソースコミュニティに心より感謝申し上げます。</p>
-                </div>
-                <div>
                     <p>© 2024 GREEN SPACE. 本プロジェクトは個人所有であり、学習目的で実施され、商業目的ではありません。</p>
                 </div>
             </div>
@@ -388,7 +385,6 @@ if (!isset($_SESSION['email'])) {
         <?php include 'include/footer.php' ?>
     </footer>
     <script src="js/menu.js"></script>
-    <script src="js/slideshow.js"></script>
     <script src="js/index.js"></script>
 </body>
 

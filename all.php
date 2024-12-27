@@ -1,6 +1,8 @@
 <?php
 require_once __DIR__ . '/class/ParkData.php';
 
+session_start();
+
 $parks = ParkData::getallParks();
 
 if (!isset($_SESSION['email'])) {
