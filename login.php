@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/class/UserData.php';
+require_once __DIR__ . '/functions/verify.php';
 
 ini_set('session.gc_maxlifetime', 259200);
 session_start();
@@ -26,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errormessages['login'] = 'メールアドレスまたはパスワードが間違っています';
         } else {
             $_SESSION['email'] = $email;
+            createToken($email);
             header('Location: index.php');
             exit;
         }

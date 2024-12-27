@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/class/ParkData.php';
 require_once __DIR__ . '/class/EventData.php';
+require_once __DIR__ . '/functions/verify.php';
 
 session_start();
 
@@ -8,10 +9,15 @@ $parks = ParkData::getParks();
 $featureParks = ParkData::getFeatureParks();
 $events = EventData::getEvents();
 
-if (!isset($_SESSION['email'])) {
-   header('Location: login.php');
+$email = verifyToken(); // Kiểm tra token trong cookie
+if (!$email) {
+   header('Location: login.php'); // Chuyển hướng nếu token không hợp lệ
    exit();
 }
+
+// Nếu cần, lưu lại email trong session để dùng trong phiên hiện tại
+$_SESSION['email'] = $email;
+
 
 ?>
 

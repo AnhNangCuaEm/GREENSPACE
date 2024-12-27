@@ -1,17 +1,24 @@
 <?php
 
+require_once __DIR__ . '/functions/verify.php';
+
 session_start();
 
-if (!isset($_SESSION['email'])) {
-    header('Location: login.php');
+$email = verifyToken(); // Kiểm tra token trong cookie
+if (!$email) {
+    header('Location: login.php'); // Chuyển hướng nếu token không hợp lệ
     exit();
 }
 
+// Nếu cần, lưu lại email trong session để dùng trong phiên hiện tại
+$_SESSION['email'] = $email;
+
 ?>
 <html>
-    <head>
-        <?php include 'include/head.php' ?>
-    </head>
+
+<head>
+    <?php include 'include/head.php' ?>
+</head>
 
 <body>
     <?php include 'include/nav.php' ?>
