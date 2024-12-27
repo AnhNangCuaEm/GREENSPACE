@@ -9,12 +9,14 @@
     background-color: rgba(62, 62, 62, 0.262);
     backdrop-filter: blur(8px);
     border: solid 1px rgba(255, 255, 255, 0.5);
+    transition: 0.3s ease-in-out;
 }
 
 .feedback-form>h1 {
     text-align: left;
     width: 100%;
     margin-bottom: 20px;
+    transition: 0.3s ease-in-out;
 }
 
 input[type="radio"]:checked {

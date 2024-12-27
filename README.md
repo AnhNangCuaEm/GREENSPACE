@@ -5,11 +5,10 @@ tìm kiếm ajax\
 
 
 TODO:\
-cho nav rộng ra,\
-bỏ icon tim mà thêm vào mypage\
 không dùng màu từ khoảng c1c1c1 đến 616161\
-thêm google map vào db trong bảng park\
 add 404 page sau khi deploy\
+check lại thêm transition cho từng cái để khi kéo browser mượt hơn\
+transition: 0.3s ease-in-out;\
 
 
 
