@@ -1,3 +1,7 @@
+main {
+    max-width: 1000px;
+}
+
 .park-detail {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -5,12 +9,13 @@
     align-items: start;
     padding: 30px;
     gap: 30px;
-    border-radius: 55px;
+    border-radius: var(--container-border-radius);
     position: relative;
     background-color: rgba(62, 62, 62, 0.262);
     backdrop-filter: blur(8px);
     border: solid 1px rgba(255, 255, 255, 0.5);
     overflow: hidden;
+    transition: 0.3s ease-in-out;
 }
 
 .park-detail-image {

@@ -5,7 +5,7 @@
     margin: auto;
     padding: 30px;
     width: fit-content;
-    border-radius: 35px;
+    border-radius: var(--container-border-radius);
     background-color: rgba(62, 62, 62, 0.262);
     backdrop-filter: blur(8px);
     border: solid 1px rgba(255, 255, 255, 0.5);

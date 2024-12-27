@@ -14,6 +14,7 @@
    --primary-color: #fcf8db;
    --secondary-color: #8fae74;
    --third-color: #f00;
+   --container-border-radius: 55px;
 }
 
 ::-webkit-scrollbar {
@@ -66,6 +67,7 @@ h2 {
    position: relative;
    width: 100%;
    font-size: 1.5rem;
+   padding-left: 20px;
 }
 
 hr {
@@ -96,14 +98,13 @@ hr {
    margin: auto;
    overflow: hidden;
    aspect-ratio: 16 / 9;
-   border-radius: 35px;
+   border-radius: var(--container-border-radius);
    background-color: rgba(128, 128, 128, 0.502);
 }
 
 .slideshow-area {
    display: flex;
    gap: 0;
-   will-change: transform;
 }
 
 .prev,
@@ -139,7 +140,7 @@ hr {
 }
 
 .mySlides img {
-   border-radius: 35px;
+   border-radius: var(--container-border-radius);
    object-fit: cover;
    height: 100%;
    width: 100%;
@@ -214,7 +215,7 @@ hr {
    /* Boxes take equal space */
    min-width: 260px;
    /* Adjust the size of each box */
-   border-radius: 30px;
+   border-radius: 35px;
    /* Rounded corners */
    transition: 0.3s ease-in-out;
    /* Smooth hover effects */
@@ -328,7 +329,7 @@ hr {
    max-width: 670px;
    align-items: center;
    gap: 10px;
-   border-radius: 35px;
+   border-radius: var(--container-border-radius);
    position: relative;
    padding: 0 30px 30px 30px;
    background-color: rgba(62, 62, 62, 0.262);
@@ -339,6 +340,7 @@ hr {
 .credit-container h1 {
    text-align: justify;
    font-size: 1.2rem;
+   padding: 0;
 }
 
 .credit-container h2,
@@ -347,6 +349,7 @@ hr {
    width: 100%;
    font-size: 1.5rem;
    font-weight: 700;
+   padding: 0;
 }
 
 .credit-container div {
@@ -397,10 +400,14 @@ hr {
       border-radius: 28px;
    }
 
+   .slideshow-container, .slideshow-container img {
+      border-radius: 35px;
+   }
+
    .slideshow-container .name {
-      font-size: 12px;
+      font-size: 0.9rem;
       padding: 5px 8px;
-      top: -130px;
+      top: -60%;
       left: 40px;
       width: 60%;
    }
@@ -408,9 +415,9 @@ hr {
    .slideshow-container .description {
       font-size: 0.8rem;
       padding: 5px 8px;
-      top: -120px;
+      top: -60%;
       left: 20px;
-      width: 55%;
+      width: 70%;
    }
 
    .slideDot-container {
@@ -441,6 +448,7 @@ hr {
 
    .credit-container h1 {
       font-size: 1rem;
+      padding: 0;
    }
 
    /* Adjust SVG sizes for better scaling */
@@ -453,6 +461,7 @@ hr {
    .credit-container h2,
    .credit-container h3 {
       font-size: 1.5rem;
+      padding: 0;
       /* Kept the same but ensure it scales well */
    }
 
