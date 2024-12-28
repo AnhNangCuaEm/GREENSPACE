@@ -96,4 +96,20 @@ class UserData
         $state->bindValue(':email', $_SESSION['email'], PDO::PARAM_STR);
         $state->execute();
     }
+
+    public static function updateInfo(string $email, string $name, string $phone, string $address): void
+    {
+        $pdo = Database::getConnection();
+
+        $state = $pdo->prepare('UPDATE user SET name = :name, phone = :phone, address = :address WHERE email = :email');
+        $state->bindValue(':name', $name, PDO::PARAM_STR);
+        $state->bindValue(':phone', $phone, PDO::PARAM_STR);
+        $state->bindValue(':address', $address, PDO::PARAM_STR);
+        $state->bindValue(':email', $email, PDO::PARAM_STR);
+        
+        // Execute the statement and check for errors
+        if (!$state->execute()) {
+            error_log('SQL Error: ' . implode(', ', $state->errorInfo())); // Log SQL error
+        }
+    }
 }

@@ -37,12 +37,12 @@ $user = UserData::getProfile();
             </div>
             <div class="user-box">
                 <div class="user-info">
-                    <p>お名前:<?php echo htmlspecialchars($user->name); ?></p>
-                    <p>メールアドレス: <?php echo htmlspecialchars($user->email); ?></p>
-                    <p>電話番号: <?php echo ($user->phone != 0) ? htmlspecialchars($user->phone) : ''; ?></p>
-                    <p>住所: <?php echo htmlspecialchars($user->address); ?></p>
+                    <p>お名前:&nbsp;<span><?php echo htmlspecialchars($user->name); ?></span></p>
+                    <p>メールアドレス:&nbsp;<span><?php echo htmlspecialchars($user->email); ?></span></p>
+                    <p>電話番号:&nbsp;<span><?php echo ($user->phone != 0) ? htmlspecialchars($user->phone) : ''; ?></span></p>
+                    <p>住所:&nbsp;<span><?php echo htmlspecialchars($user->address); ?></span></p>
                 </div>
-                <button class="editBtn">編集<svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+                <button id="editBtn" class="editBtn">編集<svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -86,6 +86,31 @@ $user = UserData::getProfile();
                 </div>
             </div>
         </div>
+        <div class="info-popup" id="infoPopup">
+            <div class="info-popup-content">
+                <h3>プロフィールを編集</h3>
+                <form id="editForm">
+                    <div>
+                        <label for="name">お名前:</label>
+                        <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($user->name); ?>">
+                    </div>
+                    <div>
+                        <label for="phone">電話番号:</label>
+                        <input type="text" id="phone" name="phone"
+                            value="<?php echo ($user->phone != 0) ? htmlspecialchars($user->phone) : ''; ?>">
+                    </div>
+                    <div>
+                        <label for="address">住所:</label>
+                        <input type="text" id="address" name="address"
+                            value="<?php echo htmlspecialchars($user->address); ?>">
+                    </div>
+                    <div class="infoBtn">
+                        <button type="submit">確定</button>
+                        <button type="button" id="closeInfoPopup" class="cancelBtn">戻る</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="result-popup" id="result"></div>
     </main>
     <div id="overlay"></div>
@@ -93,6 +118,7 @@ $user = UserData::getProfile();
         <?php include 'include/footer.php' ?>
     </footer>
     <script src="js/menu.js"></script>
+    <script src="js/editProfile.js"></script>
     <script src="js/profile.js"></script>
     <script src="js/index.js"></script>
 </body>
