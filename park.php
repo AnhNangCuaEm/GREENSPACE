@@ -109,11 +109,13 @@ if (isset($_GET['id'])) {
             const modalImage = document.getElementById("modalImage");
             modal.classList.add("show"); // Add the 'show' class to make it visible
             modalImage.src = imageSrc;
+            document.body.style.overflow = 'hidden'; // Prevent body scroll
         }
 
         function closeModal() {
             const modal = document.getElementById("imageModal");
             modal.classList.remove("show"); // Remove the 'show' class to hide it
+            document.body.style.overflow = ''; // Restore body scroll
         }
     </script>
 </body>

@@ -67,6 +67,7 @@ h2 {
    width: 100%;
    font-size: 1.5rem;
    padding-left: 20px;
+   transition: 0.3s ease-in-out;
 }
 
 hr {
@@ -296,6 +297,20 @@ hr {
    flex-direction: column;
 }
 
+.event-box button {
+   display: flex;
+   gap: 5px;
+   align-items: center;
+   margin: 0 auto;
+   padding: 0.3rem 0.7rem;
+   background-color: rgba(62, 62, 62, 0.262);
+   color: var(--primary-color);
+   border: none;
+   border-radius: 50px;
+   cursor: pointer;
+   transition: 0.3s ease-in-out;
+}
+
 .event-text {
    display: flex;
    flex-direction: column;
@@ -321,10 +336,6 @@ hr {
    height: auto;
    width: 100%;
    transition: 0.3s ease-in-out;
-}
-
-.event-box img:hover {
-   filter: brightness(0.8);
 }
 
 .credit-container {
@@ -496,6 +507,7 @@ hr {
       position: relative;
       display: flex;
       flex-direction: column;
+      margin-bottom: 15px;
    }
    
    .event-text {
@@ -519,7 +531,7 @@ hr {
    }
    
    .event-box img {
-      border-radius: 35px;
+      border-radius: 25px;
       aspect-ratio: 16/9;
       height: auto;
       width: 100%;
