@@ -1,6 +1,7 @@
 .profile-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 30px;
     border-radius: var(--container-border-radius);
     position: relative;
@@ -32,6 +33,7 @@
     padding: 10px 20px;
     border-radius: 10px;
     background-color: #f1f1f1;
+    color: black;
     border: none;
     font-size: 1rem;
     font-weight: bold;
@@ -52,7 +54,6 @@
 .user-info {
     position: relative;
     display: flex;
-    min-width: 350px;
     width: fit-content;
     height: fit-content;
     flex-direction: column;
@@ -62,4 +63,120 @@
     background-color: rgba(225, 225, 225, 0.578);
     backdrop-filter: blur(8px);
     border: solid 1px rgba(255, 255, 255, 0.5);
+}
+
+.avatar-popup {
+    display: none; /* Ẩn popup mặc định */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.331); /* Màu nền tối */
+}
+
+.popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    padding: 20px;
+    background-color: rgba(225, 225, 225, 0.187);
+    backdrop-filter: blur(8px);
+    border: solid 1px rgba(255, 255, 255, 0.5);
+    max-width: 600px;
+    border-radius: 35px;
+    text-align: center;
+}
+
+.avtBtn {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.popup-content button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    color: black;
+    border: none;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.avatar-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 15px 0;
+}
+
+.avatar-option {
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 5px;
+}
+
+.avatar-option:hover {
+    border: 2px solid #00ff51; /* Đổi màu viền khi hover */
+}
+
+.avatar-option.clicked {
+    border: 2px solid #00ff51; /* Thay đổi màu viền khi được chọn */
+    transition: border 0.3s; /* Hiệu ứng chuyển tiếp */
+}
+
+.result-popup {
+    position: fixed;
+    top: 30px;
+    display: flex;
+    padding: 10px 20px;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    z-index: 200;
+    border-radius: 25px;
+    background-color: rgba(62, 62, 62, 0.262);
+    backdrop-filter: blur(8px);
+    border: solid 1px rgba(255, 255, 255, 0.5);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    opacity: 0;
+}
+
+.result-popup.slidedown {
+    transform: translateY(100px);
+    opacity: 1;
+}
+
+.result-popup.slideup {
+    transform: translateY(-30px);
+    opacity: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+        gap: 20px;
+        max-width: 95%;
+    }
+    
+    .popup-content {
+        width: 80%;
+    }
 }

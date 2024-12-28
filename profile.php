@@ -33,7 +33,7 @@ $user = UserData::getProfile();
         <div class="profile-container">
             <div class="avatar-box">
                 <img src="<?php echo htmlspecialchars($user->avatar); ?>" alt="User Avatar">
-                <button class="changeAvtBtn">変更</button>
+                <button id="changeAvtBtn" class="changeAvtBtn">変更</button>
             </div>
             <div class="user-box">
                 <div class="user-info">
@@ -59,12 +59,41 @@ $user = UserData::getProfile();
                     </svg></button>
             </div>
         </div>
+        <div class="avatar-popup" id="avatarPopup">
+            <div class="popup-content">
+                <h2>アバターを選択</h2>
+                <div class="avatar-options">
+                    <img src="https://pw11a12425.blob.core.windows.net/avatar/bear.png" alt="Bear"
+                        class="avatar-option">
+                    <img src="https://pw11a12425.blob.core.windows.net/avatar/cat.png" alt="Cat" class="avatar-option">
+                    <img src="https://pw11a12425.blob.core.windows.net/avatar/dear.png" alt="Dear"
+                        class="avatar-option">
+                    <img src="https://pw11a12425.blob.core.windows.net/avatar/dog.png" alt="Dog" class="avatar-option">
+                    <img src="https://pw11a12425.blob.core.windows.net/avatar/fox.png" alt="Fox" class="avatar-option">
+                    <img src="https://pw11a12425.blob.core.windows.net/avatar/lion.png" alt="Lion"
+                        class="avatar-option">
+                    <img src="https://pw11a12425.blob.core.windows.net/avatar/panda.png" alt="Panda"
+                        class="avatar-option">
+                    <img src="https://pw11a12425.blob.core.windows.net/avatar/pig.png" alt="Pig" class="avatar-option">
+                    <img src="https://pw11a12425.blob.core.windows.net/avatar/rabbit.png" alt="Rabbit"
+                        class="avatar-option">
+                    <img src="https://pw11a12425.blob.core.windows.net/avatar/wolf.png" alt="Wolf"
+                        class="avatar-option">
+                </div>
+                <div class="avtBtn">
+                    <button id="applyAvatar">確定</button>
+                    <button id="closePopup" class="cancelBtn">戻る</button>
+                </div>
+            </div>
+        </div>
+        <div class="result-popup" id="result"></div>
     </main>
     <div id="overlay"></div>
     <footer>
         <?php include 'include/footer.php' ?>
     </footer>
     <script src="js/menu.js"></script>
+    <script src="js/profile.js"></script>
     <script src="js/index.js"></script>
 </body>
 

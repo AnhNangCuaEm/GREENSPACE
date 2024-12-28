@@ -69,9 +69,31 @@ class UserData
         $state->bindValue(':password_hash', password_hash($user->password, PASSWORD_DEFAULT), PDO::PARAM_STR);
         $state->bindValue(':name', $user->name, PDO::PARAM_STR);
         $state->bindValue(':phone', $user->phone, PDO::PARAM_STR);
-        $user->avatar = '/GREENSPACE/img/avatar/panda.png';
+        $avatars = [
+            'https://pw11a12425.blob.core.windows.net/avatar/bear.png',
+            'https://pw11a12425.blob.core.windows.net/avatar/cat.png',
+            'https://pw11a12425.blob.core.windows.net/avatar/dear.png',
+            'https://pw11a12425.blob.core.windows.net/avatar/dog.png',
+            'https://pw11a12425.blob.core.windows.net/avatar/fox.png',
+            'https://pw11a12425.blob.core.windows.net/avatar/lion.png',
+            'https://pw11a12425.blob.core.windows.net/avatar/panda.png',
+            'https://pw11a12425.blob.core.windows.net/avatar/pig.png',
+            'https://pw11a12425.blob.core.windows.net/avatar/rabbit.png',
+            'https://pw11a12425.blob.core.windows.net/avatar/wolf.png',
+        ];
+        $user->avatar = $avatars[array_rand($avatars)];
         $state->bindValue(':avatar', $user->avatar, PDO::PARAM_STR);
         $state->bindValue(':address', $user->address, PDO::PARAM_STR);
+        $state->execute();
+    }
+
+    public static function updateAvatar(string $email, string $newAvatar): void
+    {
+        $pdo = Database::getConnection();
+
+        $state = $pdo->prepare('UPDATE user SET avatar = :avatar WHERE email = :email');
+        $state->bindValue(':avatar', $newAvatar, PDO::PARAM_STR);
+        $state->bindValue(':email', $_SESSION['email'], PDO::PARAM_STR);
         $state->execute();
     }
 }
