@@ -84,19 +84,38 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="park-images-list" id="imageSlider">
                     <?php foreach ($images as $imagePath): ?>
-                        <div class="park-images-box">
+                        <div class="park-images-box" onclick="openModal('<?= htmlspecialchars($imagePath) ?>')">
                             <img src="<?= htmlspecialchars($imagePath) ?>" alt="公園の画像">
                         </div>
                     <?php endforeach; ?>
                 </div>
             </div>
         </main>
+        <!-- Modal for enlarged image -->
+        <div id="imageModal" class="modal" onclick="closeModal()">
+            <img class="modal-content" id="modalImage">
+            <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+        <div id="overlay"></div>
         <footer>
             <?php include 'include/footer.php' ?>
         </footer>
     </div>
     <script src="js/menu.js"></script>
     <script src="js/index.js"></script>
+    <script>
+        function openModal(imageSrc) {
+            const modal = document.getElementById("imageModal");
+            const modalImage = document.getElementById("modalImage");
+            modal.classList.add("show"); // Add the 'show' class to make it visible
+            modalImage.src = imageSrc;
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("imageModal");
+            modal.classList.remove("show"); // Remove the 'show' class to hide it
+        }
+    </script>
 </body>
 
 </html>

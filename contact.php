@@ -78,6 +78,7 @@ $_SESSION['email'] = $email;
         </div>
         <div class="result-popup" id="result"></div>
     </main>
+    <div id="overlay"></div>
     <footer>
         <?php include 'include/footer.php' ?>
     </footer>

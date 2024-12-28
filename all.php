@@ -37,6 +37,7 @@ $_SESSION['email'] = $email;
             <?php endforeach; ?>
          </div>
       </main>
+      <div id="overlay"></div>
       <footer>
          <?php include 'include/footer.php' ?>
       </footer>

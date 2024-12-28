@@ -144,7 +144,7 @@ $_SESSION['email'] = $email;
                     </g>
                 </g>
             </svg>
-            <h1>GREEN SPACEは、公園や森林、自然空間などの緑地に関する情報を提供することを目的とした学習プロジェクトです。私の目標は、ユーザーにとって直感的でリラックスできる体験を提供することです。</h1>
+            <h1>GREEN SPACEは、リラックスしたい方々のために、自然の中や街中の特定の場所やイベント情報を提供することを目的としたウェブサイトです。このプロジェクトは、学習の一環として開発され、ユーザーに心地よい体験を提供することを目指しています。</h1>
             <h2>使用したツールと技術</h2>
             <hr>
             <div class="project-info">
@@ -388,6 +388,7 @@ $_SESSION['email'] = $email;
                 </div>
             </div>
     </main>
+    <div id="overlay"></div>
     <footer>
         <?php include 'include/footer.php' ?>
     </footer>

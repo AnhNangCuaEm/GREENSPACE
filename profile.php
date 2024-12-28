@@ -60,6 +60,7 @@ $user = UserData::getProfile();
             </div>
         </div>
     </main>
+    <div id="overlay"></div>
     <footer>
         <?php include 'include/footer.php' ?>
     </footer>
