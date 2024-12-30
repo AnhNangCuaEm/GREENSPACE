@@ -71,6 +71,10 @@ nav {
     transition: 0.3s ease-in-out;
 }
 
+.mobile-menu svg {
+    margin-bottom: 10px;
+}
+
 .menu-ul button, .mobile-menu-ul button {
     margin: 0;
     background: none;

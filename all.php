@@ -33,6 +33,7 @@ $_SESSION['email'] = $email;
                <div class="park-box">
                   <a href="park.php?id=<?= $park->id ?>"><img src="<?= $park->thumbnail ?>"></a>
                   <div class="name"><?= $park->name ?></div>
+                  <div class="location"><?= $park->location ?></div>
                </div>
             <?php endforeach; ?>
          </div>

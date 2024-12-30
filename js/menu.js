@@ -110,3 +110,23 @@ document.addEventListener('DOMContentLoaded', function () {
       console.error('One or more elements are missing: logoutForm, mobileLogoutForm, confirmationPopup, confirmOk, confirmCancel'); // Updated error message
    }
 });
+
+
+// Update logo link based on screen width
+document.addEventListener('DOMContentLoaded', function () {
+   const logoLink = document.querySelector('.navL a');
+
+   function updateLogoLink() {
+      if (window.innerWidth <= 768) {
+         logoLink.href = 'index.php';
+      } else {
+         logoLink.href = '#';
+      }
+   }
+
+   // Initial check
+   updateLogoLink();
+
+   // Update on window resize
+   window.addEventListener('resize', updateLogoLink);
+});
