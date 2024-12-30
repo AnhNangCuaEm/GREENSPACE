@@ -1,7 +1,11 @@
 <?php
 
 require_once __DIR__ . '/class/UserData.php';
+require_once __DIR__ . '/class/ParkData.php';
+require_once __DIR__ . '/class/EventData.php';
 require_once __DIR__ . '/functions/verify.php';
+require_once __DIR__ . '/functions/parklike.php';
+require_once __DIR__ . '/functions/eventsave.php';
 
 session_start();
 
@@ -39,7 +43,8 @@ $user = UserData::getProfile();
                 <div class="user-info">
                     <p>お名前:&nbsp;<span><?php echo htmlspecialchars($user->name); ?></span></p>
                     <p>メールアドレス:&nbsp;<span><?php echo htmlspecialchars($user->email); ?></span></p>
-                    <p>電話番号:&nbsp;<span><?php echo ($user->phone != 0) ? htmlspecialchars($user->phone) : ''; ?></span></p>
+                    <p>電話番号:&nbsp;<span><?php echo ($user->phone != 0) ? htmlspecialchars($user->phone) : ''; ?></span>
+                    </p>
                     <p>住所:&nbsp;<span><?php echo htmlspecialchars($user->address); ?></span></p>
                 </div>
                 <button id="editBtn" class="editBtn">編集<svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
@@ -57,6 +62,53 @@ $user = UserData::getProfile();
                             </path>
                         </g>
                     </svg></button>
+            </div>
+        </div>
+        <div class="park-event-container">
+            <div class="liked-park-box">
+                <h2>お気に入りの公園</h2>
+                <?php
+                $likedParkIds = getLikedParks($email);
+                if (!empty($likedParkIds)) {
+                    echo '<div class="liked-parks-box">';
+                    foreach ($likedParkIds as $parkId) {
+                        $park = ParkData::getPark($parkId);
+                        if ($park) {
+                            echo '<div class="park-card">';
+                            echo '<img src="' . htmlspecialchars($park->thumbnail) . '" alt="' . htmlspecialchars($park->name) . '">';
+                            echo '<h3>' . htmlspecialchars($park->name) . '</h3>';
+                            echo '<p>' . htmlspecialchars($park->location) . '</p>';
+                            echo '<a href="park.php?id=' . htmlspecialchars($parkId) . '" class="view-park-btn">詳細を見る</a>';
+                            echo '</div>';
+                        }
+                    }
+                    echo '</div>';
+                } else {
+                    echo '<p class="no-parks-message">お気に入りの公園がありません。</p>';
+                }
+                ?>
+            </div>
+            <div class="saved-event-box">
+                <h2>保存したイベント</h2>
+                <?php
+                $savedEventIds = getSavedEvents($email);
+                if (!empty($savedEventIds)) {
+                    echo '<div class="saved-events-box">';
+                    foreach ($savedEventIds as $eventId) {
+                        $event = EventData::getEvent($eventId);
+                        if ($event) {
+                            echo '<div class="event-card">';
+                            echo '<img src="' . htmlspecialchars($event->thumbnail) . '" alt="' . htmlspecialchars($event->name) . '">';
+                            echo '<h3>' . htmlspecialchars($event->name) . '</h3>';
+                            echo '<a href="event.php?id=' . htmlspecialchars($eventId) . '" class="view-event-btn">詳細を見る</a>';
+                            echo '</div>';
+                        }
+                    }
+                    echo '</div>';
+                } else {
+                    echo '<p class="no-events-message">保存したイベントがありません。</p>';
+                }
+                ?>
             </div>
         </div>
         <div class="avatar-popup" id="avatarPopup">
@@ -120,7 +172,6 @@ $user = UserData::getProfile();
     <script src="js/menu.js"></script>
     <script src="js/editProfile.js"></script>
     <script src="js/profile.js"></script>
-    <script src="js/index.js"></script>
 </body>
 
 </html>

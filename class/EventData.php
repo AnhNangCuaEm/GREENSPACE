@@ -64,7 +64,7 @@ class eventData
    {
       $pdo = Database::getConnection();
 
-      $state = $pdo->prepare('SELECT * FROM events WHERE id = :id');
+      $state = $pdo->prepare('SELECT * FROM event WHERE id = :id');
       $state->execute(['id' => $id]);
 
       $row = $state->fetch();

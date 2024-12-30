@@ -2,6 +2,7 @@
 require_once __DIR__ . '/class/ParkData.php';
 require_once __DIR__ . '/class/EventData.php';
 require_once __DIR__ . '/functions/verify.php';
+require_once __DIR__ . '/functions/eventsave.php';
 
 session_start();
 
@@ -97,7 +98,7 @@ $_SESSION['email'] = $email;
          <div class="event-container">
             <?php foreach ($events as $event): ?>
                <div class="event-box">
-                  <a href="all-event.php"><img src="<?= $event->thumbnail ?>"></a>
+               <a href="event.php?id=<?= $event->id ?>"><img src="<?= $event->thumbnail ?>"></a>
                   <div class="event-text">
                      <div class="name"><?= $event->name ?></div>
                      <div class="location"><span>場所:</span>&nbsp;<?= $event->location ?></div>
@@ -106,7 +107,11 @@ $_SESSION['email'] = $email;
                      <div class="price"><span>料金:</span>&nbsp;<?= $event->price ?></div>
                      <div class="description"><span>内容:</span>&nbsp;<?= $event->description ?></div>
                   </div>
-                  <button><svg width="24px" height="24px" viewBox="0 0 24 24" fill="none"
+                  <?php
+                  $isSaved = isset($_SESSION['email']) ? checkIfSaved($event->id, $_SESSION['email']) : false;
+                  ?>
+                  <button class="save-button" data-event-id="<?= $event->id ?>">
+                     <svg class="save-icon" width="24px" height="24px" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                         <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -126,7 +131,9 @@ $_SESSION['email'] = $email;
                                  stroke-linejoin="round"></path>
                            </g>
                         </g>
-                     </svg>保存する</button>
+                     </svg>
+                     <span class="save-text"><?= $isSaved ? '保存を削除' : '保存する' ?></span>
+                  </button>
                </div>
             <?php endforeach; ?>
          </div>
@@ -138,9 +145,10 @@ $_SESSION['email'] = $email;
       <?php include 'include/footer.php' ?>
    </footer>
    </div>
+   <script src="js/loadingtransition.js"></script>
    <script src="js/menu.js"></script>
    <script src="js/slideshow.js"></script>
-   <script src="js/index.js"></script>
+   <script src="js/eventSave.js"></script>
 </body>
 
 </html>

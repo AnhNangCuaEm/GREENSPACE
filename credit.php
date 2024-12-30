@@ -393,7 +393,6 @@ $_SESSION['email'] = $email;
         <?php include 'include/footer.php' ?>
     </footer>
     <script src="js/menu.js"></script>
-    <script src="js/index.js"></script>
 </body>
 
 </html>

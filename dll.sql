@@ -84,13 +84,25 @@ CREATE TABLE event (
   price VARCHAR(100) NOT NULL
 );
 
-INSERT INTO event (name, date, time, location, description, price) VALUES
-('新宿サザンテラス イルミネーション', '2024年12月1日 ~ 2025年2月14日', '午後5時 ~ 午後11時', '新宿サザンテラスで行われる冬のイルミネーション。LEDライトが木々や歩道を彩り、ロマンチックな雰囲気を楽しめます', '入場無料'),
-('Yoga in the Park', '2021-08-20', '10:00', 'Start your day with a relaxing yoga session in the park. All levels are welcome, so come and find your inner peace.', 10.00),
-('Food Truck Festival', '2021-08-25', '12:00', 'Enjoy a variety of delicious food from local food trucks. From tacos to ice cream, there is something for everyone.', NULL),
-('Outdoor Movie Night', '2021-08-30', '20:00', 'Grab your blankets and popcorn for a movie night under the stars. We will be showing a family-friendly film for all to enjoy.', 5.00),
-(5'Art in the Park', '2021-09-05', '14:00', 'Explore the creativity of local artists at our art fair in the park. Paintings, sculptures, and more will be on display for all to see.', NULL);
+CREATE TABLE park_likes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  park_id INT NOT NULL,
+  user_email VARCHAR(100) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (park_id) REFERENCES park(id),
+  FOREIGN KEY (user_email) REFERENCES user(email)
+);
 
+CREATE TABLE event_saved (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  event_id INT NOT NULL,
+  user_email VARCHAR(100) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (event_id) REFERENCES event(id),
+  FOREIGN KEY (user_email) REFERENCES user(email)
+);
 
 
 CREATE TABLE amenities (

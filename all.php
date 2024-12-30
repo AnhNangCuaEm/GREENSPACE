@@ -43,7 +43,6 @@ $_SESSION['email'] = $email;
       </footer>
    </div>
    <script src="js/menu.js"></script>
-   <script src="js/index.js"></script>
 </body>
 
 </html>

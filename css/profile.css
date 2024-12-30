@@ -11,6 +11,24 @@
     border: solid 1px rgba(255, 255, 255, 0.5);
 }
 
+.park-event-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+    border-radius: var(--container-border-radius);
+    position: relative;
+    padding: 30px;
+    background-color: rgba(62, 62, 62, 0.262);
+    backdrop-filter: blur(8px);
+    border: solid 1px rgba(255, 255, 255, 0.5);
+}
+
+.park-event-container h2 {
+    padding: 0;
+    margin-bottom: 10px;
+}
+
 .avatar-box {
     display: flex;
     justify-content: center;
@@ -24,6 +42,59 @@
     align-items: center;
     flex-direction: column;
     gap: 20px;
+}
+
+.liked-parks-box,
+.saved-events-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+}
+
+.park-card,
+.event-card {
+    flex: 1 1 250px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    overflow: hidden;
+    text-align: center;
+    min-width: 250px;
+    max-width: 260px;
+}
+
+.park-card img,
+.event-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 25px 25px 0 0;
+    object-fit: cover;
+}
+
+.park-card h3,
+.event-card h3 {
+    padding: 10px;
+    margin: 0;
+    font-size: 1.1em;
+}
+
+.view-park-btn,
+.view-event-btn {
+    display: block;
+    text-align: center;
+    margin: 10px;
+    padding: 0.4rem 0.7rem;
+    background-color: rgba(62, 62, 62, 0.262);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+.no-parks-message {
+    text-align: center;
+    color: #fcf8db;
 }
 
 .avatar-box button,
@@ -72,7 +143,8 @@
     font-weight: bold;
 }
 
-.avatar-popup, .info-popup {
+.avatar-popup,
+.info-popup {
     display: none;
     /* Ẩn popup mặc định */
     position: fixed;
@@ -86,7 +158,8 @@
 }
 
 
-.popup-content, .info-popup-content {
+.popup-content,
+.info-popup-content {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -246,5 +319,10 @@
 
     .popup-content {
         width: 80%;
+    }
+
+    .park-card,
+    .event-card {
+        min-width: 150px;
     }
 }

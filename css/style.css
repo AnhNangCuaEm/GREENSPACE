@@ -223,6 +223,7 @@ hr {
    flex: 1;
    /* Boxes take equal space */
    min-width: 260px;
+   max-width: 350px;
    /* Adjust the size of each box */
    border-radius: 35px;
    /* Rounded corners */
@@ -357,6 +358,10 @@ hr {
    transition: 0.3s ease-in-out;
 }
 
+.credit-container svg {
+   transition: 0.3s ease-in-out;
+}
+
 .credit-container h1 {
    text-align: justify;
    font-size: 1.2rem;
@@ -406,6 +411,11 @@ hr {
 
 /* Responsive */
 @media screen and (max-width: 768px) {
+
+   body {
+      background-size: 500% 500%;
+      animation: gradient 15s ease infinite;
+   }
 
    h1,
    h2 {

@@ -128,7 +128,7 @@
         <ul>
             <li><a href="index.php">ホーム</a></li>
             <li><a href="all.php">公園一覧</a></li>
-            <li><a href="event.php">イベント</a></li>
+            <li><a href="all-event.php">イベント</a></li>
             <li><a href="credit.php">サイトについて</a></li>
         </ul>
     </div>

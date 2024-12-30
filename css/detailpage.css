@@ -18,6 +18,57 @@ main {
     transition: 0.3s ease-in-out;
 }
 
+.event-detail {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    gap: 20px;
+    border-radius: var(--container-border-radius);
+    position: relative;
+    background-color: rgba(62, 62, 62, 0.262);
+    backdrop-filter: blur(8px);
+    border: solid 1px rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+    transition: 0.3s ease-in-out;
+}
+
+.event-detail-image img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    border-radius: 25px;
+}
+
+.event-detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.event-detail-info h1 {
+    padding: 0;
+    text-align: center;
+}
+
+.event-detail-info span {
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+.event-detail-info button {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0.3rem 0.7rem;
+    background-color: rgba(62, 62, 62, 0.262);
+    color: var(--primary-color);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
 .park-detail-image {
     position: relative;
     max-width: 100%;
@@ -45,6 +96,17 @@ main {
     font-size: 2rem;
     text-align: center;
     font-weight: 700;
+}
+
+.park-like-box {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    align-items: center;
+}
+
+.park-like-box svg {
+    cursor: pointer;
 }
 
 .park-map {
