@@ -39,7 +39,7 @@ $_SESSION['email'] = $email;
                             <div class="location"><span>場所:</span>&nbsp;<?= $event->location ?></div>
                             <div class="date"><span>日付:</span>&nbsp;<?= $event->date ?></div>
                             <div class="time"><span>時間:</span>&nbsp;<?= $event->time ?></div>
-                            <div class="price"><span>料金:</span>&nbsp;<?= $event->price ?></div>
+                            <div class="price"><span>料金:</span>&nbsp;<?= $event->price ?>&yen;</div>
                             <div class="description"><span>内容:</span>&nbsp;<?= $event->description ?></div>
                         </div>
                         <?php

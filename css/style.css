@@ -343,6 +343,10 @@ hr {
    transition: 0.3s ease-in-out;
 }
 
+.event-box img:hover {
+   filter: brightness(0.8);
+}
+
 .credit-container {
    display: flex;
    flex-direction: column;

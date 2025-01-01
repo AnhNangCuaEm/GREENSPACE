@@ -6,6 +6,7 @@
     border-radius: var(--container-border-radius);
     position: relative;
     padding: 30px;
+    max-height: fit-content;
     background-color: rgba(62, 62, 62, 0.262);
     backdrop-filter: blur(8px);
     border: solid 1px rgba(255, 255, 255, 0.5);
@@ -313,6 +314,7 @@
 @media screen and (max-width: 768px) {
     .profile-container {
         flex-direction: column;
+        max-height: none;
         gap: 20px;
         max-width: 95%;
     }

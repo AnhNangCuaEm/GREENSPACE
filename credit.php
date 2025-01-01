@@ -368,7 +368,7 @@ $_SESSION['email'] = $email;
                 </div>
                 <div>
                     <p>ベクターとアイコン:</p>
-                    <a href="https://www.svgrepo.com/">SVG Repo</a>
+                    <a href="https://www.svgrepo.com/" style="color: #8bdb73">SVG Repo</a>
                 </div>
             </div>
             <h3>制作</h3>

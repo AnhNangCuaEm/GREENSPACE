@@ -43,9 +43,9 @@ $user = UserData::getProfile();
                 <div class="user-info">
                     <p>お名前:&nbsp;<span><?php echo htmlspecialchars($user->name); ?></span></p>
                     <p>メールアドレス:&nbsp;<span><?php echo htmlspecialchars($user->email); ?></span></p>
-                    <p>電話番号:&nbsp;<span><?php echo ($user->phone != 0) ? htmlspecialchars($user->phone) : ''; ?></span>
+                    <p>電話番号:&nbsp;<span><?php echo ($user->phone != 0) ? htmlspecialchars($user->phone) : '未登録'; ?></span>
                     </p>
-                    <p>住所:&nbsp;<span><?php echo htmlspecialchars($user->address); ?></span></p>
+                    <p>住所:&nbsp;<span><?php echo ($user->address) ? htmlspecialchars($user->address) : '未登録'; ?></span></p>
                 </div>
                 <button id="editBtn" class="editBtn">編集<svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">

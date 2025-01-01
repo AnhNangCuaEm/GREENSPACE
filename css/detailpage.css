@@ -1,5 +1,5 @@
 main {
-    max-width: 1250px;
+    max-width: 1000px;
 }
 
 .park-detail {
@@ -67,6 +67,11 @@ main {
     border-radius: 50px;
     cursor: pointer;
     transition: 0.3s ease-in-out;
+}
+
+.park-detail-info span {
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 .park-detail-image {

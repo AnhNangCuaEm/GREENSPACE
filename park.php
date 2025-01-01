@@ -49,8 +49,8 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="park-detail-info">
                     <h1><?= htmlspecialchars($parks->name) ?></h1>
-                    <p>住所:&nbsp;<?= htmlspecialchars($parks->location) ?></p>
-                    <p>面積:&nbsp;<?= htmlspecialchars($parks->area) ?></p>
+                    <p><span>住所:</span>&nbsp;<?= htmlspecialchars($parks->location) ?></p>
+                    <p><span>面積:</span>&nbsp;<?= htmlspecialchars($parks->area) ?></p>
                     <p><?= htmlspecialchars($parks->description) ?></p>
                     <div class="park-like-box">
                         <div id="likeCount"><?= htmlspecialchars($likeCount) ?></div>
