@@ -33,7 +33,10 @@ INSERT INTO park (name, area, location, description, price, created_at, updated_
 ('清澄庭園', '江東区', '東京都江東区清澄3-3-9', '明治時代に造られた回遊式庭園で、池に映る緑や東屋が趣深い景観を作り出しています。静かな時間を過ごすのに最適です。', '一般150円', NOW(), NOW(), NULL),
 ('旧古河庭園', '北区', '東京都北区西ヶ原1-27-39', '洋館と日本庭園が調和した大正時代の庭園です。特にバラ園が有名で、春と秋のバラフェスティバルが人気です。', '一般150円', NOW(), NOW(), NULL),
 ('砧公園', '世田谷区', '東京都世田谷区砧公園1-1', '広大な芝生広場が特徴で、ピクニックや家族でのんびり過ごすのにぴったりの公園です。子供向けの遊具も充実しています。', '入園無料', NOW(), NOW(), NULL),
-('六義園', '文京区', '東京都文京区本駒込6-16-3', '江戸時代の大名庭園で、春のしだれ桜や秋の紅葉が見どころです。特にライトアップされた夜の庭園は幻想的な雰囲気です。', '一般300円', NOW(), NOW(), NULL);
+('六義園', '文京区', '東京都文京区本駒込6-16-3', '江戸時代の大名庭園で、春のしだれ桜や秋の紅葉が見どころです。特にライトアップされた夜の庭園は幻想的な雰囲気です。', '一般300円', NOW(), NOW(), NULL).
+('行船公園', '葛西', '東京都江戸川区北葛西3丁目2-1', '行船公園は、東京都江戸川区に位置する緑豊かな公園です。公園内には小さな動物園「自然動物園」があり、無料で動物たちを観察できます。また、四季折々の自然が楽しめる散歩コースや日本庭園が整備されており、家族連れや地域の人々に親しまれています。', '入園無料', NOW(), NOW(), NULL);
+('妙正寺公園', '杉並', '東京都杉並区清水3丁目1', '妙正寺公園は、妙正寺川沿いに広がる静かな公園で、地元の人々に愛されています。公園内には広場や遊具、池があり、自然を感じながらリラックスできる空間が広がっています。また、春には桜が美しく咲き誇り、散歩やピクニックに最適なスポットです。', '入園無料', NOW(), NOW(), NULL);
+('善福寺公園', '杉並', '東京都杉並区善福寺3丁目', '善福寺公園は、善福寺池を中心に自然が広がる静かな公園です。公園は上下二つの池に分かれ、散策路やベンチが整備されており、訪れる人々がのんびりとした時間を過ごせる場所です。春には桜、秋には紅葉が美しく、バードウォッチングにも最適なスポットとして知られています。また、池ではボート遊びも楽しむことができます。', '入園無料（ボート利用は有料）', NOW(), NOW(), NULL);
 
 
 CREATE TABLE park_images (
@@ -62,6 +65,18 @@ CREATE TABLE user (
   address VARCHAR(255) DEFAULT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   update_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE comments (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  park_id INT NOT NULL,
+  user_email VARCHAR(100) NOT NULL,
+  nickname VARCHAR(100) NOT NULL,
+  content TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (park_id) REFERENCES park(id),
+  FOREIGN KEY (user_email) REFERENCES user(email)
 );
 
 CREATE TABLE avatar (

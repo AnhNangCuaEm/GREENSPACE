@@ -71,9 +71,17 @@ nav {
     transition: 0.3s ease-in-out;
 }
 
-.mobile-menu svg {
+.mobile-menu-icon {
+    width: 30px;
+    height: 30px;
     margin-bottom: 10px;
 }
+
+.mobile-menu-icon img {
+    width: 100%;
+    height: auto;
+}
+
 
 .menu-ul button, .mobile-menu-ul button {
     margin: 0;

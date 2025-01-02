@@ -35,7 +35,7 @@ class parkData
    {
       $pdo = Database::getConnection();
 
-      $state = $pdo->prepare('SELECT * FROM park ORDER BY id DESC');
+      $state = $pdo->prepare('SELECT * FROM park ORDER BY RAND()');
       $state->execute();
 
       $park = [];
@@ -59,7 +59,7 @@ class parkData
       $pdo = Database::getConnection();
 
       //get lastest 5 park by update time
-      $state = $pdo->prepare('SELECT * FROM park ORDER BY id DESC LIMIT 5');
+      $state = $pdo->prepare('SELECT * FROM park ORDER BY RAND() LIMIT 5');
       $state->execute();
 
       $park = [];
@@ -94,10 +94,13 @@ class parkData
       $park->id = $row['id'];
       $park->name = $row['name'];
       $park->area = $row['area'];
+      $park->price = $row['price'];
       $park->location = $row['location'];
       $park->description = $row['description'];
       $park->thumbnail = $row['thumbnail'];
       $park->map = $row['map'];
+      $park->nearest = $row['nearest'];
+      $park->special = $row['special'];
 
       return $park;
    }
