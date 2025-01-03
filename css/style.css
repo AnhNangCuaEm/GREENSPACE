@@ -340,6 +340,7 @@ hr {
    border-radius: 35px;
    height: auto;
    width: 100%;
+   aspect-ratio: 16/9;
    transition: 0.3s ease-in-out;
 }
 

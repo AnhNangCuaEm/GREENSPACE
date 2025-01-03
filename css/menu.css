@@ -75,6 +75,7 @@ nav {
     width: 30px;
     height: 30px;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .mobile-menu-icon img {

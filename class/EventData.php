@@ -38,7 +38,7 @@ class eventData
    {
       $pdo = Database::getConnection();
 
-      $state = $pdo->prepare('SELECT * FROM event ORDER BY id DESC');
+      $state = $pdo->prepare('SELECT * FROM event ORDER BY RAND()');
       $state->execute();
 
       $event = [];

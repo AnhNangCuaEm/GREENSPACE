@@ -379,8 +379,12 @@ $_SESSION['email'] = $email;
                 </div>
                 <div>
                     <p>ポートフォリオ:</p>
-                    <!-- them link portfolio -->
                     <a href="#">ポートフォリオ</a>
+                </div>
+                <div>
+                    <p>連絡:</p>
+                    <a href="https://www.linkedin.com/in/haile1302/" style="color: #8bdb73">LinkedIn</a>
+                    <a href="mailto:thanhhailth1302@gmail.com" style="color: #8bdb73">E-mail</a>
                 </div>
                 <hr>
                 <div>
