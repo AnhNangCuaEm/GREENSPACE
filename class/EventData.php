@@ -85,4 +85,26 @@ class eventData
 
       return $event;
    }
+
+   public static function searchEvents($query)
+   {
+      $pdo = Database::getConnection();
+      
+      $state = $pdo->prepare('SELECT * FROM event WHERE name LIKE :query OR location LIKE :query LIMIT 5');
+      $state->execute(['query' => "%$query%"]);
+      
+      $events = [];
+      
+      foreach ($state as $row) {
+         $event = new Event();
+         $event->id = $row['id'];
+         $event->name = $row['name'];
+         $event->location = $row['location'];
+         $event->thumbnail = $row['thumbnail'];
+         
+         $events[] = $event;
+      }
+      
+      return $events;
+   }
 }

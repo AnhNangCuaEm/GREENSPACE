@@ -147,6 +147,7 @@ $_SESSION['email'] = $email;
    </div>
    <script src="js/loadingtransition.js"></script>
    <script src="js/menu.js"></script>
+   <script src="js/search.js"></script>
    <script src="js/slideshow.js"></script>
    <script src="js/eventSave.js"></script>
 </body>

@@ -17,7 +17,7 @@ $user = UserData::getProfile();
         </div>
         <div id="search" class="searchBtn">
             <div>
-                <input type="text" placeholder="検索">
+                <input type="text" id="searchInput" placeholder="検索">
                 <svg class="search-icon" width="20px" height="20px" viewBox="0 -0.5 25 25" fill="none"
                     xmlns="http://www.w3.org/2000/svg" transform="matrix(-1, 0, 0, 1, 0, 0)">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -64,6 +64,7 @@ $user = UserData::getProfile();
             </form>
         </ul>
     </div>
+    <div id="searchResults" class="search-results"></div>
 </div>
 
 <div id="confirmationPopup" class="confirmation-popup" style="display: none">

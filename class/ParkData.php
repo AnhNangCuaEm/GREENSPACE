@@ -104,4 +104,26 @@ class parkData
 
       return $park;
    }
+
+   public static function searchParks($query)
+   {
+      $pdo = Database::getConnection();
+      
+      $state = $pdo->prepare('SELECT * FROM park WHERE name LIKE :query OR location LIKE :query LIMIT 5');
+      $state->execute(['query' => "%$query%"]);
+      
+      $parks = [];
+      
+      foreach ($state as $row) {
+         $park = new Park();
+         $park->id = $row['id'];
+         $park->name = $row['name'];
+         $park->location = $row['location'];
+         $park->thumbnail = $row['thumbnail'];
+         
+         $parks[] = $park;
+      }
+      
+      return $parks;
+   }
 }
