@@ -17,4 +17,5 @@ class Park {
    public string $map;
    public string $nearest;
    public string $special;
+   public string $parkfeature;
 }

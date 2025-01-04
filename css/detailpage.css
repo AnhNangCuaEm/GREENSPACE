@@ -155,7 +155,7 @@ h2 {
 .park-detail-nav, .event-detail-nav {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 5px;
 }
 
 .event-detail-nav a button {

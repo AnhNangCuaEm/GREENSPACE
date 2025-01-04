@@ -42,7 +42,7 @@ $_SESSION['email'] = $email;
                   <div class="mySlides">
                      <a href="park.php?id=<?= $park->id ?>"><img src="<?= $park->thumbnail ?>"></a>
                      <div class="name"><?= $park->name ?></div>
-                     <div class="description"><?= $park->description ?></div>
+                     <div class="description"><?= $park->parkfeature ?></div>
                   </div>
                <?php endforeach; ?>
             </div>

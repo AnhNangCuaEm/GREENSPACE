@@ -68,7 +68,7 @@ class parkData
          $park = new Park();
          $park->id = $row['id'];
          $park->name = $row['name'];
-         $park->description = $row['description'];
+         $park->parkfeature = $row['parkfeature'];
          $park->thumbnail = $row['thumbnail'];
 
          $featureparks[] = $park;

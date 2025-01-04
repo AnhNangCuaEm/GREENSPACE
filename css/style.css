@@ -161,7 +161,7 @@ hr {
    font-size: 15px;
    padding: 8px 12px;
    position: relative;
-   top: -150px;
+   bottom: 150px;
    left: 50px;
    width: 50%;
    text-align: justify;
@@ -172,9 +172,9 @@ hr {
    font-size: 13px;
    padding: 8px 12px;
    position: relative;
-   top: -150px;
+   bottom: 150px;
    left: 50px;
-   width: 40%;
+   width: 45%;
    text-align: justify;
 }
 
@@ -456,7 +456,7 @@ hr {
    .slideshow-container .name {
       font-size: 0.9rem;
       padding: 5px 8px;
-      top: -60%;
+      bottom: 150px;
       left: 40px;
       width: 60%;
    }
@@ -464,7 +464,6 @@ hr {
    .slideshow-container .description {
       font-size: 0.8rem;
       padding: 5px 8px;
-      top: -60%;
       left: 40px;
       width: 70%;
    }
