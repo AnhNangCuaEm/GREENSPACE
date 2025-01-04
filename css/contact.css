@@ -194,7 +194,9 @@ s
 
 @media screen and (max-width: 768px) {
     .feedback-form {
+        border-radius: 40px;
         max-width: 100%;
+        padding: 20px;
     }
 
     .feedback-form>h1 {

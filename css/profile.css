@@ -10,6 +10,7 @@
     background-color: rgba(62, 62, 62, 0.262);
     backdrop-filter: blur(8px);
     border: solid 1px rgba(255, 255, 255, 0.5);
+    transition: 0.3s ease-in-out;
 }
 
 .park-event-container {
@@ -23,6 +24,7 @@
     background-color: rgba(62, 62, 62, 0.262);
     backdrop-filter: blur(8px);
     border: solid 1px rgba(255, 255, 255, 0.5);
+    transition: 0.3s ease-in-out;
 }
 
 .park-event-container h2 {
@@ -317,6 +319,13 @@
         max-height: none;
         gap: 20px;
         max-width: 95%;
+        border-radius: 40px;
+    }
+
+    .park-event-container {
+        gap: 20px;
+        padding: 20px;
+        border-radius: 40px;
     }
 
     .popup-content {
