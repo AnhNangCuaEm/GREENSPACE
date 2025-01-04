@@ -170,6 +170,7 @@ $user = UserData::getProfile();
         <?php include 'include/footer.php' ?>
     </footer>
     <script src="js/menu.js"></script>
+    <script src="js/search.js"></script>
     <script src="js/editProfile.js"></script>
     <script src="js/profile.js"></script>
 </body>

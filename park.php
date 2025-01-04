@@ -247,6 +247,7 @@ if (isset($_GET['id'])) {
         <?php include 'include/footer.php' ?>
     </footer>
     <script src="js/menu.js"></script>
+    <script src="js/search.js"></script>
     <script src="js/comment.js"></script>
     <script src="js/parklike.js"></script>
     <script>

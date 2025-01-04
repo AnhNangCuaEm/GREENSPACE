@@ -30,6 +30,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300); // 300ms delay
     });
 
+    // Thêm event listener cho focus
+    searchInput.addEventListener('focus', function() {
+        const query = this.value.trim();
+        if (query.length >= 1) {
+            searchResults.style.display = 'block';
+        }
+    });
+
     // Hiển thị kết quả
     function displayResults(results) {
         searchResults.innerHTML = results.map(result => `

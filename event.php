@@ -112,6 +112,7 @@ if (isset($_GET['id'])) {
         <?php include 'include/footer.php' ?>
     </footer>
     <script src="js/menu.js"></script>
+    <script src="js/search.js"></script>
     <script src="js/eventSave.js"></script>
 </body>
 

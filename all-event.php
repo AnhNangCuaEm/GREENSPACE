@@ -79,6 +79,7 @@ $_SESSION['email'] = $email;
         </footer>
     </div>
     <script src="js/menu.js"></script>
+    <script src="js/search.js"></script>
     <script src="js/eventSave.js"></script>
 </body>
 
