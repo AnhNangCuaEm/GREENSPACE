@@ -53,7 +53,7 @@ if (isset($_GET['id'])) {
 
                 <div class="event-detail-nav">
                     <a href="?id=<?= ($id <= 1) ? count($totalevents) : $id - 1 ?>"><button><svg fill="#000000"
-                                height="24px" width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                height="18px" width="18px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.753 55.753"
                                 xml:space="preserve">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -91,7 +91,7 @@ if (isset($_GET['id'])) {
                         <span class="save-text"><?= $isSaved ? '保存を削除' : '保存する' ?></span>
                     </button>
                     <a href="?id=<?= ($id >= count($totalevents)) ? 1 : $id + 1 ?>"><button>次へ<svg fill="#000000"
-                                height="24px" width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                height="18px" width="18px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.752 55.752"
                                 xml:space="preserve">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

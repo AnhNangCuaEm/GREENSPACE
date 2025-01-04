@@ -443,6 +443,14 @@ iframe {
         border-radius: 20px;
     }
 
+    .event-detail-info span {
+        font-size: 0.8rem;
+    }
+
+    .event-detail-nav a button {
+        font-size: 0.8rem;
+        padding: 7px 12px;
+    }
 
     iframe {
         width: 100%;
