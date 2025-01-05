@@ -135,7 +135,6 @@
     <div class="footer-box">
         <h3>お問い合わせ</h3>
         <ul>
-            <li><a href="how-to-use.php">使い方</a></li>
             <li><a href="contact.php">お問い合わせ</a></li>
             <li><a href="privacy.php">プライバシーポリシー</a></li>
         </ul>

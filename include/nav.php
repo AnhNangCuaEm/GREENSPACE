@@ -39,7 +39,6 @@ $user = UserData::getProfile();
     </nav>
     <div class="menu" id="menu">
         <ul class="menu-ul">
-            <li><a href="how-to-use.php">使い方</a></li>
             <li><a href="contact.php">問い合せ</a></li>
             <li><a href="credit.php">Credit</a></li>
             <form id="logoutForm" action="logout.php" method="post">
@@ -56,7 +55,6 @@ $user = UserData::getProfile();
             </li>
             <li><a href="all.php">探る</a></li>
             <li><a href="all-event.php">イベント</a></li>
-            <li><a href="how-to-use.php">使い方</a></li>
             <li><a href="contact.php">問い合せ</a></li>
             <li><a href="credit.php">Credit</a></li>
             <form id="mobile-logoutForm" action="logout.php" method="post">
