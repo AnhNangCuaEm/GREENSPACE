@@ -1,11 +1,13 @@
-<?php
+<?php 
+
+require_once __DIR__ . '/../env.php';
 
 class Database {
    public static function getConnection(): PDO {
       return new PDO(
-         'mysql:charset=UTF8;dbname=' . getenv('DB_DATABASE') . ';host=' . getenv('DB_HOST'),
-         getenv('DB_USERNAME'),
-         getenv('DB_PASSWORD')
+         'mysql:charset=UTF8;dbname=' . DB_DATABASE . ';host=' . DB_HOST,
+         DB_USER,
+         DB_PASSWORD
       );
    }
 }
