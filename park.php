@@ -22,12 +22,13 @@ $isLiked = false; // Khởi tạo biến $isLiked
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $parks = ParkData::getPark($id);
-    
+
     // Kiểm tra xem công viên có tồn tại không
     if (!$parks) {
         // Hiển thị giao diện lỗi
-        ?>
+?>
         <html>
+
         <head>
             <title>404 Not Found</title>
             <meta charset="UTF-8">
@@ -118,11 +119,12 @@ if (isset($_GET['id'])) {
                 }, 1000); // Update every second
             </script>
         </body>
+
         </html>
-        <?php
+<?php
         exit();
     }
-    
+
     $images = ParkImageData::getParkImages($id);
     $totalpark = ParkData::getallParks();
     $likeCount = countLikes($id);
@@ -257,26 +259,26 @@ if (isset($_GET['id'])) {
                                 <strong><?= htmlspecialchars($comment['user_name'] ?: '無名さん') ?></strong>
                                 <?php if (isOwner($comment['id'], $_SESSION['email'] ?? '')): ?>
                                     <svg class="delete-comment" data-comment-id="<?= $comment['id'] ?>" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
-                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                    fill="#000000">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <title>delete_2_line</title>
-                                        <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <g id="System" transform="translate(-576.000000, -192.000000)" fill-rule="nonzero">
-                                                <g id="delete_2_line" transform="translate(576.000000, 192.000000)">
-                                                    <path
-                                                        d="M24,0 L24,24 L0,24 L0,0 L24,0 Z M12.5934901,23.257841 L12.5819402,23.2595131 L12.5108777,23.2950439 L12.4918791,23.2987469 L12.4918791,23.2987469 L12.4767152,23.2950439 L12.4056548,23.2595131 C12.3958229,23.2563662 12.3870493,23.2590235 12.3821421,23.2649074 L12.3780323,23.275831 L12.360941,23.7031097 L12.3658947,23.7234994 L12.3769048,23.7357139 L12.4804777,23.8096931 L12.4953491,23.8136134 L12.4953491,23.8136134 L12.5071152,23.8096931 L12.6106902,23.7357139 L12.6232938,23.7196733 L12.6232938,23.7196733 L12.6266527,23.7031097 L12.609561,23.275831 C12.6075724,23.2657013 12.6010112,23.2592993 12.5934901,23.257841 L12.5934901,23.257841 Z M12.8583906,23.1452862 L12.8445485,23.1473072 L12.6598443,23.2396597 L12.6498822,23.2499052 L12.6498822,23.2499052 L12.6471943,23.2611114 L12.6650943,23.6906389 L12.6699349,23.7034178 L12.6699349,23.7034178 L12.678386,23.7104931 L12.8793402,23.8032389 C12.8914285,23.8068999 12.9022333,23.8029875 12.9078286,23.7952264 L12.9118235,23.7811639 L12.8776777,23.1665331 C12.8752882,23.1545897 12.8674102,23.1470016 12.8583906,23.1452862 L12.8583906,23.1452862 Z M12.1430473,23.1473072 C12.1332178,23.1423925 12.1221763,23.1452606 12.1156365,23.1525954 L12.1099173,23.1665331 L12.0757714,23.7811639 C12.0751323,23.7926639 12.0828099,23.8018602 12.0926481,23.8045676 L12.108256,23.8032389 L12.3092106,23.7104931 L12.3186497,23.7024347 L12.3186497,23.7024347 L12.3225043,23.6906389 L12.340401,23.2611114 L12.337245,23.2485176 L12.337245,23.2485176 L12.3277531,23.2396597 L12.1430473,23.1473072 Z"
-                                                        id="MingCute" fill-rule="nonzero"> </path>
-                                                    <path
-                                                        d="M14.2792,2 C15.1401,2 15.9044,2.55086 16.1766,3.36754 L16.7208,5 L20,5 C20.5523,5 21,5.44772 21,6 C21,6.55227 20.5523,6.99998 20,7 L19.9975,7.07125 L19.9975,7.07125 L19.1301,19.2137 C19.018,20.7837 17.7117,22 16.1378,22 L7.86224,22 C6.28832,22 4.982,20.7837 4.86986,19.2137 L4.00254,7.07125 C4.00083,7.04735 3.99998,7.02359 3.99996,7 C3.44769,6.99998 3,6.55227 3,6 C3,5.44772 3.44772,5 4,5 L7.27924,5 L7.82339,3.36754 C8.09562,2.55086 8.8599,2 9.72076,2 L14.2792,2 Z M17.9975,7 L6.00255,7 L6.86478,19.0712 C6.90216,19.5946 7.3376,20 7.86224,20 L16.1378,20 C16.6624,20 17.0978,19.5946 17.1352,19.0712 L17.9975,7 Z M10,10 C10.51285,10 10.9355092,10.386027 10.9932725,10.8833761 L11,11 L11,16 C11,16.5523 10.5523,17 10,17 C9.48715929,17 9.06449214,16.613973 9.00672766,16.1166239 L9,16 L9,11 C9,10.4477 9.44771,10 10,10 Z M14,10 C14.5523,10 15,10.4477 15,11 L15,16 C15,16.5523 14.5523,17 14,17 C13.4477,17 13,16.5523 13,16 L13,11 C13,10.4477 13.4477,10 14,10 Z M14.2792,4 L9.72076,4 L9.38743,5 L14.6126,5 L14.2792,4 Z"
-                                                        id="形状" fill="#fcf8db"> </path>
+                                        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        fill="#000000">
+                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                        <g id="SVGRepo_iconCarrier">
+                                            <title>delete_2_line</title>
+                                            <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <g id="System" transform="translate(-576.000000, -192.000000)" fill-rule="nonzero">
+                                                    <g id="delete_2_line" transform="translate(576.000000, 192.000000)">
+                                                        <path
+                                                            d="M24,0 L24,24 L0,24 L0,0 L24,0 Z M12.5934901,23.257841 L12.5819402,23.2595131 L12.5108777,23.2950439 L12.4918791,23.2987469 L12.4918791,23.2987469 L12.4767152,23.2950439 L12.4056548,23.2595131 C12.3958229,23.2563662 12.3870493,23.2590235 12.3821421,23.2649074 L12.3780323,23.275831 L12.360941,23.7031097 L12.3658947,23.7234994 L12.3769048,23.7357139 L12.4804777,23.8096931 L12.4953491,23.8136134 L12.4953491,23.8136134 L12.5071152,23.8096931 L12.6106902,23.7357139 L12.6232938,23.7196733 L12.6232938,23.7196733 L12.6266527,23.7031097 L12.609561,23.275831 C12.6075724,23.2657013 12.6010112,23.2592993 12.5934901,23.257841 L12.5934901,23.257841 Z M12.8583906,23.1452862 L12.8445485,23.1473072 L12.6598443,23.2396597 L12.6498822,23.2499052 L12.6498822,23.2499052 L12.6471943,23.2611114 L12.6650943,23.6906389 L12.6699349,23.7034178 L12.6699349,23.7034178 L12.678386,23.7104931 L12.8793402,23.8032389 C12.8914285,23.8068999 12.9022333,23.8029875 12.9078286,23.7952264 L12.9118235,23.7811639 L12.8776777,23.1665331 C12.8752882,23.1545897 12.8674102,23.1470016 12.8583906,23.1452862 L12.8583906,23.1452862 Z M12.1430473,23.1473072 C12.1332178,23.1423925 12.1221763,23.1452606 12.1156365,23.1525954 L12.1099173,23.1665331 L12.0757714,23.7811639 C12.0751323,23.7926639 12.0828099,23.8018602 12.0926481,23.8045676 L12.108256,23.8032389 L12.3092106,23.7104931 L12.3186497,23.7024347 L12.3186497,23.7024347 L12.3225043,23.6906389 L12.340401,23.2611114 L12.337245,23.2485176 L12.337245,23.2485176 L12.3277531,23.2396597 L12.1430473,23.1473072 Z"
+                                                            id="MingCute" fill-rule="nonzero"> </path>
+                                                        <path
+                                                            d="M14.2792,2 C15.1401,2 15.9044,2.55086 16.1766,3.36754 L16.7208,5 L20,5 C20.5523,5 21,5.44772 21,6 C21,6.55227 20.5523,6.99998 20,7 L19.9975,7.07125 L19.9975,7.07125 L19.1301,19.2137 C19.018,20.7837 17.7117,22 16.1378,22 L7.86224,22 C6.28832,22 4.982,20.7837 4.86986,19.2137 L4.00254,7.07125 C4.00083,7.04735 3.99998,7.02359 3.99996,7 C3.44769,6.99998 3,6.55227 3,6 C3,5.44772 3.44772,5 4,5 L7.27924,5 L7.82339,3.36754 C8.09562,2.55086 8.8599,2 9.72076,2 L14.2792,2 Z M17.9975,7 L6.00255,7 L6.86478,19.0712 C6.90216,19.5946 7.3376,20 7.86224,20 L16.1378,20 C16.6624,20 17.0978,19.5946 17.1352,19.0712 L17.9975,7 Z M10,10 C10.51285,10 10.9355092,10.386027 10.9932725,10.8833761 L11,11 L11,16 C11,16.5523 10.5523,17 10,17 C9.48715929,17 9.06449214,16.613973 9.00672766,16.1166239 L9,16 L9,11 C9,10.4477 9.44771,10 10,10 Z M14,10 C14.5523,10 15,10.4477 15,11 L15,16 C15,16.5523 14.5523,17 14,17 C13.4477,17 13,16.5523 13,16 L13,11 C13,10.4477 13.4477,10 14,10 Z M14.2792,4 L9.72076,4 L9.38743,5 L14.6126,5 L14.2792,4 Z"
+                                                            id="形状" fill="#fcf8db"> </path>
+                                                    </g>
                                                 </g>
                                             </g>
                                         </g>
-                                    </g>
-                                </svg>
+                                    </svg>
                                 <?php endif; ?>
                                 <span class="comment-date"><?= date('Y-m-d H:i', strtotime($comment['created_at'])) ?></span>
                             </div>
@@ -298,50 +300,32 @@ if (isset($_GET['id'])) {
                 <button id="submitBtn" type="submit">コメントする</button>
             </form>
         </div>
-        <span id="closeCommentPopup" class="close-comment-popup"><svg width="34px" height="34px" viewBox="0 0 24 24"
-                fill="none" xmlns="http://www.w3.org/2000/svg">
+        <span id="closeCommentPopup" class="close-comment-popup"><svg width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
-                    <g clip-path="url(#clip0_429_11081)">
-                        <circle cx="12" cy="11.9999" r="9" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"
-                            stroke-linejoin="round"></circle>
-                        <path d="M14 10.0001L10 14.0001" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                        <path d="M10 10.0001L14 14.0001" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
+                    <g id="Edit / Close_Circle">
+                        <path id="Vector" d="M9 9L11.9999 11.9999M11.9999 11.9999L14.9999 14.9999M11.9999 11.9999L9 14.9999M11.9999 11.9999L14.9999 9M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </g>
-                    <defs>
-                        <clipPath id="clip0_429_11081">
-                            <rect width="24" height="24" fill="white"></rect>
-                        </clipPath>
-                    </defs>
                 </g>
             </svg></span>
     </div>
     <!-- Modal for enlarged image -->
-    <div id="imageModal" class="modal" onclick="closeModal()">
-        <img class="modal-content" id="modalImage">
-        <span class="close" onclick="closeModal()"><svg width="34px" height="34px" viewBox="0 0 24 24" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+    <div id="imageModal" class="modal">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <img id="modalImage" class="modal-image">
+        </div>
+        <span id="closeModalBtn" class="close">
+            <svg width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
-                    <g clip-path="url(#clip0_429_11081)">
-                        <circle cx="12" cy="11.9999" r="9" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"
-                            stroke-linejoin="round"></circle>
-                        <path d="M14 10.0001L10 14.0001" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                        <path d="M10 10.0001L14 14.0001" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
+                    <g id="Edit / Close_Circle">
+                        <path id="Vector" d="M9 9L11.9999 11.9999M11.9999 11.9999L14.9999 14.9999M11.9999 11.9999L9 14.9999M11.9999 11.9999L14.9999 9M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </g>
-                    <defs>
-                        <clipPath id="clip0_429_11081">
-                            <rect width="24" height="24" fill="white"></rect>
-                        </clipPath>
-                    </defs>
                 </g>
-            </svg></span>
+            </svg>
+        </span>
     </div>
     <div id="overlay"></div>
     <footer>
@@ -365,6 +349,25 @@ if (isset($_GET['id'])) {
             modal.classList.remove("show"); // Remove the 'show' class to hide it
             document.body.style.overflow = ''; // Restore body scroll
         }
+
+        // Thêm event listeners khi document load
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById("imageModal");
+            const closeBtn = document.getElementById("closeModalBtn");
+
+            // Đóng modal khi click vào nền
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Đóng modal khi click vào nút close
+            closeBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closeModal();
+            });
+        });
     </script>
 </body>
 
