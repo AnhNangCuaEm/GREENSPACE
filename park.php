@@ -22,6 +22,14 @@ $isLiked = false; // Khởi tạo biến $isLiked
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $parks = ParkData::getPark($id);
+    
+    // Kiểm tra xem công viên có tồn tại không
+    if (!$parks) {
+        // Hiển thị giao diện lỗi từ error.html
+        include 'error.html'; // Bao gồm tệp error.html
+        exit();
+    }
+    
     $images = ParkImageData::getParkImages($id);
     $totalpark = ParkData::getallParks();
     $likeCount = countLikes($id);

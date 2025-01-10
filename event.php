@@ -19,6 +19,10 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $event = EventData::getEvent($id);
     $totalevents = EventData::getAllEvents();
+    if (!$event) {
+        include 'error.html';
+        exit();
+    }
 } else {
     header('Location: all-event.php');
     exit();
