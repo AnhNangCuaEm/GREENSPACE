@@ -4,25 +4,22 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeCommentBtn = document.getElementById('closeCommentPopup');
     const commentPopup = document.querySelector('.comment-popup');
 
-    // Mặc định ẩn popup khi trang được tải
-    commentPopup.style.display = 'none';
-
     // Xử lý sự kiện khi click nút mở popup
     openCommentBtn.addEventListener('click', function() {
-        commentPopup.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // Ngăn scroll trên body
+        commentPopup.classList.add('show');
+        document.body.style.overflow = 'hidden';
     });
 
     // Xử lý sự kiện khi click nút đóng popup
     closeCommentBtn.addEventListener('click', function() {
-        commentPopup.style.display = 'none';
-        document.body.style.overflow = ''; // Khôi phục scroll trên body
+        commentPopup.classList.remove('show');
+        document.body.style.overflow = '';
     });
 
     // Đóng popup khi click bên ngoài vùng nội dung
     commentPopup.addEventListener('click', function(e) {
         if (e.target === commentPopup) {
-            commentPopup.style.display = 'none';
+            commentPopup.classList.remove('show');
             document.body.style.overflow = '';
         }
     });
@@ -44,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
             commentForm.reset();
             
             // Close popup
-            commentPopup.style.display = 'none';
+            commentPopup.classList.remove('show');
             document.body.style.overflow = '';
 
             // Show message
