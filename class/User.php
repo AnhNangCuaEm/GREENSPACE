@@ -10,8 +10,10 @@ class User
     public ?int $phone;
     public ?string $avatar;
     public ?string $address;
+    public ?string $role;
+    public ?string $status;
 
-    public function __construct(int $id, string $email, string $password, string $name, int $phone, string $avatar, string $address)
+    public function __construct(int $id, string $email, string $password, string $name, int $phone, string $avatar, string $address, string $role, string $status)
     {
         $this->id = $id;
         $this->email = $email;
@@ -20,5 +22,7 @@ class User
         $this->phone = $phone;
         $this->avatar = $avatar;
         $this->address = $address;
+        $this->role = $role;
+        $this->status = $status;
     }
 }

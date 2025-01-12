@@ -27,7 +27,9 @@ class UserData
             $row['name'],
             $row['phone'],
             $row['avatar'],
-            $row['address']
+            $row['address'],
+            $row['role'],
+            $row['status']
         );
     }
 
@@ -52,7 +54,9 @@ class UserData
             $row['name'],
             $row['phone'],
             $row['avatar'],
-            $row['address']
+            $row['address'],
+            $row['role'],
+            $row['status']
         );
     }
 
@@ -64,7 +68,7 @@ class UserData
 
         $pdo = Database::getConnection();
 
-        $state = $pdo->prepare('INSERT INTO user (email, password_hash, name, phone, avatar, address) VALUES (:email, :password_hash, :name, :phone, :avatar, :address)');
+        $state = $pdo->prepare('INSERT INTO user (email, password_hash, name, phone, avatar, address, role, status) VALUES (:email, :password_hash, :name, :phone, :avatar, :address, :role, :status)');
         $state->bindValue(':email', $user->email, PDO::PARAM_STR);
         $state->bindValue(':password_hash', password_hash($user->password, PASSWORD_DEFAULT), PDO::PARAM_STR);
         $state->bindValue(':name', $user->name, PDO::PARAM_STR);
@@ -84,6 +88,8 @@ class UserData
         $user->avatar = $avatars[array_rand($avatars)];
         $state->bindValue(':avatar', $user->avatar, PDO::PARAM_STR);
         $state->bindValue(':address', $user->address, PDO::PARAM_STR);
+        $state->bindValue(':role', $user->role, PDO::PARAM_STR);
+        $state->bindValue(':status', $user->status, PDO::PARAM_STR);
         $state->execute();
     }
 
@@ -125,5 +131,28 @@ class UserData
         if (!$state->execute()) {
             error_log('SQL Error: ' . implode(', ', $state->errorInfo())); // Log SQL error
         }
+    }
+
+    public static function getAllUsers(): array
+    {
+        $pdo = Database::getConnection();
+        $state = $pdo->query('SELECT * FROM user ORDER BY name');
+        
+        $users = [];
+        while ($row = $state->fetch(PDO::FETCH_ASSOC)) {
+            $users[] = new User(
+                $row['id'],
+                $row['email'],
+                $row['password_hash'],
+                $row['name'],
+                $row['phone'],
+                $row['avatar'],
+                $row['address'],
+                $row['role'],
+                $row['status']
+            );
+        }
+        
+        return $users;
     }
 }

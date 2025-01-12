@@ -121,6 +121,13 @@
     background-color: #e1e1e1;
 }
 
+.edit-btn-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+
 .avatar-box img {
     width: 180px;
     height: 180px;
