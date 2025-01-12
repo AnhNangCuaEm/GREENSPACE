@@ -8,5 +8,4 @@
    <link rel="shortcut icon" href="img/img/logoNotext.png" type="image/x-icon">
    <link rel="stylesheet" href="css/style.css">
    <link rel="stylesheet" href="css/menu.css">
-   <link rel="stylesheet" href="css/contact.css">
    <link rel="stylesheet" href="css/footer.css">

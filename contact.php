@@ -18,6 +18,7 @@ $_SESSION['email'] = $email;
 
 <head>
     <?php include 'include/head.php' ?>
+    <link rel="stylesheet" href="css/contact.css">
 </head>
 
 <body>
