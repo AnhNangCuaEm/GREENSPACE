@@ -1,27 +1,32 @@
 <?php
+require_once __DIR__ . '/../class/UserData.php';
 session_start();
 
-require_once __DIR__ . '/../class/UserData.php';
-
-header('Content-Type: application/json');
-
+// Get JSON data from request body
 $data = json_decode(file_get_contents('php://input'), true);
 
-if (isset($data['name'], $data['phone'], $data['address']) && isset($_SESSION['email'])) {
+if (!isset($_SESSION['email'])) {
+    http_response_code(401);
+    exit('Unauthorized');
+}
+
+try {
     $email = $_SESSION['email'];
     
-    // Log the incoming data for debugging
-    error_log('Incoming data: ' . json_encode($data)); // Log incoming data
-
-    try {
-        // Update the user information directly using the existing email
+    // Update user info (name, phone, address)
+    if (isset($data['name']) && isset($data['phone']) && isset($data['address'])) {
         UserData::updateInfo($email, $data['name'], $data['phone'], $data['address']);
-        echo json_encode(['status' => 'success']);
-    } catch (Exception $e) {
-        error_log($e->getMessage());
-        echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
     }
-} else {
-    error_log('Invalid input or session not set');
-    echo json_encode(['status' => 'error', 'message' => 'Invalid input']);
+    
+    // Update password if requested
+    if (isset($data['updatePassword']) && $data['updatePassword'] === true && isset($data['password'])) {
+        UserData::updatePassword($email, $data['password']);
+    }
+    
+    http_response_code(200);
+    echo json_encode(['success' => true]);
+} catch (Exception $e) {
+    error_log($e->getMessage());
+    http_response_code(500);
+    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 }

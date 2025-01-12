@@ -112,4 +112,18 @@ class UserData
             error_log('SQL Error: ' . implode(', ', $state->errorInfo())); // Log SQL error
         }
     }
+
+    public static function updatePassword(string $email, string $newPassword): void
+    {
+        $pdo = Database::getConnection();
+
+        $state = $pdo->prepare('UPDATE user SET password_hash = :password_hash WHERE email = :email');
+        $state->bindValue(':password_hash', password_hash($newPassword, PASSWORD_DEFAULT), PDO::PARAM_STR);
+        $state->bindValue(':email', $email, PDO::PARAM_STR);
+        
+        // Execute the statement and check for errors
+        if (!$state->execute()) {
+            error_log('SQL Error: ' . implode(', ', $state->errorInfo())); // Log SQL error
+        }
+    }
 }

@@ -156,6 +156,14 @@ $user = UserData::getProfile();
                         <input type="text" id="address" name="address"
                             value="<?php echo htmlspecialchars($user->address); ?>">
                     </div>
+                    <div>
+                        <label for="password">新パスワード:</label>
+                        <input type="password" id="password" name="password">
+                    </div>
+                    <div>
+                        <label for="confirmPassword">新パスワード確認:</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword">
+                    </div>
                     <div class="infoBtn">
                         <button type="submit">確定</button>
                         <button type="button" id="closeInfoPopup" class="cancelBtn">戻る</button>
