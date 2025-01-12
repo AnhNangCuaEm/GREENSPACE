@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/Database.php';
 require_once __DIR__ . '/Event.php';
+require_once __DIR__ . '/../functions/TextHelper.php';
 
 class eventData
 {
@@ -90,21 +91,46 @@ class eventData
    {
       $pdo = Database::getConnection();
       
-      $state = $pdo->prepare('SELECT * FROM event WHERE name LIKE :query OR location LIKE :query LIMIT 5');
-      $state->execute(['query' => "%$query%"]);
+      // Chuẩn bị các biến tìm kiếm
+      list($searchQuery, $searchQueryNoSpaces) = TextHelper::convertToSearchableText($query);
+      $queryNoSpaces = str_replace(' ', '', $query);
+      
+      // Tìm kiếm với nhiều điều kiện
+      $sql = "SELECT * FROM event WHERE 
+              name LIKE :query 
+              OR location LIKE :query
+              OR REPLACE(name, ' ', '') LIKE :queryNoSpaces
+              OR REPLACE(location, ' ', '') LIKE :queryNoSpaces
+              OR name_yomi LIKE :searchQuery 
+              OR location_yomi LIKE :searchQuery
+              OR REPLACE(name_yomi, ' ', '') LIKE :searchQueryNoSpaces
+              OR REPLACE(location_yomi, ' ', '') LIKE :searchQueryNoSpaces
+              OR name_romaji LIKE :query
+              OR location_romaji LIKE :query
+              OR REPLACE(name_romaji, ' ', '') LIKE :queryNoSpaces
+              OR REPLACE(location_romaji, ' ', '') LIKE :queryNoSpaces
+              LIMIT 5";
+              
+      $state = $pdo->prepare($sql);
+      $state->execute([
+          'query' => "%$query%",
+          'queryNoSpaces' => "%$queryNoSpaces%",
+          'searchQuery' => "%$searchQuery%",
+          'searchQueryNoSpaces' => "%$searchQueryNoSpaces%"
+      ]);
       
       $events = [];
-      
+
       foreach ($state as $row) {
          $event = new Event();
          $event->id = $row['id'];
          $event->name = $row['name'];
          $event->location = $row['location'];
          $event->thumbnail = $row['thumbnail'];
-         
+
          $events[] = $event;
       }
-      
+
       return $events;
    }
 }
