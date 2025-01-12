@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user) {
             $errormessages['email'] = 'このメールアドレスは既に登録されています';
         } else {
-            $user = new User(0, $email, $password, '', 0, '', '');
+            $user = new User(0, $email, $password, '', 0, '', '', 'user', 'active');
             UserData::createUser($user);
             $_SESSION['email'] = $email;
             createToken($email);

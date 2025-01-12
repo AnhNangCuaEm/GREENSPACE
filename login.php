@@ -25,6 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = UserData::getUser($email);
         if (!$user || !password_verify($password, $user->password)) {
             $errormessages['login'] = 'メールアドレスまたはパスワードが間違っています';
+        } elseif ($user->status === 'banned') {
+            $errormessages['login'] = 'このアカウントは利用停止されています';
         } else {
             $_SESSION['email'] = $email;
             createToken($email);

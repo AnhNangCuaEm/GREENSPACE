@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../class/Database.php';
 // Enable error reporting for debugging
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -17,16 +18,11 @@ if (!isset($data['email']) || !isset($data['status']) ||
 }
 
 try {
-    // Database connection (adjust credentials as needed)
-    $pdo = new PDO(
-        "mysql:host=localhost;dbname=your_database_name",
-        "your_username",
-        "your_password",
-        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-    );
+    // Use Database class instead of direct PDO connection
+    $pdo = Database::getConnection();
 
     // Update user status
-    $stmt = $pdo->prepare("UPDATE users SET status = ? WHERE email = ?");
+    $stmt = $pdo->prepare("UPDATE user SET status = ? WHERE email = ?");
     $success = $stmt->execute([$data['status'], $data['email']]);
 
     echo json_encode([

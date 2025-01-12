@@ -55,7 +55,7 @@ function loadUsers() {
             
             users.forEach(user => {
                 html += `
-                    <tr>
+                    <tr data-status="${user.status}">
                         <td><img src="${user.avatar}" alt="avatar" width="50"></td>
                         <td>${user.name}</td>
                         <td>${user.email}</td>
@@ -70,7 +70,6 @@ function loadUsers() {
                         <td>
                             <select class="status-select" onchange="updateUserStatus('${user.email}', this.value)">
                                 <option value="active" ${user.status === 'active' ? 'selected' : ''}>Active</option>
-                                <option value="deactive" ${user.status === 'deactive' ? 'selected' : ''}>Deactive</option>
                                 <option value="banned" ${user.status === 'banned' ? 'selected' : ''}>Banned</option>
                             </select>
                         </td>
