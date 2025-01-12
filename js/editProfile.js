@@ -16,7 +16,12 @@ document.getElementById('editForm').addEventListener('submit', function (event) 
 
     // Convert FormData to a JSON object
     formData.forEach((value, key) => {
-        data[key] = value;
+        // Check if phone is empty and set it to '0' if true
+        if (key === 'phone' && value.trim() === '') {
+            data[key] = '0'; // Default to '0' if phone is empty
+        } else {
+            data[key] = value;
+        }
     });
 
     // Send AJAX request to update the profile
