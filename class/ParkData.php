@@ -14,7 +14,7 @@ class parkData
    {
       $pdo = Database::getConnection();
 
-      $state = $pdo->prepare('SELECT * FROM park ORDER BY RAND() LIMIT 8');
+      $state = $pdo->prepare('SELECT * FROM park ORDER BY RAND() LIMIT 6');
       $state->execute();
 
       $park = [];
@@ -45,9 +45,13 @@ class parkData
          $park = new Park();
          $park->id = $row['id'];
          $park->name = $row['name'];
-         $park->area = $row['area'];
          $park->location = $row['location'];
          $park->thumbnail = $row['thumbnail'];
+         $park->location = $row['location'];
+         $park->price = $row['price'];
+         $park->nearest = $row['nearest'];
+         $park->special = $row['special'];
+
 
          $parks[] = $park;
       }

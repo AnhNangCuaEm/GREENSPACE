@@ -133,7 +133,7 @@ if (isset($_GET['id'])) {
 
 <body>
     <?php include 'include/nav.php' ?>
-    <main>
+    <main style="max-width: 850px;">
         <div class="event-detail">
             <div class="event-detail-image">
                 <img src="<?= htmlspecialchars($event->thumbnail) ?>" alt="イベントの画像">

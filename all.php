@@ -32,8 +32,13 @@ $_SESSION['email'] = $email;
             <?php foreach ($parks as $park): ?>
                <div class="park-box">
                   <a href="park.php?id=<?= $park->id ?>"><img src="<?= $park->thumbnail ?>"></a>
-                  <div class="name"><?= $park->name ?></div>
-                  <div class="location"><?= $park->location ?></div>
+                  <div class="park-text">
+                     <div class="name"><?= $park->name ?></div>
+                     <div class="location"><span>住所:</span>&nbsp;<?= $park->location ?></div>
+                     <div class="price"><span>料金:</span>&nbsp;<?= $park->price ?>&yen;</div>
+                     <div class="nearest"><span>最寄り駅:</span>&nbsp;<?= $park->nearest ?></div>
+                     <div class="special"><span>特別な特徴:</span>&nbsp;<?= $park->special ?></div>
+                  </div>
                </div>
             <?php endforeach; ?>
          </div>

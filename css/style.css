@@ -162,7 +162,7 @@ hr {
 
 .slideshow-container .name {
    color: #f2f2f2;
-   font-size: 15px;
+   font-size: 1.4rem;
    padding: 8px 12px;
    position: relative;
    bottom: 150px;
@@ -170,17 +170,19 @@ hr {
    width: 50%;
    font-weight: 650;
    text-align: justify;
+   text-shadow: 0 0 9px rgba(0, 0, 0, 0.5);
 }
 
 .slideshow-container .description {
    color: #f2f2f2;
-   font-size: 13px;
+   font-size: 1rem;
    padding: 8px 12px;
    position: relative;
    bottom: 150px;
    left: 50px;
    width: 45%;
    text-align: justify;
+   text-shadow: 0 0 9px rgba(0, 0, 0, 0.5);
 }
 
 .slideDot-container {
@@ -191,6 +193,9 @@ hr {
    text-align: center;
    z-index: 1;
    font-size: 0;
+   background-color: rgba(66, 66, 66, 0.151);
+   border-radius: 50px;
+   padding: 5px;
 }
 
 .dot {
@@ -212,31 +217,20 @@ hr {
 .park-container {
    display: flex;
    justify-content: space-evenly;
-   /* Adjust spacing between boxes */
-   align-items: center;
-   /* Vertically align boxes if needed */
    gap: 20px;
-   /* Add a gap between boxes for spacing */
    flex-wrap: wrap;
-   /* Allow wrapping if needed */
-   padding: 10px;
+   padding: 20px;
    overflow: hidden;
    border-radius: 25px;
 }
 
-
 .park-box {
-   flex: 1;
-   /* Boxes take equal space */
+   flex: 1 1 calc(33.333% - 40px);
    min-width: 260px;
    max-width: 350px;
-   /* Adjust the size of each box */
    border-radius: 35px;
-   /* Rounded corners */
    transition: 0.3s ease-in-out;
-   /* Smooth hover effects */
    position: relative;
-   /* Smooth hover effects */
    aspect-ratio: 4/3;
    transform: translateY(0);
    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -246,11 +240,6 @@ hr {
 .park-box:hover {
    transform: translateY(-5px);
    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.park-box img:hover {
-   filter: brightness(0.85);
-   transform: scale(1.02);
 }
 
 .park-box .name {
@@ -264,8 +253,8 @@ hr {
 
 .park-box .location {
    width: 100%;
-   position: absolute; /* Change to absolute to keep it in place */
-   bottom: 10px; /* Adjust bottom position */
+   position: absolute;
+   bottom: 10px;
    font-size: 0.9rem;
    padding-left: 20px;
    z-index: 50;
@@ -279,6 +268,21 @@ hr {
    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.park-text {
+   padding: 10px;
+   text-align: left;
+   color: var(--primary-color);
+}
+
+.park-text .name,
+.park-text .location,
+.park-text .price,
+.park-text .nearest,
+.park-text .special {
+   font-size: 0.9rem;
+   margin-bottom: 5px;
+   font-weight: 650;
+}
 
 .view-more-btn {
    display: block;
@@ -299,12 +303,9 @@ hr {
 .event-container {
    display: flex;
    justify-content: space-evenly;
-   /* Adjust spacing between boxes */
    gap: 35px;
-   /* Add a gap between boxes for spacing */
    flex-wrap: wrap;
-   /* Allow wrapping if needed */
-   padding: 10px;
+   padding: 20px;
    overflow: hidden;
 }
 
@@ -539,9 +540,7 @@ hr {
    .prev:hover,
    .next:hover {
       filter: none;
-      /* Disable drop-shadow */
       background-color: transparent;
-      /* Remove background color */
    }
 
    .credit-container {
@@ -555,36 +554,27 @@ hr {
       padding: 0;
    }
 
-   /* Adjust SVG sizes for better scaling */
    .credit-container svg {
       width: 240px;
       height: auto;
    }
 
-   /* Ensure h2 and h3 font sizes are responsive */
    .credit-container h2,
    .credit-container h3 {
       font-size: 1.5rem;
       padding: 0;
-      /* Kept the same but ensure it scales well */
    }
 
-   /* Adjust project-info SVG sizes for better visibility */
    .credit-container .project-info svg {
       width: 50px;
-      /* Increased size for better visibility */
       height: 50px;
-      /* Increased size for better visibility */
    }
 
    .event-container {
       justify-content: space-evenly;
-      /* Adjust spacing between boxes */
       gap: 20px;
-      /* Add a gap between boxes for spacing */
       flex-wrap: wrap;
-      /* Allow wrapping if needed */
-      padding: 0;
+      padding: 20px;
    }
    
    .event-box {

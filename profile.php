@@ -121,22 +121,16 @@ $user = UserData::getProfile();
             <div class="popup-content">
                 <h2>アバターを選択</h2>
                 <div class="avatar-options">
-                    <img src="https://pw11a12425.blob.core.windows.net/avatar/bear.png" alt="Bear"
-                        class="avatar-option">
-                    <img src="https://pw11a12425.blob.core.windows.net/avatar/cat.png" alt="Cat" class="avatar-option">
-                    <img src="https://pw11a12425.blob.core.windows.net/avatar/dear.png" alt="Dear"
-                        class="avatar-option">
-                    <img src="https://pw11a12425.blob.core.windows.net/avatar/dog.png" alt="Dog" class="avatar-option">
-                    <img src="https://pw11a12425.blob.core.windows.net/avatar/fox.png" alt="Fox" class="avatar-option">
-                    <img src="https://pw11a12425.blob.core.windows.net/avatar/lion.png" alt="Lion"
-                        class="avatar-option">
-                    <img src="https://pw11a12425.blob.core.windows.net/avatar/panda.png" alt="Panda"
-                        class="avatar-option">
-                    <img src="https://pw11a12425.blob.core.windows.net/avatar/pig.png" alt="Pig" class="avatar-option">
-                    <img src="https://pw11a12425.blob.core.windows.net/avatar/rabbit.png" alt="Rabbit"
-                        class="avatar-option">
-                    <img src="https://pw11a12425.blob.core.windows.net/avatar/wolf.png" alt="Wolf"
-                        class="avatar-option">
+                    <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/bear.png" alt="Bear" class="avatar-option">
+                    <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/cat.png" alt="Cat" class="avatar-option">
+                    <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/dear.png" alt="Dear" class="avatar-option">
+                    <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/dog.png" alt="Dog" class="avatar-option">
+                    <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/fox.png" alt="Fox" class="avatar-option">
+                    <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/lion.png" alt="Lion" class="avatar-option">
+                    <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/panda.png" alt="Panda" class="avatar-option">
+                    <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/pig.png" alt="Pig" class="avatar-option">
+                    <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/rabbit.png" alt="Rabbit" class="avatar-option">
+                    <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/wolf.png" alt="Wolf" class="avatar-option">
                 </div>
                 <div class="avtBtn">
                     <button id="applyAvatar">確定</button>
