@@ -81,6 +81,7 @@ $_SESSION['email'] = $email;
     <script src="js/menu.js"></script>
     <script src="js/search.js"></script>
     <script src="js/eventSave.js"></script>
+    <script src="js/scroll-animation.js"></script>
 </body>
 
 </html>

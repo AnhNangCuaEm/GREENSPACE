@@ -25,6 +25,9 @@ class parkData
          $park->name = $row['name'];
          $park->location = $row['location'];
          $park->thumbnail = $row['thumbnail'];
+         $park->price = $row['price'];
+         $park->nearest = $row['nearest'];
+         $park->special = $row['special'];
 
          $parks[] = $park;
       }
@@ -45,7 +48,6 @@ class parkData
          $park = new Park();
          $park->id = $row['id'];
          $park->name = $row['name'];
-         $park->location = $row['location'];
          $park->thumbnail = $row['thumbnail'];
          $park->location = $row['location'];
          $park->price = $row['price'];

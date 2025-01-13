@@ -50,6 +50,7 @@ $_SESSION['email'] = $email;
    </div>
    <script src="js/menu.js"></script>
    <script src="js/search.js"></script>
+   <script src="js/scroll-animation.js"></script>
 </body>
 
 </html>

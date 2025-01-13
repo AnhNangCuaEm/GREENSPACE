@@ -88,8 +88,13 @@ $_SESSION['email'] = $email;
             <?php foreach ($parks as $park): ?>
                <div class="park-box">
                   <a href="park.php?id=<?= $park->id ?>"><img src="<?= $park->thumbnail ?>"></a>
-                  <div class="name"><?= $park->name ?></div>
-                  <div class="location"><?= $park->location ?></div>
+                  <div class="park-text">
+                     <div class="name"><?= $park->name ?></div>
+                     <div class="location"><span>場所:</span>&nbsp;<?= $park->location ?></div>
+                     <div class="price"><span>料金:</span>&nbsp;<?= $park->price ?></div>
+                     <div class="nearest"><span>最寄り駅:</span>&nbsp;<?= $park->nearest ?></div>
+                     <div class="special"><?= $park->special ?></div>
+                  </div>
                </div>
             <?php endforeach; ?>
          </div>
@@ -98,7 +103,7 @@ $_SESSION['email'] = $email;
          <div class="event-container">
             <?php foreach ($events as $event): ?>
                <div class="event-box">
-               <a href="event.php?id=<?= $event->id ?>"><img src="<?= $event->thumbnail ?>"></a>
+                  <a href="event.php?id=<?= $event->id ?>"><img src="<?= $event->thumbnail ?>"></a>
                   <div class="event-text">
                      <div class="name"><?= $event->name ?></div>
                      <div class="location"><span>場所:</span>&nbsp;<?= $event->location ?></div>
@@ -150,6 +155,7 @@ $_SESSION['email'] = $email;
    <script src="js/search.js"></script>
    <script src="js/slideshow.js"></script>
    <script src="js/eventSave.js"></script>
+   <script src="js/scroll-animation.js"></script>
 </body>
 
 </html>
