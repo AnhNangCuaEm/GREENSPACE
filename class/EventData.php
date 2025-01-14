@@ -39,7 +39,7 @@ class eventData
    {
       $pdo = Database::getConnection();
 
-      $state = $pdo->prepare('SELECT * FROM event ORDER BY RAND()');
+      $state = $pdo->prepare('SELECT * FROM event ORDER BY id');
       $state->execute();
 
       $event = [];
@@ -90,11 +90,11 @@ class eventData
    public static function searchEvents($query)
    {
       $pdo = Database::getConnection();
-      
+
       // Chuẩn bị các biến tìm kiếm
       list($searchQuery, $searchQueryNoSpaces) = TextHelper::convertToSearchableText($query);
       $queryNoSpaces = str_replace(' ', '', $query);
-      
+
       // Tìm kiếm với nhiều điều kiện
       $sql = "SELECT * FROM event WHERE 
               name LIKE :query 
@@ -110,15 +110,15 @@ class eventData
               OR REPLACE(name_romaji, ' ', '') LIKE :queryNoSpaces
               OR REPLACE(location_romaji, ' ', '') LIKE :queryNoSpaces
               LIMIT 5";
-              
+
       $state = $pdo->prepare($sql);
       $state->execute([
-          'query' => "%$query%",
-          'queryNoSpaces' => "%$queryNoSpaces%",
-          'searchQuery' => "%$searchQuery%",
-          'searchQueryNoSpaces' => "%$searchQueryNoSpaces%"
+         'query' => "%$query%",
+         'queryNoSpaces' => "%$queryNoSpaces%",
+         'searchQuery' => "%$searchQuery%",
+         'searchQueryNoSpaces' => "%$searchQueryNoSpaces%"
       ]);
-      
+
       $events = [];
 
       foreach ($state as $row) {
@@ -132,5 +132,68 @@ class eventData
       }
 
       return $events;
+   }
+
+   public static function addEvent($name, $location, $date, $time, $price, $description, $thumbnail): bool
+   {
+      $pdo = Database::getConnection();
+
+      $sql = "INSERT INTO event (name, location, date, time, price, description, thumbnail) 
+              VALUES (:name, :location, :date, :time, :price, :description, :thumbnail)";
+
+      $state = $pdo->prepare($sql);
+
+      return $state->execute([
+         'name' => $name,
+         'location' => $location,
+         'date' => $date,
+         'time' => $time,
+         'price' => $price,
+         'description' => $description,
+         'thumbnail' => $thumbnail
+      ]);
+   }
+
+   public static function updateEvent($id, $name, $location, $date, $time, $price, $description, $thumbnail): bool
+   {
+      $pdo = Database::getConnection();
+
+      $sql = "UPDATE event 
+              SET name = :name,
+                  location = :location,
+                  date = :date,
+                  time = :time,
+                  price = :price,
+                  description = :description,
+                  thumbnail = :thumbnail
+              WHERE id = :id";
+
+      $state = $pdo->prepare($sql);
+
+      return $state->execute([
+         'id' => $id,
+         'name' => $name,
+         'location' => $location,
+         'date' => $date,
+         'time' => $time,
+         'price' => $price,
+         'description' => $description,
+         'thumbnail' => $thumbnail
+      ]);
+   }
+
+   public static function deleteEvent($id): bool
+   {
+      $pdo = Database::getConnection();
+
+      $sql = "DELETE FROM event WHERE id = :id";
+      $state = $pdo->prepare($sql);
+
+      return $state->execute(['id' => $id]);
+   }
+
+   public static function getEventById($id): ?Event
+   {
+      return self::getEvent($id); // Sử dụng lại phương thức getEvent() đã có
    }
 }

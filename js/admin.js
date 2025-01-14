@@ -124,5 +124,189 @@ function loadParks() {
 }
 
 function loadEvents() {
-    document.getElementById('events-section').innerHTML = '<h2>Event Management Coming Soon</h2>';
+    fetch('functions/get_events.php')
+        .then(response => response.json())
+        .then(events => {
+            const eventsSection = document.getElementById('events-section');
+            let html = `
+                <div class="events-header">
+                    <h2>Event Management</h2>
+                    <button class="add-event-btn" onclick="showAddEventModal()">
+                        <i class="fas fa-plus"></i> Add New Event
+                    </button>
+                </div>
+                <table class="events-table">
+                    <thead>
+                        <tr>
+                            <th>Thumbnail</th>
+                            <th>Name</th>
+                            <th>Location</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Price</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            events.forEach(event => {
+                html += `
+                    <tr>
+                        <td><img src="${event.thumbnail}" alt="Event thumbnail" width="50" height="50" style="object-fit: cover;"></td>
+                        <td>${event.name}</td>
+                        <td>${event.location}</td>
+                        <td>${event.date}</td>
+                        <td>${event.time}</td>
+                        <td>${event.price}</td>
+                        <td>${event.description.substring(0, 50)}...</td>
+                        <td>
+                            <button onclick="editEvent(${event.id})" class="edit-btn">Edit</button>
+                            <button onclick="deleteEvent(${event.id})" class="delete-btn">Delete</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            html += `</tbody></table>`;
+            eventsSection.innerHTML = html;
+        });
+}
+
+function showAddEventModal() {
+    const modal = `
+        <div class="modal" id="eventModal">
+            <div class="modal-content">
+                <h2>Add New Event</h2>
+                <form id="eventForm">
+                    <input type="text" name="name" placeholder="Event Name" required>
+                    <input type="text" name="location" placeholder="Location" required>
+                    <input type="date" name="date" required>
+                    <input type="time" name="time" required>
+                    <input type="number" name="price" placeholder="Price" required>
+                    <input type="url" name="thumbnail" placeholder="Thumbnail URL" required>
+                    <textarea name="description" placeholder="Description" required></textarea>
+                    <div class="modal-buttons">
+                        <button type="submit">Save</button>
+                        <button type="button" onclick="closeModal()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modal);
+    
+    document.getElementById('eventForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        addEvent(Object.fromEntries(formData));
+    });
+}
+
+function addEvent(eventData) {
+    fetch('functions/add_event.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(eventData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            closeModal();
+            loadEvents();
+            alert('Event added successfully');
+        } else {
+            alert('Error adding event');
+        }
+    });
+}
+
+function editEvent(eventId) {
+    fetch(`functions/get_event.php?id=${eventId}`)
+        .then(response => response.json())
+        .then(event => {
+            showEditEventModal(event);
+        });
+}
+
+function showEditEventModal(event) {
+    const modal = `
+        <div class="modal" id="eventModal">
+            <div class="modal-content">
+                <h2>Edit Event</h2>
+                <form id="eventForm">
+                    <input type="hidden" name="id" value="${event.id}">
+                    <input type="text" name="name" value="${event.name}" required>
+                    <input type="text" name="location" value="${event.location}" required>
+                    <input type="date" name="date" value="${event.date}" required>
+                    <input type="time" name="time" value="${event.time}" required>
+                    <input type="number" name="price" value="${event.price}" required>
+                    <input type="url" name="thumbnail" value="${event.thumbnail}" required>
+                    <textarea name="description" required>${event.description}</textarea>
+                    <div class="modal-buttons">
+                        <button type="submit">Update</button>
+                        <button type="button" onclick="closeModal()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modal);
+    
+    document.getElementById('eventForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        updateEvent(Object.fromEntries(formData));
+    });
+}
+
+function updateEvent(eventData) {
+    fetch('functions/update_event.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(eventData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            closeModal();
+            loadEvents();
+            alert('Event updated successfully');
+        } else {
+            alert('Error updating event');
+        }
+    });
+}
+
+function deleteEvent(eventId) {
+    if (confirm('Are you sure you want to delete this event?')) {
+        fetch('functions/delete_event.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: eventId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                loadEvents();
+                alert('Event deleted successfully');
+            } else {
+                alert('Error deleting event');
+            }
+        });
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('eventModal');
+    if (modal) {
+        modal.remove();
+    }
 }
