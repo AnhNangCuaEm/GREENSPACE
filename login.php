@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errormessages['email'] = 'メールアドレスフォーマットが間違っています';
     }
     if (empty($password)) {
-        $errormessages['password'] = 'のパスワードを入力してください';
+        $errormessages['password'] = 'パスワードを入力してください';
     }
 
     if (empty($errormessages)) {
