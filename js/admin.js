@@ -182,8 +182,8 @@ function showAddEventModal() {
                 <form id="eventForm">
                     <input type="text" name="name" placeholder="Event Name" required>
                     <input type="text" name="location" placeholder="Location" required>
-                    <input type="date" name="date" required>
-                    <input type="time" name="time" required>
+                    <input type="text" name="date" placeholder="Date" required>
+                    <input type="text" name="time" placeholder="Time" required>
                     <input type="number" name="price" placeholder="Price" required>
                     <input type="url" name="thumbnail" placeholder="Thumbnail URL" required>
                     <textarea name="description" placeholder="Description" required></textarea>
@@ -239,13 +239,13 @@ function showEditEventModal(event) {
                 <h2>Edit Event</h2>
                 <form id="eventForm">
                     <input type="hidden" name="id" value="${event.id}">
-                    <input type="text" name="name" value="${event.name}" required>
-                    <input type="text" name="location" value="${event.location}" required>
-                    <input type="date" name="date" value="${event.date}" required>
-                    <input type="time" name="time" value="${event.time}" required>
-                    <input type="number" name="price" value="${event.price}" required>
-                    <input type="url" name="thumbnail" value="${event.thumbnail}" required>
-                    <textarea name="description" required>${event.description}</textarea>
+                    <input type="text" name="name" value="${event.name}" placeholder="Event Name">
+                    <input type="text" name="location" value="${event.location}" placeholder="Location">
+                    <input type="text" name="date" value="${event.date}" placeholder="Date">
+                    <input type="text" name="time" value="${event.time}" placeholder="Time">
+                    <input type="number" name="price" value="${event.price}" placeholder="Price">
+                    <input type="url" name="thumbnail" value="${event.thumbnail}" placeholder="Thumbnail URL">
+                    <textarea name="description" placeholder="Description">${event.description}</textarea>
                     <div class="modal-buttons">
                         <button type="submit">Update</button>
                         <button type="button" onclick="closeModal()">Cancel</button>
