@@ -101,6 +101,15 @@ h1 {
     background-color: rgba(231, 76, 60, 0.1);
 }
 
+.user-table tr[data-role="admin"] {
+    background-color: rgba(255, 235, 59, 0.2);  /* Light yellow with some transparency */
+}
+
+/* Keep the hover effect but make it slightly different for admin rows */
+.user-table tr[data-role="admin"]:hover {
+    background-color: rgba(255, 235, 59, 0.3);
+}
+
 /* Loading state */
 .content-section:not(.active) {
     display: none;
@@ -190,11 +199,13 @@ body > div > div.sidebar > button:nth-child(5) {
 .edit-btn {
     background-color: #3498db;
     color: white;
+    min-width: 70px;
 }
 
 .delete-btn {
     background-color: #e74c3c;
     color: white;
+    min-width: 70px;
 }
 
 .edit-btn:hover {

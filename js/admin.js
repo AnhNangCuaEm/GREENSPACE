@@ -1,16 +1,47 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Load initial content (users section)
-    loadUsers();
+    // Get active section from localStorage, default to 'users' if none saved
+    const activeSection = localStorage.getItem('activeSection') || 'users';
+    
+    // Activate the saved section
+    const activeButton = document.querySelector(`.nav-btn[data-section="${activeSection}"]`);
+    if (activeButton) {
+        // Remove active class from all buttons and sections
+        document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+        document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
+        
+        // Add active class to saved button and section
+        activeButton.classList.add('active');
+        document.getElementById(`${activeSection}-section`).classList.add('active');
+        
+        // Load content for active section
+        switch(activeSection) {
+            case 'users':
+                loadUsers();
+                break;
+            case 'parks':
+                loadParks();
+                break;
+            case 'events':
+                loadEvents();
+                break;
+        }
+    }
 
     // Add click handlers to navigation buttons
     document.querySelectorAll('.nav-btn').forEach(button => {
         button.addEventListener('click', function() {
+            // Skip if this is the "Back to Profile" button
+            if (!this.dataset.section) return;
+            
             // Remove active class from all buttons and sections
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
             
             // Add active class to clicked button
             this.classList.add('active');
+            
+            // Save active section to localStorage
+            localStorage.setItem('activeSection', this.dataset.section);
             
             // Show corresponding section
             const sectionId = this.dataset.section + '-section';
@@ -55,7 +86,7 @@ function loadUsers() {
             
             users.forEach(user => {
                 html += `
-                    <tr data-status="${user.status}">
+                    <tr data-status="${user.status}" data-role="${user.role}">
                         <td><img src="${user.avatar}" alt="avatar" width="50"></td>
                         <td>${user.name}</td>
                         <td>${user.email}</td>
@@ -93,9 +124,9 @@ function updateUserRole(email, newRole) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert('User role updated successfully');
+            alert('ユーザーの役割を更新しました');
         } else {
-            alert('Error updating user role');
+            alert('ユーザーの役割を更新できませんでした');
         }
     });
 }
@@ -111,9 +142,9 @@ function updateUserStatus(email, newStatus) {
     .then(response => response.json())
     .then(data => {
         if (data.success) {
-            alert('User status updated successfully');
+            alert('ユーザーのステータスを更新しました');
         } else {
-            alert('Error updating user status');
+            alert('ユーザーのステータスを更新できませんでした');
         }
     });
 }
@@ -184,7 +215,7 @@ function showAddEventModal() {
                     <input type="text" name="location" placeholder="Location" required>
                     <input type="text" name="date" placeholder="Date" required>
                     <input type="text" name="time" placeholder="Time" required>
-                    <input type="number" name="price" placeholder="Price" required>
+                    <input type="text" name="price" placeholder="Price" required>
                     <input type="url" name="thumbnail" placeholder="Thumbnail URL" required>
                     <textarea name="description" placeholder="Description" required></textarea>
                     <div class="modal-buttons">
@@ -217,9 +248,9 @@ function addEvent(eventData) {
         if (data.success) {
             closeModal();
             loadEvents();
-            alert('Event added successfully');
+            alert('イベントを追加しました');
         } else {
-            alert('Error adding event');
+            alert('イベントを追加できませんでした');
         }
     });
 }
@@ -243,7 +274,7 @@ function showEditEventModal(event) {
                     <input type="text" name="location" value="${event.location}" placeholder="Location">
                     <input type="text" name="date" value="${event.date}" placeholder="Date">
                     <input type="text" name="time" value="${event.time}" placeholder="Time">
-                    <input type="number" name="price" value="${event.price}" placeholder="Price">
+                    <input type="text" name="price" value="${event.price}" placeholder="Price">
                     <input type="url" name="thumbnail" value="${event.thumbnail}" placeholder="Thumbnail URL">
                     <textarea name="description" placeholder="Description">${event.description}</textarea>
                     <div class="modal-buttons">
@@ -276,15 +307,15 @@ function updateEvent(eventData) {
         if (data.success) {
             closeModal();
             loadEvents();
-            alert('Event updated successfully');
+            alert('イベントを更新しました');
         } else {
-            alert('Error updating event');
+            alert('イベントを更新できませんでした');
         }
     });
 }
 
 function deleteEvent(eventId) {
-    if (confirm('Are you sure you want to delete this event?')) {
+    if (confirm('イベントを削除しますか？')) {
         fetch('functions/delete_event.php', {
             method: 'POST',
             headers: {
@@ -296,9 +327,9 @@ function deleteEvent(eventId) {
         .then(data => {
             if (data.success) {
                 loadEvents();
-                alert('Event deleted successfully');
+                alert('イベントを削除しました');
             } else {
-                alert('Error deleting event');
+                alert('イベントを削除できませんでした');
             }
         });
     }
