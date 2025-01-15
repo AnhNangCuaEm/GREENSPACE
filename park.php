@@ -126,8 +126,16 @@ if (isset($_GET['id'])) {
     }
 
     $images = ParkImageData::getParkImages($id);
-    $totalpark = ParkData::getallParks();
     $likeCount = countLikes($id);
+
+    $parkIds = ParkData::getAllParkIds(); // Assume this function returns an array of event IDs
+
+    // Find the current event's position in the list
+    $currentIndex = array_search($id, $parkIds);
+
+    // Determine the previous and next event IDs
+    $prevId = ($currentIndex > 0) ? $parkIds[$currentIndex - 1] : end($parkIds);
+    $nextId = ($currentIndex < count($parkIds) - 1) ? $parkIds[$currentIndex + 1] : $parkIds[0];
 
     // Kiểm tra trạng thái like
     $isLiked = checkIfLiked($id, $_SESSION['email']);
@@ -160,7 +168,7 @@ if (isset($_GET['id'])) {
                 <p><span>特徴:</span>&nbsp;<?= $parks->special ?></p>
                 <p><?= htmlspecialchars($parks->description) ?></p>
                 <div class="park-detail-nav">
-                    <a href="?id=<?= ($id <= 1) ? count($totalpark) : $id - 1 ?>"><button><svg fill="#000000"
+                    <a href="?id=<?= $prevId ?>"><button><svg fill="#000000"
                                 height="24px" width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.753 55.753"
                                 xml:space="preserve">
@@ -174,7 +182,7 @@ if (isset($_GET['id'])) {
                                     </g>
                                 </g>
                             </svg>前へ</button></a>
-                    <a href="?id=<?= ($id >= count($totalpark)) ? 1 : $id + 1 ?>"><button>次へ<svg fill="#000000"
+                    <a href="?id=<?= $nextId ?>"><button>次へ<svg fill="#000000"
                                 height="24px" width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.752 55.752"
                                 xml:space="preserve">

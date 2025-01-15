@@ -158,4 +158,17 @@ class parkData
 
       return $parks;
    }
+
+   public static function getAllParkIds(): array
+   {
+      $pdo = Database::getConnection();
+      $sql = 'SELECT id FROM park ORDER BY id';
+      $state = $pdo->prepare($sql);
+      $state->execute();
+      $parkIds = [];
+      while ($row = $state->fetch()) {
+         $parkIds[] = $row['id'];
+      }
+      return $parkIds;
+   }
 }

@@ -18,11 +18,11 @@ $_SESSION['email'] = $email;
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $event = EventData::getEvent($id);
-    $totalevents = EventData::getAllEvents();
     if (!$event) {
         // Hiển thị giao diện lỗi
-        ?>
+?>
         <html>
+
         <head>
             <title>404 Not Found</title>
             <meta charset="UTF-8">
@@ -113,14 +113,25 @@ if (isset($_GET['id'])) {
                 }, 1000); // Update every second
             </script>
         </body>
+
         </html>
-        <?php
+<?php
         exit();
     }
 } else {
     header('Location: all-event.php');
     exit();
 }
+
+// Fetch all event IDs from the database
+$eventIds = EventData::getAllEventIds(); // Assume this function returns an array of event IDs
+
+// Find the current event's position in the list
+$currentIndex = array_search($id, $eventIds);
+
+// Determine the previous and next event IDs
+$prevId = ($currentIndex > 0) ? $eventIds[$currentIndex - 1] : end($eventIds);
+$nextId = ($currentIndex < count($eventIds) - 1) ? $eventIds[$currentIndex + 1] : $eventIds[0];
 
 ?>
 
@@ -150,7 +161,7 @@ if (isset($_GET['id'])) {
                 ?>
 
                 <div class="event-detail-nav">
-                    <a href="?id=<?= ($id <= 1) ? count($totalevents) : $id - 1 ?>"><button><svg fill="#000000"
+                    <a href="?id=<?= $prevId ?>"><button><svg fill="#000000"
                                 height="18px" width="18px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.753 55.753"
                                 xml:space="preserve">
@@ -188,7 +199,7 @@ if (isset($_GET['id'])) {
                         </svg>
                         <span class="save-text"><?= $isSaved ? '保存を削除' : '保存する' ?></span>
                     </button>
-                    <a href="?id=<?= ($id >= count($totalevents)) ? 1 : $id + 1 ?>"><button>次へ<svg fill="#000000"
+                    <a href="?id=<?= $nextId ?>"><button>次へ<svg fill="#000000"
                                 height="18px" width="18px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.752 55.752"
                                 xml:space="preserve">

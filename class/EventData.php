@@ -196,4 +196,20 @@ class eventData
    {
       return self::getEvent($id); // Sử dụng lại phương thức getEvent() đã có
    }
+
+   public static function getAllEventIds(): array
+   {
+      $pdo = Database::getConnection();
+
+      $sql = 'SELECT id FROM event ORDER BY id';
+      $state = $pdo->prepare($sql);
+      $state->execute();
+
+      $eventIds = [];
+      while ($row = $state->fetch()) {
+         $eventIds[] = $row['id'];
+      }
+
+      return $eventIds;
+   }
 }
