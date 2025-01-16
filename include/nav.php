@@ -17,7 +17,7 @@ $user = UserData::getProfile();
         </div>
         <div id="search" class="searchBtn">
             <div>
-                <input type="text" id="searchInput" placeholder="検索">
+                <input type="text" class="glow-on-focus" id="searchInput" placeholder="検索">
                 <svg class="search-icon" width="20px" height="20px" viewBox="0 -0.5 25 25" fill="none"
                     xmlns="http://www.w3.org/2000/svg" transform="matrix(-1, 0, 0, 1, 0, 0)">
                     <path fill-rule="evenodd" clip-rule="evenodd"
