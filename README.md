@@ -13,4 +13,19 @@ trang admin\
 
 
 Project Feature\
-tìm kiếm bằng tiếng anh,ひらがな,漢字
+Search by English,Hiragana,Kanji\
+
+Admin dashboard\
+Traffic Log\
+User,Park,Event Management\
+
+Responsive design\
+Morden design\
+
+Update user info, chose avatar\
+Comment system\
+Add favorite park, event and show them on profile\
+
+
+Small Feature\
+loading animation for image\

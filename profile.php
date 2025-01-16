@@ -81,7 +81,7 @@ $user = UserData::getProfile();
                         $park = ParkData::getPark($parkId);
                         if ($park) {
                             echo '<div class="park-card">';
-                            echo '<div class="image-container loading">';
+                            echo '<div class="image-container loading" style="border-radius: 0;">';
                             echo '<div>';
                             echo '<img src="' . htmlspecialchars($park->thumbnail) . '" alt="' . htmlspecialchars($park->name) . '" onload="this.classList.add(\'loaded\'); this.parentElement.parentElement.classList.remove(\'loading\')">';
                             echo '</div>';
@@ -108,7 +108,7 @@ $user = UserData::getProfile();
                         $event = EventData::getEvent($eventId);
                         if ($event) {
                             echo '<div class="event-card">';
-                            echo '<div class="image-container loading">';
+                            echo '<div class="image-container loading" style="border-radius: 0;">';
                             echo '<div>';
                             echo '<img src="' . htmlspecialchars($event->thumbnail) . '" alt="' . htmlspecialchars($event->name) . '" onload="this.classList.add(\'loaded\'); this.parentElement.parentElement.classList.remove(\'loading\')">';
                             echo '</div>';

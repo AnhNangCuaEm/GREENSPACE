@@ -477,6 +477,7 @@ h2 {
 .image-container {
    position: relative;
    width: 100%;
+   border-radius: 25px;
    background: rgba(255, 255, 255, 0.1);
    overflow: hidden;
 }
