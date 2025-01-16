@@ -74,16 +74,16 @@ class UserData
         $state->bindValue(':name', $user->name, PDO::PARAM_STR);
         $state->bindValue(':phone', $user->phone, PDO::PARAM_STR);
         $avatars = [
-            'https://pw11a12425.blob.core.windows.net/avatar/bear.png',
-            'https://pw11a12425.blob.core.windows.net/avatar/cat.png',
-            'https://pw11a12425.blob.core.windows.net/avatar/dear.png',
-            'https://pw11a12425.blob.core.windows.net/avatar/dog.png',
-            'https://pw11a12425.blob.core.windows.net/avatar/fox.png',
-            'https://pw11a12425.blob.core.windows.net/avatar/lion.png',
-            'https://pw11a12425.blob.core.windows.net/avatar/panda.png',
-            'https://pw11a12425.blob.core.windows.net/avatar/pig.png',
-            'https://pw11a12425.blob.core.windows.net/avatar/rabbit.png',
-            'https://pw11a12425.blob.core.windows.net/avatar/wolf.png',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/bear.png',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/cat.png',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/dear.png',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/dog.png',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/fox.png',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/lion.png',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/panda.png',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/pig.png',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/rabbit.png',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/wolf.png',
         ];
         $user->avatar = $avatars[array_rand($avatars)];
         $state->bindValue(':avatar', $user->avatar, PDO::PARAM_STR);

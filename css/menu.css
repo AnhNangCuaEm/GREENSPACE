@@ -23,7 +23,7 @@ nav {
     backdrop-filter: blur(8px);
     border: solid 1px rgba(255, 255, 255, 0.5);
     border-radius: 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     display: none;
 }
@@ -33,6 +33,7 @@ nav {
     align-items: center;
     padding: 10px;
     cursor: pointer;
+    min-width: 300px;
     transition: 0.3s ease-in-out;
 }
 
@@ -88,7 +89,8 @@ nav {
     z-index: 99;
 }
 
-.menu, .mobile-menu {
+.menu,
+.mobile-menu {
     position: absolute;
     width: fit-content;
     top: 65px;
@@ -103,12 +105,14 @@ nav {
     z-index: 99;
 }
 
-.menu.show, .mobile-menu.show {
+.menu.show,
+.mobile-menu.show {
     display: block;
     opacity: 1;
 }
 
-.menu-ul, .mobile-menu-ul {
+.menu-ul,
+.mobile-menu-ul {
     width: fit-content;
     padding: 20px 30px;
     border-radius: 20px;
@@ -134,7 +138,8 @@ nav {
 }
 
 
-.menu-ul button, .mobile-menu-ul button {
+.menu-ul button,
+.mobile-menu-ul button {
     margin: 0;
     background: none;
     border: none;
@@ -144,7 +149,8 @@ nav {
     transition: 0.3s ease-in-out;
 }
 
-.menu-ul li, .mobile-menu-ul li{
+.menu-ul li,
+.mobile-menu-ul li {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -158,7 +164,8 @@ ul li:hover {
     text-shadow: 0 0 10px rgb(255, 255, 255);
 }
 
-.menu-ul>li::after, .mobile-menu-ul>li::after {
+.menu-ul>li::after,
+.mobile-menu-ul>li::after {
     content: "";
     display: block;
     width: 100%;
@@ -217,11 +224,28 @@ ul li:hover {
     width: 170px;
     padding: 7px 20px;
     border-radius: 20px;
-    border: none;
+    border: 2px solid transparent;
     outline: none;
     margin: auto 15px;
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.62);
+    background-color: rgba(234, 234, 234, 0.45);
+    transition: all 0.3s ease;
+}
+
+.searchBtn div input:focus {
+    background:linear-gradient(rgb(234, 234, 234), rgb(234, 234, 234)) padding-box, linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    border: 2px solid transparent;
+    animation: rainbow 12s linear infinite;
+    background-size: 300% 300%;
+}
+
+@keyframes rainbow {
+    0% {
+        background-position: 0% center;
+    }
+    100% {
+        background-position: -200% center;
+    }
 }
 
 .searchBtn div {
@@ -408,6 +432,7 @@ ul li:hover {
 
     .search-result-item {
         padding: 8px;
+        min-width: 200px;
     }
 
     .search-result-item img {
