@@ -19,12 +19,13 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch(`functions/search.php?query=${encodeURIComponent(query)}`)
                 .then(response => response.json())
                 .then(data => {
+                    searchResults.style.display = 'block';
+                    const resultsContent = searchResults.querySelector('.results-content');
                     if (data.length > 0) {
                         displayResults(data);
                     } else {
-                        searchResults.innerHTML = '<div class="search-result-item">検索結果がありません</div>';
+                        resultsContent.innerHTML = '<div class="search-result-item">検索結果がありません</div>';
                     }
-                    searchResults.style.display = 'block';
                 })
                 .catch(error => console.error('Error:', error));
         }, 300); // 300ms delay
@@ -40,7 +41,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Hiển thị kết quả
     function displayResults(results) {
-        searchResults.innerHTML = results.map(result => `
+        const resultsContent = searchResults.querySelector('.results-content');
+        resultsContent.innerHTML = results.map(result => `
             <a href="${result.type}.php?id=${result.id}" class="search-result-item">
                 <img src="${result.thumbnail}" alt="${result.name}">
                 <div class="result-info">

@@ -62,7 +62,10 @@ $user = UserData::getProfile();
             </form>
         </ul>
     </div>
-    <div id="searchResults" class="search-results"></div>
+    <div id="searchResults" class="search-results">
+        <div class="glow-background"></div>
+        <div class="results-content"></div>
+    </div>
 </div>
 
 <div id="confirmationPopup" class="confirmation-popup" style="display: none">

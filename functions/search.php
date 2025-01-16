@@ -6,7 +6,7 @@ if (isset($_GET['query'])) {
     $query = $_GET['query'];
     $results = [];
 
-    if (strlen($query) >= 1) { // Chỉ tìm kiếm khi có ít nhất 2 ký tự
+    if (strlen($query) >= 1) { // Chỉ tìm kiếm khi có ít nhất 1 ký tự
         // Tìm trong parks
         $parks = ParkData::searchParks($query);
         foreach ($parks as $park) {
