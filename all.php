@@ -31,7 +31,11 @@ $_SESSION['email'] = $email;
          <div class="park-container">
             <?php foreach ($parks as $park): ?>
                <div class="park-box">
-                  <a href="park.php?id=<?= $park->id ?>"><img src="<?= $park->thumbnail ?>"></a>
+                  <div class="image-container loading">
+                     <a href="park.php?id=<?= $park->id ?>">
+                        <img src="<?= $park->thumbnail ?>" onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
+                     </a>
+                  </div>
                   <div class="park-text">
                      <div class="name"><?= $park->name ?></div>
                      <div class="location"><span>住所:</span>&nbsp;<?= $park->location ?></div>

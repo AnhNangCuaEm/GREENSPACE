@@ -157,7 +157,11 @@ if (isset($_GET['id'])) {
     <main>
         <div class="park-detail">
             <div class="park-detail-image">
-                <img src="<?= htmlspecialchars($parks->thumbnail) ?>" alt="公園の画像">
+                <div class="image-container loading">
+                    <div>
+                        <img src="<?= htmlspecialchars($parks->thumbnail) ?>" alt="公園の画像" onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
+                    </div>
+                </div>
             </div>
             <div class="park-detail-info">
                 <h1><?= htmlspecialchars($parks->name) ?></h1>
@@ -248,7 +252,11 @@ if (isset($_GET['id'])) {
             <div class="park-images-list" id="imageSlider">
                 <?php foreach ($images as $imagePath): ?>
                     <div class="park-images-box" onclick="openModal('<?= htmlspecialchars($imagePath) ?>')">
-                        <img src="<?= htmlspecialchars($imagePath) ?>" alt="公園の画像">
+                        <div class="image-container loading">
+                            <div>
+                                <img src="<?= htmlspecialchars($imagePath) ?>" alt="公園の画像" onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
+                            </div>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>

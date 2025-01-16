@@ -33,14 +33,18 @@ $_SESSION['email'] = $email;
    <!-- <div id="loading">
       <img src="img/img/logo.png" alt="">
    </div> -->
-   <div id="content">
+   <div id="content"></div>
       <?php include 'include/nav.php' ?>
       <main>
          <div class="slideshow-container">
             <div id="slideshow-area" class="slideshow-area">
                <?php foreach ($featureParks as $park): ?>
                   <div class="mySlides">
-                     <a href="park.php?id=<?= $park->id ?>"><img src="<?= $park->thumbnail ?>"></a>
+                     <div class="image-container loading">
+                        <a href="park.php?id=<?= $park->id ?>">
+                           <img src="<?= $park->thumbnail ?>" onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
+                        </a>
+                     </div>
                      <div class="name"><?= $park->name ?></div>
                      <div class="description"><?= $park->parkfeature ?></div>
                   </div>
@@ -87,7 +91,11 @@ $_SESSION['email'] = $email;
          <div class="park-container">
             <?php foreach ($parks as $park): ?>
                <div class="park-box">
-                  <a href="park.php?id=<?= $park->id ?>"><img src="<?= $park->thumbnail ?>"></a>
+                  <div class="image-container loading">
+                     <a href="park.php?id=<?= $park->id ?>">
+                        <img src="<?= $park->thumbnail ?>" onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
+                     </a>
+                  </div>
                   <div class="park-text">
                      <div class="name"><?= $park->name ?></div>
                      <div class="location"><span>場所:</span>&nbsp;<?= $park->location ?></div>
@@ -103,7 +111,11 @@ $_SESSION['email'] = $email;
          <div class="event-container">
             <?php foreach ($events as $event): ?>
                <div class="event-box">
-                  <a href="event.php?id=<?= $event->id ?>"><img src="<?= $event->thumbnail ?>"></a>
+                  <div class="image-container loading">
+                     <a href="event.php?id=<?= $event->id ?>">
+                        <img src="<?= $event->thumbnail ?>" onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
+                     </a>
+                  </div>
                   <div class="event-text">
                      <div class="name"><?= $event->name ?></div>
                      <div class="location"><span>場所:</span>&nbsp;<?= $event->location ?></div>

@@ -147,7 +147,11 @@ $nextId = ($currentIndex < count($eventIds) - 1) ? $eventIds[$currentIndex + 1] 
     <main style="max-width: 850px;">
         <div class="event-detail">
             <div class="event-detail-image">
-                <img src="<?= htmlspecialchars($event->thumbnail) ?>" alt="イベントの画像">
+                <div class="image-container loading">
+                    <div>
+                        <img src="<?= htmlspecialchars($event->thumbnail) ?>" alt="イベントの画像" onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
+                    </div>
+                </div>
             </div>
             <div class="event-detail-info">
                 <h1><?= htmlspecialchars($event->name) ?></h1>

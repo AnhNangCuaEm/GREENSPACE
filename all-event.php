@@ -33,7 +33,11 @@ $_SESSION['email'] = $email;
             <div class="event-container">
                 <?php foreach ($events as $event): ?>
                     <div class="event-box">
-                        <a href="event.php?id=<?= $event->id ?>"><img src="<?= $event->thumbnail ?>"></a>
+                        <div class="image-container loading">
+                            <a href="event.php?id=<?= $event->id ?>">
+                                <img src="<?= $event->thumbnail ?>" onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
+                            </a>
+                        </div>
                         <div class="event-text">
                             <div class="name"><?= $event->name ?></div>
                             <div class="location"><span>場所:</span>&nbsp;<?= $event->location ?></div>
