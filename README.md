@@ -31,3 +31,4 @@ Add favorite park, event and show them on profile\
 
 Small Feature\
 loading animation for image\
+login tokens 7 days\

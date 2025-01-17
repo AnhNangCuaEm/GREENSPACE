@@ -29,11 +29,27 @@ $_SESSION['email'] = $email;
 </head>
 
 <body>
-   <!-- tắt tạm trang loading trong lúc đang code -->
-   <!-- <div id="loading">
-      <img src="img/img/logo.png" alt="">
-   </div> -->
-   <div id="content"></div>
+   <div class="gradient-bg">
+      <svg xmlns="http://www.w3.org/2000/svg">
+         <defs>
+            <filter id="goo">
+               <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+               <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
+                  result="goo" />
+               <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+         </defs>
+      </svg>
+      <div class="gradients-container">
+         <div class="g1"></div>
+         <div class="g2"></div>
+         <div class="g3"></div>
+         <div class="g4"></div>
+         <div class="g5"></div>
+         <div class="interactive"></div>
+      </div>
+   </div>
+   <div class="content-wrapper">
       <?php include 'include/nav.php' ?>
       <main>
          <div class="slideshow-container">
@@ -42,7 +58,8 @@ $_SESSION['email'] = $email;
                   <div class="mySlides">
                      <div class="image-container loading">
                         <a href="park.php?id=<?= $park->id ?>">
-                           <img src="<?= $park->thumbnail ?>" onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
+                           <img src="<?= $park->thumbnail ?>"
+                              onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
                         </a>
                      </div>
                      <div class="name"><?= $park->name ?></div>
@@ -53,8 +70,8 @@ $_SESSION['email'] = $email;
 
 
             <a class="prev" onclick="prev()"><svg fill="#fcf8db" height="15px" width="15px" version="1.1" id="Capa_1"
-                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                  viewBox="0 0 55.753 55.753" xml:space="preserve">
+                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.753 55.753"
+                  xml:space="preserve">
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                   <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
@@ -66,8 +83,8 @@ $_SESSION['email'] = $email;
                   </g>
                </svg></a>
             <a class="next" onclick="next()"><svg fill="#fcf8db" height="15px" width="15px" version="1.1" id="Capa_1"
-                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                  viewBox="0 0 55.752 55.752" xml:space="preserve">
+                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.752 55.752"
+                  xml:space="preserve">
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                   <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                   <g id="SVGRepo_iconCarrier">
@@ -93,7 +110,8 @@ $_SESSION['email'] = $email;
                <div class="park-box">
                   <div class="image-container loading">
                      <a href="park.php?id=<?= $park->id ?>">
-                        <img src="<?= $park->thumbnail ?>" onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
+                        <img src="<?= $park->thumbnail ?>"
+                           onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
                      </a>
                   </div>
                   <div class="park-text">
@@ -113,7 +131,8 @@ $_SESSION['email'] = $email;
                <div class="event-box">
                   <div class="image-container loading">
                      <a href="event.php?id=<?= $event->id ?>">
-                        <img src="<?= $event->thumbnail ?>" onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
+                        <img src="<?= $event->thumbnail ?>"
+                           onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
                      </a>
                   </div>
                   <div class="event-text">
@@ -155,19 +174,19 @@ $_SESSION['email'] = $email;
             <?php endforeach; ?>
          </div>
          <a href="all-event.php"><button class="view-more-btn">もっと見る</button></a>
+      </main>
+      <footer>
+         <?php include 'include/footer.php' ?>
+      </footer>
    </div>
-   </main>
    <div id="overlay"></div>
-   <footer>
-      <?php include 'include/footer.php' ?>
-   </footer>
-   </div>
+   <script src="js/background.js"></script>
+   <script src="js/scroll-animation.js"></script>
    <script src="js/loadingtransition.js"></script>
    <script src="js/menu.js"></script>
    <script src="js/search.js"></script>
    <script src="js/slideshow.js"></script>
    <script src="js/eventSave.js"></script>
-   <script src="js/scroll-animation.js"></script>
 </body>
 
 </html>

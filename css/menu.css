@@ -88,16 +88,17 @@ nav {
 
 .search-result-item .result-info {
     flex: 1;
-    color: black;
 }
 
 .search-result-item .result-name {
     font-weight: bold;
     margin-bottom: 4px;
+    color: black;
 }
 
 .search-result-item .result-type {
     font-size: 0.8em;
+    color: black;
 }
 
 #overlay {
@@ -272,6 +273,7 @@ ul li:hover {
     border: 2px solid transparent;
     outline: none;
     text-align: center;
+    color: black;
     background-color: rgba(234, 234, 234, 0.45);
     transition: all 0.3s ease;
     z-index: 2;
@@ -436,7 +438,6 @@ ul li:hover {
 
 .confirmation-popup-content button {
     padding: 10px 20px;
-    color: var(primary-color);
     font-size: 1rem;
     border: none;
     border-radius: 10px;
