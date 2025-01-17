@@ -773,15 +773,15 @@ function addParkImage(parkId) {
                     <div class="modal-content">
                         <h2>写真管理</h2>
                         <div class="park-images-container">
-                            ${Array.isArray(data) ? data.map(imageUrl => `
-                                <div class="park-image-item">
-                                    <img src="${imageUrl}" alt="Park image">
-                                    <div class="image-url">${imageUrl}</div>
-                                    <button onclick="deleteParkImage('${parkId}', '${imageUrl}')" class="delete-image-btn">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                            `).join('') : '<p>No images available</p>'}
+                            ${Array.isArray(data) ? data.map(image => `
+                    <div class="park-image-item">
+                        <img src="${image.image_url}" alt="Park image">
+                        <div class="image-url">${image.image_url}</div>
+                        <button onclick="deleteParkImage('${parkId}', ${image.id})" class="delete-image-btn">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                `).join('') : '<p>No images available</p>'}
                         </div>
                         <div class="add-image-container">
                             <input type="text" id="newImageUrl" placeholder="新しい画像のURL">
@@ -829,14 +829,14 @@ function addNewParkImage(parkId) {
         });
 }
 
-function deleteParkImage(parkId, imageUrl) {
+function deleteParkImage(parkId, imageId) {
     if (confirm('この画像を削除しますか？')) {
         fetch('functions/delete_park_image.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ image_url: imageUrl })
+            body: JSON.stringify({ image_id: imageId })
         })
             .then(response => response.json())
             .then(data => {
@@ -845,8 +845,12 @@ function deleteParkImage(parkId, imageUrl) {
                     addParkImage(parkId); // Reload the images modal
                     alert('画像を削除しました');
                 } else {
-                    alert('画像を削除できませんでした');
+                    alert(data.message || '画像を削除できませんでした');
                 }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('エラーが発生しました: ' + error.message);
             });
     }
 }

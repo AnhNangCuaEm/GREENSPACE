@@ -39,7 +39,7 @@ class parkData
    {
       $pdo = Database::getConnection();
 
-      $state = $pdo->prepare('SELECT * FROM park ORDER BY RAND()');
+      $state = $pdo->prepare('SELECT * FROM park ORDER BY id DESC');
       $state->execute();
 
       $park = [];

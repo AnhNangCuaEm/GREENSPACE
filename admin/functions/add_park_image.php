@@ -1,5 +1,5 @@
 <?php
-require_once '../class/ParkImageData.php';
+require_once __DIR__ . '/../../class/ParkImageData.php';
 
 header('Content-Type: application/json');
 

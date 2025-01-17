@@ -24,8 +24,11 @@ class ParkImageData
 
       // Lặp qua các kết quả và chỉ lấy đường dẫn ảnh
       while ($row = $state->fetch(PDO::FETCH_ASSOC)) {
-         // Chỉ thêm đường dẫn ảnh vào mảng
-         $parkImages[] = $row['image_url']; // Chỉ lấy đường dẫn ảnh
+         // Trả về cả id và image_url
+         $parkImages[] = [
+            'id' => $row['id'],
+            'image_url' => $row['image_url']
+         ];
       }
 
       return $parkImages;
