@@ -186,14 +186,15 @@ function loadParks() {
                         <td>${park.location}</td>
                         <td>${park.area || 'N/A'}</td>
                         <td>${park.price}</td>
-                        <td>${park.nearest}</td>
+                        <td>${park.nearest ? park.nearest.substring(0, 15) + '...' : '最寄り駅がありません'}</td>
                         <td>${park.special}</td>
-                        <td>${park.description ? park.description.substring(0, 50) + '...' : 'No description'}</td>
+                        <td>${park.description ? park.description.substring(0, 40) + '...' : '説明がありません'}</td>
                         <td>
                             <button onclick="showParkDetails(${park.id})" class="details-btn">詳細</button>
                             <button onclick="editPark(${park.id})" class="edit-btn">編集</button>
-                            <button onclick="deletePark(${park.id})" class="delete-btn">削除</button>
                             <button onclick="addParkImage(${park.id})" class="add-image-btn">写真管理</button>
+                            <button onclick="showComments(${park.id})" class="comments-btn">コメント</button>
+                            <button onclick="deletePark(${park.id})" class="delete-btn">削除</button>
                         </td>
                     </tr>
                 `;
@@ -688,50 +689,47 @@ function showParkDetails(parkId) {
                         <h2>${park.name} 詳細</h2>
                         <div class="details-container">
                             <div class="details-section">
-                                <h3>Park Name</h3>
+                                <h3>公園名</h3>
                                 <p>漢字: ${park.name}</p>
                                 <p>よみがな: ${park.name_yomi || 'Not available'}</p>
                                 <p>ローマ字: ${park.name_romaji || 'Not available'}</p>
                             </div>
 
                             <div class="details-section">
-                                <h3>Location</h3>
+                                <h3>場所</h3>
                                 <p>漢字: ${park.location}</p>
                                 <p>よみがな: ${park.location_yomi || 'Not available'}</p>
                                 <p>ローマ字: ${park.location_romaji || 'Not available'}</p>
                             </div>
 
                             <div class="details-section">
-                                <h3>Park Features</h3>
+                                <h3>周りの駅</h3>
+                                <p>${park.nearest || 'Not available'}</p>
+                            </div>
+
+                            <div class="details-section">
+                                <h3>公園の特徴</h3>
                                 <p>${park.parkfeature || 'No features available'}</p>
                             </div>
 
                             <div class="details-section">
-                                <h3>Full Description</h3>
+                                <h3>公園の説明</h3>
                                 <p>${park.description || 'No description available'}</p>
                             </div>
 
                             <div class="details-section">
-                                <h3>Map</h3>
+                                <h3>地図</h3>
                                 <div class="map-container">
                                     ${park.map || 'No map available'}
                                 </div>
                             </div>
                             
                             <div class="details-section">
-                                <h3>Images</h3>
+                                <h3>写真</h3>
                                 <div class="park-images">
                                     ${park.images ? park.images.map(image =>
                 `<img src="${image.image_url}" alt="Park image" width="150">`
             ).join('') : 'No images available'}
-                                </div>
-                            </div>
-
-                            <div class="details-section">
-                                <h3>Comments</h3>
-                                <div class="comments-container">
-                                    <!-- Add comments section here if needed -->
-                                    <p>Comments feature coming soon...</p>
                                 </div>
                             </div>
                         </div>
@@ -858,5 +856,98 @@ function closeImageModal() {
     const modal = document.getElementById('parkImagesModal');
     if (modal) {
         modal.remove();
+    }
+}
+
+function showComments(parkId) {
+    console.log('Park ID:', parkId); // Debug log
+    fetch(`../functions/comment.php?parkId=${parkId}`)
+        .then(response => {
+            console.log('Response:', response); // Debug log
+            return response.json();
+        })
+        .then(comments => {
+            console.log('Comments:', comments); // Debug log
+            const modal = `
+                <div class="modal" id="commentsModal">
+                    <div class="modal-content">
+                        <h2>コメント管理</h2>
+                        <div class="comments-container">
+                            ${comments && comments.length > 0 ? comments.map(comment => `
+                                <div class="comment-item" data-comment-id="${comment.id}">
+                                    <div class="comment-content">
+                                        <strong>${comment.user_name}</strong>
+                                        <span class="comment-date">${new Date(comment.created_at).toLocaleString('ja-JP')}</span>
+                                        <p>${comment.content}</p>
+                                    </div>
+                                    <button class="delete-comment-btn" onclick="deleteComment(${comment.id}, '${comment.user_email}')">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            `).join('') : '<p>コメントはまだありません</p>'}
+                        </div>
+                        <div class="modal-buttons">
+                            <button onclick="closeCommentsModal()">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modal);
+        })
+        .catch(error => {
+            console.error('Error fetching comments:', error); // Debug log
+        });
+}
+
+function closeCommentsModal() {
+    const modal = document.getElementById('commentsModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function deleteComment(commentId, userEmail) {
+    console.log('Attempting to delete comment:', { commentId, userEmail }); // Debug log
+
+    if (confirm('このコメントを削除しますか？')) {
+        const data = new URLSearchParams();
+        data.append('commentId', commentId);
+        data.append('email', userEmail);
+
+        console.log('Request data:', data.toString()); // Debug log
+
+        fetch('../functions/comment.php', {
+            method: 'DELETE',
+            body: data
+        })
+            .then(response => {
+                console.log('Response status:', response.status); // Debug log
+                return response.text().then(text => {
+                    console.log('Raw response:', text); // Debug log
+                    try {
+                        return JSON.parse(text);
+                    } catch (e) {
+                        console.error('JSON parse error:', e); // Debug log
+                        throw new Error('Invalid JSON response');
+                    }
+                });
+            })
+            .then(data => {
+                console.log('Parsed response data:', data); // Debug log
+                if (data.success) {
+                    const commentElement = document.querySelector(`[data-comment-id="${commentId}"]`);
+                    console.log('Found comment element:', commentElement); // Debug log
+                    if (commentElement) {
+                        commentElement.remove();
+                    }
+                    alert('コメントを削除しました');
+                } else {
+                    alert('コメントを削除できませんでした: ' + (data.message || '不明なエラー'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('エラーが発生しました');
+            });
     }
 }

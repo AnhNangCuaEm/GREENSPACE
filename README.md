@@ -5,10 +5,10 @@ thêm và chỉnh sửa thông thông tin\
 TODO:\
 add 404 page sau khi deploy\
 ngăn gửi form edit info nếu không có bất kì thay đổi nào\
-trang dashboard hiện graph traffic các thứ\
 animation cho thanh menu ẩn lên trên khi scroll và hiện ra khi dừng scroll\
-thêm animation cho thanh menu khi click vào các item trong menu\
 thêm entrance animation cho menu\
+xóa console log còn sót lại\
+xắp xếp lại các code cho đẹp hơn\
 
 
 

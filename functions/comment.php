@@ -2,6 +2,10 @@
 
 require_once __DIR__ . '/../class/Database.php';
 
+// Add this at the very top to catch any PHP errors
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 /**
  * Lưu comment mới vào database
  */
@@ -58,67 +62,91 @@ function getCommentsByParkId($parkId) {
 }
 
 function getAllCommentsByParkId($parkId) {
-    $db = new Database();
-    $conn = $db->getConnection();
-    
-    $sql = "SELECT c.*, c.nickname as user_name 
-            FROM comments c
-            WHERE park_id = ?
-            ORDER BY created_at DESC";
-    
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$parkId]);
-    
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    try {
+        $db = new Database();
+        $conn = $db->getConnection();
+        
+        $sql = "SELECT c.*, c.nickname as user_name 
+                FROM comments c
+                WHERE park_id = ?
+                ORDER BY created_at DESC";
+        
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$parkId]);
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        return [];
+    }
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Only process API requests if this file is accessed directly
+if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
     header('Content-Type: application/json');
     
-    $parkId = $_POST['parkId'] ?? null;
-    $email = $_POST['email'] ?? null;
-    $nickname = $_POST['nickname'] ?? '無名さん';
-    $content = trim($_POST['comment'] ?? null);
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        $parkId = $_GET['parkId'] ?? null;
+        
+        if (!$parkId) {
+            echo json_encode(['success' => false, 'message' => 'Missing park ID']);
+            exit;
+        }
 
-    if (!$parkId || !$email || !$content) {
-        echo json_encode(['success' => false, 'message' => 'Missing required fields']);
+        try {
+            $comments = getAllCommentsByParkId($parkId);
+            if (!is_array($comments)) {
+                $comments = []; // Ensure we always return an array
+            }
+            echo json_encode($comments);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
         exit;
     }
 
-    try {
-        $result = saveComment($parkId, $email, $nickname, $content);
-        echo json_encode(['success' => $result]);
-    } catch (Exception $e) {
-        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
-    }
-    exit;
-}
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $parkId = $_POST['parkId'] ?? null;
+        $email = $_POST['email'] ?? null;
+        $nickname = $_POST['nickname'] ?? '無名さん';
+        $content = trim($_POST['comment'] ?? null);
 
-if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-    header('Content-Type: application/json');
-    
-    // Parse DELETE request data
-    parse_str(file_get_contents("php://input"), $_DELETE);
-    $commentId = $_DELETE['commentId'] ?? null;
-    $userEmail = $_DELETE['email'] ?? null;
+        if (!$parkId || !$email || !$content) {
+            echo json_encode(['success' => false, 'message' => 'Missing required fields']);
+            exit;
+        }
 
-    if (!$commentId || !$userEmail) {
-        echo json_encode(['success' => false, 'message' => 'Missing required fields']);
+        try {
+            $result = saveComment($parkId, $email, $nickname, $content);
+            echo json_encode(['success' => $result]);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
         exit;
     }
 
-    // Check if user owns the comment
-    if (!isOwner($commentId, $userEmail)) {
-        echo json_encode(['success' => false, 'message' => 'Unauthorized']);
+    if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+        parse_str(file_get_contents("php://input"), $_DELETE);
+        $commentId = $_DELETE['commentId'] ?? null;
+        $userEmail = $_DELETE['email'] ?? null;
+
+        if (!$commentId || !$userEmail) {
+            echo json_encode(['success' => false, 'message' => 'Missing required fields']);
+            exit;
+        }
+
+        if (!isOwner($commentId, $userEmail)) {
+            echo json_encode(['success' => false, 'message' => 'Unauthorized']);
+            exit;
+        }
+
+        try {
+            $result = deleteComment($commentId);
+            echo json_encode(['success' => $result]);
+        } catch (Exception $e) {
+            echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+        }
         exit;
     }
-
-    try {
-        $result = deleteComment($commentId);
-        echo json_encode(['success' => $result]);
-    } catch (Exception $e) {
-        echo json_encode(['success' => false, 'message' => $e->getMessage()]);
-    }
-    exit;
 }
 

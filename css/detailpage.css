@@ -297,11 +297,13 @@ main>div>div.park-detail-info>div>a:nth-child(2)>button:hover svg {
     width: 200px;
     border: none;
     border-radius: 7px;
+    color: black;
 }
 
 #comment {
     padding: 10px;
     border-radius: 7px;
+    color: black;
 }
 
 .comment-popup {
