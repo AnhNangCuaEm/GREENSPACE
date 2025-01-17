@@ -18,4 +18,8 @@ class Park {
    public string $nearest;
    public string $special;
    public string $parkfeature;
+   public string $name_yomi;
+   public string $location_yomi;
+   public string $name_romaji;
+   public string $location_romaji;
 }

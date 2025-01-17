@@ -50,10 +50,13 @@ class parkData
          $park->name = $row['name'];
          $park->thumbnail = $row['thumbnail'];
          $park->location = $row['location'];
+         $park->area = $row['area'];
          $park->price = $row['price'];
          $park->nearest = $row['nearest'];
          $park->special = $row['special'];
-
+         $park->description = $row['description'];
+         $park->map = $row['map'];
+         $park->parkfeature = $row['parkfeature'];
 
          $parks[] = $park;
       }
@@ -108,18 +111,22 @@ class parkData
       $park->map = $row['map'];
       $park->nearest = $row['nearest'];
       $park->special = $row['special'];
-
+      $park->parkfeature = $row['parkfeature'];
+      $park->name_yomi = $row['name_yomi'];
+      $park->location_yomi = $row['location_yomi'];
+      $park->name_romaji = $row['name_romaji'];
+      $park->location_romaji = $row['location_romaji'];
       return $park;
    }
 
    public static function searchParks($query)
    {
       $pdo = Database::getConnection();
-      
+
       // Chuẩn bị các biến tìm kiếm
       list($searchQuery, $searchQueryNoSpaces) = TextHelper::convertToSearchableText($query);
       $queryNoSpaces = str_replace(' ', '', $query);
-      
+
       // Tìm kiếm với nhiều điều kiện
       $sql = "SELECT * FROM park WHERE 
               name LIKE :query 
@@ -135,15 +142,15 @@ class parkData
               OR REPLACE(name_romaji, ' ', '') LIKE :queryNoSpaces
               OR REPLACE(location_romaji, ' ', '') LIKE :queryNoSpaces
               LIMIT 5";
-              
+
       $state = $pdo->prepare($sql);
       $state->execute([
-          'query' => "%$query%",
-          'queryNoSpaces' => "%$queryNoSpaces%",
-          'searchQuery' => "%$searchQuery%",
-          'searchQueryNoSpaces' => "%$searchQueryNoSpaces%"
+         'query' => "%$query%",
+         'queryNoSpaces' => "%$queryNoSpaces%",
+         'searchQuery' => "%$searchQuery%",
+         'searchQueryNoSpaces' => "%$searchQueryNoSpaces%"
       ]);
-      
+
       $parks = [];
 
       foreach ($state as $row) {
@@ -170,5 +177,78 @@ class parkData
          $parkIds[] = $row['id'];
       }
       return $parkIds;
+   }
+
+   public static function addPark($name, $location, $area, $price, $nearest, $special, $description, $thumbnail, $map, $name_yomi, $location_yomi, $name_romaji, $location_romaji, $parkfeature): bool
+   {
+      $pdo = Database::getConnection();
+      $sql = "INSERT INTO park (name, location, area, price, nearest, special, description, thumbnail, map, name_yomi, location_yomi, name_romaji, location_romaji, parkfeature) 
+              VALUES (:name, :location, :area, :price, :nearest, :special, :description, :thumbnail, :map, :name_yomi, :location_yomi, :name_romaji, :location_romaji, :parkfeature)";
+
+      $state = $pdo->prepare($sql);
+      return $state->execute([
+         'name' => $name,
+         'location' => $location,
+         'area' => $area,
+         'price' => $price,
+         'nearest' => $nearest,
+         'special' => $special,
+         'description' => $description,
+         'thumbnail' => $thumbnail,
+         'map' => $map,
+         'parkfeature' => $parkfeature,
+         'name_yomi' => $name_yomi,
+         'location_yomi' => $location_yomi,
+         'name_romaji' => $name_romaji,
+         'location_romaji' => $location_romaji
+      ]);
+   }
+
+   public static function updatePark($id, $name, $location, $area, $price, $nearest, $special, $description, $thumbnail, $map, $parkfeature, $name_yomi, $location_yomi, $name_romaji, $location_romaji): bool
+   {
+      $pdo = Database::getConnection();
+      $sql = "UPDATE park 
+              SET name = :name, 
+                  location = :location, 
+                  area = :area, 
+                  price = :price, 
+                  nearest = :nearest, 
+                  special = :special, 
+                  description = :description, 
+                  thumbnail = :thumbnail, 
+                  map = :map,
+                  parkfeature = :parkfeature,
+                  name_yomi = :name_yomi,
+                  location_yomi = :location_yomi,
+                  name_romaji = :name_romaji,
+                  location_romaji = :location_romaji
+              WHERE id = :id";
+
+      $state = $pdo->prepare($sql);
+      return $state->execute([
+         'id' => $id,
+         'name' => $name,
+         'location' => $location,
+         'area' => $area,
+         'price' => $price,
+         'nearest' => $nearest,
+         'special' => $special,
+         'description' => $description,
+         'thumbnail' => $thumbnail,
+         'map' => $map,
+         'parkfeature' => $parkfeature,
+         'name_yomi' => $name_yomi,
+         'location_yomi' => $location_yomi,
+         'name_romaji' => $name_romaji,
+         'location_romaji' => $location_romaji
+      ]);
+   }
+
+   public static function deletePark($id): bool
+   {
+      $pdo = Database::getConnection();
+      $sql = "DELETE FROM park WHERE id = :id";
+      $state = $pdo->prepare($sql);
+      return $state->execute(['id' => $id]);
    }
 }

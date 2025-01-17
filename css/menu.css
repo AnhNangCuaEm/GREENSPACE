@@ -46,7 +46,6 @@ nav {
     min-width: 200px;
     max-height: 400px;
     overflow-y: auto;
-    padding-right: 5px;
 }
 
 .results-content::-webkit-scrollbar {
@@ -64,7 +63,6 @@ nav {
 
 .search-result-item {
     position: relative;
-    width: calc(100% - 10px);
     z-index: 1;
     display: flex;
     align-items: center;

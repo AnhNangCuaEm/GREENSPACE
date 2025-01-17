@@ -4,6 +4,7 @@
 require_once __DIR__ . '/../class/UserData.php';
 require_once __DIR__ . '/../class/ParkData.php';
 require_once __DIR__ . '/../class/EventData.php';
+require_once __DIR__ . '/../class/ParkImageData.php';
 require_once __DIR__ . '/../functions/verify.php';
 
 session_start();

@@ -30,4 +30,51 @@ class ParkImageData
 
       return $parkImages;
    }
+
+   /**
+    * Thêm ảnh mới cho công viên
+    * 
+    * @param int|string $parkId ID của công viên
+    * @param string $imageUrl Đường dẫn ảnh
+    * @return bool Kết quả thêm ảnh
+    */
+   public static function addParkImage(int|string $parkId, string $imageUrl): bool
+   {
+      $pdo = Database::getConnection();
+      $stmt = $pdo->prepare('INSERT INTO park_images (park_id, image_url) VALUES (:park_id, :image_url)');
+      return $stmt->execute([
+         'park_id' => $parkId,
+         'image_url' => $imageUrl
+      ]);
+   }
+
+   /**
+    * Cập nhật đường dẫn ảnh
+    * 
+    * @param int|string $imageId ID của ảnh
+    * @param string $newImageUrl Đường dẫn ảnh mới
+    * @return bool Kết quả cập nhật
+    */
+   public static function updateParkImage(int|string $imageId, string $newImageUrl): bool
+   {
+      $pdo = Database::getConnection();
+      $stmt = $pdo->prepare('UPDATE park_images SET image_url = :image_url WHERE id = :id');
+      return $stmt->execute([
+         'id' => $imageId,
+         'image_url' => $newImageUrl
+      ]);
+   }
+
+   /**
+    * Xóa ảnh khỏi công viên
+    * 
+    * @param int|string $imageId ID của ảnh cần xóa
+    * @return bool Kết quả xóa ảnh
+    */
+   public static function deleteParkImage(int|string $imageId): bool
+   {
+      $pdo = Database::getConnection();
+      $stmt = $pdo->prepare('DELETE FROM park_images WHERE id = :id');
+      return $stmt->execute(['id' => $imageId]);
+   }
 }
