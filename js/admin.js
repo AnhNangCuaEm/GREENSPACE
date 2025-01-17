@@ -257,7 +257,7 @@ function showAddParkModal() {
                     </div>
                     <div class="form-group">
                         <label>サムネイルURL:</label>
-                        <input type="url" name="thumbnail" placeholder="サムネイルURL" required>
+                        <input type="text" name="thumbnail" placeholder="サムネイルURL" required>
                     </div>
                     <div class="form-group">
                         <label>Google Maps iframe:</label>
@@ -428,8 +428,14 @@ function deletePark(parkId) {
                 loadParks();
                 alert('公園を削除しました');
             } else {
-                alert('公園を削除できませんでした');
+                const errorMessage = data.message || '公園を削除できませんでした';
+                console.error('Delete park error:', data);
+                alert(errorMessage);
             }
+        })
+        .catch(error => {
+            console.error('Network error:', error);
+            alert('ネットワークエラーが発生しました');
         });
     }
 }

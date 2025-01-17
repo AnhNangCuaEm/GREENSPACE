@@ -11,8 +11,23 @@ if (!$data || !isset($data['id'])) {
 }
 
 try {
+    // Kiểm tra xem công viên có tồn tại không
+    $park = ParkData::getPark($data['id']);
+    if (!$park) {
+        echo json_encode(['success' => false, 'message' => 'Park not found']);
+        exit;
+    }
+
     $result = ParkData::deletePark($data['id']);
-    echo json_encode(['success' => true]);
+    if ($result) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Failed to delete park']);
+    }
 } catch (Exception $e) {
-    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+    echo json_encode([
+        'success' => false, 
+        'message' => $e->getMessage(),
+        'error' => true
+    ]);
 }

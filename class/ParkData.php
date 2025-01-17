@@ -246,9 +246,39 @@ class parkData
 
    public static function deletePark($id): bool
    {
-      $pdo = Database::getConnection();
-      $sql = "DELETE FROM park WHERE id = :id";
-      $state = $pdo->prepare($sql);
-      return $state->execute(['id' => $id]);
+      try {
+         $pdo = Database::getConnection();
+         
+         // Bắt đầu transaction
+         $pdo->beginTransaction();
+         
+         // Xóa các bản ghi liên quan trong bảng park_likes
+         $sql1 = "DELETE FROM park_likes WHERE park_id = :id";
+         $state1 = $pdo->prepare($sql1);
+         $state1->execute(['id' => $id]);
+         
+         // Xóa các bản ghi liên quan trong bảng park_images
+         $sql2 = "DELETE FROM park_images WHERE park_id = :id";
+         $state2 = $pdo->prepare($sql2);
+         $state2->execute(['id' => $id]);
+         
+         // Xóa công viên
+         $sql3 = "DELETE FROM park WHERE id = :id";
+         $state3 = $pdo->prepare($sql3);
+         $result = $state3->execute(['id' => $id]);
+         
+         if ($result) {
+            $pdo->commit();
+            return true;
+         } else {
+            $pdo->rollBack();
+            return false;
+         }
+      } catch (PDOException $e) {
+         if (isset($pdo)) {
+            $pdo->rollBack();
+         }
+         throw new Exception("Database error: " . $e->getMessage());
+      }
    }
 }
