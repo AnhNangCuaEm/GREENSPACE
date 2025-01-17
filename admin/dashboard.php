@@ -37,6 +37,7 @@ if ($user->role !== 'admin') {
     <title>Admin Dashboard</title>
     <link rel="shortcut icon" href="../img/img/logoNotext.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <div class="dashboard-container">

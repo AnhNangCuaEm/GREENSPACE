@@ -1,20 +1,20 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Get active section from localStorage, default to 'users' if none saved
     const activeSection = localStorage.getItem('activeSection') || 'users';
-    
+
     // Activate the saved section
     const activeButton = document.querySelector(`.nav-btn[data-section="${activeSection}"]`);
     if (activeButton) {
         // Remove active class from all buttons and sections
         document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
         document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
-        
+
         // Add active class to saved button and section
         activeButton.classList.add('active');
         document.getElementById(`${activeSection}-section`).classList.add('active');
-        
+
         // Load content for active section
-        switch(activeSection) {
+        switch (activeSection) {
             case 'users':
                 loadUsers();
                 break;
@@ -29,26 +29,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Add click handlers to navigation buttons
     document.querySelectorAll('.nav-btn').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             // Skip if this is the "Back to Profile" button
             if (!this.dataset.section) return;
-            
+
             // Remove active class from all buttons and sections
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
-            
+
             // Add active class to clicked button
             this.classList.add('active');
-            
+
             // Save active section to localStorage
             localStorage.setItem('activeSection', this.dataset.section);
-            
+
             // Show corresponding section
             const sectionId = this.dataset.section + '-section';
             document.getElementById(sectionId).classList.add('active');
-            
+
             // Load content based on section
-            switch(this.dataset.section) {
+            switch (this.dataset.section) {
                 case 'users':
                     loadUsers();
                     break;
@@ -83,7 +83,7 @@ function loadUsers() {
                     </thead>
                     <tbody>
             `;
-            
+
             users.forEach(user => {
                 html += `
                     <tr data-status="${user.status}" data-role="${user.role}">
@@ -107,7 +107,7 @@ function loadUsers() {
                     </tr>
                 `;
             });
-            
+
             html += `</tbody></table>`;
             usersSection.innerHTML = html;
         });
@@ -121,14 +121,14 @@ function updateUserRole(email, newRole) {
         },
         body: JSON.stringify({ email, role: newRole })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('ユーザーの役割を更新しました');
-        } else {
-            alert('ユーザーの役割を更新できませんでした');
-        }
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('ユーザーの役割を更新しました');
+            } else {
+                alert('ユーザーの役割を更新できませんでした');
+            }
+        });
 }
 
 function updateUserStatus(email, newStatus) {
@@ -139,14 +139,14 @@ function updateUserStatus(email, newStatus) {
         },
         body: JSON.stringify({ email, status: newStatus })
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            alert('ユーザーのステータスを更新しました');
-        } else {
-            alert('ユーザーのステータスを更新できませんでした');
-        }
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('ユーザーのステータスを更新しました');
+            } else {
+                alert('ユーザーのステータスを更新できませんでした');
+            }
+        });
 }
 
 function loadParks() {
@@ -177,7 +177,7 @@ function loadParks() {
                     </thead>
                     <tbody>
             `;
-            
+
             parks.forEach(park => {
                 html += `
                     <tr>
@@ -193,12 +193,12 @@ function loadParks() {
                             <button onclick="showParkDetails(${park.id})" class="details-btn">詳細</button>
                             <button onclick="editPark(${park.id})" class="edit-btn">編集</button>
                             <button onclick="deletePark(${park.id})" class="delete-btn">削除</button>
-                            <button onclick="addParkImage(${park.id})" class="add-image-btn">写真追加</button>
+                            <button onclick="addParkImage(${park.id})" class="add-image-btn">写真管理</button>
                         </td>
                     </tr>
                 `;
             });
-            
+
             html += `</tbody></table>`;
             parksSection.innerHTML = html;
         });
@@ -276,8 +276,8 @@ function showAddParkModal() {
         </div>
     `;
     document.body.insertAdjacentHTML('beforeend', modal);
-    
-    document.getElementById('parkForm').addEventListener('submit', function(e) {
+
+    document.getElementById('parkForm').addEventListener('submit', function (e) {
         e.preventDefault();
         const formData = new FormData(this);
         addPark(Object.fromEntries(formData));
@@ -292,16 +292,16 @@ function addPark(parkData) {
         },
         body: JSON.stringify(parkData)
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            closeModal();
-            loadParks();
-            alert('公園を追加しました');
-        } else {
-            alert('公園を追加できませんでした');
-        }
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                closeModal();
+                loadParks();
+                alert('公園を追加しました');
+            } else {
+                alert('公園を追加できませんでした');
+            }
+        });
 }
 
 function editPark(parkId) {
@@ -385,8 +385,8 @@ function showEditParkModal(park) {
         </div>
     `;
     document.body.insertAdjacentHTML('beforeend', modal);
-    
-    document.getElementById('parkForm').addEventListener('submit', function(e) {
+
+    document.getElementById('parkForm').addEventListener('submit', function (e) {
         e.preventDefault();
         const formData = new FormData(this);
         updatePark(Object.fromEntries(formData));
@@ -401,16 +401,16 @@ function updatePark(parkData) {
         },
         body: JSON.stringify(parkData)
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            closeModal();
-            loadParks();
-            alert('公園を更新しました');
-        } else {
-            alert('公園を更新できませんでした');
-        }
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                closeModal();
+                loadParks();
+                alert('公園を更新しました');
+            } else {
+                alert('公園を更新できませんでした');
+            }
+        });
 }
 
 function deletePark(parkId) {
@@ -422,21 +422,21 @@ function deletePark(parkId) {
             },
             body: JSON.stringify({ id: parkId })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                loadParks();
-                alert('公園を削除しました');
-            } else {
-                const errorMessage = data.message || '公園を削除できませんでした';
-                console.error('Delete park error:', data);
-                alert(errorMessage);
-            }
-        })
-        .catch(error => {
-            console.error('Network error:', error);
-            alert('ネットワークエラーが発生しました');
-        });
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    loadParks();
+                    alert('公園を削除しました');
+                } else {
+                    const errorMessage = data.message || '公園を削除できませんでした';
+                    console.error('Delete park error:', data);
+                    alert(errorMessage);
+                }
+            })
+            .catch(error => {
+                console.error('Network error:', error);
+                alert('ネットワークエラーが発生しました');
+            });
     }
 }
 
@@ -467,7 +467,7 @@ function loadEvents() {
                     </thead>
                     <tbody>
             `;
-            
+
             events.forEach(event => {
                 html += `
                     <tr>
@@ -485,7 +485,7 @@ function loadEvents() {
                     </tr>
                 `;
             });
-            
+
             html += `</tbody></table>`;
             eventsSection.innerHTML = html;
         });
@@ -535,8 +535,8 @@ function showAddEventModal() {
         </div>
     `;
     document.body.insertAdjacentHTML('beforeend', modal);
-    
-    document.getElementById('eventForm').addEventListener('submit', function(e) {
+
+    document.getElementById('eventForm').addEventListener('submit', function (e) {
         e.preventDefault();
         const formData = new FormData(this);
         addEvent(Object.fromEntries(formData));
@@ -551,16 +551,16 @@ function addEvent(eventData) {
         },
         body: JSON.stringify(eventData)
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            closeModal();
-            loadEvents();
-            alert('イベントを追加しました');
-        } else {
-            alert('イベントを追加できませんでした');
-        }
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                closeModal();
+                loadEvents();
+                alert('イベントを追加しました');
+            } else {
+                alert('イベントを追加できませんでした');
+            }
+        });
 }
 
 function editEvent(eventId) {
@@ -616,8 +616,8 @@ function showEditEventModal(event) {
         </div>
     `;
     document.body.insertAdjacentHTML('beforeend', modal);
-    
-    document.getElementById('eventForm').addEventListener('submit', function(e) {
+
+    document.getElementById('eventForm').addEventListener('submit', function (e) {
         e.preventDefault();
         const formData = new FormData(this);
         updateEvent(Object.fromEntries(formData));
@@ -632,16 +632,16 @@ function updateEvent(eventData) {
         },
         body: JSON.stringify(eventData)
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            closeModal();
-            loadEvents();
-            alert('イベントを更新しました');
-        } else {
-            alert('イベントを更新できませんでした');
-        }
-    });
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                closeModal();
+                loadEvents();
+                alert('イベントを更新しました');
+            } else {
+                alert('イベントを更新できませんでした');
+            }
+        });
 }
 
 function deleteEvent(eventId) {
@@ -653,15 +653,15 @@ function deleteEvent(eventId) {
             },
             body: JSON.stringify({ id: eventId })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                loadEvents();
-                alert('イベントを削除しました');
-            } else {
-                alert('イベントを削除できませんでした');
-            }
-        });
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    loadEvents();
+                    alert('イベントを削除しました');
+                } else {
+                    alert('イベントを削除できませんでした');
+                }
+            });
     }
 }
 
@@ -721,9 +721,9 @@ function showParkDetails(parkId) {
                             <div class="details-section">
                                 <h3>Images</h3>
                                 <div class="park-images">
-                                    ${park.images ? park.images.map(imageUrl => 
-                                        `<img src="${imageUrl}" alt="Park image" width="150">`
-                                    ).join('') : 'No images available'}
+                                    ${park.images ? park.images.map(imageUrl =>
+                `<img src="${imageUrl}" alt="Park image" width="150">`
+            ).join('') : 'No images available'}
                                 </div>
                             </div>
 
@@ -748,6 +748,112 @@ function showParkDetails(parkId) {
 function closeDetailsModal() {
     document.body.style.overflow = '';
     const modal = document.getElementById('parkDetailsModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+
+
+function addParkImage(parkId) {
+    document.body.style.overflow = 'hidden';
+    fetch(`functions/get_park_images.php?park_id=${parkId}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                throw new Error(data.error);
+            }
+            const modal = `
+                <div class="modal" id="parkImagesModal">
+                    <div class="modal-content">
+                        <h2>写真管理</h2>
+                        <div class="park-images-container">
+                            ${Array.isArray(data) ? data.map(imageUrl => `
+                                <div class="park-image-item">
+                                    <img src="${imageUrl}" alt="Park image">
+                                    <div class="image-url">${imageUrl}</div>
+                                    <button onclick="deleteParkImage('${parkId}', '${imageUrl}')" class="delete-image-btn">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            `).join('') : '<p>No images available</p>'}
+                        </div>
+                        <div class="add-image-container">
+                            <input type="text" id="newImageUrl" placeholder="新しい画像のURL">
+                            <button onclick="addNewParkImage('${parkId}')" class="add-new-image-btn">
+                                <i class="fas fa-plus"></i> 追加
+                            </button>
+                        </div>
+                        <div class="modal-buttons">
+                            <button onclick="closeImageModal()">閉じる</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.insertAdjacentHTML('beforeend', modal);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('データの取得中にエラーが発生しました: ' + error.message);
+        });
+}
+
+function addNewParkImage(parkId) {
+    const imageUrl = document.getElementById('newImageUrl').value.trim();
+    if (!imageUrl) {
+        alert('画像URLを入力してください');
+        return;
+    }
+
+    fetch('functions/add_park_image.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ park_id: parkId, image_url: imageUrl })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                closeImageModal();
+                addParkImage(parkId); // Reload the images modal
+                alert('画像を追加しました');
+            } else {
+                alert('画像を追加できませんでした');
+            }
+        });
+}
+
+function deleteParkImage(parkId, imageUrl) {
+    if (confirm('この画像を削除しますか？')) {
+        fetch('functions/delete_park_image.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ image_url: imageUrl })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    closeImageModal();
+                    addParkImage(parkId); // Reload the images modal
+                    alert('画像を削除しました');
+                } else {
+                    alert('画像を削除できませんでした');
+                }
+            });
+    }
+}
+
+function closeImageModal() {
+    document.body.style.overflow = '';
+    const modal = document.getElementById('parkImagesModal');
     if (modal) {
         modal.remove();
     }

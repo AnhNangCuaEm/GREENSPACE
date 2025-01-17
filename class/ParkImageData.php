@@ -77,4 +77,17 @@ class ParkImageData
       $stmt = $pdo->prepare('DELETE FROM park_images WHERE id = :id');
       return $stmt->execute(['id' => $imageId]);
    }
+
+   /**
+    * Xóa ảnh khỏi công viên
+    * 
+    * @param string $imageUrl Đường dẫn ảnh cần xóa
+    * @return bool Kết quả xóa ảnh
+    */
+   public static function deleteParkImageByUrl(string $imageUrl): bool
+   {
+      $pdo = Database::getConnection();
+      $stmt = $pdo->prepare('DELETE FROM park_images WHERE image_url = :image_url');
+      return $stmt->execute(['image_url' => $imageUrl]);
+   }
 }
