@@ -26,7 +26,7 @@ if (isset($_GET['id'])) {
     // Kiểm tra xem công viên có tồn tại không
     if (!$parks) {
         // Hiển thị giao diện lỗi
-?>
+        ?>
         <html>
 
         <head>
@@ -121,7 +121,7 @@ if (isset($_GET['id'])) {
         </body>
 
         </html>
-<?php
+        <?php
         exit();
     }
 
@@ -158,7 +158,8 @@ if (isset($_GET['id'])) {
             <defs>
                 <filter id="goo">
                     <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
+                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8"
+                        result="goo" />
                     <feBlend in="SourceGraphic" in2="goo" />
                 </filter>
             </defs>
@@ -179,7 +180,8 @@ if (isset($_GET['id'])) {
                 <div class="park-detail-image">
                     <div class="image-container loading">
                         <div>
-                            <img src="<?= htmlspecialchars($parks->thumbnail) ?>" alt="公園の画像" onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
+                            <img src="<?= htmlspecialchars($parks->thumbnail) ?>" alt="公園の画像"
+                                onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
                         </div>
                     </div>
                 </div>
@@ -192,8 +194,8 @@ if (isset($_GET['id'])) {
                     <p><span>特徴:</span>&nbsp;<?= $parks->special ?></p>
                     <p><?= htmlspecialchars($parks->description) ?></p>
                     <div class="park-detail-nav">
-                        <a href="?id=<?= $prevId ?>"><button><svg fill="#000000"
-                                    height="24px" width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                        <a href="?id=<?= $prevId ?>"><button><svg fill="#000000" height="24px" width="24px"
+                                    version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.753 55.753"
                                     xml:space="preserve">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -206,8 +208,8 @@ if (isset($_GET['id'])) {
                                         </g>
                                     </g>
                                 </svg>前へ</button></a>
-                        <a href="?id=<?= $nextId ?>"><button>次へ<svg fill="#000000"
-                                    height="24px" width="24px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                        <a href="?id=<?= $nextId ?>"><button>次へ<svg fill="#000000" height="24px" width="24px"
+                                    version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.752 55.752"
                                     xml:space="preserve">
                                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -229,7 +231,8 @@ if (isset($_GET['id'])) {
                                 <g id="SVGRepo_iconCarrier">
                                     <path fill-rule="evenodd" clip-rule="evenodd"
                                         d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z"
-                                        stroke="#fcf8db" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        stroke="#fcf8db" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
                                     </path>
                                 </g>
                             </svg>
@@ -270,11 +273,12 @@ if (isset($_GET['id'])) {
                     <?= $parks->map ?>
                 </div>
                 <div class="park-images-list" id="imageSlider">
-                    <?php foreach ($images as $imagePath): ?>
-                        <div class="park-images-box" onclick="openModal('<?= htmlspecialchars($imagePath) ?>')">
+                    <?php foreach ($images as $image): ?>
+                        <div class="park-images-box" onclick="openModal('<?= htmlspecialchars($image['image_url']) ?>')">
                             <div class="image-container loading">
                                 <div>
-                                    <img src="<?= htmlspecialchars($imagePath) ?>" alt="公園の画像" onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
+                                    <img src="<?= htmlspecialchars($image['image_url']) ?>" alt="公園の画像"
+                                        onload="this.classList.add('loaded'); this.parentElement.parentElement.classList.remove('loading')">
                                 </div>
                             </div>
                         </div>
@@ -294,15 +298,16 @@ if (isset($_GET['id'])) {
                                 <div class="comment-header">
                                     <strong><?= htmlspecialchars($comment['user_name'] ?: '無名さん') ?></strong>
                                     <?php if (isOwner($comment['id'], $_SESSION['email'] ?? '')): ?>
-                                        <svg class="delete-comment" data-comment-id="<?= $comment['id'] ?>" width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
-                                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                                            fill="#000000">
+                                        <svg class="delete-comment" data-comment-id="<?= $comment['id'] ?>" width="24px"
+                                            height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
                                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                                             <g id="SVGRepo_iconCarrier">
                                                 <title>delete_2_line</title>
                                                 <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                                    <g id="System" transform="translate(-576.000000, -192.000000)" fill-rule="nonzero">
+                                                    <g id="System" transform="translate(-576.000000, -192.000000)"
+                                                        fill-rule="nonzero">
                                                         <g id="delete_2_line" transform="translate(576.000000, 192.000000)">
                                                             <path
                                                                 d="M24,0 L24,24 L0,24 L0,0 L24,0 Z M12.5934901,23.257841 L12.5819402,23.2595131 L12.5108777,23.2950439 L12.4918791,23.2987469 L12.4918791,23.2987469 L12.4767152,23.2950439 L12.4056548,23.2595131 C12.3958229,23.2563662 12.3870493,23.2590235 12.3821421,23.2649074 L12.3780323,23.275831 L12.360941,23.7031097 L12.3658947,23.7234994 L12.3769048,23.7357139 L12.4804777,23.8096931 L12.4953491,23.8136134 L12.4953491,23.8136134 L12.5071152,23.8096931 L12.6106902,23.7357139 L12.6232938,23.7196733 L12.6232938,23.7196733 L12.6266527,23.7031097 L12.609561,23.275831 C12.6075724,23.2657013 12.6010112,23.2592993 12.5934901,23.257841 L12.5934901,23.257841 Z M12.8583906,23.1452862 L12.8445485,23.1473072 L12.6598443,23.2396597 L12.6498822,23.2499052 L12.6498822,23.2499052 L12.6471943,23.2611114 L12.6650943,23.6906389 L12.6699349,23.7034178 L12.6699349,23.7034178 L12.678386,23.7104931 L12.8793402,23.8032389 C12.8914285,23.8068999 12.9022333,23.8029875 12.9078286,23.7952264 L12.9118235,23.7811639 L12.8776777,23.1665331 C12.8752882,23.1545897 12.8674102,23.1470016 12.8583906,23.1452862 L12.8583906,23.1452862 Z M12.1430473,23.1473072 C12.1332178,23.1423925 12.1221763,23.1452606 12.1156365,23.1525954 L12.1099173,23.1665331 L12.0757714,23.7811639 C12.0751323,23.7926639 12.0828099,23.8018602 12.0926481,23.8045676 L12.108256,23.8032389 L12.3092106,23.7104931 L12.3186497,23.7024347 L12.3186497,23.7024347 L12.3225043,23.6906389 L12.340401,23.2611114 L12.337245,23.2485176 L12.337245,23.2485176 L12.3277531,23.2396597 L12.1430473,23.1473072 Z"
@@ -316,7 +321,8 @@ if (isset($_GET['id'])) {
                                             </g>
                                         </svg>
                                     <?php endif; ?>
-                                    <span class="comment-date"><?= date('Y-m-d H:i', strtotime($comment['created_at'])) ?></span>
+                                    <span
+                                        class="comment-date"><?= date('Y-m-d H:i', strtotime($comment['created_at'])) ?></span>
                                 </div>
                                 <div class="comment-content">
                                     <?= htmlspecialchars($comment['content']) ?>
@@ -336,12 +342,15 @@ if (isset($_GET['id'])) {
                     <button id="submitBtn" type="submit">コメントする</button>
                 </form>
             </div>
-            <span id="closeCommentPopup" class="close-comment-popup"><svg width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <span id="closeCommentPopup" class="close-comment-popup"><svg width="34px" height="34px" viewBox="0 0 24 24"
+                    fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                     <g id="SVGRepo_iconCarrier">
                         <g id="Edit / Close_Circle">
-                            <path id="Vector" d="M9 9L11.9999 11.9999M11.9999 11.9999L14.9999 14.9999M11.9999 11.9999L9 14.9999M11.9999 11.9999L14.9999 9M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path id="Vector"
+                                d="M9 9L11.9999 11.9999M11.9999 11.9999L14.9999 14.9999M11.9999 11.9999L9 14.9999M11.9999 11.9999L14.9999 9M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z"
+                                stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                         </g>
                     </g>
                 </svg></span>
@@ -357,7 +366,9 @@ if (isset($_GET['id'])) {
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                     <g id="SVGRepo_iconCarrier">
                         <g id="Edit / Close_Circle">
-                            <path id="Vector" d="M9 9L11.9999 11.9999M11.9999 11.9999L14.9999 14.9999M11.9999 11.9999L9 14.9999M11.9999 11.9999L14.9999 9M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path id="Vector"
+                                d="M9 9L11.9999 11.9999M11.9999 11.9999L14.9999 14.9999M11.9999 11.9999L9 14.9999M11.9999 11.9999L14.9999 9M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21Z"
+                                stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                         </g>
                     </g>
                 </svg>
@@ -388,19 +399,19 @@ if (isset($_GET['id'])) {
             }
 
             // Thêm event listeners khi document load
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const modal = document.getElementById("imageModal");
                 const closeBtn = document.getElementById("closeModalBtn");
 
                 // Đóng modal khi click vào nền
-                modal.addEventListener('click', function(e) {
+                modal.addEventListener('click', function (e) {
                     if (e.target === modal) {
                         closeModal();
                     }
                 });
 
                 // Đóng modal khi click vào nút close
-                closeBtn.addEventListener('click', function(e) {
+                closeBtn.addEventListener('click', function (e) {
                     e.stopPropagation();
                     closeModal();
                 });

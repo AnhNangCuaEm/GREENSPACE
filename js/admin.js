@@ -721,8 +721,8 @@ function showParkDetails(parkId) {
                             <div class="details-section">
                                 <h3>Images</h3>
                                 <div class="park-images">
-                                    ${park.images ? park.images.map(imageUrl =>
-                `<img src="${imageUrl}" alt="Park image" width="150">`
+                                    ${park.images ? park.images.map(image =>
+                `<img src="${image.image_url}" alt="Park image" width="150">`
             ).join('') : 'No images available'}
                                 </div>
                             </div>
@@ -752,8 +752,6 @@ function closeDetailsModal() {
         modal.remove();
     }
 }
-
-
 
 function addParkImage(parkId) {
     document.body.style.overflow = 'hidden';
