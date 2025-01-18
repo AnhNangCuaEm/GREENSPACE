@@ -168,6 +168,7 @@ function loadParks() {
                 <table class="events-table">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>img</th>
                             <th>公園名</th>
                             <th>場所</th>
@@ -176,7 +177,7 @@ function loadParks() {
                             <th>最寄り駅</th>
                             <th>特徴</th>
                             <th>説明</th>
-                            <th>アクション</th>
+                            <th>メニュー</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -185,6 +186,7 @@ function loadParks() {
             parks.forEach(park => {
                 html += `
                     <tr>
+                        <td>${park.id}</td>
                         <td><img src="${park.thumbnail}" alt="Park thumbnail" width="50" height="50" style="object-fit: cover;"></td>
                         <td>${park.name}</td>
                         <td>${park.location}</td>
@@ -194,11 +196,28 @@ function loadParks() {
                         <td>${park.special}</td>
                         <td>${park.description ? park.description.substring(0, 40) + '...' : '説明がありません'}</td>
                         <td>
-                            <button onclick="showParkDetails(${park.id})" class="details-btn">詳細</button>
-                            <button onclick="editPark(${park.id})" class="edit-btn">編集</button>
-                            <button onclick="addParkImage(${park.id})" class="add-image-btn">写真管理</button>
-                            <button onclick="showComments(${park.id})" class="comments-btn">コメント</button>
-                            <button onclick="deletePark(${park.id})" class="delete-btn">削除</button>
+                            <div class="action-menu">
+                                <button class="action-menu-btn">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </button>
+                                <div class="action-menu-content">
+                                    <button onclick="showParkDetails(${park.id})" class="details-btn">
+                                        <i class="fas fa-info-circle"></i> 詳細
+                                    </button>
+                                    <button onclick="editPark(${park.id})" class="edit-btn">
+                                        <i class="fas fa-edit"></i> 編集
+                                    </button>
+                                    <button onclick="addParkImage(${park.id})" class="add-image-btn">
+                                        <i class="fas fa-images"></i> 写真管理
+                                    </button>
+                                    <button onclick="showComments(${park.id})" class="comments-btn">
+                                        <i class="fas fa-comments"></i> コメント
+                                    </button>
+                                    <button onclick="deletePark(${park.id})" class="delete-btn">
+                                        <i class="fas fa-trash"></i> 削除
+                                    </button>
+                                </div>
+                            </div>
                         </td>
                     </tr>
                 `;
@@ -206,6 +225,28 @@ function loadParks() {
 
             html += `</tbody></table>`;
             parksSection.innerHTML = html;
+
+            // Add click event listeners for action menus
+            document.querySelectorAll('.action-menu-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    // Close all other menus
+                    document.querySelectorAll('.action-menu').forEach(menu => {
+                        if (menu !== btn.parentElement) {
+                            menu.classList.remove('active');
+                        }
+                    });
+                    // Toggle current menu
+                    btn.parentElement.classList.toggle('active');
+                });
+            });
+
+            // Close menu when clicking outside
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.action-menu').forEach(menu => {
+                    menu.classList.remove('active');
+                });
+            });
         });
 }
 
@@ -467,7 +508,7 @@ function loadEvents() {
                             <th>時間</th>
                             <th>料金</th>
                             <th>説明</th>
-                            <th>アクション</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -484,8 +525,8 @@ function loadEvents() {
                         <td>${event.price}</td>
                         <td>${event.description.substring(0, 50)}...</td>
                         <td>
-                            <button onclick="editEvent(${event.id})" class="edit-btn">編集</button>
-                            <button onclick="deleteEvent(${event.id})" class="delete-btn">削除</button>
+                            <button onclick="editEvent(${event.id})" class="edit-btn"><i class="fas fa-edit"></i>編集</button>
+                            <button onclick="deleteEvent(${event.id})" class="delete-btn"><i class="fas fa-trash"></i>削除</button>
                         </td>
                     </tr>
                 `;

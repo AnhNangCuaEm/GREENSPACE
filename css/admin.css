@@ -75,8 +75,8 @@ h1 {
 
 .content {
     flex: 1;
-    padding: 20px;
-    background-color: #f8f9fa;
+    padding: 10px;
+    background-color: #eeeeee;
     margin-left: 180px;
 }
 
@@ -225,40 +225,31 @@ body>div>div.sidebar>button:nth-child(6) {
 }
 
 .edit-btn,
-.delete-btn,
-.details-btn,
-.add-image-btn {
-    padding: 5px 5px;
+.delete-btn{
+    display: block;
+    border-radius: 5px;
+    width: 100%;
+    padding: 5px 8px;
+    text-align: left;
     border: none;
-    border-radius: 4px;
+    background: none;
     cursor: pointer;
-    margin-bottom: 5px;
+    white-space: nowrap;
 }
 
 .edit-btn {
     background-color: #3498db;
     color: white;
-    min-width: 70px;
 }
 
 .delete-btn {
     background-color: #e74c3c;
     color: white;
-    min-width: 70px;
 }
 
-.add-image-btn {
-    background-color: #ece800;
-    color: white;
-    min-width: 70px;
-}
-
-.edit-btn:hover {
-    background-color: #2980b9;
-}
-
+.edit-btn:hover,
 .delete-btn:hover {
-    background-color: #c0392b;
+    background-color: #636363;
 }
 
 /* Modal Styles */
@@ -390,20 +381,6 @@ input[type="url"]:focus {
     margin: 10px 0;
 }
 
-.details-btn {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    min-width: 70px;
-    padding: 5px 5px;
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.details-btn:hover {
-    background-color: #45a049;
-}
-
 .map-container {
     margin: 10px 0;
 }
@@ -477,19 +454,6 @@ input[type="url"]:focus {
     word-break: break-all;
 }
 
-.delete-image-btn {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 5px 5px;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.delete-image-btn:hover {
-    background-color: #c0392b;
-}
-
 .add-image-container {
     display: flex;
     gap: 10px;
@@ -524,22 +488,6 @@ input[type="url"]:focus {
     height: 300px;
 }
 
-.comments-btn {
-    background-color: #9b59b6;
-    color: white;
-    border: none;
-    padding: 5px 5px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-bottom: 5px;
-    min-width: 70px;
-}
-
-.comments-btn:hover {
-    background-color: #8e44ad;
-}
-
-
 /* dashboard */
 /* Dashboard Styles */
 .dashboard-wrapper {
@@ -556,6 +504,8 @@ input[type="url"]:focus {
 .dashboard-card {
     background: white;
     padding: 20px;
+    max-height: 450px;
+    overflow-y: scroll;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -637,4 +587,71 @@ input[type="url"]:focus {
 .breakdown-value {
     font-weight: bold;
     color: #333;
+}
+
+/* Action Menu Styles */
+.action-menu {
+    position: relative;
+    display: inline-block;
+}
+
+.action-menu-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    min-width: 70px;
+}
+
+.action-menu-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    min-width: 120px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.action-menu-content button {
+    display: block;
+    width: 100%;
+    padding: 8px 12px;
+    text-align: left;
+    border: none;
+    background: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.action-menu-content button:hover {
+    background-color: #f5f5f5;
+}
+
+.action-menu.active .action-menu-content {
+    display: block;
+}
+
+/* Modify existing button colors for the dropdown */
+.action-menu-content .details-btn {
+    color: #4CAF50;
+}
+
+.action-menu-content .edit-btn {
+    color: #3498db;
+}
+
+.action-menu-content .add-image-btn {
+    color: #f1c40f;
+}
+
+.action-menu-content .comments-btn {
+    color: #9b59b6;
+}
+
+.action-menu-content .delete-btn {
+    color: #e74c3c;
 }

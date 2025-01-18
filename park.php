@@ -19,7 +19,12 @@ if (!$email) {
 // Nếu cần, lưu lại email trong session để dùng trong phiên hiện tại
 $_SESSION['email'] = $email;
 
-trackPageVisit('park.php');
+if (isset($_GET['id'])) {
+    $parkId = $_GET['id'];
+    trackPageVisit("park.php?id={$parkId}");
+} else {
+    trackPageVisit('park.php');
+}
 
 $isLiked = false; // Khởi tạo biến $isLiked
 if (isset($_GET['id'])) {

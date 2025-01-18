@@ -16,7 +16,12 @@ if (!$email) {
 // Nếu cần, lưu lại email trong session để dùng trong phiên hiện tại
 $_SESSION['email'] = $email;
 
-trackPageVisit('event.php');
+if (isset($_GET['id'])) {
+    $eventId = $_GET['id'];
+    trackPageVisit("event.php?id={$eventId}");
+} else {
+    trackPageVisit('event.php');
+}
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
