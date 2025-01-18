@@ -1,6 +1,6 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Get active section from localStorage, default to 'users' if none saved
-    const activeSection = localStorage.getItem('activeSection') || 'users';
+document.addEventListener('DOMContentLoaded', function() {
+    // Get active section from localStorage, default to 'dashboard' if none saved
+    const activeSection = localStorage.getItem('activeSection') || 'dashboard';
 
     // Activate the saved section
     const activeButton = document.querySelector(`.nav-btn[data-section="${activeSection}"]`);
@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Load content for active section
         switch (activeSection) {
+            case 'dashboard':
+                loadDashboard();
+                break;
             case 'users':
                 loadUsers();
                 break;
@@ -27,28 +30,29 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Add click handlers to navigation buttons
+    // Add click event listeners to nav buttons
     document.querySelectorAll('.nav-btn').forEach(button => {
-        button.addEventListener('click', function () {
-            // Skip if this is the "Back to Profile" button
-            if (!this.dataset.section) return;
+        button.addEventListener('click', function() {
+            if (this.hasAttribute('onclick')) return; // Skip for buttons with onclick attribute
+
+            const section = this.dataset.section;
+            
+            // Save active section to localStorage
+            localStorage.setItem('activeSection', section);
 
             // Remove active class from all buttons and sections
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.content-section').forEach(section => section.classList.remove('active'));
 
-            // Add active class to clicked button
+            // Add active class to clicked button and corresponding section
             this.classList.add('active');
-
-            // Save active section to localStorage
-            localStorage.setItem('activeSection', this.dataset.section);
-
-            // Show corresponding section
-            const sectionId = this.dataset.section + '-section';
-            document.getElementById(sectionId).classList.add('active');
+            document.getElementById(`${section}-section`).classList.add('active');
 
             // Load content based on section
-            switch (this.dataset.section) {
+            switch (section) {
+                case 'dashboard':
+                    loadDashboard();
+                    break;
                 case 'users':
                     loadUsers();
                     break;
@@ -950,4 +954,201 @@ function deleteComment(commentId, userEmail) {
                 alert('エラーが発生しました');
             });
     }
+}
+
+function loadDashboard() {
+    const dashboardSection = document.getElementById('dashboard-section');
+
+    const html = `
+        <div class="dashboard-wrapper">
+            <!-- Traffic Analysis -->
+            <div class="dashboard-row">
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3>Traffic Analysis</h3>
+                        <div class="period-selector">
+                            <button class="period-btn active" data-period="24hours">24H</button>
+                            <button class="period-btn" data-period="7days">7D</button>
+                            <button class="period-btn" data-period="30days">30D</button>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="trafficChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="dashboard-row">
+                <div class="dashboard-card">
+                    <h3>Traffic Overview</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Total Visits</span>
+                            <span class="stat-value" id="totalVisits">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Unique Visitors</span>
+                            <span class="stat-value" id="uniqueVisitors">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Logged Users</span>
+                            <span class="stat-value" id="loggedInUsers">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h3>Device Distribution</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">Desktop</span>
+                            <span class="stat-value" id="desktopVisits">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Mobile</span>
+                            <span class="stat-value" id="mobileVisits">-</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Tablet</span>
+                            <span class="stat-value" id="tabletVisits">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Page and Visitor Stats -->
+            <div class="dashboard-row">
+                <div class="dashboard-card">
+                    <h3>Popular Pages</h3>
+                    <div id="pageBreakdown" class="breakdown-list"></div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Top Visitors</h3>
+                    <div id="topVisitors" class="breakdown-list"></div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    dashboardSection.innerHTML = html;
+
+    // Initialize Chart.js
+    initTrafficChart();
+
+    // Load initial data
+    loadTrafficData('7days');
+
+    // Add event listeners to period buttons
+    document.querySelectorAll('.period-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            document.querySelectorAll('.period-btn').forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            loadTrafficData(this.dataset.period);
+        });
+    });
+}
+
+function initTrafficChart() {
+    const ctx = document.getElementById('trafficChart').getContext('2d');
+    window.trafficChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [],
+            datasets: [{
+                label: 'Total Visits',
+                data: [],
+                borderColor: '#2ecc71',
+                backgroundColor: 'rgba(46, 204, 113, 0.1)',
+                tension: 0.3,
+                fill: true
+            }, {
+                label: 'Unique Visitors',
+                data: [],
+                borderColor: '#3498db',
+                backgroundColor: 'rgba(52, 152, 219, 0.1)',
+                tension: 0.3,
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: true,
+            aspectRatio: 2.5, // Điều chỉnh tỷ lệ chart
+            plugins: {
+                legend: {
+                    position: 'top',
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: {
+                        color: 'rgba(0, 0, 0, 0.05)'
+                    }
+                },
+                x: {
+                    grid: {
+                        display: false
+                    }
+                }
+            }
+        }
+    });
+}
+
+function loadTrafficData(period) {
+    fetch('../admin/functions/get_traffic_data.php?period=' + period)
+        .then(response => response.json())
+        .then(data => {
+            updateTrafficChart(data.chartData);
+            updateTrafficStats(data.summary);
+            updatePageBreakdown(data.pageBreakdown);
+            updateTopVisitors(data.topVisitors);
+        })
+        .catch(error => console.error('Error loading traffic data:', error));
+}
+
+function updateTrafficChart(chartData) {
+    window.trafficChart.data.labels = chartData.map(item => item.time_period);
+    window.trafficChart.data.datasets[0].data = chartData.map(item => item.visit_count);
+    window.trafficChart.data.datasets[1].data = chartData.map(item => item.unique_visitors);
+    window.trafficChart.update();
+}
+
+function updateTrafficStats(stats) {
+    document.getElementById('totalVisits').textContent = stats.total_visits;
+    document.getElementById('uniqueVisitors').textContent = stats.unique_visitors;
+    document.getElementById('loggedInUsers').textContent = stats.logged_in_users;
+    document.getElementById('desktopVisits').textContent = stats.desktop_visits;
+    document.getElementById('mobileVisits').textContent = stats.mobile_visits;
+    document.getElementById('tabletVisits').textContent = stats.tablet_visits;
+}
+
+function updatePageBreakdown(pageStats) {
+    const container = document.getElementById('pageBreakdown');
+    let html = '';
+    pageStats.forEach(page => {
+        html += `
+            <div class="breakdown-item">
+                <span class="breakdown-label">${page.page_name}</span>
+                <span class="breakdown-value">${page.visit_count}</span>
+            </div>
+        `;
+    });
+    container.innerHTML = html;
+}
+
+function updateTopVisitors(visitors) {
+    const container = document.getElementById('topVisitors');
+    let html = '';
+    visitors.forEach(visitor => {
+        html += `
+            <div class="breakdown-item">
+                <span class="breakdown-label">${visitor.visitor}</span>
+                <span class="breakdown-value">${visitor.visit_count}</span>
+            </div>
+        `;
+    });
+    container.innerHTML = html;
 }

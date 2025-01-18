@@ -3,6 +3,7 @@
 require_once __DIR__ . '/class/EventData.php';
 require_once __DIR__ . '/functions/verify.php';
 require_once __DIR__ . '/functions/eventsave.php';
+require_once __DIR__ . '/functions/track_visits.php';
 
 session_start();
 
@@ -14,6 +15,8 @@ if (!$email) {
 
 // Nếu cần, lưu lại email trong session để dùng trong phiên hiện tại
 $_SESSION['email'] = $email;
+
+trackPageVisit('event.php');
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];

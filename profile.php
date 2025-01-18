@@ -6,6 +6,7 @@ require_once __DIR__ . '/class/EventData.php';
 require_once __DIR__ . '/functions/verify.php';
 require_once __DIR__ . '/functions/parklike.php';
 require_once __DIR__ . '/functions/eventsave.php';
+require_once __DIR__ . '/functions/track_visits.php';
 
 session_start();
 
@@ -19,6 +20,7 @@ if (!$email) {
 // Nếu cần, lưu lại email trong session để dùng trong phiên hiện tại
 $_SESSION['email'] = $email;
 
+trackPageVisit('profile.php');
 $email = $_SESSION['email'];
 $user = UserData::getProfile();
 

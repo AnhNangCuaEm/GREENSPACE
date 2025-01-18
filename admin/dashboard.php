@@ -31,6 +31,7 @@ if ($user->role !== 'admin') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,25 +40,27 @@ if ($user->role !== 'admin') {
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
-    <div class="dashboard-container">
+    <div class="admin-container">
         <div class="sidebar">
             <h1>Admin Dashboard</h1>
+            <button class="nav-btn" data-section="dashboard">Dashboard</button>
             <button class="nav-btn active" data-section="users">User Manager</button>
             <button class="nav-btn" data-section="parks">Park Manager</button>
             <button class="nav-btn" data-section="events">Event Manager</button>
-            <!-- back to profile page -->
             <button class="nav-btn" onclick="window.location.href='../profile.php'">Back to Profile</button>
         </div>
-        
+
         <div class="content">
+            <div id="dashboard-section" class="content-section "></div>
             <div id="users-section" class="content-section active"></div>
             <div id="parks-section" class="content-section"></div>
             <div id="events-section" class="content-section"></div>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/admin.js"></script>
 </body>
-</html>
 
+</html>

@@ -6,6 +6,7 @@ require_once __DIR__ . '/class/ParkImageData.php';
 require_once __DIR__ . '/functions/verify.php';
 require_once __DIR__ . '/functions/parklike.php';
 require_once __DIR__ . '/functions/comment.php';
+require_once __DIR__ . '/functions/track_visits.php';
 
 session_start();
 
@@ -17,6 +18,8 @@ if (!$email) {
 
 // Nếu cần, lưu lại email trong session để dùng trong phiên hiện tại
 $_SESSION['email'] = $email;
+
+trackPageVisit('park.php');
 
 $isLiked = false; // Khởi tạo biến $isLiked
 if (isset($_GET['id'])) {
