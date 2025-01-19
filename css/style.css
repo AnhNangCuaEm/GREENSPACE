@@ -438,9 +438,7 @@ hr {
 .park-text .price,
 .park-text .nearest,
 .park-text .special {
-   font-size: 0.9rem;
    margin-bottom: 5px;
-   font-weight: 650;
 }
 
 .park-box img {

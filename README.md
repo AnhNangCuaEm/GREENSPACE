@@ -9,6 +9,7 @@ animation cho thanh menu ẩn lên trên khi scroll và hiện ra khi dừng scr
 thêm entrance animation cho menu\
 xóa console log còn sót lại\
 xắp xếp lại các code cho đẹp hơn\
+nút xóa traffic logs\
 
 
 

@@ -173,12 +173,12 @@ h2 {
     transition: 0.3s ease-in-out;
 }
 
-body > main > div > div.event-detail-info > div > a:nth-child(1):hover svg {
-    transform: translateX(-20%);
+body > div.content-wrapper > main > div > div.event-detail-info > div > a:nth-child(3) > button:hover svg {
+    transform: translateX(20%);
 }
 
-body > main > div > div.event-detail-info > div > a:nth-child(3):hover svg {
-    transform: translateX(20%);
+body > div.content-wrapper > main > div > div.event-detail-info > div > a:nth-child(1) > button:hover svg {
+    transform: translateX(-20%);
 }
 
 .park-detail-nav button {
