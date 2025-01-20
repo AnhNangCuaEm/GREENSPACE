@@ -501,6 +501,7 @@ function loadEvents() {
                 <table class="events-table">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Thumb</th>
                             <th>イベント名</th>
                             <th>場所</th>
@@ -517,6 +518,7 @@ function loadEvents() {
             events.forEach(event => {
                 html += `
                     <tr>
+                        <td>${event.id}</td>
                         <td><img src="${event.thumbnail}" alt="Event thumbnail" width="50" height="50" style="object-fit: cover;"></td>
                         <td>${event.name}</td>
                         <td>${event.location}</td>
@@ -1008,8 +1010,8 @@ function loadDashboard() {
                     <div class="card-header">
                         <h3>Traffic Analysis</h3>
                         <div class="period-selector">
-                            <button class="period-btn active" data-period="24hours">24H</button>
-                            <button class="period-btn" data-period="7days">7D</button>
+                            <button class="period-btn" data-period="24hours">24H</button>
+                            <button class="period-btn active" data-period="7days">7D</button>
                             <button class="period-btn" data-period="30days">30D</button>
                         </div>
                     </div>
