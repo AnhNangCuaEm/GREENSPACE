@@ -73,6 +73,12 @@ function loadUsers() {
         .then(users => {
             const usersSection = document.getElementById('users-section');
             let html = `
+                <div class="events-header">
+                    <h2>User Management</h2>
+                    <div class="header-controls">
+                        <input type="text" id="userSearch" placeholder="ユーザーを検索..." onkeyup="filterUsers()">
+                    </div>
+                </div>
                 <table class="user-table">
                     <thead>
                         <tr>
@@ -85,7 +91,7 @@ function loadUsers() {
                             <th>ステータス</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="userTableBody">
             `;
 
             users.forEach(user => {
@@ -161,9 +167,12 @@ function loadParks() {
             let html = `
                 <div class="events-header">
                     <h2>Park Management</h2>
-                    <button class="add-event-btn" onclick="showAddParkModal()">
-                        <i class="fas fa-plus"></i> 新公園追加
-                    </button>
+                    <div class="header-controls">
+                        <input type="text" id="parkSearch" placeholder="公園を検索..." onkeyup="filterParks()">
+                        <button class="add-event-btn" onclick="showAddParkModal()">
+                            <i class="fas fa-plus"></i> 新公園追加
+                        </button>
+                    </div>
                 </div>
                 <table class="events-table">
                     <thead>
@@ -180,7 +189,7 @@ function loadParks() {
                             <th>メニュー</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="parkTableBody">
             `;
 
             parks.forEach(park => {
@@ -494,9 +503,12 @@ function loadEvents() {
             let html = `
                 <div class="events-header">
                     <h2>Event Management</h2>
-                    <button class="add-event-btn" onclick="showAddEventModal()">
-                        <i class="fas fa-plus"></i> 新イベント追加
-                    </button>
+                    <div class="header-controls">
+                        <input type="text" id="eventSearch" placeholder="イベントを検索..." onkeyup="filterEvents()">
+                        <button class="add-event-btn" onclick="showAddEventModal()">
+                            <i class="fas fa-plus"></i> 新イベント追加
+                        </button>
+                    </div>
                 </div>
                 <table class="events-table">
                     <thead>
@@ -512,7 +524,7 @@ function loadEvents() {
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="eventTableBody">
             `;
 
             events.forEach(event => {
@@ -1184,4 +1196,73 @@ function updateTopVisitors(visitors) {
         `;
     });
     container.innerHTML = html;
+}
+
+function filterUsers() {
+    const input = document.getElementById('userSearch');
+    const filter = input.value.toLowerCase();
+    const tbody = document.getElementById('userTableBody');
+    const rows = tbody.getElementsByTagName('tr');
+
+    for (let row of rows) {
+        const name = row.getElementsByTagName('td')[1].textContent;
+        const email = row.getElementsByTagName('td')[2].textContent;
+        const phone = row.getElementsByTagName('td')[3].textContent;
+        const address = row.getElementsByTagName('td')[4].textContent;
+        
+        if (name.toLowerCase().includes(filter) || 
+            email.toLowerCase().includes(filter) || 
+            phone.toLowerCase().includes(filter) || 
+            address.toLowerCase().includes(filter)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    }
+}
+
+function filterParks() {
+    const input = document.getElementById('parkSearch');
+    const filter = input.value.toLowerCase();
+    const tbody = document.getElementById('parkTableBody');
+    const rows = tbody.getElementsByTagName('tr');
+
+    for (let row of rows) {
+        const name = row.getElementsByTagName('td')[2].textContent;
+        const location = row.getElementsByTagName('td')[3].textContent;
+        const nearest = row.getElementsByTagName('td')[6].textContent;
+        const special = row.getElementsByTagName('td')[7].textContent;
+        
+        if (name.toLowerCase().includes(filter) || 
+            location.toLowerCase().includes(filter) || 
+            nearest.toLowerCase().includes(filter) || 
+            special.toLowerCase().includes(filter)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    }
+}
+
+function filterEvents() {
+    const input = document.getElementById('eventSearch');
+    const filter = input.value.toLowerCase();
+    const tbody = document.getElementById('eventTableBody');
+    const rows = tbody.getElementsByTagName('tr');
+
+    for (let row of rows) {
+        const name = row.getElementsByTagName('td')[2].textContent;
+        const location = row.getElementsByTagName('td')[3].textContent;
+        const date = row.getElementsByTagName('td')[4].textContent;
+        const description = row.getElementsByTagName('td')[7].textContent;
+        
+        if (name.toLowerCase().includes(filter) || 
+            location.toLowerCase().includes(filter) || 
+            date.toLowerCase().includes(filter) || 
+            description.toLowerCase().includes(filter)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    }
 }
