@@ -70,7 +70,7 @@ class eventData
 
       $row = $state->fetch();
 
-      if (is_null($row)) {
+      if (!$row) {
          return null;
       }
 

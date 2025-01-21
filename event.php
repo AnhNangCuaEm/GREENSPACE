@@ -104,7 +104,7 @@ if (isset($_GET['id'])) {
             <div>
                 <h1>アクセスされたURLは存在しません!</h1>
                 <p id="countdown">10秒後、ホームページへ自動的に移動されます!</p>
-                <button><a href="index.php">ホームページに戻る</a></button>
+                <a href="index.php"><button>ホームページに戻る</button></a>
             </div>
             <script>
                 let timeLeft = 10; // Set the countdown time in seconds
