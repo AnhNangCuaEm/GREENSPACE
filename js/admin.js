@@ -907,14 +907,11 @@ function closeImageModal() {
 }
 
 function showComments(parkId) {
-    console.log('Park ID:', parkId); // Debug log
     fetch(`../functions/comment.php?parkId=${parkId}`)
         .then(response => {
-            console.log('Response:', response); // Debug log
             return response.json();
         })
         .then(comments => {
-            console.log('Comments:', comments); // Debug log
             const modal = `
                 <div class="modal" id="commentsModal">
                     <div class="modal-content">
@@ -954,23 +951,18 @@ function closeCommentsModal() {
 }
 
 function deleteComment(commentId, userEmail) {
-    console.log('Attempting to delete comment:', { commentId, userEmail }); // Debug log
 
     if (confirm('このコメントを削除しますか？')) {
         const data = new URLSearchParams();
         data.append('commentId', commentId);
         data.append('email', userEmail);
 
-        console.log('Request data:', data.toString()); // Debug log
-
         fetch('../functions/comment.php', {
             method: 'DELETE',
             body: data
         })
             .then(response => {
-                console.log('Response status:', response.status); // Debug log
                 return response.text().then(text => {
-                    console.log('Raw response:', text); // Debug log
                     try {
                         return JSON.parse(text);
                     } catch (e) {
@@ -980,10 +972,8 @@ function deleteComment(commentId, userEmail) {
                 });
             })
             .then(data => {
-                console.log('Parsed response data:', data); // Debug log
                 if (data.success) {
                     const commentElement = document.querySelector(`[data-comment-id="${commentId}"]`);
-                    console.log('Found comment element:', commentElement); // Debug log
                     if (commentElement) {
                         commentElement.remove();
                     }

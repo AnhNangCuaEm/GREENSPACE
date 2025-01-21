@@ -68,7 +68,6 @@ document.getElementById('editForm').addEventListener('submit', function (event) 
     })
     .then(response => {
         if (response.ok) {
-            console.log('Profile updated successfully');
             document.getElementById('infoPopup').style.display = 'none'; // Hide the popup
 
             // Show result popup after applying changes

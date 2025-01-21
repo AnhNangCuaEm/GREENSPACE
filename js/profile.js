@@ -13,7 +13,6 @@ document.getElementById('applyAvatar').addEventListener('click', function () {
     const selectedAvatar = document.querySelector('.avatar-option.selected');
     if (selectedAvatar) {
         const newAvatar = selectedAvatar.src; // Get the selected avatar URL
-        console.log('Avatar đã chọn:', newAvatar);
 
         // Send AJAX request to update the avatar
         fetch('functions/update_avatar.php', {
@@ -25,7 +24,6 @@ document.getElementById('applyAvatar').addEventListener('click', function () {
         })
             .then(response => {
                 if (response.ok) {
-                    console.log('Avatar updated successfully');
                     document.getElementById('avatarPopup').style.display = 'none'; // Tắt popup sau khi click apply
                     document.body.style.overflow = 'auto'; // Bật lại cuộn
 
