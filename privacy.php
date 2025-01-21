@@ -39,8 +39,6 @@ trackPageVisit('privacy.php');
             <div class="g1"></div>
             <div class="g2"></div>
             <div class="g3"></div>
-            <div class="g4"></div>
-            <div class="g5"></div>
             <div class="interactive"></div>
         </div>
     </div>

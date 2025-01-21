@@ -181,38 +181,6 @@ body {
    opacity: 1;
 }
 
-.g4 {
-   position: absolute;
-   background: radial-gradient(circle at center, rgba(var(--color4), 0.8) 0, rgba(var(--color4), 0) 50%) no-repeat;
-   mix-blend-mode: var(--blending);
-
-   width: var(--circle-size);
-   height: var(--circle-size);
-   top: calc(50% - var(--circle-size) / 2);
-   left: calc(50% - var(--circle-size) / 2);
-
-   transform-origin: calc(50% - 200px);
-   animation: moveHorizontal 40s ease infinite;
-
-   opacity: 0.7;
-}
-
-.g5 {
-   position: absolute;
-   background: radial-gradient(circle at center, rgba(var(--color5), 0.8) 0, rgba(var(--color5), 0) 50%) no-repeat;
-   mix-blend-mode: var(--blending);
-
-   width: calc(var(--circle-size) * 2);
-   height: calc(var(--circle-size) * 2);
-   top: calc(50% - var(--circle-size));
-   left: calc(50% - var(--circle-size));
-
-   transform-origin: calc(50% - 800px) calc(50% + 200px);
-   animation: moveInCircle 20s ease infinite;
-
-   opacity: 1;
-}
-
 .interactive {
    position: absolute;
    background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;
@@ -461,7 +429,9 @@ hr {
 }
 
 .view-more-btn:hover {
-   background-color: #7f7f7f55;
+   background-color: rgba(62, 62, 62, 0.4);
+   transform: translateY(-2px);
+   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 .event-container {
