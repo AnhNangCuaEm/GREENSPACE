@@ -1,3 +1,10 @@
+// Kiểm tra xem đã load lần đầu chưa
+if (!sessionStorage.getItem('hasVisited')) {
+   document.querySelector('nav').classList.add('initial-load');
+   // Đánh dấu đã load
+   sessionStorage.setItem('hasVisited', 'true');
+}
+
 // Hamburger menu
 const hamburger = document.getElementById('hamburger');
 

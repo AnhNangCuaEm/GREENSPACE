@@ -13,6 +13,21 @@ nav {
     gap: 15px;
 }
 
+nav.initial-load {
+    animation: navSlideDown 0.8s ease-out;
+}
+
+@keyframes navSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .search-results {
     position: absolute;
     top: 65px;
@@ -147,6 +162,18 @@ nav {
 .mobile-menu.show {
     display: block;
     opacity: 1;
+    animation: menuSlideDown 0.3s ease-out;
+}
+
+@keyframes menuSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .menu-ul,
@@ -234,15 +261,6 @@ ul li:hover {
     justify-content: center;
     flex-shrink: 0;
     transition: 0.3s ease-out;
-
-}
-
-.navL ul li:hover {
-    text-shadow: 0 0 10px rgb(255, 255, 255);
-}
-
-.navR ul li:hover {
-    filter: drop-shadow(0 0 8px white);
 }
 
 .navLogo {
@@ -278,6 +296,13 @@ ul li:hover {
     transition: all 0.3s ease;
     z-index: 2;
     position: relative;
+    animation: searchBarPulse 2s infinite;
+}
+
+@keyframes searchBarPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
 }
 
 .searchBtn div:before {
@@ -400,6 +425,12 @@ ul li:hover {
 .hamburger.active .menuLine::after {
     transform: rotate(-45deg);
     top: 0;
+}
+
+.hamburger .menuLine, 
+.hamburger .menuLine::before, 
+.hamburger .menuLine::after {
+    transition: all 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
 }
 
 .confirmation-popup {

@@ -38,7 +38,6 @@ trackPageVisit('contact.php');
         <div class="gradients-container">
             <div class="g1"></div>
             <div class="g2"></div>
-            <div class="g3"></div>
             <div class="interactive"></div>
         </div>
     </div>
