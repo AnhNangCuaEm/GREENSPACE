@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Get active section from localStorage, default to 'dashboard' if none saved
     const activeSection = localStorage.getItem('activeSection') || 'dashboard';
 
@@ -27,16 +27,19 @@ document.addEventListener('DOMContentLoaded', function() {
             case 'events':
                 loadEvents();
                 break;
+            case 'feedbacks':
+                loadFeedbacks();
+                break;
         }
     }
 
     // Add click event listeners to nav buttons
     document.querySelectorAll('.nav-btn').forEach(button => {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function () {
             if (this.hasAttribute('onclick')) return; // Skip for buttons with onclick attribute
 
             const section = this.dataset.section;
-            
+
             // Save active section to localStorage
             localStorage.setItem('activeSection', section);
 
@@ -61,6 +64,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     break;
                 case 'events':
                     loadEvents();
+                    break;
+                case 'feedbacks':
+                    loadFeedbacks();
                     break;
             }
         });
@@ -1209,10 +1215,10 @@ function filterUsers() {
         const email = row.getElementsByTagName('td')[2].textContent;
         const phone = row.getElementsByTagName('td')[3].textContent;
         const address = row.getElementsByTagName('td')[4].textContent;
-        
-        if (name.toLowerCase().includes(filter) || 
-            email.toLowerCase().includes(filter) || 
-            phone.toLowerCase().includes(filter) || 
+
+        if (name.toLowerCase().includes(filter) ||
+            email.toLowerCase().includes(filter) ||
+            phone.toLowerCase().includes(filter) ||
             address.toLowerCase().includes(filter)) {
             row.style.display = '';
         } else {
@@ -1232,10 +1238,10 @@ function filterParks() {
         const location = row.getElementsByTagName('td')[3].textContent;
         const nearest = row.getElementsByTagName('td')[6].textContent;
         const special = row.getElementsByTagName('td')[7].textContent;
-        
-        if (name.toLowerCase().includes(filter) || 
-            location.toLowerCase().includes(filter) || 
-            nearest.toLowerCase().includes(filter) || 
+
+        if (name.toLowerCase().includes(filter) ||
+            location.toLowerCase().includes(filter) ||
+            nearest.toLowerCase().includes(filter) ||
             special.toLowerCase().includes(filter)) {
             row.style.display = '';
         } else {
@@ -1255,11 +1261,226 @@ function filterEvents() {
         const location = row.getElementsByTagName('td')[3].textContent;
         const date = row.getElementsByTagName('td')[4].textContent;
         const description = row.getElementsByTagName('td')[7].textContent;
-        
-        if (name.toLowerCase().includes(filter) || 
-            location.toLowerCase().includes(filter) || 
-            date.toLowerCase().includes(filter) || 
+
+        if (name.toLowerCase().includes(filter) ||
+            location.toLowerCase().includes(filter) ||
+            date.toLowerCase().includes(filter) ||
             description.toLowerCase().includes(filter)) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    }
+}
+
+function loadFeedbacks() {
+    fetch('functions/get_feedbacks.php')
+        .then(response => response.json())
+        .then(response => {
+            console.log('Feedback response:', response);
+
+            const feedbacks = response.data || [];
+            const feedbacksSection = document.getElementById('feedbacks-section');
+            
+            let html = `
+                <div class="events-header">
+                    <h2>Feedback Management</h2>
+                    <div class="header-controls">
+                        <input type="text" id="feedbackSearch" placeholder="フィードバックを検索..." onkeyup="filterFeedbacks()">
+                    </div>
+                </div>
+                <table class="feedback-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Email</th>
+                            <th>UI/UX評価</th>
+                            <th>コンテンツ評価</th>
+                            <th>総合評価</th>
+                            <th>フィードバック内容</th>
+                            <th>日付</th>
+                            <th>ステータス</th>
+                            <th>アクション</th>
+                        </tr>
+                    </thead>
+                    <tbody id="feedbackTableBody">
+            `;
+
+            if (response.status === 'error') {
+                html += `
+                    <tr>
+                        <td colspan="9" style="text-align: center; color: red;">
+                            エラーが発生しました: ${response.message}
+                        </td>
+                    </tr>
+                `;
+            } else if (feedbacks.length === 0) {
+                html += `
+                    <tr>
+                        <td colspan="9" style="text-align: center;">
+                            フィードバックはありません
+                        </td>
+                    </tr>
+                `;
+            } else {
+                feedbacks.forEach(feedback => {
+                    const createdAt = new Date(feedback.created_at).toLocaleString('ja-JP');
+                    const truncatedContent = feedback.feedback_content.length > 50 ? 
+                        `${feedback.feedback_content.substring(0, 50)}...` : 
+                        feedback.feedback_content;
+                        
+                    html += `
+                        <tr data-id="${feedback.id}" class="${feedback.is_important ? 'important' : ''} ${feedback.is_read ? 'read' : ''}">
+                            <td>${feedback.id}</td>
+                            <td>${feedback.email}</td>
+                            <td>${feedback.uiux}/5</td>
+                            <td>${feedback.content_rating}/5</td>
+                            <td>${feedback.overall}/5</td>
+                            <td class="feedback-content-cell">
+                                <div class="feedback-content-truncated">${truncatedContent}</div>
+                                <div class="feedback-content-full">${feedback.feedback_content}</div>
+                                <button class="expand-btn">
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                            </td>
+                            <td>${createdAt}</td>
+                            <td>
+                                <div class="status-toggles">
+                                    <label class="toggle">
+                                        <input type="checkbox" 
+                                               onchange="updateFeedbackStatus(${feedback.id}, 'is_read', this.checked)"
+                                               ${feedback.is_read ? 'checked' : ''}>
+                                        既読
+                                    </label>
+                                    <label class="toggle">
+                                        <input type="checkbox" 
+                                               onchange="updateFeedbackStatus(${feedback.id}, 'is_important', this.checked)"
+                                               ${feedback.is_important ? 'checked' : ''}>
+                                        重要
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <button onclick="deleteFeedback(${feedback.id})" class="delete-btn">
+                                    <i class="fas fa-trash"></i> 削除
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+
+            html += `</tbody></table>`;
+            feedbacksSection.innerHTML = html;
+
+            // Add event listeners for expand buttons after table is loaded
+            document.querySelectorAll('.expand-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const cell = this.closest('.feedback-content-cell');
+                    cell.classList.toggle('expanded');
+                    
+                    // Change icon based on expanded state
+                    const icon = this.querySelector('i');
+                    if (cell.classList.contains('expanded')) {
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
+                    } else {
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    }
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Error loading feedbacks:', error);
+            const feedbacksSection = document.getElementById('feedbacks-section');
+            feedbacksSection.innerHTML = `
+                <div class="error-message">
+                    フィードバックの読み込み中にエラーが発生しました。<br>
+                    エラー詳細: ${error.message}
+                </div>
+            `;
+        });
+}
+
+function updateFeedbackStatus(id, field, value) {
+    fetch('functions/update_feedback_status.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, field, value })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const row = document.querySelector(`tr[data-id="${id}"]`);
+                if (row) {
+                    if (field === 'is_important') {
+                        if (value) {
+                            row.classList.add('important');
+                        } else {
+                            row.classList.remove('important');
+                        }
+                    } else if (field === 'is_read') {
+                        if (value) {
+                            row.classList.add('read');
+                        } else {
+                            row.classList.remove('read');
+                        }
+                    }
+                }
+            } else {
+                // Nếu update thất bại, revert lại checkbox
+                const checkbox = document.querySelector(`tr[data-id="${id}"] input[type="checkbox"][onchange*="${field}"]`);
+                if (checkbox) {
+                    checkbox.checked = !value;
+                }
+                alert('ステータスの更新に失敗しました');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating status:', error);
+            // Revert checkbox nếu có lỗi
+            const checkbox = document.querySelector(`tr[data-id="${id}"] input[type="checkbox"][onchange*="${field}"]`);
+            if (checkbox) {
+                checkbox.checked = !value;
+            }
+            alert('エラーが発生しました');
+        });
+}
+
+function deleteFeedback(id) {
+    if (confirm('このフィードバックを削除しますか？')) {
+        fetch('functions/delete_feedback.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    loadFeedbacks();
+                    alert('フィードバックを削除しました');
+                }
+            });
+    }
+}
+
+function filterFeedbacks() {
+    const input = document.getElementById('feedbackSearch');
+    const filter = input.value.toLowerCase();
+    const tbody = document.getElementById('feedbackTableBody');
+    const rows = tbody.getElementsByTagName('tr');
+
+    for (let row of rows) {
+        const email = row.cells[1].textContent;
+        const content = row.cells[4].textContent;
+
+        if (email.toLowerCase().includes(filter) ||
+            content.toLowerCase().includes(filter)) {
             row.style.display = '';
         } else {
             row.style.display = 'none';

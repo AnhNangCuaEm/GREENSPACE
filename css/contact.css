@@ -50,6 +50,7 @@ textarea {
     border: 1px solid #919191;
     border-radius: 7px;
     resize: vertical;
+    color: black;
 }
 
 .button-area {
