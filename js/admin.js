@@ -1012,7 +1012,7 @@ function loadDashboard() {
 
     const html = `
         <div class="dashboard-wrapper">
-            <!-- Traffic Analysis -->
+            <!-- First row with Traffic Analysis -->
             <div class="dashboard-row">
                 <div class="dashboard-card">
                     <div class="card-header">
@@ -1068,7 +1068,7 @@ function loadDashboard() {
                 </div>
             </div>
 
-            <!-- Page and Visitor Stats -->
+            <!-- Page Stats and Popular Content -->
             <div class="dashboard-row">
                 <div class="dashboard-card">
                     <h3>Popular Pages</h3>
@@ -1078,17 +1078,27 @@ function loadDashboard() {
                     <h3>Top Visitors</h3>
                     <div id="topVisitors" class="breakdown-list"></div>
                 </div>
+                <div class="dashboard-card">
+                    <h3>Most Liked Parks</h3>
+                    <div id="popularParks" class="breakdown-list"></div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Most Saved Events</h3>
+                    <div id="popularEvents" class="breakdown-list"></div>
+                </div>
             </div>
         </div>
     `;
 
     dashboardSection.innerHTML = html;
 
-    // Initialize Chart.js
+    // Initialize traffic chart
     initTrafficChart();
 
-    // Load initial data
+    // Load all data
     loadTrafficData('7days');
+    loadPopularParks();
+    loadPopularEvents();
 
     // Add event listeners to period buttons
     document.querySelectorAll('.period-btn').forEach(button => {
@@ -1098,6 +1108,44 @@ function loadDashboard() {
             loadTrafficData(this.dataset.period);
         });
     });
+}
+
+function loadPopularParks() {
+    fetch('../admin/functions/get_parks_likes.php')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('popularParks');
+            let html = '';
+            data.forEach(park => {
+                html += `
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">${park.name}</span>
+                        <span class="breakdown-value">${park.likes_count}</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        })
+        .catch(error => console.error('Error loading popular parks:', error));
+}
+
+function loadPopularEvents() {
+    fetch('../admin/functions/get_events_saved.php')
+        .then(response => response.json())
+        .then(data => {
+            const container = document.getElementById('popularEvents');
+            let html = '';
+            data.forEach(event => {
+                html += `
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">${event.name}</span>
+                        <span class="breakdown-value">${event.saves_count}</span>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        })
+        .catch(error => console.error('Error loading popular events:', error));
 }
 
 function initTrafficChart() {

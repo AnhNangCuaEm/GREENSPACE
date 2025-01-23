@@ -496,7 +496,7 @@ input[type="url"]:focus {
 
 .dashboard-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     margin-bottom: 20px;
 }
@@ -568,7 +568,7 @@ input[type="url"]:focus {
 
 .breakdown-list {
     margin-top: 10px;
-    max-height: 400px;
+    max-height: 350px;
     overflow-y: auto;
 }
 
