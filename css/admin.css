@@ -494,14 +494,39 @@ input[type="url"]:focus {
     padding: 20px;
 }
 
+/* Modify top row layout */
+.dashboard-row.top-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stats-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Traffic chart specific styles */
+.traffic-chart {
+    height: 100%;
+}
+
+.traffic-chart .chart-container {
+    height: 300px;
+}
+
+/* Regular dashboard rows (3 columns) */
 .dashboard-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin-bottom: 20px;
 }
 
 .dashboard-card {
+    flex: 1;
     background: white;
     padding: 20px;
     border-radius: 8px;
@@ -544,7 +569,7 @@ input[type="url"]:focus {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 15px;
 }
 
@@ -798,4 +823,48 @@ input[type="url"]:focus {
 
 .feedback-content-cell.expanded {
     padding-bottom: 15px;
+}
+
+/* Device Distribution Chart Styles */
+.device-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    height: 200px;
+}
+
+.device-chart {
+    width: 200px; /* Fixed width for the chart */
+    height: 200px;
+}
+
+.device-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+.legend-color {
+    min-width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+
+.legend-text {
+    color: #666;
+}
+
+.legend-count {
+    color: #999;
+    font-size: 12px;
+    margin-left: 4px;
 }

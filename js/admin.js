@@ -1012,9 +1012,10 @@ function loadDashboard() {
 
     const html = `
         <div class="dashboard-wrapper">
-            <!-- First row with Traffic Analysis -->
-            <div class="dashboard-row">
-                <div class="dashboard-card">
+            <!-- First row with Traffic Analysis and Stats -->
+            <div class="dashboard-row top-row">
+                <!-- Traffic Analysis Chart -->
+                <div class="dashboard-card traffic-chart">
                     <div class="card-header">
                         <h3>Traffic Analysis</h3>
                         <div class="period-selector">
@@ -1027,56 +1028,59 @@ function loadDashboard() {
                         <canvas id="trafficChart"></canvas>
                     </div>
                 </div>
-            </div>
 
-            <!-- Statistics Cards -->
-            <div class="dashboard-row">
-                <div class="dashboard-card">
-                    <h3>Traffic Overview</h3>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-label">Total Visits</span>
-                            <span class="stat-value" id="totalVisits">-</span>
+                <!-- Stats Column -->
+                <div class="stats-column">
+                    <!-- Traffic Overview Card -->
+                    <div class="dashboard-card">
+                        <h3>Traffic Overview</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Visits</span>
+                                <span class="stat-value" id="totalVisits">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Unique Visitors</span>
+                                <span class="stat-value" id="uniqueVisitors">-</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Logged Users</span>
+                                <span class="stat-value" id="loggedInUsers">-</span>
+                            </div>
                         </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Unique Visitors</span>
-                            <span class="stat-value" id="uniqueVisitors">-</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Logged Users</span>
-                            <span class="stat-value" id="loggedInUsers">-</span>
+                    </div>
+
+                    <!-- Device Distribution Card -->
+                    <div class="dashboard-card">
+                        <h3>Device Distribution</h3>
+                        <div class="device-stats">
+                            <div class="device-chart">
+                                <canvas id="deviceChart"></canvas>
+                            </div>
+                            <div class="device-legend">
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #2ecc71"></span>
+                                    <span class="legend-text" id="desktopLegend">Desktop 0%</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #3498db"></span>
+                                    <span class="legend-text" id="mobileLegend">Mobile 0%</span>
+                                </div>
+                                <div class="legend-item">
+                                    <span class="legend-color" style="background-color: #e74c3c"></span>
+                                    <span class="legend-text" id="tabletLegend">Tablet 0%</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="dashboard-card">
-                    <h3>Device Distribution</h3>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <span class="stat-label">Desktop</span>
-                            <span class="stat-value" id="desktopVisits">-</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Mobile</span>
-                            <span class="stat-value" id="mobileVisits">-</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Tablet</span>
-                            <span class="stat-value" id="tabletVisits">-</span>
-                        </div>
-                    </div>
-                </div>
             </div>
 
-            <!-- Page Stats and Popular Content -->
+            <!-- Second row with 3 cards -->
             <div class="dashboard-row">
                 <div class="dashboard-card">
                     <h3>Popular Pages</h3>
                     <div id="pageBreakdown" class="breakdown-list"></div>
-                </div>
-                <div class="dashboard-card">
-                    <h3>Top Visitors</h3>
-                    <div id="topVisitors" class="breakdown-list"></div>
                 </div>
                 <div class="dashboard-card">
                     <h3>Most Liked Parks</h3>
@@ -1087,13 +1091,31 @@ function loadDashboard() {
                     <div id="popularEvents" class="breakdown-list"></div>
                 </div>
             </div>
+
+            <!-- Third row with 3 cards (including Top Visitors) -->
+            <div class="dashboard-row">
+                <div class="dashboard-card">
+                    <h3>Top Visitors</h3>
+                    <div id="topVisitors" class="breakdown-list"></div>
+                </div>
+                <!-- Placeholder for 2 new cards -->
+                <div class="dashboard-card">
+                    <h3>New Card 1</h3>
+                    <div class="breakdown-list"></div>
+                </div>
+                <div class="dashboard-card">
+                    <h3>New Card 2</h3>
+                    <div class="breakdown-list"></div>
+                </div>
+            </div>
         </div>
     `;
 
     dashboardSection.innerHTML = html;
 
-    // Initialize traffic chart
+    // Initialize both charts after HTML is set
     initTrafficChart();
+    initDeviceChart();
 
     // Load all data
     loadTrafficData('7days');
@@ -1219,9 +1241,62 @@ function updateTrafficStats(stats) {
     document.getElementById('totalVisits').textContent = stats.total_visits;
     document.getElementById('uniqueVisitors').textContent = stats.unique_visitors;
     document.getElementById('loggedInUsers').textContent = stats.logged_in_users;
-    document.getElementById('desktopVisits').textContent = stats.desktop_visits;
-    document.getElementById('mobileVisits').textContent = stats.mobile_visits;
-    document.getElementById('tabletVisits').textContent = stats.tablet_visits;
+    
+    // Update device distribution
+    updateDeviceStats(stats);
+}
+
+function initDeviceChart() {
+    const ctx = document.getElementById('deviceChart').getContext('2d');
+    window.deviceChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Desktop', 'Mobile', 'Tablet'],
+            datasets: [{
+                data: [0, 0, 0], // Will be updated with real data
+                backgroundColor: [
+                    '#2ecc71', // Desktop - Green
+                    '#3498db', // Mobile - Blue
+                    '#e74c3c'  // Tablet - Red
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false // Hide default legend
+                }
+            },
+            cutout: '60%'
+        }
+    });
+}
+
+function updateDeviceStats(stats) {
+    // Calculate percentages
+    const total = stats.desktop_visits + stats.mobile_visits + stats.tablet_visits;
+    const desktopPercent = ((stats.desktop_visits / total) * 100).toFixed(1);
+    const mobilePercent = ((stats.mobile_visits / total) * 100).toFixed(1);
+    const tabletPercent = ((stats.tablet_visits / total) * 100).toFixed(1);
+
+    // Update chart data
+    window.deviceChart.data.datasets[0].data = [
+        stats.desktop_visits,
+        stats.mobile_visits,
+        stats.tablet_visits
+    ];
+    window.deviceChart.update();
+
+    // Update legend text with both percentage and count
+    document.getElementById('desktopLegend').textContent = 
+        `Desktop ${desktopPercent}% (${stats.desktop_visits})`;
+    document.getElementById('mobileLegend').textContent = 
+        `Mobile ${mobilePercent}% (${stats.mobile_visits})`;
+    document.getElementById('tabletLegend').textContent = 
+        `Tablet ${tabletPercent}% (${stats.tablet_visits})`;
 }
 
 function updatePageBreakdown(pageStats) {
