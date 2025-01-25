@@ -197,17 +197,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="login-register-form">
             <form action="login.php" method="post">
                 <h2>ログイン</h2>
-                <div>
-                    <label for="email">メールアドレス</label>
-                    <input type="email" name="email" id="email" placeholder="abc@gmail.com"
-                        value="<?= htmlspecialchars($email ?? '') ?>">
-                    <p><?= htmlspecialchars($errormessages['email'] ?? '') ?></p>
-                </div>
-                <div>
-                    <label for="password">パスワード</label>
-                    <input type="password" name="password" id="password" placeholder="********"
-                        value="<?= htmlspecialchars($password ?? '') ?>">
-                    <p><?= htmlspecialchars($errormessages['password'] ?? '') ?></p>
+                <div class="input-div">
+                    <div>
+                        <label for="email">メールアドレス</label>
+                        <input type="email" name="email" id="email" placeholder="abc@gmail.com"
+                            value="<?= htmlspecialchars($email ?? '') ?>">
+                        <p><?= htmlspecialchars($errormessages['email'] ?? '') ?></p>
+                    </div>
+                    <div>
+                        <label for="password">パスワード</label>
+                        <input type="password" name="password" id="password" placeholder="********"
+                            value="<?= htmlspecialchars($password ?? '') ?>">
+                        <p><?= htmlspecialchars($errormessages['password'] ?? '') ?></p>
+                    </div>
                 </div>
                 <p><?= htmlspecialchars($errormessages['login'] ?? '') ?></p>
                 <div class="button-area">

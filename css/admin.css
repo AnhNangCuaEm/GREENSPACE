@@ -868,3 +868,8 @@ input[type="url"]:focus {
     font-size: 12px;
     margin-left: 4px;
 }
+
+.satisfaction-chart {
+    height: 300px;
+    position: relative;
+}

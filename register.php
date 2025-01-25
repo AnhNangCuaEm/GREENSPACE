@@ -198,16 +198,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form action="register.php" method="post">
                 <h2>新規登録</h2>
                 <div>
-                    <label for="email">メールアドレス</label>
-                    <input type="email" name="email" id="email" placeholder="abc@gmail.com"
-                        value="<?= htmlspecialchars($email ?? '') ?>">
-                    <p><?= $errormessages['email'] ?? '' ?></p>
-                </div>
-                <div>
-                    <label for="password">パスワード</label>
-                    <input type="password" name="password" id="password" placeholder="8文字以上のパスワード"
-                        value="<?= htmlspecialchars($password ?? '') ?>" style="margin-bottom: 0;">
-                    <p><?= $errormessages['password'] ?? '' ?></p>
+                    <div class="input-div">
+                        <label for="email">メールアドレス</label>
+                        <input type="email" name="email" id="email" placeholder="abc@gmail.com"
+                            value="<?= htmlspecialchars($email ?? '') ?>">
+                        <p><?= $errormessages['email'] ?? '' ?></p>
+                    </div>
+                    <div>
+                        <label for="password">パスワード</label>
+                        <input type="password" name="password" id="password" placeholder="8文字以上のパスワード"
+                            value="<?= htmlspecialchars($password ?? '') ?>" style="margin-bottom: 0;">
+                        <p><?= $errormessages['password'] ?? '' ?></p>
+                    </div>
                 </div>
                 <div class="button-area">
                     <button class="glow-on-hover" type="submit" name="submit-button">登録</button>

@@ -1052,7 +1052,7 @@ function loadDashboard() {
 
                     <!-- Device Distribution Card -->
                     <div class="dashboard-card">
-                        <h3>Device Distribution</h3>
+                        <h3>デバイス 割合</h3>
                         <div class="device-stats">
                             <div class="device-chart">
                                 <canvas id="deviceChart"></canvas>
@@ -1079,33 +1079,30 @@ function loadDashboard() {
             <!-- Second row with 3 cards -->
             <div class="dashboard-row">
                 <div class="dashboard-card">
-                    <h3>Popular Pages</h3>
-                    <div id="pageBreakdown" class="breakdown-list"></div>
+                    <h3>満足度</h3>
+                    <div class="satisfaction-chart">
+                        <canvas id="satisfactionChart"></canvas>
+                    </div>
                 </div>
                 <div class="dashboard-card">
-                    <h3>Most Liked Parks</h3>
+                    <h3>保存された公園</h3>
                     <div id="popularParks" class="breakdown-list"></div>
                 </div>
                 <div class="dashboard-card">
-                    <h3>Most Saved Events</h3>
+                    <h3>保存されたイベント</h3>
                     <div id="popularEvents" class="breakdown-list"></div>
                 </div>
             </div>
 
-            <!-- Third row with 3 cards (including Top Visitors) -->
+            <!-- Third row with 3 cards -->
             <div class="dashboard-row">
+                <div class="dashboard-card">
+                    <h3>Popular Pages</h3>
+                    <div id="pageBreakdown" class="breakdown-list"></div>
+                </div>
                 <div class="dashboard-card">
                     <h3>Top Visitors</h3>
                     <div id="topVisitors" class="breakdown-list"></div>
-                </div>
-                <!-- Placeholder for 2 new cards -->
-                <div class="dashboard-card">
-                    <h3>New Card 1</h3>
-                    <div class="breakdown-list"></div>
-                </div>
-                <div class="dashboard-card">
-                    <h3>New Card 2</h3>
-                    <div class="breakdown-list"></div>
                 </div>
             </div>
         </div>
@@ -1113,9 +1110,10 @@ function loadDashboard() {
 
     dashboardSection.innerHTML = html;
 
-    // Initialize both charts after HTML is set
+    // Initialize charts
     initTrafficChart();
     initDeviceChart();
+    initSatisfactionChart();
 
     // Load all data
     loadTrafficData('7days');
@@ -1226,6 +1224,7 @@ function loadTrafficData(period) {
             updateTrafficStats(data.summary);
             updatePageBreakdown(data.pageBreakdown);
             updateTopVisitors(data.topVisitors);
+            updateDeviceChart(data.summary);
         })
         .catch(error => console.error('Error loading traffic data:', error));
 }
@@ -1241,7 +1240,7 @@ function updateTrafficStats(stats) {
     document.getElementById('totalVisits').textContent = stats.total_visits;
     document.getElementById('uniqueVisitors').textContent = stats.unique_visitors;
     document.getElementById('loggedInUsers').textContent = stats.logged_in_users;
-    
+
     // Update device distribution
     updateDeviceStats(stats);
 }
@@ -1291,11 +1290,11 @@ function updateDeviceStats(stats) {
     window.deviceChart.update();
 
     // Update legend text with both percentage and count
-    document.getElementById('desktopLegend').textContent = 
+    document.getElementById('desktopLegend').textContent =
         `Desktop ${desktopPercent}% (${stats.desktop_visits})`;
-    document.getElementById('mobileLegend').textContent = 
+    document.getElementById('mobileLegend').textContent =
         `Mobile ${mobilePercent}% (${stats.mobile_visits})`;
-    document.getElementById('tabletLegend').textContent = 
+    document.getElementById('tabletLegend').textContent =
         `Tablet ${tabletPercent}% (${stats.tablet_visits})`;
 }
 
@@ -1404,7 +1403,7 @@ function loadFeedbacks() {
 
             const feedbacks = response.data || [];
             const feedbacksSection = document.getElementById('feedbacks-section');
-            
+
             let html = `
                 <div class="events-header">
                     <h2>Feedback Management</h2>
@@ -1448,10 +1447,10 @@ function loadFeedbacks() {
             } else {
                 feedbacks.forEach(feedback => {
                     const createdAt = new Date(feedback.created_at).toLocaleString('ja-JP');
-                    const truncatedContent = feedback.feedback_content.length > 50 ? 
-                        `${feedback.feedback_content.substring(0, 50)}...` : 
+                    const truncatedContent = feedback.feedback_content.length > 50 ?
+                        `${feedback.feedback_content.substring(0, 50)}...` :
                         feedback.feedback_content;
-                        
+
                     html += `
                         <tr data-id="${feedback.id}" class="${feedback.is_important ? 'important' : ''} ${feedback.is_read ? 'read' : ''}">
                             <td>${feedback.id}</td>
@@ -1498,10 +1497,10 @@ function loadFeedbacks() {
 
             // Add event listeners for expand buttons after table is loaded
             document.querySelectorAll('.expand-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
+                btn.addEventListener('click', function () {
                     const cell = this.closest('.feedback-content-cell');
                     cell.classList.toggle('expanded');
-                    
+
                     // Change icon based on expanded state
                     const icon = this.querySelector('i');
                     if (cell.classList.contains('expanded')) {
@@ -1609,4 +1608,92 @@ function filterFeedbacks() {
             row.style.display = 'none';
         }
     }
+}
+
+function loadFeedbackData() {
+    fetch('functions/get_feedback_stats.php')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Feedback data received:', data);
+            updateSatisfactionChart(data);
+        })
+        .catch(error => console.error('Error loading feedback data:', error));
+}
+
+function updateSatisfactionChart(data) {
+    const chart = window.satisfactionChart;
+    if (!chart) return;
+
+    // Convert 1-5 scale to percentage (0-100%)
+    const uiuxPercent = (data.averages.uiux / 5) * 100;
+    const contentPercent = (data.averages.content / 5) * 100;
+    const overallPercent = (data.averages.overall / 5) * 100;
+
+    chart.data.datasets[0].data = [
+        uiuxPercent,
+        contentPercent,
+        overallPercent
+    ];
+
+    chart.update();
+}
+
+function initSatisfactionChart() {
+    const ctx = document.getElementById('satisfactionChart').getContext('2d');
+    window.satisfactionChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['UI/UX', 'Content', 'Overall'],
+            datasets: [{
+                label: 'Satisfaction Rate',
+                data: [0, 0, 0],
+                backgroundColor: [
+                    '#2ecc71',
+                    '#3498db',
+                    '#9b59b6'
+                ],
+                borderWidth: 0
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: {
+                        callback: function (value) {
+                            return value + '%';
+                        }
+                    }
+                }
+            },
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function (context) {
+                            return `Satisfaction: ${context.raw.toFixed(1)}%`;
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    // Load data right after initialization
+    fetch('functions/get_feedback_stats.php')
+        .then(response => response.json())
+        .then(data => {
+            const uiuxPercent = (data.averages.uiux / 5) * 100;
+            const contentPercent = (data.averages.content / 5) * 100;
+            const overallPercent = (data.averages.overall / 5) * 100;
+
+            window.satisfactionChart.data.datasets[0].data = [
+                uiuxPercent,
+                contentPercent,
+                overallPercent
+            ];
+            window.satisfactionChart.update();
+        });
 }
