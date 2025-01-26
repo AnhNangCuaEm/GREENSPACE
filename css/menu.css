@@ -277,11 +277,13 @@ ul li:hover {
     position: relative;
     width: 160px;
     z-index: 1000;
+    border-radius: 20px;
 }
 
 .searchBtn div {
     position: relative;
     width: 100%;
+    border-radius: 20px;
 }
 
 .searchBtn div input {
@@ -365,6 +367,7 @@ ul li:hover {
 .navR img {
     width: 30px;
     height: auto;
+    border-radius: 5px;
 }
 
 

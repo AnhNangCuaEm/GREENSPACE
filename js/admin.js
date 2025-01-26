@@ -1332,7 +1332,15 @@ function filterUsers() {
     const tbody = document.getElementById('userTableBody');
     const rows = tbody.getElementsByTagName('tr');
 
+    let hasVisibleRows = false;
+
     for (let row of rows) {
+        // Skip the "no results" row if it exists
+        if (row.classList.contains('no-results-row')) {
+            row.remove();
+            continue;
+        }
+
         const name = row.getElementsByTagName('td')[1].textContent;
         const email = row.getElementsByTagName('td')[2].textContent;
         const phone = row.getElementsByTagName('td')[3].textContent;
@@ -1343,9 +1351,22 @@ function filterUsers() {
             phone.toLowerCase().includes(filter) ||
             address.toLowerCase().includes(filter)) {
             row.style.display = '';
+            hasVisibleRows = true;
         } else {
             row.style.display = 'none';
         }
+    }
+
+    // 検索結果がない場合のメッセージを表示
+    if (!hasVisibleRows) {
+        const noResultsRow = document.createElement('tr');
+        noResultsRow.classList.add('no-results-row');
+        noResultsRow.innerHTML = `
+            <td colspan="7" style="text-align: center;">
+                検索結果はありません
+            </td>
+        `;
+        tbody.appendChild(noResultsRow);
     }
 }
 
@@ -1355,7 +1376,15 @@ function filterParks() {
     const tbody = document.getElementById('parkTableBody');
     const rows = tbody.getElementsByTagName('tr');
 
+    let hasVisibleRows = false;
+
     for (let row of rows) {
+        // Skip the "no results" row if it exists
+        if (row.classList.contains('no-results-row')) {
+            row.remove();
+            continue;
+        }
+
         const name = row.getElementsByTagName('td')[2].textContent;
         const location = row.getElementsByTagName('td')[3].textContent;
         const nearest = row.getElementsByTagName('td')[6].textContent;
@@ -1366,9 +1395,22 @@ function filterParks() {
             nearest.toLowerCase().includes(filter) ||
             special.toLowerCase().includes(filter)) {
             row.style.display = '';
+            hasVisibleRows = true;
         } else {
             row.style.display = 'none';
         }
+    }
+
+    // 検索結果がない場合のメッセージを表示
+    if (!hasVisibleRows) {
+        const noResultsRow = document.createElement('tr');
+        noResultsRow.classList.add('no-results-row');
+        noResultsRow.innerHTML = `
+            <td colspan="10" style="text-align: center;">
+                検索結果はありません
+            </td>
+        `;
+        tbody.appendChild(noResultsRow);
     }
 }
 
@@ -1378,7 +1420,15 @@ function filterEvents() {
     const tbody = document.getElementById('eventTableBody');
     const rows = tbody.getElementsByTagName('tr');
 
+    let hasVisibleRows = false;
+
     for (let row of rows) {
+        // Skip the "no results" row if it exists
+        if (row.classList.contains('no-results-row')) {
+            row.remove();
+            continue;
+        }
+
         const name = row.getElementsByTagName('td')[2].textContent;
         const location = row.getElementsByTagName('td')[3].textContent;
         const date = row.getElementsByTagName('td')[4].textContent;
@@ -1389,9 +1439,22 @@ function filterEvents() {
             date.toLowerCase().includes(filter) ||
             description.toLowerCase().includes(filter)) {
             row.style.display = '';
+            hasVisibleRows = true;
         } else {
             row.style.display = 'none';
         }
+    }
+
+    // 検索結果がない場合のメッセージを表示
+    if (!hasVisibleRows) {
+        const noResultsRow = document.createElement('tr');
+        noResultsRow.classList.add('no-results-row');
+        noResultsRow.innerHTML = `
+            <td colspan="9" style="text-align: center;">
+                検索結果はありません
+            </td>
+        `;
+        tbody.appendChild(noResultsRow);
     }
 }
 
@@ -1440,7 +1503,7 @@ function loadFeedbacks() {
                 html += `
                     <tr>
                         <td colspan="9" style="text-align: center;">
-                            フィードバックはありません
+                            フィードバックはまだありません
                         </td>
                     </tr>
                 `;
@@ -1597,16 +1660,55 @@ function filterFeedbacks() {
     const tbody = document.getElementById('feedbackTableBody');
     const rows = tbody.getElementsByTagName('tr');
 
-    for (let row of rows) {
-        const email = row.cells[1].textContent;
-        const content = row.cells[4].textContent;
+    let hasVisibleRows = false;
 
-        if (email.toLowerCase().includes(filter) ||
-            content.toLowerCase().includes(filter)) {
+    // 検索キーワードに対する特別なフィルター条件を追加
+    const isReadFilter = filter.includes('既読');
+    const isImportantFilter = filter.includes('重要');
+    const searchText = filter
+        .replace('既読', '')
+        .replace('重要', '')
+        .trim();
+
+    for (let row of rows) {
+        // Skip the "no results" row if it exists
+        if (row.classList.contains('no-results-row')) {
+            row.remove();
+            continue;
+        }
+
+        const email = row.cells[1]?.textContent;
+        const content = row.cells[4]?.textContent;
+        const isRead = row.classList.contains('read');
+        const isImportant = row.classList.contains('important');
+
+        // フィルター条件をチェック
+        const matchesText = !searchText || 
+            email?.toLowerCase().includes(searchText) ||
+            content?.toLowerCase().includes(searchText);
+        
+        const matchesRead = !isReadFilter || isRead;
+        const matchesImportant = !isImportantFilter || isImportant;
+
+        // すべての条件に一致する場合のみ表示
+        if (matchesText && matchesRead && matchesImportant) {
             row.style.display = '';
+            hasVisibleRows = true;
         } else {
             row.style.display = 'none';
         }
+    }
+
+    // 検索結果がない場合のメッセージを表示
+    if (!hasVisibleRows) {
+        const noResultsRow = document.createElement('tr');
+        noResultsRow.classList.add('no-results-row');
+        noResultsRow.innerHTML = `
+            <td colspan="9" style="text-align: center;">
+                検索結果はありません
+            </td>
+        `;
+        tbody.appendChild(noResultsRow);
     }
 }
 

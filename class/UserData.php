@@ -74,16 +74,16 @@ class UserData
         $state->bindValue(':name', $user->name, PDO::PARAM_STR);
         $state->bindValue(':phone', $user->phone, PDO::PARAM_STR);
         $avatars = [
-            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/bear.png',
-            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/cat.png',
-            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/dear.png',
-            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/dog.png',
-            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/fox.png',
-            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/lion.png',
-            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/panda.png',
-            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/pig.png',
-            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/rabbit.png',
-            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/wolf.png',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Cat.jpg',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Dog.jpg',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Fox.jpg',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Panda.jpg',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Wolf.jpg',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Lion.jpg',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Deer.jpg',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Bear.jpg',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Rabbit.jpg',
+            'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Pig.jpg',
         ];
         $user->avatar = $avatars[array_rand($avatars)];
         $state->bindValue(':avatar', $user->avatar, PDO::PARAM_STR);

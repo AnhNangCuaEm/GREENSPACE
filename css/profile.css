@@ -152,16 +152,16 @@
 .avatar-box img {
     width: 180px;
     height: 180px;
-    border-radius: 50%;
+    border-radius: 25px;
 }
 
 .user-info {
     position: relative;
     display: flex;
     width: fit-content;
-    height: fit-content;
+    height: 180px;
     flex-direction: column;
-    gap: 15px;
+    gap: 10px;
     padding: 20px;
     border-radius: 25px;
     background-color: rgba(225, 225, 225, 0.242);
@@ -299,7 +299,7 @@
     margin: 10px;
     cursor: pointer;
     border: 2px solid transparent;
-    border-radius: 5px;
+    border-radius: 50%;
 }
 
 .avatar-option:hover {
