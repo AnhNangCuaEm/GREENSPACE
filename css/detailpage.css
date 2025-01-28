@@ -136,7 +136,6 @@ h2 {
     gap: 20px;
     flex-wrap: wrap;
     padding: 0;
-    overflow: hidden;
 }
 
 .park-images-box {
@@ -148,6 +147,12 @@ h2 {
     aspect-ratio: 4 / 3;
 }
 
+.park-images-box:hover {
+    background-color: rgba(62, 62, 62, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
 .park-images-box img {
     height: 100%;
     width: 100%;
@@ -157,7 +162,8 @@ h2 {
     cursor: pointer;
 }
 
-.park-detail-nav, .event-detail-nav {
+.park-detail-nav,
+.event-detail-nav {
     display: flex;
     justify-content: center;
     gap: 5px;
@@ -173,11 +179,11 @@ h2 {
     transition: 0.3s ease-in-out;
 }
 
-body > div.content-wrapper > main > div > div.event-detail-info > div > a:nth-child(3) > button:hover svg {
+body>div.content-wrapper>main>div>div.event-detail-info>div>a:nth-child(3)>button:hover svg {
     transform: translateX(20%);
 }
 
-body > div.content-wrapper > main > div > div.event-detail-info > div > a:nth-child(1) > button:hover svg {
+body>div.content-wrapper>main>div>div.event-detail-info>div>a:nth-child(1)>button:hover svg {
     transform: translateX(-20%);
 }
 
