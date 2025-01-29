@@ -184,7 +184,7 @@ function loadParks() {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>img</th>
+                            <th>Thumb</th>
                             <th>公園名</th>
                             <th>場所</th>
                             <th>面積</th>
@@ -1334,6 +1334,18 @@ function filterUsers() {
 
     let hasVisibleRows = false;
 
+    // Add special filter conditions for role and status
+    const isAdminFilter = filter.includes('admin');
+    const isUserFilter = filter.includes('user');
+    const isActiveFilter = filter.includes('active');
+    const isBannedFilter = filter.includes('banned');
+    const searchText = filter
+        .replace('admin', '')
+        .replace('user', '')
+        .replace('active', '')
+        .replace('banned', '')
+        .trim();
+
     for (let row of rows) {
         // Skip the "no results" row if it exists
         if (row.classList.contains('no-results-row')) {
@@ -1345,11 +1357,26 @@ function filterUsers() {
         const email = row.getElementsByTagName('td')[2].textContent;
         const phone = row.getElementsByTagName('td')[3].textContent;
         const address = row.getElementsByTagName('td')[4].textContent;
+        const role = row.dataset.role; // Add data-role attribute to tr elements
+        const status = row.dataset.status; // Add data-status attribute to tr elements
 
-        if (name.toLowerCase().includes(filter) ||
-            email.toLowerCase().includes(filter) ||
-            phone.toLowerCase().includes(filter) ||
-            address.toLowerCase().includes(filter)) {
+        // Check filter conditions
+        const matchesText = !searchText || 
+            name.toLowerCase().includes(searchText) ||
+            email.toLowerCase().includes(searchText) ||
+            phone.toLowerCase().includes(searchText) ||
+            address.toLowerCase().includes(searchText);
+        
+        const matchesRole = (!isAdminFilter && !isUserFilter) || 
+            (isAdminFilter && role === 'admin') ||
+            (isUserFilter && role === 'user');
+
+        const matchesStatus = (!isActiveFilter && !isBannedFilter) ||
+            (isActiveFilter && status === 'active') ||
+            (isBannedFilter && status === 'banned');
+
+        // Show row only if all conditions match
+        if (matchesText && matchesRole && matchesStatus) {
             row.style.display = '';
             hasVisibleRows = true;
         } else {
@@ -1357,7 +1384,7 @@ function filterUsers() {
         }
     }
 
-    // 検索結果がない場合のメッセージを表示
+    // Show "no results" message if no matches found
     if (!hasVisibleRows) {
         const noResultsRow = document.createElement('tr');
         noResultsRow.classList.add('no-results-row');
