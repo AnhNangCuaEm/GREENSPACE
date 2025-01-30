@@ -635,15 +635,12 @@ body>main>div>h2 {
    }
 
    .park-box .name {
-      font-size: 0.9rem;
       padding-left: 8px;
       bottom: 40px;
    }
 
    .park-box .location {
       bottom: 12px;
-      font-size: 0.8rem;
-      padding-left: 8px;
    }
 
    .park-box img {
