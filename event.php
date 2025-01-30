@@ -7,13 +7,12 @@ require_once __DIR__ . '/functions/track_visits.php';
 
 session_start();
 
-$email = verifyToken(); // Kiểm tra token trong cookie
+$email = verifyToken();
 if (!$email) {
-    header('Location: login.php'); // Chuyển hướng nếu token không hợp lệ
+    header('Location: login.php');
     exit();
 }
 
-// Nếu cần, lưu lại email trong session để dùng trong phiên hiện tại
 $_SESSION['email'] = $email;
 
 if (isset($_GET['id'])) {
@@ -27,8 +26,7 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $event = EventData::getEvent($id);
     if (!$event) {
-        // Hiển thị giao diện lỗi
-        ?>
+?>
         <html>
 
         <head>
@@ -123,7 +121,7 @@ if (isset($_GET['id'])) {
         </body>
 
         </html>
-        <?php
+<?php
         exit();
     }
 } else {
@@ -131,13 +129,9 @@ if (isset($_GET['id'])) {
     exit();
 }
 
-// Fetch all event IDs from the database
-$eventIds = EventData::getAllEventIds(); // Assume this function returns an array of event IDs
-
-// Find the current event's position in the list
+//Next and previous event algorithm
+$eventIds = EventData::getAllEventIds();
 $currentIndex = array_search($id, $eventIds);
-
-// Determine the previous and next event IDs
 $prevId = ($currentIndex > 0) ? $eventIds[$currentIndex - 1] : end($eventIds);
 $nextId = ($currentIndex < count($eventIds) - 1) ? $eventIds[$currentIndex + 1] : $eventIds[0];
 

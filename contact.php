@@ -4,13 +4,12 @@ require_once __DIR__ . '/functions/track_visits.php';
 
 session_start();
 
-$email = verifyToken(); // Kiểm tra token trong cookie
+$email = verifyToken();
 if (!$email) {
-    header('Location: login.php'); // Chuyển hướng nếu token không hợp lệ
+    header('Location: login.php');
     exit();
 }
 
-// Nếu cần, lưu lại email trong session để dùng trong phiên hiện tại
 $_SESSION['email'] = $email;
 
 trackPageVisit('contact.php');
@@ -46,8 +45,6 @@ trackPageVisit('contact.php');
         <main>
             <div class="feedback-form">
                 <h1>フィードバック・問い合わせフォーム</h1>
-
-                <!-- Phần 1: Bảng đánh giá -->
                 <form id="myForm">
                     <table>
                         <thead>
@@ -88,10 +85,8 @@ trackPageVisit('contact.php');
                         </tbody>
                     </table>
 
-                    <!-- Phần 2: Text Area -->
                     <textarea name="content_text" placeholder="問い合わせ、フィードバックの内容..."></textarea>
 
-                    <!-- Nút Submit -->
                     <div class="button-area">
                         <button class="glow-on-hover" type="submit" name="submit-button">送信</button>
                     </div>

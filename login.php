@@ -189,7 +189,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </g>
                 </g>
             </svg>
-            <!-- このサイトの簡単な説明 -->
             <h1>
                 GREEN SPACEは、<br>公園の情報を共有するサイトです。
             </h1>

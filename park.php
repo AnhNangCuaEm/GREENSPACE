@@ -10,13 +10,13 @@ require_once __DIR__ . '/functions/track_visits.php';
 
 session_start();
 
-$email = verifyToken(); // Kiểm tra token trong cookie
+$email = verifyToken();
 if (!$email) {
-    header('Location: login.php'); // Chuyển hướng nếu token không hợp lệ
+    header('Location: login.php');
     exit();
 }
 
-// Nếu cần, lưu lại email trong session để dùng trong phiên hiện tại
+
 $_SESSION['email'] = $email;
 
 if (isset($_GET['id'])) {
@@ -26,12 +26,12 @@ if (isset($_GET['id'])) {
     trackPageVisit('park.php');
 }
 
-$isLiked = false; // Khởi tạo biến $isLiked
+$isLiked = false;
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $parks = ParkData::getPark($id);
 
-    // Kiểm tra xem công viên có tồn tại không
+    //If park not found, show error page
     if (!$parks) {
         // Hiển thị giao diện lỗi
         ?>
@@ -136,16 +136,13 @@ if (isset($_GET['id'])) {
     $images = ParkImageData::getParkImages($id);
     $likeCount = countLikes($id);
 
-    $parkIds = ParkData::getAllParkIds(); // Assume this function returns an array of event IDs
+    $parkIds = ParkData::getAllParkIds();
 
-    // Find the current event's position in the list
+    //Next and previous park algorithm
     $currentIndex = array_search($id, $parkIds);
-
-    // Determine the previous and next event IDs
     $prevId = ($currentIndex > 0) ? $parkIds[$currentIndex - 1] : end($parkIds);
     $nextId = ($currentIndex < count($parkIds) - 1) ? $parkIds[$currentIndex + 1] : $parkIds[0];
 
-    // Kiểm tra trạng thái like
     $isLiked = checkIfLiked($id, $_SESSION['email']);
 } else {
     header('Location: index.php');

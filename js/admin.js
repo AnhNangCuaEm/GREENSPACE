@@ -430,7 +430,7 @@ function showEditParkModal(park) {
                         <textarea name="map" required>${park.map || ''}</textarea>
                     </div>
                     <div class="form-group">
-                        <label>スライドに表示する説明より短い文:</label>
+                        <label>見出し:</label>
                         <input type="text" name="parkfeature" value="${park.parkfeature}" required>
                     </div>
                     <div class="form-group">
@@ -1033,7 +1033,7 @@ function loadDashboard() {
                 <div class="stats-column">
                     <!-- Traffic Overview Card -->
                     <div class="dashboard-card">
-                        <h3>Traffic Overview</h3>
+                        <h3>Traffic 概要</h3>
                         <div class="stats-grid">
                             <div class="stat-item">
                                 <span class="stat-label">Total Visits</span>
@@ -1052,7 +1052,7 @@ function loadDashboard() {
 
                     <!-- Device Distribution Card -->
                     <div class="dashboard-card">
-                        <h3>デバイス 割合</h3>
+                        <h3>デバイス 分布</h3>
                         <div class="device-stats">
                             <div class="device-chart">
                                 <canvas id="deviceChart"></canvas>
@@ -1097,11 +1097,11 @@ function loadDashboard() {
             <!-- Third row with 3 cards -->
             <div class="dashboard-row">
                 <div class="dashboard-card">
-                    <h3>Popular Pages</h3>
+                    <h3>人気のページ</h3>
                     <div id="pageBreakdown" class="breakdown-list"></div>
                 </div>
                 <div class="dashboard-card">
-                    <h3>Top Visitors</h3>
+                    <h3>トップ訪問者</h3>
                     <div id="topVisitors" class="breakdown-list"></div>
                 </div>
                 <div class="dashboard-card">
@@ -1196,8 +1196,7 @@ function initTrafficChart() {
         },
         options: {
             responsive: true,
-            maintainAspectRatio: true,
-            aspectRatio: 2.5, // Điều chỉnh tỷ lệ chart
+            maintainAspectRatio: false,
             plugins: {
                 legend: {
                     position: 'top',

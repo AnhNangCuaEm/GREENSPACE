@@ -11,13 +11,12 @@ require_once __DIR__ . '/functions/track_visits.php';
 session_start();
 
 
-$email = verifyToken(); // Kiểm tra token trong cookie
+$email = verifyToken(); //Verify user's email
 if (!$email) {
-    header('Location: login.php'); // Chuyển hướng nếu token không hợp lệ
+    header('Location: login.php'); //Redirect to login page
     exit();
 }
 
-// Nếu cần, lưu lại email trong session để dùng trong phiên hiện tại
 $_SESSION['email'] = $email;
 
 trackPageVisit('profile.php');

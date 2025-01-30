@@ -7,13 +7,12 @@ session_start();
 
 $parks = ParkData::getallParks();
 
-$email = verifyToken(); // Kiểm tra token trong cookie
+$email = verifyToken();
 if (!$email) {
-   header('Location: login.php'); // Chuyển hướng nếu token không hợp lệ
+   header('Location: login.php');
    exit();
 }
 
-// Nếu cần, lưu lại email trong session để dùng trong phiên hiện tại
 $_SESSION['email'] = $email;
 
 trackPageVisit('all.php');
