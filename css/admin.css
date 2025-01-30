@@ -782,7 +782,7 @@ input[type="url"]:focus {
     padding: 10px;
     border-radius: 4px;
     margin-top: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
@@ -835,7 +835,8 @@ input[type="url"]:focus {
 }
 
 .device-chart {
-    width: 200px; /* Fixed width for the chart */
+    width: 200px;
+    /* Fixed width for the chart */
     height: 200px;
 }
 
@@ -850,7 +851,8 @@ input[type="url"]:focus {
     align-items: center;
     gap: 8px;
     font-size: 14px;
-    white-space: nowrap; /* Prevent text wrapping */
+    white-space: nowrap;
+    /* Prevent text wrapping */
 }
 
 .legend-color {
@@ -872,4 +874,62 @@ input[type="url"]:focus {
 .satisfaction-chart {
     height: 300px;
     position: relative;
+}
+
+/* Add these styles to your existing admin.css */
+.recent-comments .breakdown-item {
+    flex-direction: column;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.recent-comments .comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.recent-comments .park-name {
+    color: #2ecc71;
+    font-weight: 500;
+    font-size: 0.9em;
+}
+
+.recent-comments .comment-date {
+    color: #95a5a6;
+    font-size: 0.8em;
+}
+
+.recent-comments .comment-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.recent-comments .user-name {
+    color: #34495e;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.recent-comments .comment-content {
+    color: #7f8c8d;
+    font-size: 0.85em;
+    line-height: 1.4;
+}
+
+.recent-comments .breakdown-list {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.recent-comments .no-comments {
+    text-align: center;
+    color: #95a5a6;
+    padding: 20px;
+    font-size: 0.9em;
 }

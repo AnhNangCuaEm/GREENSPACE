@@ -1104,6 +1104,10 @@ function loadDashboard() {
                     <h3>Top Visitors</h3>
                     <div id="topVisitors" class="breakdown-list"></div>
                 </div>
+                <div class="dashboard-card">
+                    <h3>最近のコメント</h3>
+                    <div id="recentComments" class="breakdown-list"></div>
+                </div>
             </div>
         </div>
     `;
@@ -1119,7 +1123,7 @@ function loadDashboard() {
     loadTrafficData('7days');
     loadPopularParks();
     loadPopularEvents();
-
+    loadRecentComments();
     // Add event listeners to period buttons
     document.querySelectorAll('.period-btn').forEach(button => {
         button.addEventListener('click', function () {
@@ -1824,5 +1828,54 @@ function initSatisfactionChart() {
                 overallPercent
             ];
             window.satisfactionChart.update();
+        });
+}
+
+function loadRecentComments() {
+    fetch('../admin/functions/get_recent_comments.php')
+        .then(response => response.json())
+        .then(comments => {
+            const container = document.getElementById('recentComments');
+            container.className = 'breakdown-list recent-comments';
+            let html = '';
+            
+            if (comments.length === 0) {
+                html = '<div class="no-comments">最近のコメントはありません</div>';
+            } else {
+                comments.forEach(comment => {
+                    // Truncate content if it's too long (25 characters)
+                    const truncatedContent = comment.content.length > 25 
+                        ? comment.content.substring(0, 25) + '...' 
+                        : comment.content;
+                    
+                    html += `
+                        <div class="breakdown-item">
+                            <div class="comment-header">
+                                <span class="park-name">${comment.park_name}</span>
+                                <span class="comment-date">${comment.formatted_date}</span>
+                            </div>
+                            <div class="comment-body">
+                                <span class="user-name">
+                                    <i class="fas fa-user"></i> ${comment.display_name}
+                                </span>
+                                <span class="comment-content">
+                                    <i class="fas fa-comment"></i> ${truncatedContent}
+                                </span>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            container.innerHTML = html;
+        })
+        .catch(error => {
+            console.error('Error loading recent comments:', error);
+            document.getElementById('recentComments').innerHTML = `
+                <div class="no-comments">
+                    <i class="fas fa-exclamation-circle"></i>
+                    コメントの読み込み中にエラーが発生しました
+                </div>
+            `;
         });
 }
