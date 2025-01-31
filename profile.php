@@ -10,7 +10,6 @@ require_once __DIR__ . '/functions/track_visits.php';
 
 session_start();
 
-
 $email = verifyToken(); //Verify user's email
 if (!$email) {
     header('Location: login.php'); //Redirect to login page

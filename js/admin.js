@@ -1417,11 +1417,13 @@ function filterParks() {
 
         const name = row.getElementsByTagName('td')[2].textContent;
         const location = row.getElementsByTagName('td')[3].textContent;
+        const price = row.getElementsByTagName('td')[5].textContent;
         const nearest = row.getElementsByTagName('td')[6].textContent;
         const special = row.getElementsByTagName('td')[7].textContent;
 
         if (name.toLowerCase().includes(filter) ||
             location.toLowerCase().includes(filter) ||
+            price.toLowerCase().includes(filter) ||
             nearest.toLowerCase().includes(filter) ||
             special.toLowerCase().includes(filter)) {
             row.style.display = '';
@@ -1462,11 +1464,13 @@ function filterEvents() {
         const name = row.getElementsByTagName('td')[2].textContent;
         const location = row.getElementsByTagName('td')[3].textContent;
         const date = row.getElementsByTagName('td')[4].textContent;
+        const price = row.getElementsByTagName('td')[6].textContent;
         const description = row.getElementsByTagName('td')[7].textContent;
 
         if (name.toLowerCase().includes(filter) ||
             location.toLowerCase().includes(filter) ||
             date.toLowerCase().includes(filter) ||
+            price.toLowerCase().includes(filter) ||
             description.toLowerCase().includes(filter)) {
             row.style.display = '';
             hasVisibleRows = true;
