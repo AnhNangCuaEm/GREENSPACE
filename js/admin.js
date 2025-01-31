@@ -30,6 +30,9 @@ document.addEventListener('DOMContentLoaded', function () {
             case 'feedbacks':
                 loadFeedbacks();
                 break;
+            case 'notifications':
+                loadNotifications();
+                break;
         }
     }
 
@@ -67,6 +70,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     break;
                 case 'feedbacks':
                     loadFeedbacks();
+                    break;
+                case 'notifications':
+                    loadNotifications();
                     break;
             }
         });
@@ -740,6 +746,10 @@ function closeModal() {
     const parkModal = document.getElementById('parkModal');
     if (parkModal) {
         parkModal.remove();
+    }
+    const notificationModal = document.getElementById('notificationModal');
+    if (notificationModal) {
+        notificationModal.remove();
     }
 }
 
@@ -1496,7 +1506,6 @@ function loadFeedbacks() {
     fetch('functions/get_feedbacks.php')
         .then(response => response.json())
         .then(response => {
-            console.log('Feedback response:', response);
 
             const feedbacks = response.data || [];
             const feedbacksSection = document.getElementById('feedbacks-section');
@@ -1879,6 +1888,310 @@ function loadRecentComments() {
                     <i class="fas fa-exclamation-circle"></i>
                     コメントの読み込み中にエラーが発生しました
                 </div>
+            `;
+        });
+}
+
+function loadNotifications() {
+    const notificationsSection = document.getElementById('notifications-section');
+    
+    let html = `
+        <div class="notifications-header">
+            <h2>Notifications Management</h2>
+            <div class="header-controls">
+                <input type="text" id="notificationSearch" placeholder="通知を検索..." onkeyup="filterNotifications()">
+                <button class="add-notification-btn" onclick="showAddNotificationModal()">
+                    <i class="fas fa-plus"></i> 新規通知作成
+                </button>
+            </div>
+        </div>
+        <table class="notifications-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>タイトル</th>
+                    <th>内容</th>
+                    <th>対象</th>
+                    <th>ステータス</th>
+                    <th>作成日時</th>
+                    <th>アクション</th>
+                </tr>
+            </thead>
+            <tbody id="notificationTableBody">
+            </tbody>
+        </table>
+    `;
+    
+    notificationsSection.innerHTML = html;
+    fetchNotifications();
+}
+
+function showAddNotificationModal() {
+    const modal = `
+        <div class="modal" id="notificationModal">
+            <div class="modal-content">
+                <h2>新規通知作成</h2>
+                <form id="notificationForm">
+                    <div class="notification-form-group">
+                        <label>タイトル:</label>
+                        <input type="text" name="title" required>
+                    </div>
+                    <div class="notification-form-group">
+                        <label>内容:</label>
+                        <textarea name="content" required></textarea>
+                    </div>
+                    <div class="notification-form-group">
+                        <label>対象:</label>
+                        <div class="target-type-selector">
+                            <div class="radio-group">
+                                <input type="radio" name="target_type" value="all" id="target_all" checked> 
+                                <label for="target_all">全員</label>
+                                <input type="radio" name="target_type" value="specific" id="target_specific"> 
+                                <label for="target_specific">特定のユーザー</label>
+                            </div>
+                            <div class="target-search-container" style="display: none;">
+                                <div class="search-box">
+                                    <input type="text" id="userSearchInput" placeholder="メールアドレスで検索...">
+                                    <div id="searchResults" class="search-results"></div>
+                                </div>
+                                <div id="selectedUsers" class="selected-users">
+                                    <input type="hidden" name="target_emails" id="targetEmails">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-buttons">
+                        <button type="submit">作成</button>
+                        <button type="button" onclick="closeModal()">キャンセル</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modal);
+    
+    // Add event listeners
+    const targetTypeInputs = document.querySelectorAll('input[name="target_type"]');
+    const searchContainer = document.querySelector('.target-search-container');
+    const searchInput = document.getElementById('userSearchInput');
+    const searchResults = document.getElementById('searchResults');
+    const selectedUsers = document.getElementById('selectedUsers');
+    const targetEmailsInput = document.getElementById('targetEmails');
+    
+    // Store selected users
+    const selectedUsersList = new Set();
+    
+    // Toggle search container visibility
+    targetTypeInputs.forEach(input => {
+        input.addEventListener('change', (e) => {
+            searchContainer.style.display = e.target.value === 'specific' ? 'block' : 'none';
+            if (e.target.value === 'all') {
+                selectedUsersList.clear();
+                updateSelectedUsersDisplay();
+            }
+        });
+    });
+    
+    // Handle search input
+    let searchTimeout;
+    searchInput.addEventListener('input', () => {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => {
+            const searchTerm = searchInput.value.trim();
+            if (searchTerm.length >= 2) {
+                searchUsers(searchTerm);
+            } else {
+                searchResults.innerHTML = '';
+            }
+        }, 300);
+    });
+    
+    // Search users function
+    function searchUsers(term) {
+        fetch(`functions/search_users.php?term=${encodeURIComponent(term)}`)
+            .then(response => response.json())
+            .then(users => {
+                searchResults.innerHTML = users.map(user => `
+                    <div class="search-result-item" data-email="${user.email}">
+                        <span>${user.email}</span>
+                        <button type="button" class="add-user-btn">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                `).join('');
+                
+                // Add click handlers for add buttons
+                searchResults.querySelectorAll('.add-user-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const item = e.target.closest('.search-result-item');
+                        const email = item.dataset.email;
+                        selectedUsersList.add(email);
+                        updateSelectedUsersDisplay();
+                        searchInput.value = '';
+                        searchResults.innerHTML = '';
+                    });
+                });
+            });
+    }
+    
+    // Update selected users display
+    function updateSelectedUsersDisplay() {
+        selectedUsers.innerHTML = Array.from(selectedUsersList).map(email => `
+            <div class="selected-user-item">
+                <span>${email}</span>
+                <button type="button" class="remove-user-btn" data-email="${email}">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        `).join('');
+        
+        // Update hidden input value
+        targetEmailsInput.value = Array.from(selectedUsersList).join(',');
+        
+        // Add click handlers for remove buttons
+        selectedUsers.querySelectorAll('.remove-user-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const email = e.target.closest('.remove-user-btn').dataset.email;
+                selectedUsersList.delete(email);
+                updateSelectedUsersDisplay();
+            });
+        });
+    }
+    
+    // Form submit handler
+    document.getElementById('notificationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        createNotification(Object.fromEntries(formData));
+    });
+}
+
+function createNotification(data) {
+    fetch('admin/functions/create_notification.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            closeModal();
+            loadNotifications();
+            alert('通知を作成しました');
+        } else {
+            alert('通知の作成に失敗しました');
+        }
+    });
+}
+
+function deleteNotification(id) {
+    if (confirm('この通知を削除しますか？')) {
+        fetch('admin/functions/delete_notification.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                loadNotifications();
+                alert('通知を削除しました');
+            } else {
+                alert('通知の削除に失敗しました');
+            }
+        });
+    }
+}
+
+function filterNotifications() {
+    const input = document.getElementById('notificationSearch');
+    const filter = input.value.toLowerCase();
+    const tbody = document.getElementById('notificationTableBody');
+    const rows = tbody.getElementsByTagName('tr');
+    
+    let hasVisibleRows = false;
+    
+    for (let row of rows) {
+        if (row.classList.contains('no-results-row')) {
+            row.remove();
+            continue;
+        }
+        
+        const title = row.cells[1].textContent;
+        const content = row.cells[2].textContent;
+        const target = row.cells[3].textContent;
+        
+        if (title.toLowerCase().includes(filter) ||
+            content.toLowerCase().includes(filter) ||
+            target.toLowerCase().includes(filter)) {
+            row.style.display = '';
+            hasVisibleRows = true;
+        } else {
+            row.style.display = 'none';
+        }
+    }
+    
+    if (!hasVisibleRows) {
+        const noResultsRow = document.createElement('tr');
+        noResultsRow.classList.add('no-results-row');
+        noResultsRow.innerHTML = `
+            <td colspan="7" style="text-align: center;">
+                検索結果はありません
+            </td>
+        `;
+        tbody.appendChild(noResultsRow);
+    }
+}
+
+function fetchNotifications() {
+    fetch('../admin/functions/get_notifications.php')
+        .then(response => response.json())
+        .then(data => {
+            const tbody = document.getElementById('notificationTableBody');
+            if (data.status === 'empty') {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center;">通知はありません</td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = data.data.map(notification => `
+                <tr>
+                    <td>${notification.id}</td>
+                    <td>${notification.title}</td>
+                    <td>${notification.content.substring(0, 50)}${notification.content.length > 50 ? '...' : ''}</td>
+                    <td class="target-cell">
+                        ${notification.target_display}
+                    </td>
+                    <td>
+                        <span class="status-badge ${notification.read_count > 0 ? 'sent' : 'pending'}">
+                            ${notification.read_count > 0 ? '送信済み' : '未送信'}
+                        </span>
+                    </td>
+                    <td>${new Date(notification.created_at).toLocaleString('ja-JP')}</td>
+                    <td>
+                        <button onclick="deleteNotification(${notification.id})" class="delete-btn">
+                            <i class="fas fa-trash"></i> 削除
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        })
+        .catch(error => {
+            console.error('Error fetching notifications:', error);
+            document.getElementById('notificationTableBody').innerHTML = `
+                <tr>
+                    <td colspan="7" style="text-align: center;">
+                        エラーが発生しました: ${error.message}
+                    </td>
+                </tr>
             `;
         });
 }

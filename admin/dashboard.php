@@ -50,6 +50,7 @@ if ($user->role !== 'admin') {
             <button class="nav-btn" data-section="parks">Park Manager</button>
             <button class="nav-btn" data-section="events">Event Manager</button>
             <button class="nav-btn" data-section="feedbacks">Feedbacks</button>
+            <button class="nav-btn" data-section="notifications">Notifications</button>
             <button class="nav-btn" onclick="window.location.href='../profile.php'">Back to Profile</button>
         </div>
 
@@ -59,6 +60,7 @@ if ($user->role !== 'admin') {
             <div id="parks-section" class="content-section"></div>
             <div id="events-section" class="content-section"></div>
             <div id="feedbacks-section" class="content-section"></div>
+            <div id="notifications-section" class="content-section"></div>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
