@@ -172,7 +172,7 @@ function updateUserStatus(email, newStatus) {
 }
 
 function loadParks() {
-    fetch('functions/get_parks.php')
+    fetch('functions/get_parks.php?random=false')
         .then(response => response.json())
         .then(parks => {
             const parksSection = document.getElementById('parks-section');

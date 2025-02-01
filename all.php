@@ -5,7 +5,7 @@ require_once __DIR__ . '/functions/track_visits.php';
 
 session_start();
 
-$parks = ParkData::getallParks();
+$parks = ParkData::getallParks(true);
 
 $email = verifyToken();
 if (!$email) {
@@ -56,7 +56,7 @@ trackPageVisit('all.php');
                      <div class="park-text">
                         <div class="name"><?= $park->name ?></div>
                         <div class="location"><span>住所:</span>&nbsp;<?= $park->location ?></div>
-                        <div class="price"><span>料金:</span>&nbsp;<?= $park->price ?>&yen;</div>
+                        <div class="price"><span>料金:</span>&nbsp;<?= $park->price ?></div>
                         <div class="nearest"><span>最寄り駅:</span>&nbsp;<?= $park->nearest ?></div>
                         <div class="special"><span>特別な特徴:</span>&nbsp;<?= $park->special ?></div>
                      </div>

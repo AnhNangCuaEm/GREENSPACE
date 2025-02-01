@@ -4,7 +4,8 @@ require_once __DIR__ . '/../../class/ParkData.php';
 header('Content-Type: application/json');
 
 try {
-    $parks = ParkData::getAllParks();
+    $random = isset($_GET['random']) ? filter_var($_GET['random'], FILTER_VALIDATE_BOOLEAN) : false;
+    $parks = ParkData::getAllParks($random);
     echo json_encode($parks);
 } catch (Exception $e) {
     echo json_encode(['error' => $e->getMessage()]);

@@ -35,14 +35,15 @@ class parkData
       return $parks;
    }
 
-   public static function getallParks(): array
+   public static function getallParks(bool $randomOrder = false): array
    {
       $pdo = Database::getConnection();
 
-      $state = $pdo->prepare('SELECT * FROM park ORDER BY id DESC');
+      $sql = 'SELECT * FROM park ORDER BY ' . ($randomOrder ? 'RAND()' : 'id ASC');
+      $state = $pdo->prepare($sql);
       $state->execute();
 
-      $park = [];
+      $parks = [];
 
       foreach ($state as $row) {
          $park = new Park();
