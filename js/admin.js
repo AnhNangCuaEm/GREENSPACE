@@ -2004,7 +2004,7 @@ function showAddNotificationModal() {
             } else {
                 searchResults.innerHTML = '';
             }
-        }, 300);
+        }, 500);
     });
     
     // Search users function
@@ -2068,7 +2068,7 @@ function showAddNotificationModal() {
 }
 
 function createNotification(data) {
-    fetch('admin/functions/create_notification.php', {
+    fetch('../admin/functions/create_notification.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -2089,7 +2089,7 @@ function createNotification(data) {
 
 function deleteNotification(id) {
     if (confirm('この通知を削除しますか？')) {
-        fetch('admin/functions/delete_notification.php', {
+        fetch('../admin/functions/delete_notification.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
