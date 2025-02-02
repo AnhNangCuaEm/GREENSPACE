@@ -751,6 +751,10 @@ function closeModal() {
     if (notificationModal) {
         notificationModal.remove();
     }
+    const notificationDetailsModal = document.getElementById('notificationDetailsModal');
+    if (notificationDetailsModal) {
+        notificationDetailsModal.remove();
+    }
 }
 
 function showParkDetails(parkId) {
@@ -1237,7 +1241,6 @@ function loadTrafficData(period) {
             updateTrafficStats(data.summary);
             updatePageBreakdown(data.pageBreakdown);
             updateTopVisitors(data.topVisitors);
-            updateDeviceChart(data.summary);
         })
         .catch(error => console.error('Error loading traffic data:', error));
 }
@@ -2068,28 +2071,41 @@ function showAddNotificationModal() {
 }
 
 function createNotification(data) {
-    fetch('../admin/functions/create_notification.php', {
+    fetch('functions/create_notification.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            if (response.status === 403) {
+                throw new Error('権限がありません。管理者としてログインしてください。');
+            }
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
     .then(data => {
+        console.log("Server response:", data); // Debugging line
         if (data.success) {
             closeModal();
             loadNotifications();
             alert('通知を作成しました');
         } else {
-            alert('通知の作成に失敗しました');
+            alert('通知の作成に失敗しました: ' + data.message);
         }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('エラーが発生しました: ' + error.message);
     });
 }
 
 function deleteNotification(id) {
     if (confirm('この通知を削除しますか？')) {
-        fetch('../admin/functions/delete_notification.php', {
+        fetch('functions/delete_notification.php', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -2171,18 +2187,51 @@ function fetchNotifications() {
                         ${notification.target_display}
                     </td>
                     <td>
-                        <span class="status-badge ${notification.read_count > 0 ? 'sent' : 'pending'}">
-                            ${notification.read_count > 0 ? '送信済み' : '未送信'}
+                        <span class="status-badge ${notification.is_active ? 'sent' : 'pending'}">
+                            ${notification.is_active ? '送信済み' : '未送信'}
                         </span>
                     </td>
                     <td>${new Date(notification.created_at).toLocaleString('ja-JP')}</td>
                     <td>
-                        <button onclick="deleteNotification(${notification.id})" class="delete-btn">
-                            <i class="fas fa-trash"></i> 削除
-                        </button>
+                        <div class="action-menu">
+                            <button class="action-menu-btn">
+                                アクション <i class="fas fa-caret-down"></i>
+                            </button>
+                            <div class="action-menu-content">
+                                <button onclick="showNotificationDetails(${JSON.stringify(notification).replace(/"/g, '&quot;')})" style="color: #3498db;">
+                                    <i class="fas fa-info-circle"></i> 詳細
+                                </button>
+                                ${!notification.is_active ? `
+                                    <button onclick="sendNotification(${notification.id})" style="color: #2ecc71;">
+                                        <i class="fas fa-paper-plane"></i> 送信
+                                    </button>
+                                ` : ''}
+                                <button onclick="deleteNotification(${notification.id})" style="color: #e74c3c;">
+                                    <i class="fas fa-trash"></i> 削除
+                                </button>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             `).join('');
+
+            // Add click handlers for action menus
+            document.querySelectorAll('.action-menu-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const menu = e.target.closest('.action-menu');
+                    menu.classList.toggle('active');
+                });
+            });
+
+            // Close menus when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.action-menu')) {
+                    document.querySelectorAll('.action-menu.active').forEach(menu => {
+                        menu.classList.remove('active');
+                    });
+                }
+            });
         })
         .catch(error => {
             console.error('Error fetching notifications:', error);
@@ -2194,4 +2243,74 @@ function fetchNotifications() {
                 </tr>
             `;
         });
+}
+
+function showNotificationDetails(notification) {
+    const modal = `
+        <div class="modal" id="notificationDetailsModal">
+            <div class="modal-content">
+                <h2>通知詳細</h2>
+                <div class="details-container">
+                    <div class="form-group">
+                        <label>タイトル:</label>
+                        <div>${notification.title}</div>
+                    </div>
+                    <div class="form-group">
+                        <label>内容:</label>
+                        <div>${notification.content}</div>
+                    </div>
+                    <div class="form-group">
+                        <label>作成者:</label>
+                        <div>${notification.created_by}</div>
+                    </div>
+                    <div class="form-group">
+                        <label>対象:</label>
+                        <div>${notification.target_display}</div>
+                    </div>
+                    <div class="form-group">
+                        <label>ステータス:</label>
+                        <div>
+                            <span class="status-badge ${notification.is_active ? 'sent' : 'pending'}">
+                                ${notification.is_active ? '送信済み' : '未送信'}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>作成日時:</label>
+                        <div>${new Date(notification.created_at).toLocaleString('ja-JP')}</div>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" onclick="closeModal()">閉じる</button>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modal);
+}
+
+function sendNotification(id) {
+    if (confirm('この通知を送信しますか？')) {
+        fetch('functions/send_notification.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id }),
+            credentials: 'include'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                loadNotifications();
+                alert('通知を送信しました');
+            } else {
+                alert('通知の送信に失敗しました: ' + data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('エラーが発生しました: ' + error.message);
+        });
+    }
 }

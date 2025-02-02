@@ -137,3 +137,169 @@ document.addEventListener('DOMContentLoaded', function () {
    // Update on window resize
    window.addEventListener('resize', updateLogoLink);
 });
+
+// Notification handling
+document.addEventListener('DOMContentLoaded', function () {
+   const notificationBell = document.querySelector('.notification-bell');
+   const mobileNotificationBell = document.querySelector('.mobile-notification-bell');
+   const notificationsMenu = document.getElementById('notifications-menu');
+   const mobileNotificationsMenu = document.getElementById('mobile-notifications-menu');
+   const notificationModal = document.getElementById('notification-modal');
+   const closeNotificationModal = document.getElementById('closeNotificationModal');
+   const hamburger = document.getElementById('hamburger');
+
+   // Ẩn mobile notification menu khi khởi tạo
+   if (mobileNotificationsMenu) {
+      mobileNotificationsMenu.style.display = 'none';
+   }
+
+   // Toggle notifications menu
+   function toggleNotificationsMenu(e) {
+      e.stopPropagation();
+      const menu = document.getElementById('menu');
+      const mobileMenu = document.getElementById('mobile-menu');
+      const isMobile = window.innerWidth <= 768;
+      const targetMenu = isMobile ? mobileNotificationsMenu : notificationsMenu;
+
+      // Hide other menus first
+      if (menu.classList.contains('show')) {
+         menu.classList.remove('show');
+         setTimeout(() => { menu.style.display = 'none'; }, 300);
+         hamburger.classList.remove('active');
+      }
+      if (mobileMenu.classList.contains('show')) {
+         mobileMenu.classList.remove('show');
+         setTimeout(() => { mobileMenu.style.display = 'none'; }, 300);
+         hamburger.classList.remove('active');
+      }
+
+      // Toggle notifications menu
+      if (targetMenu.classList.contains('show')) {
+         targetMenu.classList.remove('show');
+         setTimeout(() => {
+            targetMenu.style.display = 'none';
+         }, 300);
+      } else {
+         targetMenu.style.display = 'block';
+         setTimeout(() => {
+            targetMenu.classList.add('show');
+         }, 10);
+      }
+   }
+
+   if (notificationBell) {
+      notificationBell.addEventListener('click', toggleNotificationsMenu);
+   }
+   if (mobileNotificationBell) {
+      mobileNotificationBell.addEventListener('click', toggleNotificationsMenu);
+   }
+
+   // Close notifications menu when clicking outside
+   document.addEventListener('click', (event) => {
+      const isMobile = window.innerWidth <= 768;
+      const targetMenu = isMobile ? mobileNotificationsMenu : notificationsMenu;
+      const targetBell = isMobile ? mobileNotificationBell : notificationBell;
+
+      if (!targetBell.contains(event.target) && !targetMenu.contains(event.target)) {
+         if (targetMenu.classList.contains('show')) {
+            targetMenu.classList.remove('show');
+            setTimeout(() => {
+               targetMenu.style.display = 'none';
+            }, 300);
+         }
+      }
+   });
+
+   // Close notification modal
+   if (closeNotificationModal) {
+      closeNotificationModal.addEventListener('click', () => {
+         notificationModal.style.display = 'none';
+         document.body.style.overflow = '';
+         document.getElementById('overlay').style.display = 'none';
+      });
+   }
+
+   // Function to show notification detail
+   window.showNotificationDetail = function (notificationId) {
+      const notification = notificationStore.get(notificationId);
+      if (!notification) return;
+
+      // Hiển thị modal với dữ liệu từ notification
+      const modalTitle = notificationModal.querySelector('.notification-title');
+      const modalContent = notificationModal.querySelector('.notification-content');
+      const modalMeta = notificationModal.querySelector('.notification-meta');
+
+      modalTitle.textContent = notification.title;
+      modalContent.textContent = notification.content;
+      modalMeta.textContent = new Date(notification.created_at).toLocaleString('ja-JP');
+
+      notificationModal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      document.getElementById('overlay').style.display = 'block';
+   };
+});
+
+// Tạo một object để lưu trữ dữ liệu thông báo
+const notificationStore = new Map();
+
+function loadNotifications() {
+    fetch('functions/get_user_notifications.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update notification badges
+                const badges = document.querySelectorAll('.notification-badge');
+                badges.forEach(badge => {
+                    if (data.unread_count > 0) {
+                        badge.style.display = 'block';
+                        badge.textContent = data.unread_count;
+                    } else {
+                        badge.style.display = 'none';
+                    }
+                });
+
+                // Update both notification menus
+                const notificationMenus = [
+                    document.querySelector('#notifications-menu .menu-ul'),
+                    document.querySelector('#mobile-notifications-menu .menu-ul')
+                ];
+
+                const content = data.data.length === 0 
+                    ? `<li class="menu-li">
+                         <div class="empty-notification">
+                             通知はありません
+                         </div>
+                       </li>`
+                    : data.data.map(notification => {
+                        notificationStore.set(notification.id, notification);
+                        return `
+                            <li class="menu-li ${notification.is_read ? '' : 'unread'}" 
+                                onclick="showNotificationDetail(${notification.id})">
+                                <div class="notification-item">
+                                    <div class="notification-title">${notification.title}</div>
+                                    <div class="notification-preview">${notification.short_content}</div>
+                                    <div class="notification-time">${notification.created_at_formatted}</div>
+                                </div>
+                            </li>
+                        `;
+                    }).join('');
+
+                notificationMenus.forEach(menu => {
+                    if (menu) menu.innerHTML = content;
+                });
+            } else {
+                console.error('Failed to load notifications:', data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error loading notifications:', error);
+        });
+}
+
+// Load notifications when page loads
+document.addEventListener('DOMContentLoaded', function () {
+   loadNotifications();
+
+   // Reload notifications periodically (every 3 minutes)
+   setInterval(loadNotifications, 180000);
+});

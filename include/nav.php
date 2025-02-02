@@ -30,13 +30,25 @@ $user = UserData::getProfile();
         </div>
         <div class="navR">
             <ul>
-                <li><a href="profile.php"><img src="<?php echo htmlspecialchars($user->avatar); ?>" alt="User Avatar"></a></li>
+                <li>
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" style="display: none;">0</span>
+                    </div>
+                </li>
+                <li><a href="profile.php"><img src="<?php echo htmlspecialchars($user->avatar); ?>"
+                            alt="User Avatar"></a></li>
                 <div class="hamburger" id="hamburger">
                     <div class="menuLine"></div>
                 </div>
             </ul>
         </div>
     </nav>
+    <div class="notifications-menu" id="notifications-menu">
+        <ul class="menu-ul">
+            <!-- Notifications will be loaded here -->
+        </ul>
+    </div>
     <div class="menu" id="menu">
         <ul class="menu-ul">
             <li><a href="contact.php">問い合せ</a></li>
@@ -51,7 +63,14 @@ $user = UserData::getProfile();
         <ul class="mobile-menu-ul">
             <li>
                 <div class="mobile-menu-icon">
-                    <a href="profile.php"><img src="<?php echo htmlspecialchars($user->avatar); ?>" alt="User Avatar"></a>
+                    <a href="profile.php"><img src="<?php echo htmlspecialchars($user->avatar); ?>"
+                            alt="User Avatar"></a>
+                </div>
+            </li>
+            <li>
+                <div class="mobile-notification-bell">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge" style="display: none;">0</span>
                 </div>
             </li>
             <li><a href="all.php">探る</a></li>
@@ -62,6 +81,11 @@ $user = UserData::getProfile();
             <form id="mobile-logoutForm" action="logout.php" method="post">
                 <button id="mobile-logoutButton" type="submit">サインアウト</button>
             </form>
+        </ul>
+    </div>
+    <div class="mobile-notifications-menu" id="mobile-notifications-menu">
+        <ul class="menu-ul">
+            <!-- Mobile notifications will be loaded here -->
         </ul>
     </div>
     <div id="searchResults" class="search-results">
@@ -76,6 +100,17 @@ $user = UserData::getProfile();
         <div>
             <button id="confirmCancel" style="background-color: rgb(71, 181, 245);">戻る</button>
             <button id="confirmOk">確定</button>
+        </div>
+    </div>
+</div>
+
+<div id="notification-modal" class="confirmation-popup" style="display: none">
+    <div class="confirmation-popup-content">
+        <h3 class="notification-title"></h3>
+        <p class="notification-content"></p>
+        <div class="notification-meta"></div>
+        <div>
+            <button id="closeNotificationModal">閉じる</button>
         </div>
     </div>
 </div>

@@ -725,6 +725,10 @@ body>main>div>h2 {
       padding: 20px;
    }
 
+   .privacy-container {
+      border-radius: 35px;
+   }
+
    .event-box,
    .park-box {
       flex: 1;

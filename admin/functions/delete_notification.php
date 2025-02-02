@@ -32,7 +32,7 @@ try {
    $pdo->commit();
 
    echo json_encode([
-      'status' => 'success',
+      'success' => true,
       'message' => 'Notification deleted successfully'
    ]);
 } catch (Exception $e) {
@@ -40,7 +40,7 @@ try {
       $pdo->rollBack();
    }
    echo json_encode([
-      'status' => 'error',
+      'success' => false,
       'message' => $e->getMessage()
    ]);
 }

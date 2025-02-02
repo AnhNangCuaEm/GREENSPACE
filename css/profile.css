@@ -251,6 +251,13 @@
     font-weight: bold;
     cursor: pointer;
     width: fit-content;
+    transition: all 0.3s ease;
+}
+
+#editForm>div.infoBtn>button:hover {
+    background-color: #e1e1e1;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 .info-popup-content form div {
@@ -276,6 +283,13 @@
     font-weight: bold;
     cursor: pointer;
     width: fit-content;
+    transition: all 0.3s ease;
+}
+
+.popup-content button:hover {
+    background-color: #e1e1e1;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
 
 .close {

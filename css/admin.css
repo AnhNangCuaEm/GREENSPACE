@@ -225,7 +225,8 @@ body>div>div.sidebar>button:nth-child(8) {
 }
 
 .edit-btn,
-.delete-btn {
+.delete-btn,
+.send-btn {
     display: block;
     border-radius: 5px;
     width: 100%;
@@ -248,7 +249,8 @@ body>div>div.sidebar>button:nth-child(8) {
 }
 
 .edit-btn:hover,
-.delete-btn:hover {
+.delete-btn:hover,
+.send-btn:hover {
     background-color: #636363;
 }
 
@@ -1168,4 +1170,12 @@ input[type="url"]:focus {
     display: flex;
     align-items: center;
     cursor: pointer;
+}
+
+.send-btn {
+    background-color: #2ecc71;
+}
+
+.send-btn:hover {
+    background-color: #27ae60;
 }

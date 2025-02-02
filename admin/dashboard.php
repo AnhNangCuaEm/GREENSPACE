@@ -9,14 +9,12 @@ require_once __DIR__ . '/../functions/verify.php';
 
 session_start();
 
-
 $email = verifyToken(); // Kiểm tra token trong cookie
 if (!$email) {
     header('Location: login.php'); // Chuyển hướng nếu token không hợp lệ
     exit();
 }
 
-// Nếu cần, lưu lại email trong session để dùng trong phiên hiện tại
 $_SESSION['email'] = $email;
 
 $email = $_SESSION['email'];
@@ -27,6 +25,7 @@ if ($user->role !== 'admin') {
     header('Location: ../index.php');
     exit();
 }
+
 ?>
 
 <!DOCTYPE html>
