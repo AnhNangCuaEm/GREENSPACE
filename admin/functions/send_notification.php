@@ -23,18 +23,47 @@ try {
     $pdo = Database::getConnection();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Update is_active status
-    $sql = "UPDATE notifications SET is_active = 1 WHERE id = ?";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([$data['id']]);
+    // Start transaction
+    $pdo->beginTransaction();
 
-    if ($stmt->rowCount() > 0) {
+    try {
+        // Get notification details
+        $stmt = $pdo->prepare("SELECT target_type FROM notifications WHERE id = ?");
+        $stmt->execute([$data['id']]);
+        $notification = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$notification) {
+            throw new Exception('Notification not found');
+        }
+
+        // Add to notification_recipients based on target_type
+        if ($notification['target_type'] === 'all') {
+            $sql = "INSERT INTO notification_recipients (notification_id, recipient_email)
+                    SELECT ?, email FROM user WHERE status = 'active'";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$data['id']]);
+        } else {
+            $sql = "INSERT INTO notification_recipients (notification_id, recipient_email)
+                    SELECT ?, target_email FROM notification_targets WHERE notification_id = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$data['id'], $data['id']]);
+        }
+
+        // Update is_active status
+        $sql = "UPDATE notifications SET is_active = 1 WHERE id = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([$data['id']]);
+
+        $pdo->commit();
+
         echo json_encode([
             'success' => true,
             'message' => 'Notification sent successfully'
         ]);
-    } else {
-        throw new Exception('Notification not found');
+
+    } catch (Exception $e) {
+        $pdo->rollBack();
+        throw $e;
     }
 
 } catch (Exception $e) {

@@ -62,19 +62,6 @@ try {
          }
       }
 
-      // Add to notification_recipients
-      if ($data['target_type'] === 'all') {
-         $sql = "INSERT INTO notification_recipients (notification_id, recipient_email)
-                  SELECT ?, email FROM user WHERE status = 'active'";
-         $stmt = $pdo->prepare($sql);
-         $stmt->execute([$notificationId]);
-      } else {
-         $sql = "INSERT INTO notification_recipients (notification_id, recipient_email)
-                  SELECT ?, target_email FROM notification_targets WHERE notification_id = ?";
-         $stmt = $pdo->prepare($sql);
-         $stmt->execute([$notificationId, $notificationId]);
-      }
-
       $pdo->commit();
 
       echo json_encode([

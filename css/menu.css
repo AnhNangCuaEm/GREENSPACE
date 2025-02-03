@@ -224,10 +224,12 @@ nav.initial-load {
     justify-content: center;
     width: 100%;
     font-size: 1.2rem;
+    border-radius: 15px;
     transition: 0.3s ease-in-out;
 }
 
 ul li:hover {
+    transform: scale(1.05);
     text-shadow: 0 0 10px rgb(255, 255, 255);
 }
 
@@ -585,7 +587,7 @@ ul li:hover {
 }
 
 .notification-bell:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .notification-badge {
@@ -670,6 +672,7 @@ ul li:hover {
 .mobile-notifications-menu > .menu-ul .menu-li:hover {
     text-shadow: none;
     background-color: rgba(255, 255, 255, 0.1);
+    transform: none;
 }
 
 /* .menu-li.unread {

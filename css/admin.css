@@ -397,7 +397,7 @@ input[type="url"]:focus {
 
 .form-group label {
     text-align: left;
-    width: 110px;
+    min-width: 110px;
     text-wrap: wrap;
     color: #2c3e50;
     font-weight: 500;

@@ -17,8 +17,8 @@ try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Lấy thông báo của user từ notification_recipients và notifications
-    $sql = "SELECT n.id, n.title, n.content, n.created_at, n.created_by, 
-                   nr.is_read, nr.read_at
+    $sql = "SELECT n.id, n.title, n.content, n.created_at, 
+                   nr.is_read, nr.read_at, n.is_active
             FROM notifications n
             INNER JOIN notification_recipients nr ON n.id = nr.notification_id
             WHERE nr.recipient_email = ?

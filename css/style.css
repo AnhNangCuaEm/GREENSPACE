@@ -22,7 +22,7 @@
 }
 
 ::-webkit-scrollbar-track {
-   background: rgb(0, 0, 0);
+   background: rgba(0, 0, 0, 0.755);
    transition: all 0.3s ease;
 }
 
@@ -93,7 +93,6 @@ body {
 
 .content-wrapper {
    position: relative;
-   z-index: 1;
 }
 
 .gradients-container {
