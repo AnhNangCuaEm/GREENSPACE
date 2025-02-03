@@ -1762,7 +1762,6 @@ function loadFeedbackData() {
     fetch('functions/get_feedback_stats.php')
         .then(response => response.json())
         .then(data => {
-            console.log('Feedback data received:', data);
             updateSatisfactionChart(data);
         })
         .catch(error => console.error('Error loading feedback data:', error));
@@ -1957,9 +1956,9 @@ function showAddNotificationModal() {
                                     <input type="text" id="userSearchInput" placeholder="メールアドレスで検索...">
                                     <div id="searchResults" class="search-results"></div>
                                 </div>
-                                <div id="selectedUsers" class="selected-users">
-                                    <input type="hidden" name="target_emails" id="targetEmails">
-                                </div>
+                                <div id="selectedUsers" class="selected-users"></div>
+                                <!-- Moved hidden input here -->
+                                <input type="hidden" name="target_emails" id="targetEmails">
                             </div>
                         </div>
                     </div>
@@ -1974,16 +1973,16 @@ function showAddNotificationModal() {
     
     document.body.insertAdjacentHTML('beforeend', modal);
     
-    // Add event listeners
+    // Store selected users
+    const selectedUsersList = new Set();
+    
+    // Get DOM elements after modal is added to document
     const targetTypeInputs = document.querySelectorAll('input[name="target_type"]');
     const searchContainer = document.querySelector('.target-search-container');
     const searchInput = document.getElementById('userSearchInput');
     const searchResults = document.getElementById('searchResults');
     const selectedUsers = document.getElementById('selectedUsers');
     const targetEmailsInput = document.getElementById('targetEmails');
-    
-    // Store selected users
-    const selectedUsersList = new Set();
     
     // Toggle search container visibility
     targetTypeInputs.forEach(input => {
@@ -2040,6 +2039,7 @@ function showAddNotificationModal() {
     
     // Update selected users display
     function updateSelectedUsersDisplay() {
+        // Update display
         selectedUsers.innerHTML = Array.from(selectedUsersList).map(email => `
             <div class="selected-user-item">
                 <span>${email}</span>
@@ -2050,7 +2050,9 @@ function showAddNotificationModal() {
         `).join('');
         
         // Update hidden input value
-        targetEmailsInput.value = Array.from(selectedUsersList).join(',');
+        if (targetEmailsInput) {
+            targetEmailsInput.value = Array.from(selectedUsersList).join(',');
+        }
         
         // Add click handlers for remove buttons
         selectedUsers.querySelectorAll('.remove-user-btn').forEach(btn => {
@@ -2065,8 +2067,24 @@ function showAddNotificationModal() {
     // Form submit handler
     document.getElementById('notificationForm').addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        // Get form data
         const formData = new FormData(this);
-        createNotification(Object.fromEntries(formData));
+        const data = Object.fromEntries(formData);
+        
+        // If specific target type, get emails from selectedUsersList
+        if (data.target_type === 'specific') {
+            const targetEmails = Array.from(selectedUsersList).join(',');
+            
+            if (!targetEmails) {
+                alert('特定のユーザーを選択してください。');
+                return;
+            }
+            
+            data.target_emails = targetEmails;
+        }
+        
+        createNotification(data);
     });
 }
 
@@ -2088,7 +2106,6 @@ function createNotification(data) {
         return response.json();
     })
     .then(data => {
-        console.log("Server response:", data); // Debugging line
         if (data.success) {
             closeModal();
             loadNotifications();

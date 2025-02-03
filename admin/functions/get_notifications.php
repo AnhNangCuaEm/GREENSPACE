@@ -1,18 +1,25 @@
 <?php
+session_start();
 require_once __DIR__ . '/../../class/Database.php';
 
-try {
-   $pdo = Database::getConnection();
-   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+header('Content-Type: application/json');
 
-   // Lấy thông tin cơ bản từ bảng notifications
-   $sql = "SELECT n.*, 
-            GROUP_CONCAT(nt.target_email) as target_emails,
-            COUNT(DISTINCT nr.recipient_email) as read_count
+try {
+   if (!isset($_SESSION['email'])) {
+      throw new Exception('Unauthorized access');
+   }
+
+   $pdo = Database::getConnection();
+
+   // Get all notifications with target information
+   $sql = "SELECT n.*,
+            CASE 
+                WHEN n.target_type = 'all' THEN '全員'
+                ELSE COALESCE(GROUP_CONCAT(nt.target_email SEPARATOR ', '), '指定')
+            END as target_display
             FROM notifications n
             LEFT JOIN notification_targets nt ON n.id = nt.notification_id
-            LEFT JOIN notification_recipients nr ON n.id = nr.notification_id AND nr.is_read = 1
-            GROUP BY n.id
+            GROUP BY n.id, n.title, n.content, n.created_by, n.target_type, n.created_at, n.is_active
             ORDER BY n.created_at DESC";
 
    $stmt = $pdo->prepare($sql);
@@ -22,31 +29,19 @@ try {
    if (empty($notifications)) {
       echo json_encode([
          'status' => 'empty',
-         'message' => 'No notifications found',
-         'data' => []
+         'message' => 'No notifications found'
       ]);
-   } else {
-      // Format dữ liệu trước khi trả về
-      foreach ($notifications as &$notification) {
-         // Xử lý target_type
-         if ($notification['target_type'] === 'all') {
-            $notification['target_display'] = '全員';
-         } else {
-            $emails = explode(',', $notification['target_emails']);
-            $notification['target_display'] = count($emails) . '人のユーザー';
-         }
-      }
-
-      echo json_encode([
-         'status' => 'success',
-         'count' => count($notifications),
-         'data' => $notifications
-      ]);
+      exit;
    }
-} catch (PDOException $e) {
+
+   echo json_encode([
+      'status' => 'success',
+      'data' => $notifications
+   ]);
+} catch (Exception $e) {
+   http_response_code(500);
    echo json_encode([
       'status' => 'error',
-      'message' => $e->getMessage(),
-      'code' => $e->getCode()
+      'message' => $e->getMessage()
    ]);
 }
