@@ -14,18 +14,18 @@ if (!$email) {
     header('Location: login.php'); // Chuyển hướng nếu token không hợp lệ
     exit();
 }
+// Kiểm tra quyền admin
+if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
+    header('Content-Type: application/json');
+    http_response_code(403);
+    echo json_encode(['success' => false, 'message' => 'Unauthorized access']);
+    exit();
+}
 
 $_SESSION['email'] = $email;
 
 $email = $_SESSION['email'];
 $user = UserData::getProfile();
-
-// Check if user is admin
-if ($user->role !== 'admin') {
-    header('Location: ../index.php');
-    exit();
-}
-
 ?>
 
 <!DOCTYPE html>

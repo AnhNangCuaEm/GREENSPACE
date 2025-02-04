@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errormessages['login'] = 'このアカウントは利用停止されています';
         } else {
             $_SESSION['email'] = $email;
+            $_SESSION['role'] = $user->role;
             createToken($email);
             header('Location: index.php');
             exit;

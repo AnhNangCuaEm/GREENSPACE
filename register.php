@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user = new User(0, $email, $password, '', 0, '', '', 'user', 'active');
             UserData::createUser($user);
             $_SESSION['email'] = $email;
+            $_SESSION['role'] = 'user';
             createToken($email);
             header('Location: index.php');
             exit;

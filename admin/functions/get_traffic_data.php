@@ -1,8 +1,13 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+session_start();
 
+// Kiểm tra quyền admin
+if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
+    header('Content-Type: application/json');
+    http_response_code(403);
+    echo json_encode(['success' => false, 'message' => 'Unauthorized access']);
+    exit();
+}
 require_once __DIR__ . '/../../class/Database.php';
 
 try {
@@ -48,10 +53,10 @@ try {
 
     $stmt = $conn->prepare($chartQuery);
     $stmt->bindParam(':dateFormat', $dateFormat, PDO::PARAM_STR);
-    
+
     // Debug: Print bound parameters
     error_log("Date Format: " . $dateFormat);
-    
+
     $stmt->execute();
     $chartData = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -129,12 +134,11 @@ try {
 
     header('Content-Type: application/json');
     echo json_encode($response);
-
 } catch (PDOException $e) {
     error_log("Database error in get_traffic_data.php: " . $e->getMessage());
     error_log("SQL State: " . $e->getCode());
     error_log("Stack trace: " . $e->getTraceAsString());
-    
+
     header('Content-Type: application/json');
     http_response_code(500);
     echo json_encode([

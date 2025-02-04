@@ -1,8 +1,14 @@
 <?php
-
+session_start();
 require_once __DIR__ . '/../../class/ParkImageData.php';
 
-// Đảm bảo không có output nào trước header
+// Kiểm tra quyền admin
+if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
+    header('Content-Type: application/json');
+    http_response_code(403);
+    echo json_encode(['success' => false, 'message' => 'Unauthorized access']);
+    exit();
+}
 header('Content-Type: application/json');
 
 try {
@@ -25,7 +31,6 @@ try {
     }
 
     echo json_encode($images);
-
 } catch (Exception $e) {
     http_response_code(400);
     echo json_encode(['error' => $e->getMessage()]);

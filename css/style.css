@@ -274,7 +274,7 @@ hr {
    text-shadow: 0 0 9px rgba(0, 0, 0, 0.5);
 }
 
-.slideshow-container .description {
+.slideshow-container .parkfeature {
    color: #f2f2f2;
    font-size: 1rem;
    padding: 8px 12px;
@@ -662,7 +662,7 @@ body>main>div>h2 {
       width: 60%;
    }
 
-   .slideshow-container .description {
+   .slideshow-container .parkfeature {
       font-size: 0.8rem;
       padding: 5px 8px;
       left: 40px;

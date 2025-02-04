@@ -2,13 +2,12 @@
 session_start();
 require_once __DIR__ . '/../../class/Database.php';
 
-if (!isset($_SESSION['email'])) {
+// Kiểm tra quyền admin
+if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
+    header('Content-Type: application/json');
     http_response_code(403);
-    echo json_encode([
-        'success' => false,
-        'message' => 'Unauthorized access'
-    ]);
-    exit;
+    echo json_encode(['success' => false, 'message' => 'Unauthorized access']);
+    exit();
 }
 
 header('Content-Type: application/json');
@@ -60,12 +59,10 @@ try {
             'success' => true,
             'message' => 'Notification sent successfully'
         ]);
-
     } catch (Exception $e) {
         $pdo->rollBack();
         throw $e;
     }
-
 } catch (Exception $e) {
     http_response_code(500);
     echo json_encode([

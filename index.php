@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/class/UserData.php';
 require_once __DIR__ . '/class/ParkData.php';
 require_once __DIR__ . '/class/EventData.php';
 require_once __DIR__ . '/functions/verify.php';
@@ -18,9 +19,7 @@ if (!$email) {
 }
 
 $_SESSION['email'] = $email;
-
 trackPageVisit('index.php');
-
 ?>
 
 <html>
@@ -61,7 +60,7 @@ trackPageVisit('index.php');
                         </a>
                      </div>
                      <div class="name"><?= $park->name ?></div>
-                     <div class="description"><?= $park->parkfeature ?></div>
+                     <div class="parkfeature"><?= $park->parkfeature ?></div>
                   </div>
                <?php endforeach; ?>
             </div>
@@ -185,6 +184,14 @@ trackPageVisit('index.php');
    <script src="js/search.js"></script>
    <script src="js/slideshow.js"></script>
    <script src="js/eventSave.js"></script>
+   <script>
+      document.querySelectorAll('.parkfeature').forEach(element => {
+         const text = element.textContent;
+         if (text.length > 70) {
+            element.textContent = text.substring(0, 70) + '...';
+         }
+      });
+   </script>
 </body>
 
 </html>

@@ -1,14 +1,14 @@
 <?php
 require_once __DIR__ . '/../../class/Database.php';
-require_once __DIR__ . '/../../functions/verify.php';
 
 session_start();
 
-// Verify admin access
-$email = verifyToken();
-if (!$email) {
-   http_response_code(401);
-   exit('Unauthorized');
+// Kiểm tra quyền admin
+if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
+   header('Content-Type: application/json');
+   http_response_code(403);
+   echo json_encode(['success' => false, 'message' => 'Unauthorized access']);
+   exit();
 }
 
 try {
