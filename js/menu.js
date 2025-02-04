@@ -224,6 +224,41 @@ document.addEventListener('DOMContentLoaded', function () {
       const notification = notificationStore.get(notificationId);
       if (!notification) return;
 
+      // Đánh dấu thông báo đã đọc
+      if (!notification.is_read) {
+         fetch('functions/mark_notification_read.php', {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `notification_id=${notificationId}`
+         })
+         .then(response => response.json())
+         .then(data => {
+            if (data.success) {
+               // Cập nhật trạng thái trong store
+               notification.is_read = true;
+               notificationStore.set(notificationId, notification);
+               
+               // Cập nhật UI
+               const notificationElements = document.querySelectorAll(`[data-notification-id="${notificationId}"]`);
+               notificationElements.forEach(el => el.classList.remove('unread'));
+               
+               // Cập nhật badge
+               const unreadCount = parseInt(document.querySelector('.notification-badge').textContent) - 1;
+               const badges = document.querySelectorAll('.notification-badge');
+               badges.forEach(badge => {
+                  if (unreadCount > 0) {
+                     badge.style.display = 'block';
+                     badge.textContent = unreadCount;
+                  } else {
+                     badge.style.display = 'none';
+                  }
+               });
+            }
+         });
+      }
+
       // Hiển thị modal với dữ liệu từ notification
       const modalTitle = notificationModal.querySelector('.notification-title');
       const modalContent = notificationModal.querySelector('.notification-content');
@@ -274,6 +309,7 @@ function loadNotifications() {
                         notificationStore.set(notification.id, notification);
                         return `
                             <li class="menu-li ${notification.is_read ? '' : 'unread'}" 
+                                data-notification-id="${notification.id}"
                                 onclick="showNotificationDetail(${notification.id})">
                                 <div class="notification-item">
                                     <div class="notification-title">${notification.title}</div>

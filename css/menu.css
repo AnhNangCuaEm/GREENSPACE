@@ -230,6 +230,21 @@ nav.initial-load {
     transition: 0.3s ease-in-out;
 }
 
+.menu-li.unread .notification-item {
+    position: relative;
+}
+
+.menu-li.unread .notification-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+}
+
 ul li:hover {
     transform: scale(1.05);
     text-shadow: 0 0 10px rgb(255, 255, 255);
@@ -674,8 +689,8 @@ ul li:hover {
     border-radius: 10px;
 }
 
-.notifications-menu > .menu-ul .menu-li:hover,
-.mobile-notifications-menu > .menu-ul .menu-li:hover {
+.notifications-menu>.menu-ul .menu-li:hover,
+.mobile-notifications-menu>.menu-ul .menu-li:hover {
     text-shadow: none;
     background-color: rgba(255, 255, 255, 0.1);
     transform: none;
