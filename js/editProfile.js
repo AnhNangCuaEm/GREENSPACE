@@ -9,53 +9,89 @@ document.getElementById('closeInfoPopup').addEventListener('click', function () 
 });
 
 document.getElementById('editForm').addEventListener('submit', function (event) {
-    event.preventDefault(); // Prevent the default form submission
+    event.preventDefault();
 
-    const formData = new FormData(this); // Create a FormData object from the form
-    const data = {}; // Create an object to hold the data
+    const formData = new FormData(this);
+    const data = {};
+    let hasChanges = false;
 
-    // Convert FormData to a JSON object
+    // Convert FormData to a JSON object and check for changes
     formData.forEach((value, key) => {
-        // Check if phone is empty and set it to '0' if true
-        if (key === 'phone' && value.trim() === '') {
-            data[key] = '0'; // Default to '0' if phone is empty
-        } else {
+        const input = document.getElementById(key);
+        const originalValue = input.defaultValue;
+        
+        if (key === 'phone') {
+            if (value.trim() === '') {
+                data[key] = '0';
+                if (originalValue !== '') hasChanges = true;
+            } else {
+                data[key] = value;
+                if (value !== originalValue) hasChanges = true;
+            }
+        } else if (key !== 'password' && key !== 'confirmPassword') {
             data[key] = value;
+            if (value !== originalValue) hasChanges = true;
         }
     });
 
-    // Check if password fields are filled and match
-    const password = data.password;
-    const confirmPassword = data.confirmPassword;
-
-    if (password && confirmPassword) {
-        if (password === confirmPassword) {
-            data.updatePassword = true; // Indicate that password update is requested
-        } else {
-            // Hide the popup before showing the error message
-            document.getElementById('infoPopup').style.display = 'none'; // Hide the popup
-
-            // Show error message if passwords do not match
+    // Kiểm tra password riêng
+    const password = formData.get('password');
+    const confirmPassword = formData.get('confirmPassword');
+    
+    if (password || confirmPassword) {
+        if (!password || !confirmPassword) {
+            document.getElementById('infoPopup').style.display = 'none';
             const resultPopup = document.getElementById('result');
-            resultPopup.innerHTML = 'パスワードが一致しません'; // Display password mismatch message
-            resultPopup.classList.add('slidedown'); // Add class for animation
+            resultPopup.innerHTML = 'パスワードを両方入力してください';
+            resultPopup.classList.add('slidedown');
 
-            // Set timeout to hide popup after 3 seconds
             setTimeout(() => {
-                resultPopup.classList.remove('slidedown'); // Remove slidedown class
-                resultPopup.classList.add('slideup'); // Add class to hide animation
-
-                // Reset animation classes after slideup completes
+                resultPopup.classList.remove('slidedown');
+                resultPopup.classList.add('slideup');
                 setTimeout(() => {
-                    resultPopup.classList.remove('slideup'); // Remove slideup class for future displays
-                }, 300); // Time needed to complete animation
-            }, 4000); // 4 seconds
-
-            return; // Exit the function if passwords do not match
+                    resultPopup.classList.remove('slideup');
+                }, 300);
+            }, 4000);
+            return;
         }
-    } else {
-        delete data.password; // Remove password if not valid
-        delete data.confirmPassword; // Remove confirm password if not valid
+
+        if (password !== confirmPassword) {
+            document.getElementById('infoPopup').style.display = 'none';
+            const resultPopup = document.getElementById('result');
+            resultPopup.innerHTML = 'パスワードが一致しません';
+            resultPopup.classList.add('slidedown');
+
+            setTimeout(() => {
+                resultPopup.classList.remove('slidedown');
+                resultPopup.classList.add('slideup');
+                setTimeout(() => {
+                    resultPopup.classList.remove('slideup');
+                }, 300);
+            }, 4000);
+            return;
+        }
+
+        // Nếu password hợp lệ, thêm flag và password vào data
+        data.updatePassword = true;  // Thêm flag này
+        data.password = password;
+        hasChanges = true;
+    }
+
+    // Nếu không có thay đổi, hiển thị thông báo và dừng lại
+    if (!hasChanges) {
+        document.getElementById('infoPopup').style.display = 'none';
+        const resultPopup = document.getElementById('result');
+        resultPopup.innerHTML = '変更内容がありません'; // "Không có thay đổi nào"
+        resultPopup.classList.add('slidedown');
+
+        setTimeout(() => {
+            resultPopup.classList.remove('slidedown');
+            resultPopup.classList.add('slideup');
+            setTimeout(() => {
+                resultPopup.classList.remove('slideup');
+            }, 300);
+        }, 4000);
+        return;
     }
 
     // Send AJAX request to update the profile
@@ -88,7 +124,6 @@ document.getElementById('editForm').addEventListener('submit', function (event) 
 
         } else {
             // Handle error response
-            console.error('プロフィールの更新に失敗しました');
             const resultPopup = document.getElementById('result');
             resultPopup.innerHTML = 'プロフィールの更新に失敗しました'; // Display error message
             resultPopup.classList.add('slidedown'); // Add class for animation

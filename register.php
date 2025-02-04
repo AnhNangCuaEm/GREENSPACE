@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/class/UserData.php';
 require_once __DIR__ . '/functions/verify.php';
+require_once __DIR__ . '/class/Database.php';
 
 ini_set('session.gc_maxlifetime', 259200);
 session_start();
@@ -26,13 +27,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($user) {
             $errormessages['email'] = 'このメールアドレスは既に登録されています';
         } else {
-            $user = new User(0, $email, $password, '', 0, '', '', 'user', 'active');
-            UserData::createUser($user);
-            $_SESSION['email'] = $email;
-            $_SESSION['role'] = 'user';
-            createToken($email);
-            header('Location: index.php');
-            exit;
+            $pdo = Database::getConnection();
+            $pdo->beginTransaction();
+            
+            try {
+                // Create new user
+                $user = new User(0, $email, $password, '', 0, '', '', 'user', 'active');
+                UserData::createUser($user);
+                
+                // Add welcome notification
+                $stmt = $pdo->prepare("INSERT INTO notification_recipients (notification_id, recipient_email) VALUES (?, ?)");
+                $stmt->execute([6, $email]);
+                
+                $pdo->commit();
+                
+                $_SESSION['email'] = $email;
+                $_SESSION['role'] = 'user';
+                createToken($email);
+                header('Location: index.php');
+                exit;
+            } catch (Exception $e) {
+                $pdo->rollBack();
+                $errormessages['system'] = 'システムエラーが発生しました。';
+            }
         }
     }
 }

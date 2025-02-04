@@ -28,6 +28,7 @@ div {
 p {
     color: red;
     font-size: 0.9rem;
+    margin-bottom: 1rem;
 }
 
 .logo {
@@ -45,10 +46,6 @@ p {
     backdrop-filter: blur(8px);
     border: solid 1px rgba(255, 255, 255, 0.5);
     font-size: 1.3rem;
-}
-
-.login-register-form div {
-    margin-bottom: 1rem;
 }
 
 .login-register-form form {

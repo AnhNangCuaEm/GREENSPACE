@@ -1,12 +1,12 @@
 
 document.getElementById('changeAvtBtn').addEventListener('click', function () {
     document.getElementById('avatarPopup').style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Vô hiệu hóa cuộn
+    document.body.style.overflow = 'hidden';
 });
 
 document.getElementById('closePopup').addEventListener('click', function () {
     document.getElementById('avatarPopup').style.display = 'none';
-    document.body.style.overflow = 'auto'; // Bật lại cuộn
+    document.body.style.overflow = 'auto';
 });
 
 document.getElementById('applyAvatar').addEventListener('click', function () {
