@@ -21,7 +21,8 @@ try {
                    nr.is_read, nr.read_at, n.is_active
             FROM notifications n
             INNER JOIN notification_recipients nr ON n.id = nr.notification_id
-            WHERE nr.recipient_email = ?
+            WHERE nr.recipient_email = ? 
+            AND nr.is_deleted = 0
             ORDER BY n.created_at DESC";
 
     $stmt = $pdo->prepare($sql);

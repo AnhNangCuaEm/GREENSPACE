@@ -109,8 +109,11 @@ $user = UserData::getProfile();
         <h3 class="notification-title"></h3>
         <p class="notification-content"></p>
         <div class="notification-meta"></div>
-        <div>
+        <div class="notification-actions">
             <button id="closeNotificationModal">閉じる</button>
+            <button class="delete-notification">
+                <i class="fas fa-trash"></i>
+            </button>
         </div>
     </div>
 </div>

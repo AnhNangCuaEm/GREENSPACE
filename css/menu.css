@@ -849,3 +849,29 @@ ul li:hover {
     padding: 20px;
     color: rgba(252, 248, 219, 0.6);
 }
+
+.notification-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.delete-notification {
+    margin-left: 10px;
+    background: none;
+    border: none;
+    color: #ff4444;
+    cursor: pointer;
+    padding: 5px;
+    transition: 0.3s ease-out;
+}
+
+.delete-notification:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.delete-notification i {
+    font-size: 1.2em;
+}

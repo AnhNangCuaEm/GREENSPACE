@@ -147,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
    const notificationModal = document.getElementById('notification-modal');
    const closeNotificationModal = document.getElementById('closeNotificationModal');
    const hamburger = document.getElementById('hamburger');
+   const deleteButton = document.querySelector('.delete-notification');
 
    // Ẩn mobile notification menu khi khởi tạo
    if (mobileNotificationsMenu) {
@@ -219,6 +220,52 @@ document.addEventListener('DOMContentLoaded', function () {
       });
    }
 
+   // Function to delete notification
+   function deleteNotification(notificationId) {
+      fetch('functions/delete_notification.php', {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+         },
+         body: `notification_id=${notificationId}`
+      })
+         .then(response => response.json())
+         .then(data => {
+            if (data.success) {
+               // Xóa khỏi store
+               notificationStore.delete(notificationId);
+               
+               // Xóa khỏi UI
+               const notificationElements = document.querySelectorAll(`[data-notification-id="${notificationId}"]`);
+               notificationElements.forEach(el => el.remove());
+               
+               // Đóng modal
+               notificationModal.style.display = 'none';
+               document.body.style.overflow = '';
+               document.getElementById('overlay').style.display = 'none';
+               
+               // Tải lại danh sách thông báo
+               loadNotifications();
+            } else {
+               console.error('Failed to delete notification:', data.message);
+            }
+         })
+         .catch(error => {
+            console.error('Error deleting notification:', error);
+         });
+   }
+
+   // Add event listener for delete button
+   if (deleteButton) {
+      deleteButton.addEventListener('click', function() {
+         const notificationId = this.getAttribute('data-notification-id');
+         console.log('Deleting notification:', notificationId); // Debug log
+         if (notificationId) {
+            deleteNotification(notificationId);
+         }
+      });
+   }
+
    // Function to show notification detail
    window.showNotificationDetail = function (notificationId) {
       const notification = notificationStore.get(notificationId);
@@ -233,40 +280,47 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: `notification_id=${notificationId}`
          })
-         .then(response => response.json())
-         .then(data => {
-            if (data.success) {
-               // Cập nhật trạng thái trong store
-               notification.is_read = true;
-               notificationStore.set(notificationId, notification);
-               
-               // Cập nhật UI
-               const notificationElements = document.querySelectorAll(`[data-notification-id="${notificationId}"]`);
-               notificationElements.forEach(el => el.classList.remove('unread'));
-               
-               // Cập nhật badge
-               const unreadCount = parseInt(document.querySelector('.notification-badge').textContent) - 1;
-               const badges = document.querySelectorAll('.notification-badge');
-               badges.forEach(badge => {
-                  if (unreadCount > 0) {
-                     badge.style.display = 'block';
-                     badge.textContent = unreadCount;
-                  } else {
-                     badge.style.display = 'none';
-                  }
-               });
-            }
-         });
+            .then(response => response.json())
+            .then(data => {
+               if (data.success) {
+                  // Cập nhật trạng thái trong store
+                  notification.is_read = true;
+                  notificationStore.set(notificationId, notification);
+
+                  // Cập nhật UI
+                  const notificationElements = document.querySelectorAll(`[data-notification-id="${notificationId}"]`);
+                  notificationElements.forEach(el => el.classList.remove('unread'));
+
+                  // Cập nhật badge
+                  const unreadCount = parseInt(document.querySelector('.notification-badge').textContent) - 1;
+                  const badges = document.querySelectorAll('.notification-badge');
+                  badges.forEach(badge => {
+                     if (unreadCount > 0) {
+                        badge.style.display = 'block';
+                        badge.textContent = unreadCount;
+                     } else {
+                        badge.style.display = 'none';
+                     }
+                  });
+               }
+            });
       }
 
       // Hiển thị modal với dữ liệu từ notification
       const modalTitle = notificationModal.querySelector('.notification-title');
       const modalContent = notificationModal.querySelector('.notification-content');
       const modalMeta = notificationModal.querySelector('.notification-meta');
+      const deleteButton = notificationModal.querySelector('.delete-notification');
 
       modalTitle.textContent = notification.title;
       modalContent.textContent = notification.content;
       modalMeta.textContent = new Date(notification.created_at).toLocaleString('ja-JP');
+      
+      // Set notification ID cho nút xóa
+      if (deleteButton) {
+         deleteButton.setAttribute('data-notification-id', notificationId);
+         console.log('Set notification ID:', notificationId); // Debug log
+      }
 
       notificationModal.style.display = 'block';
       document.body.style.overflow = 'hidden';
@@ -278,36 +332,36 @@ document.addEventListener('DOMContentLoaded', function () {
 const notificationStore = new Map();
 
 function loadNotifications() {
-    fetch('functions/get_user_notifications.php')
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Update notification badges
-                const badges = document.querySelectorAll('.notification-badge');
-                badges.forEach(badge => {
-                    if (data.unread_count > 0) {
-                        badge.style.display = 'block';
-                        badge.textContent = data.unread_count;
-                    } else {
-                        badge.style.display = 'none';
-                    }
-                });
+   fetch('functions/get_user_notifications.php')
+      .then(response => response.json())
+      .then(data => {
+         if (data.success) {
+            // Update notification badges
+            const badges = document.querySelectorAll('.notification-badge');
+            badges.forEach(badge => {
+               if (data.unread_count > 0) {
+                  badge.style.display = 'block';
+                  badge.textContent = data.unread_count;
+               } else {
+                  badge.style.display = 'none';
+               }
+            });
 
-                // Update both notification menus
-                const notificationMenus = [
-                    document.querySelector('#notifications-menu .menu-ul'),
-                    document.querySelector('#mobile-notifications-menu .menu-ul')
-                ];
+            // Update both notification menus
+            const notificationMenus = [
+               document.querySelector('#notifications-menu .menu-ul'),
+               document.querySelector('#mobile-notifications-menu .menu-ul')
+            ];
 
-                const content = data.data.length === 0 
-                    ? `<li class="menu-li">
+            const content = data.data.length === 0
+               ? `<li class="menu-li">
                          <div class="empty-notification">
                              通知はありません
                          </div>
                        </li>`
-                    : data.data.map(notification => {
-                        notificationStore.set(notification.id, notification);
-                        return `
+               : data.data.map(notification => {
+                  notificationStore.set(notification.id, notification);
+                  return `
                             <li class="menu-li ${notification.is_read ? '' : 'unread'}" 
                                 data-notification-id="${notification.id}"
                                 onclick="showNotificationDetail(${notification.id})">
@@ -318,18 +372,18 @@ function loadNotifications() {
                                 </div>
                             </li>
                         `;
-                    }).join('');
+               }).join('');
 
-                notificationMenus.forEach(menu => {
-                    if (menu) menu.innerHTML = content;
-                });
-            } else {
-                console.error('Failed to load notifications:', data.message);
-            }
-        })
-        .catch(error => {
-            console.error('Error loading notifications:', error);
-        });
+            notificationMenus.forEach(menu => {
+               if (menu) menu.innerHTML = content;
+            });
+         } else {
+            console.error('Failed to load notifications:', data.message);
+         }
+      })
+      .catch(error => {
+         console.error('Error loading notifications:', error);
+      });
 }
 
 // Load notifications when page loads
