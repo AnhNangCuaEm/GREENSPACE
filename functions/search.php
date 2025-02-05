@@ -3,8 +3,17 @@
 ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
-// Set JSON header right from the start
-header('Content-Type: application/json');
+// Ensure headers haven't been sent yet
+if (!headers_sent()) {
+    // Set necessary headers
+    header('Content-Type: application/json');
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET');
+    header('Access-Control-Allow-Headers: Content-Type');
+    
+    // Disable session cookies if not needed
+    ini_set('session.use_cookies', 0);
+}
 
 // Đầu file
 error_log("[Search] Starting search process");
