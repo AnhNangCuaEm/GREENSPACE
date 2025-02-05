@@ -1,12 +1,16 @@
 <?php
-// Enable error reporting for debugging
+// Disable error display on output
+ini_set('display_errors', 0);
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
-require_once __DIR__ . '/../class/ParkData.php';
-require_once __DIR__ . '/../class/EventData.php';
+// Set JSON header right from the start
+header('Content-Type: application/json');
 
 try {
+    require_once __DIR__ . '/../class/ParkData.php';
+    require_once __DIR__ . '/../class/EventData.php';
+    require_once __DIR__ . '/../functions/TextHelper.php';
+
     // Ensure query parameter exists
     if (!isset($_GET['query'])) {
         throw new Exception('Query parameter is required');
@@ -16,7 +20,6 @@ try {
     $results = [];
 
     if (strlen($query) >= 1) {
-        // Wrap database operations in try-catch
         try {
             //Search in parks
             $parks = ParkData::searchParks($query);
@@ -39,17 +42,15 @@ try {
                     'thumbnail' => $event->thumbnail
                 ];
             }
-        } catch (Exception $e) {
-            throw new Exception('Database error: ' . $e->getMessage());
+        } catch (Throwable $e) {
+            echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
+            exit;
         }
     }
 
-    header('Content-Type: application/json');
     echo json_encode($results);
     
-} catch (Exception $e) {
-    // Return error as JSON
-    header('Content-Type: application/json');
+} catch (Throwable $e) {
     http_response_code(500);
     echo json_encode(['error' => $e->getMessage()]);
 }
