@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Set timeout to avoid sending too many requests
         timeoutId = setTimeout(() => {
-            search(query)
+            fetch(`functions/search.php?query=${encodeURIComponent(query)}`)
+                .then(response => response.json())
                 .then(data => {
                     searchResults.style.display = 'block';
                     const resultsContent = searchResults.querySelector('.results-content');
@@ -59,25 +60,3 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-async function search(query) {
-    try {
-        const response = await fetch(`/functions/search.php?query=${encodeURIComponent(query)}`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-            },
-            credentials: 'omit' // Don't send cookies
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('Search error:', error);
-        throw error;
-    }
-}
