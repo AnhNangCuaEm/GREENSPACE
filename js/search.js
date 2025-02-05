@@ -10,7 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const query = this.value.trim();
         
         if (query.length < 1) {
-            searchResults.style.display = 'none';
+            // Add smooth hide animation
+            searchResults.classList.remove('show');
+            setTimeout(() => {
+                searchResults.style.display = 'none';
+            }, 300);
             return;
         }
 
@@ -20,6 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(response => response.json())
                 .then(data => {
                     searchResults.style.display = 'block';
+                    // Add show animation after display is set
+                    setTimeout(() => {
+                        searchResults.classList.add('show');
+                    }, 10);
                     const resultsContent = searchResults.querySelector('.results-content');
                     if (data.length > 0) {
                         displayResults(data);
@@ -28,14 +36,29 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 })
                 .catch(error => console.error('Error:', error));
-        }, 300); // 300ms delay
+        }, 300);
     });
 
-    // Add event listener for focus
+    // Update focus event listener
     searchInput.addEventListener('focus', function() {
         const query = this.value.trim();
         if (query.length >= 1) {
-            searchResults.style.display = 'block';
+            // Reuse the search functionality
+            fetch(`functions/search.php?query=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    searchResults.style.display = 'block';
+                    setTimeout(() => {
+                        searchResults.classList.add('show');
+                    }, 10);
+                    const resultsContent = searchResults.querySelector('.results-content');
+                    if (data.length > 0) {
+                        displayResults(data);
+                    } else {
+                        resultsContent.innerHTML = '<div class="search-result-item">検索結果がありません</div>';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
         }
     });
 
@@ -56,7 +79,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Close results when clicking outside
     document.addEventListener('click', function(e) {
         if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-            searchResults.style.display = 'none';
+            // Add smooth hide animation
+            searchResults.classList.remove('show');
+            setTimeout(() => {
+                searchResults.style.display = 'none';
+            }, 300);
         }
     });
 });

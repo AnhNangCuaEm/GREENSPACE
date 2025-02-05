@@ -158,8 +158,17 @@ document.addEventListener('DOMContentLoaded', function () {
       e.stopPropagation();
       const menu = document.getElementById('menu');
       const mobileMenu = document.getElementById('mobile-menu');
+      const searchResults = document.getElementById('searchResults');
       const isMobile = window.innerWidth <= 768;
       const targetMenu = isMobile ? mobileNotificationsMenu : notificationsMenu;
+
+      // Hide search results
+      if (searchResults) {
+         searchResults.classList.remove('show');
+         setTimeout(() => {
+            searchResults.style.display = 'none';
+         }, 300);
+      }
 
       // Hide other menus first
       if (menu.classList.contains('show')) {
