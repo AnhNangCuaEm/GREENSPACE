@@ -17,12 +17,17 @@ try {
     }
 
     $query = $_GET['query'];
+    error_log("Original query: " . $query); // Debug log
+
     $results = [];
 
     if (strlen($query) >= 1) {
         try {
             //Search in parks
+            error_log("Searching parks..."); // Debug log
             $parks = ParkData::searchParks($query);
+            error_log("Found " . count($parks) . " parks"); // Debug log
+
             foreach ($parks as $park) {
                 $results[] = [
                     'id' => $park->id,
@@ -33,7 +38,10 @@ try {
             }
 
             //Search in events
+            error_log("Searching events..."); // Debug log
             $events = EventData::searchEvents($query);
+            error_log("Found " . count($events) . " events"); // Debug log
+
             foreach ($events as $event) {
                 $results[] = [
                     'id' => $event->id,
@@ -43,14 +51,17 @@ try {
                 ];
             }
         } catch (Throwable $e) {
+            error_log("Search error: " . $e->getMessage()); // Debug log
             echo json_encode(['error' => 'Database error: ' . $e->getMessage()]);
             exit;
         }
     }
 
+    error_log("Total results: " . count($results)); // Debug log
     echo json_encode($results);
     
 } catch (Throwable $e) {
+    error_log("General error: " . $e->getMessage()); // Debug log
     http_response_code(500);
     echo json_encode(['error' => $e->getMessage()]);
 }
