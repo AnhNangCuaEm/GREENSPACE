@@ -8,7 +8,7 @@ if (!class_exists('Database')) {
       public static function getConnection(): PDO
       {
          return new PDO(
-            'mysql:charset=UTF8;dbname=' . DB_DATABASE . ';host=' . DB_HOST,
+            'mysql:charset=UTF8;dbname=' . DB_DATABASE . ';host=' . DB_HOST . ';port=' . DB_PORT,
             DB_USER,
             DB_PASSWORD
          );
