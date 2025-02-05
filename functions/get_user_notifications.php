@@ -70,10 +70,9 @@ try {
                 ->format('Y年m月d日 H:i');
         }
 
-        $notification['short_content'] = mb_strlen($notification['content']) > 30 
-            ? mb_substr($notification['content'], 0, 30) . '...'
-            : $notification['content'];
-    }
+            // Content is already processed in database, no need to shorten
+            $notification['short_content'] = $notification['content'];
+        }
 
     // Count unread
     $unreadCount = array_reduce($notifications, function ($carry, $item) {
