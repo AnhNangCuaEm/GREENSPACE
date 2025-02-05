@@ -179,7 +179,6 @@ trackPageVisit('index.php');
    <div id="overlay"></div>
    <script src="js/background.js"></script>
    <script src="js/scroll-animation.js"></script>
-   <script src="js/loadingtransition.js"></script>
    <script src="js/menu.js"></script>
    <script src="js/search.js"></script>
    <script src="js/slideshow.js"></script>

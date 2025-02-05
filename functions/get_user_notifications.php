@@ -47,12 +47,8 @@ try {
                     ->format('Y年m月d日 H:i');
             }
 
-            // Shorten content if too long
-            if (strlen($notification['content']) > 30) {
-                $notification['short_content'] = mb_substr($notification['content'], 0, 30) . '...';
-            } else {
-                $notification['short_content'] = $notification['content'];
-            }
+            // Content is already processed in database, no need to shorten
+            $notification['short_content'] = $notification['content'];
         }
 
         // Count unread notifications
