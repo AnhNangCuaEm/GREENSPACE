@@ -3,7 +3,6 @@ session_start();
 require_once __DIR__ . '/../../class/ParkData.php';
 require_once __DIR__ . '/../../class/ParkImageData.php';
 
-// Kiểm tra quyền admin
 if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
    header('Content-Type: application/json');
    http_response_code(403);
@@ -21,7 +20,6 @@ try {
    $park = ParkData::getPark($_GET['id']);
    $parkImages = ParkImageData::getParkImages($_GET['id']);
 
-   // Chuyển đổi $park thành array và thêm images vào
    $parkArray = [
       'id' => $park->id,
       'name' => $park->name,

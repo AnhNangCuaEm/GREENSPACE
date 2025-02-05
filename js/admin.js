@@ -971,7 +971,7 @@ function showComments(parkId) {
             document.body.insertAdjacentHTML('beforeend', modal);
         })
         .catch(error => {
-            console.error('Error fetching comments:', error); // Debug log
+            console.error('Error fetching comments:', error);
         });
 }
 
@@ -998,7 +998,7 @@ function deleteComment(commentId, userEmail) {
                     try {
                         return JSON.parse(text);
                     } catch (e) {
-                        console.error('JSON parse error:', e); // Debug log
+                        console.error('JSON parse error:', e);
                         throw new Error('Invalid JSON response');
                     }
                 });
@@ -1446,7 +1446,7 @@ function filterParks() {
         }
     }
 
-    // 検索結果がない場合のメッセージを表示
+    //Show no results message if no matches found
     if (!hasVisibleRows) {
         const noResultsRow = document.createElement('tr');
         noResultsRow.classList.add('no-results-row');
@@ -1492,7 +1492,6 @@ function filterEvents() {
         }
     }
 
-    // 検索結果がない場合のメッセージを表示
     if (!hasVisibleRows) {
         const noResultsRow = document.createElement('tr');
         noResultsRow.classList.add('no-results-row');
@@ -1662,7 +1661,7 @@ function updateFeedbackStatus(id, field, value) {
                     }
                 }
             } else {
-                // Nếu update thất bại, revert lại checkbox
+                //Revert checkbox if update fails
                 const checkbox = document.querySelector(`tr[data-id="${id}"] input[type="checkbox"][onchange*="${field}"]`);
                 if (checkbox) {
                     checkbox.checked = !value;
@@ -1672,7 +1671,7 @@ function updateFeedbackStatus(id, field, value) {
         })
         .catch(error => {
             console.error('Error updating status:', error);
-            // Revert checkbox nếu có lỗi
+            // Revert checkbox if error
             const checkbox = document.querySelector(`tr[data-id="${id}"] input[type="checkbox"][onchange*="${field}"]`);
             if (checkbox) {
                 checkbox.checked = !value;
@@ -1708,7 +1707,6 @@ function filterFeedbacks() {
 
     let hasVisibleRows = false;
 
-    // 検索キーワードに対する特別なフィルター条件を追加
     const isReadFilter = filter.includes('既読');
     const isImportantFilter = filter.includes('重要');
     const searchText = filter
@@ -1728,7 +1726,6 @@ function filterFeedbacks() {
         const isRead = row.classList.contains('read');
         const isImportant = row.classList.contains('important');
 
-        // フィルター条件をチェック
         const matchesText = !searchText || 
             email?.toLowerCase().includes(searchText) ||
             content?.toLowerCase().includes(searchText);
@@ -1736,7 +1733,7 @@ function filterFeedbacks() {
         const matchesRead = !isReadFilter || isRead;
         const matchesImportant = !isImportantFilter || isImportant;
 
-        // すべての条件に一致する場合のみ表示
+        //Only show row if all conditions match
         if (matchesText && matchesRead && matchesImportant) {
             row.style.display = '';
             hasVisibleRows = true;
@@ -1745,7 +1742,6 @@ function filterFeedbacks() {
         }
     }
 
-    // 検索結果がない場合のメッセージを表示
     if (!hasVisibleRows) {
         const noResultsRow = document.createElement('tr');
         noResultsRow.classList.add('no-results-row');

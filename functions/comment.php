@@ -2,10 +2,6 @@
 
 require_once __DIR__ . '/../class/Database.php';
 
-// Add this at the very top to catch any PHP errors
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 /**
  * Lưu comment mới vào database
  */

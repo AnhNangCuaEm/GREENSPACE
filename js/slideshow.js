@@ -1,5 +1,4 @@
 //Slide move X and scale like ios widget
-/* Slideshow JavaScript */
 let currentSlideIndex = 0;
 let autoNextInterval;
 const slideshowArea = document.getElementById('slideshow-area');
@@ -53,11 +52,11 @@ function currentSlide(index) {
    updateDotNavigation();
 }
 
-// Hàm cập nhật dot navigation
+// Function to update dot navigation
 function updateDotNavigation() {
-   const dots = document.querySelectorAll('.dot'); // Lấy tất cả các dot
+   const dots = document.querySelectorAll('.dot'); // Get all dots
    dots.forEach((dot, idx) => {
-      dot.classList.toggle('active', idx === currentSlideIndex); // Thêm class active cho dot hiện tại
+      dot.classList.toggle('active', idx === currentSlideIndex); // Add active class to current dot
    });
 }
 
@@ -66,13 +65,13 @@ function startAutoNext() {
 }
 
 function stopAutoNext() {
-   clearInterval(autoNextInterval); // Dừng auto next slide
+   clearInterval(autoNextInterval); // Stop auto next slide
 }
 
 window.onload = () => {
    setTimeout(() => {
-      updateSlidePosition(); // Gọi hàm sau khi trang đã sẵn sàng
-      updateDotNavigation(); // Cập nhật dot navigation
-      startAutoNext(); // Bắt đầu auto next slide
-   }, 100); // Trì hoãn 100ms để đảm bảo DOM được tải xong
+      updateSlidePosition(); // Call function after page is ready
+      updateDotNavigation(); // Update dot navigation
+      startAutoNext(); // Start auto next slide
+   }, 100); // Delay of 100ms to ensure DOM is loaded
 };

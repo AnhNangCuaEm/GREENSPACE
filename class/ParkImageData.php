@@ -19,12 +19,9 @@ class ParkImageData
 
       $state->execute(['id' => $id]);
 
-      // Khởi tạo mảng chứa danh sách ảnh
       $parkImages = [];
 
-      // Lặp qua các kết quả và chỉ lấy đường dẫn ảnh
       while ($row = $state->fetch(PDO::FETCH_ASSOC)) {
-         // Trả về cả id và image_url
          $parkImages[] = [
             'id' => $row['id'],
             'image_url' => $row['image_url']

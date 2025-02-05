@@ -1,6 +1,5 @@
 <?php
 //this is dashboard page to manage user, park, event only admin can access
-
 require_once __DIR__ . '/../class/UserData.php';
 require_once __DIR__ . '/../class/ParkData.php';
 require_once __DIR__ . '/../class/EventData.php';
@@ -9,12 +8,12 @@ require_once __DIR__ . '/../functions/verify.php';
 
 session_start();
 
-$email = verifyToken(); // Kiểm tra token trong cookie
+$email = verifyToken();
 if (!$email) {
-    header('Location: login.php'); // Chuyển hướng nếu token không hợp lệ
+    header('Location: login.php');
     exit();
 }
-// Kiểm tra quyền admin
+// Check admin role
 if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
     header('Content-Type: application/json');
     http_response_code(403);

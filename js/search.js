@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchResults = document.getElementById('searchResults');
     let timeoutId = null;
 
-    // Xử lý sự kiện input
+    //Handle input event
     searchInput.addEventListener('input', function() {
         clearTimeout(timeoutId);
         
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Đặt timeout để tránh gửi quá nhiều request
+        // Set timeout to avoid sending too many requests
         timeoutId = setTimeout(() => {
             fetch(`functions/search.php?query=${encodeURIComponent(query)}`)
                 .then(response => response.json())
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 300); // 300ms delay
     });
 
-    // Thêm event listener cho focus
+    // Add event listener for focus
     searchInput.addEventListener('focus', function() {
         const query = this.value.trim();
         if (query.length >= 1) {
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Hiển thị kết quả
+    // Display results
     function displayResults(results) {
         const resultsContent = searchResults.querySelector('.results-content');
         resultsContent.innerHTML = results.map(result => `
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
         `).join('');
     }
 
-    // Đóng kết quả khi click ra ngoài
+    // Close results when clicking outside
     document.addEventListener('click', function(e) {
         if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
             searchResults.style.display = 'none';

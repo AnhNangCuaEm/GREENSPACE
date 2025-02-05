@@ -2,7 +2,6 @@
 session_start();
 require_once __DIR__ . '/../../class/Database.php';
 
-// Kiểm tra quyền admin
 if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
    header('Content-Type: application/json');
    http_response_code(403);
@@ -20,20 +19,16 @@ try {
    $pdo = Database::getConnection();
    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-   // Bắt đầu transaction
    $pdo->beginTransaction();
 
-   // Xóa từ bảng notification_recipients
    $sql = "DELETE FROM notification_recipients WHERE notification_id = ?";
    $stmt = $pdo->prepare($sql);
    $stmt->execute([$data['id']]);
 
-   // Xóa từ bảng notification_targets
    $sql = "DELETE FROM notification_targets WHERE notification_id = ?";
    $stmt = $pdo->prepare($sql);
    $stmt->execute([$data['id']]);
 
-   // Xóa từ bảng notifications
    $sql = "DELETE FROM notifications WHERE id = ?";
    $stmt = $pdo->prepare($sql);
    $stmt->execute([$data['id']]);

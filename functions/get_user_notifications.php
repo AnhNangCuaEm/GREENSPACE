@@ -16,7 +16,6 @@ try {
     $pdo = Database::getConnection();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Lấy thông báo của user từ notification_recipients và notifications
     $sql = "SELECT n.id, n.title, n.content, n.created_at, 
                    nr.is_read, nr.read_at, n.is_active
             FROM notifications n
@@ -36,19 +35,19 @@ try {
             'data' => []
         ]);
     } else {
-        // Format dữ liệu trước khi trả về
+        // Format data before returning
         foreach ($notifications as &$notification) {
-            // Thêm thông tin về thời gian tạo
+            // Add time information
             $notification['created_at_formatted'] = (new DateTime($notification['created_at']))
                 ->format('Y年m月d日 H:i');
 
-            // Thêm thông tin về thời gian đọc nếu có
+            // Add time information if read
             if ($notification['read_at']) {
                 $notification['read_at_formatted'] = (new DateTime($notification['read_at']))
                     ->format('Y年m月d日 H:i');
             }
 
-            // Rút gọn content nếu quá dài
+            // Shorten content if too long
             if (strlen($notification['content']) > 30) {
                 $notification['short_content'] = mb_substr($notification['content'], 0, 30) . '...';
             } else {
@@ -56,7 +55,7 @@ try {
             }
         }
 
-        // Đếm số thông báo chưa đọc
+        // Count unread notifications
         $unreadCount = array_reduce($notifications, function ($carry, $item) {
             return $carry + ($item['is_read'] ? 0 : 1);
         }, 0);

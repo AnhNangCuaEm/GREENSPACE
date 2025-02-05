@@ -69,7 +69,6 @@ class parkData
    {
       $pdo = Database::getConnection();
 
-      //get lastest 5 park by update time
       $state = $pdo->prepare('SELECT * FROM park ORDER BY RAND() LIMIT 5');
       $state->execute();
 
@@ -124,11 +123,9 @@ class parkData
    {
       $pdo = Database::getConnection();
 
-      // Chuẩn bị các biến tìm kiếm
       list($searchQuery, $searchQueryNoSpaces) = TextHelper::convertToSearchableText($query);
       $queryNoSpaces = str_replace(' ', '', $query);
 
-      // Tìm kiếm với nhiều điều kiện
       $sql = "SELECT * FROM park WHERE 
               name LIKE :query 
               OR location LIKE :query
@@ -250,20 +247,16 @@ class parkData
       try {
          $pdo = Database::getConnection();
          
-         // Bắt đầu transaction
          $pdo->beginTransaction();
          
-         // Xóa các bản ghi liên quan trong bảng park_likes
          $sql1 = "DELETE FROM park_likes WHERE park_id = :id";
          $state1 = $pdo->prepare($sql1);
          $state1->execute(['id' => $id]);
          
-         // Xóa các bản ghi liên quan trong bảng park_images
          $sql2 = "DELETE FROM park_images WHERE park_id = :id";
          $state2 = $pdo->prepare($sql2);
          $state2->execute(['id' => $id]);
          
-         // Xóa công viên
          $sql3 = "DELETE FROM park WHERE id = :id";
          $state3 = $pdo->prepare($sql3);
          $result = $state3->execute(['id' => $id]);

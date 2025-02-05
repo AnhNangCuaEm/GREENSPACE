@@ -91,11 +91,11 @@ class eventData
    {
       $pdo = Database::getConnection();
 
-      // Chuẩn bị các biến tìm kiếm
+      //Prepare search query
       list($searchQuery, $searchQueryNoSpaces) = TextHelper::convertToSearchableText($query);
       $queryNoSpaces = str_replace(' ', '', $query);
 
-      // Tìm kiếm với nhiều điều kiện
+      //Search with multiple conditions
       $sql = "SELECT * FROM event WHERE 
               name LIKE :query 
               OR location LIKE :query

@@ -33,7 +33,6 @@ if (isset($_GET['id'])) {
 
     //If park not found, show error page
     if (!$parks) {
-        // Hiển thị giao diện lỗi
         ?>
         <html>
 
@@ -113,7 +112,7 @@ if (isset($_GET['id'])) {
                 <a href="index.php"><button>ホームページに戻る</button></a>
             </div>
             <script>
-                let timeLeft = 10; // Set the countdown time in seconds
+                let timeLeft = 10;
                 const countdownElement = document.getElementById('countdown');
 
                 const countdownInterval = setInterval(() => {
@@ -122,9 +121,9 @@ if (isset($_GET['id'])) {
 
                     if (timeLeft <= 0) {
                         clearInterval(countdownInterval);
-                        window.location.href = 'index.php'; // Redirect to index.php
+                        window.location.href = 'index.php';
                     }
-                }, 1000); // Update every second
+                }, 1000);
             </script>
         </body>
 
@@ -400,19 +399,18 @@ if (isset($_GET['id'])) {
                 document.body.style.overflow = ''; // Restore body scroll
             }
 
-            // Thêm event listeners khi document load
             document.addEventListener('DOMContentLoaded', function () {
                 const modal = document.getElementById("imageModal");
                 const closeBtn = document.getElementById("closeModalBtn");
 
-                // Đóng modal khi click vào nền
+                //Close modal when clicking outside the modal
                 modal.addEventListener('click', function (e) {
                     if (e.target === modal) {
                         closeModal();
                     }
                 });
 
-                // Đóng modal khi click vào nút close
+                // Close modal when clicking on the close button
                 closeBtn.addEventListener('click', function (e) {
                     e.stopPropagation();
                     closeModal();

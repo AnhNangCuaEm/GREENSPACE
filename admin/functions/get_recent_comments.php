@@ -3,7 +3,6 @@ require_once __DIR__ . '/../../class/Database.php';
 
 session_start();
 
-// Kiểm tra quyền admin
 if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
    header('Content-Type: application/json');
    http_response_code(403);

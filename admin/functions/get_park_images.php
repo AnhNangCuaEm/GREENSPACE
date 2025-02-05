@@ -2,7 +2,6 @@
 session_start();
 require_once __DIR__ . '/../../class/ParkImageData.php';
 
-// Kiểm tra quyền admin
 if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
     header('Content-Type: application/json');
     http_response_code(403);
@@ -25,7 +24,6 @@ try {
 
     $images = ParkImageData::getParkImages($parkId);
 
-    // Kiểm tra xem $images có phải là array không
     if (!is_array($images)) {
         throw new Exception('Invalid data format');
     }

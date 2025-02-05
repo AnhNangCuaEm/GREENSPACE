@@ -1,7 +1,7 @@
-// Kiểm tra xem đã load lần đầu chưa
+// Check if the initial load has occurred
 if (!sessionStorage.getItem('hasVisited')) {
    document.querySelector('nav').classList.add('initial-load');
-   // Đánh dấu đã load
+   // Mark as loaded
    sessionStorage.setItem('hasVisited', 'true');
 }
 
@@ -11,7 +11,6 @@ const hamburger = document.getElementById('hamburger');
 hamburger.addEventListener('click', () => {
    hamburger.classList.toggle('active');
 });
-// Hamburger menu
 
 //click to show menu
 document.getElementById('hamburger').addEventListener('click', toggleMenu);
@@ -54,14 +53,14 @@ document.addEventListener('click', (event) => {
    const menu = document.getElementById('menu');
    const mobilemenu = document.getElementById('mobile-menu');
    const hamburger = document.getElementById('hamburger');
-   // Kiểm tra xem click có xảy ra bên ngoài hamburger, menu và mobile menu không
+   // Check if the click occurred outside the hamburger, menu, and mobile menu
    if (!hamburger.contains(event.target) && !menu.contains(event.target) && !mobilemenu.contains(event.target)) {
       if (menu.classList.contains('show')) {
-         toggleMenu(); // Gọi hàm tắt menu
+         toggleMenu(); // Call the menu toggle function
          hamburger.classList.toggle('active');
       }
       if (mobilemenu.classList.contains('show')) {
-         toggleMenu(); // Gọi hàm tắt mobile menu
+         toggleMenu(); // Call the menu toggle function
          hamburger.classList.toggle('active');
       }
    }
@@ -70,47 +69,47 @@ document.addEventListener('click', (event) => {
 //logout confirmation
 document.addEventListener('DOMContentLoaded', function () {
    const logoutForm = document.getElementById('logoutForm');
-   const mobileLogoutForm = document.getElementById('mobile-logoutForm'); // New mobile logout form
+   const mobileLogoutForm = document.getElementById('mobile-logoutForm');
    const confirmationPopup = document.getElementById('confirmationPopup');
    const confirmOk = document.getElementById('confirmOk');
    const confirmCancel = document.getElementById('confirmCancel');
 
    // Check if elements exist before adding event listeners
-   if (logoutForm && mobileLogoutForm && confirmationPopup && confirmOk && confirmCancel) { // Updated check
-      // Thêm biến để theo dõi trạng thái popup
+   if (logoutForm && mobileLogoutForm && confirmationPopup && confirmOk && confirmCancel) {
+      // Add variable to track popup status
       let isPopupVisible = false;
 
-      // Cập nhật sự kiện submit cho cả hai form
+      // Update submit event for both forms
       const handleLogoutSubmit = function (event) {
-         event.preventDefault(); // Prevent form submission
+         event.preventDefault();
          confirmationPopup.style.display = 'block'; // Show confirmation popup
-         isPopupVisible = true; // Đánh dấu popup là hiển thị
-         document.body.style.overflow = 'hidden'; // Vô hiệu hóa cuộn
-         document.getElementById('overlay').style.display = 'block'; // Hiển thị overlay
+         isPopupVisible = true; // Mark popup as visible
+         document.body.style.overflow = 'hidden';
+         document.getElementById('overlay').style.display = 'block'; // Show overlay
       };
 
       logoutForm.addEventListener('submit', handleLogoutSubmit);
       mobileLogoutForm.addEventListener('submit', handleLogoutSubmit); // New event listener for mobile form
 
       confirmOk.addEventListener('click', function () {
-         if (logoutForm) logoutForm.submit(); // Submit the form if confirmed
-         if (mobileLogoutForm) mobileLogoutForm.submit(); // Submit mobile form if confirmed
-         isPopupVisible = false; // Đánh dấu popup là không hiển thị
-         document.body.style.overflow = ''; // Khôi phục cuộn
-         document.getElementById('overlay').style.display = 'none'; // Ẩn overlay
+         if (logoutForm) logoutForm.submit();
+         if (mobileLogoutForm) mobileLogoutForm.submit();
+         isPopupVisible = false;
+         document.body.style.overflow = '';
+         document.getElementById('overlay').style.display = 'none';
       });
 
       confirmCancel.addEventListener('click', function () {
          confirmationPopup.style.display = 'none'; // Hide the popup if canceled
-         isPopupVisible = false; // Đánh dấu popup là không hiển thị
-         document.body.style.overflow = ''; // Khôi phục cuộn
-         document.getElementById('overlay').style.display = 'none'; // Ẩn overlay
+         isPopupVisible = false;
+         document.body.style.overflow = '';
+         document.getElementById('overlay').style.display = 'none';
       });
 
-      // Chặn click bên ngoài nếu popup đang hiển thị
+      // Prevent click outside if popup is visible
       document.addEventListener('click', (event) => {
          if (isPopupVisible) {
-            event.stopPropagation(); // Ngăn chặn sự kiện click
+            event.stopPropagation();
          }
       });
    } else {
@@ -149,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
    const hamburger = document.getElementById('hamburger');
    const deleteButton = document.querySelector('.delete-notification');
 
-   // Ẩn mobile notification menu khi khởi tạo
+   // Hide mobile notification menu when initialized
    if (mobileNotificationsMenu) {
       mobileNotificationsMenu.style.display = 'none';
    }
@@ -232,19 +231,19 @@ document.addEventListener('DOMContentLoaded', function () {
          .then(response => response.json())
          .then(data => {
             if (data.success) {
-               // Xóa khỏi store
+               // Remove from store
                notificationStore.delete(notificationId);
                
-               // Xóa khỏi UI
+               // Remove from UI
                const notificationElements = document.querySelectorAll(`[data-notification-id="${notificationId}"]`);
                notificationElements.forEach(el => el.remove());
                
-               // Đóng modal
+               // Close modal
                notificationModal.style.display = 'none';
                document.body.style.overflow = '';
                document.getElementById('overlay').style.display = 'none';
                
-               // Tải lại danh sách thông báo
+               // Reload notifications
                loadNotifications();
             } else {
                console.error('Failed to delete notification:', data.message);
@@ -271,7 +270,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const notification = notificationStore.get(notificationId);
       if (!notification) return;
 
-      // Đánh dấu thông báo đã đọc
+      // Mark notification as read
       if (!notification.is_read) {
          fetch('functions/mark_notification_read.php', {
             method: 'POST',
@@ -283,15 +282,15 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.json())
             .then(data => {
                if (data.success) {
-                  // Cập nhật trạng thái trong store
+                  // Update status in store
                   notification.is_read = true;
                   notificationStore.set(notificationId, notification);
 
-                  // Cập nhật UI
+                  // Update UI
                   const notificationElements = document.querySelectorAll(`[data-notification-id="${notificationId}"]`);
                   notificationElements.forEach(el => el.classList.remove('unread'));
 
-                  // Cập nhật badge
+                  // Update badge
                   const unreadCount = parseInt(document.querySelector('.notification-badge').textContent) - 1;
                   const badges = document.querySelectorAll('.notification-badge');
                   badges.forEach(badge => {
@@ -306,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
       }
 
-      // Hiển thị modal với dữ liệu từ notification
+      // Show modal with data from notification
       const modalTitle = notificationModal.querySelector('.notification-title');
       const modalContent = notificationModal.querySelector('.notification-content');
       const modalMeta = notificationModal.querySelector('.notification-meta');
@@ -316,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function () {
       modalContent.textContent = notification.content;
       modalMeta.textContent = new Date(notification.created_at).toLocaleString('ja-JP');
       
-      // Set notification ID cho nút xóa
+      // Set notification ID for delete button
       if (deleteButton) {
          deleteButton.setAttribute('data-notification-id', notificationId);
          console.log('Set notification ID:', notificationId); // Debug log
@@ -328,7 +327,7 @@ document.addEventListener('DOMContentLoaded', function () {
    };
 });
 
-// Tạo một object để lưu trữ dữ liệu thông báo
+// Create an object to store notification data
 const notificationStore = new Map();
 
 function loadNotifications() {

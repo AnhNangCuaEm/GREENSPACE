@@ -34,12 +34,12 @@ function updateSave($eventId, $userEmail) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($result) {
-        // Nếu đã save thì xóa save
+        //Delete save if already saved
         $query = "DELETE FROM event_saved WHERE event_id = ? AND user_email = ?";
         $stmt = $pdo->prepare($query);
         return $stmt->execute([$eventId, $userEmail]);
     } else {
-        // Nếu chưa save thì thêm save
+        //Add save if not saved
         $query = "INSERT INTO event_saved (event_id, user_email) VALUES (?, ?)";
         $stmt = $pdo->prepare($query);
         return $stmt->execute([$eventId, $userEmail]);

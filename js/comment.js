@@ -1,22 +1,22 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Lấy các phần tử cần thiết
+    // Get necessary elements
     const openCommentBtn = document.getElementById('openCommentPopup');
     const closeCommentBtn = document.getElementById('closeCommentPopup');
     const commentPopup = document.querySelector('.comment-popup');
 
-    // Xử lý sự kiện khi click nút mở popup
+    // Process event when click open popup button
     openCommentBtn.addEventListener('click', function() {
         commentPopup.classList.add('show');
         document.body.style.overflow = 'hidden';
     });
 
-    // Xử lý sự kiện khi click nút đóng popup
+    // Process event when click close popup button
     closeCommentBtn.addEventListener('click', function() {
         commentPopup.classList.remove('show');
         document.body.style.overflow = '';
     });
 
-    // Đóng popup khi click bên ngoài vùng nội dung
+    // Close popup when click outside content
     commentPopup.addEventListener('click', function(e) {
         if (e.target === commentPopup) {
             commentPopup.classList.remove('show');
@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 resultPopup.innerHTML = data.success ? 'コメントを削除しました!' : 'コメントの削除に失敗しました。';
                 resultPopup.classList.add('slidedown');
 
-                // Thêm code để đóng popup
+                // Add code to close popup
                 commentPopup.style.display = 'none';
                 document.body.style.overflow = '';
 

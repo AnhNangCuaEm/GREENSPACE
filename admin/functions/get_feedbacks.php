@@ -2,7 +2,6 @@
 session_start();
 require_once __DIR__ . '/../../class/Database.php';
 
-// Kiểm tra quyền admin
 if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
     header('Content-Type: application/json');
     http_response_code(403);
@@ -13,7 +12,6 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
 try {
     $pdo = Database::getConnection();
 
-    // Add error mode setting
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $sql = "SELECT * FROM feedback ORDER BY created_at DESC";
@@ -22,7 +20,6 @@ try {
     $stmt->execute();
     $feedbacks = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Add debug information
     if (empty($feedbacks)) {
         echo json_encode([
             'status' => 'empty',

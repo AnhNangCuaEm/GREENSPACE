@@ -4,7 +4,6 @@ require_once __DIR__ . '/../../class/EventData.php';
 
 header('Content-Type: application/json');
 
-// Kiểm tra quyền admin
 if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
    header('Content-Type: application/json');
    http_response_code(403);

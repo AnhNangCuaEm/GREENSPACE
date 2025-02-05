@@ -1,13 +1,13 @@
 <?php
 class TextHelper {
     public static function convertToSearchableText($text) {
-        // Chuyển đổi half-width sang full-width katakana
+        //Convert half-width to full-width katakana
         $text = mb_convert_kana($text, "KV", "UTF-8");
         
-        // Chuyển đổi katakana sang hiragana
+        //Convert katakana to hiragana
         $text = mb_convert_kana($text, "c", "UTF-8");
         
-        // Loại bỏ tất cả dấu cách
+        //Remove all spaces
         $textWithoutSpaces = str_replace(' ', '', $text);
         
         return [$text, $textWithoutSpaces];

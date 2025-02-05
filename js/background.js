@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let speed = 20;
     let isFirstMove = true;
 
-    // Lấy vị trí chuột ngay khi load trang
+    //Take mouse position
     tgX = curX = window.event?.clientX || window.innerWidth / 2;
     tgY = curY = window.event?.clientY || window.innerHeight / 2;
 
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tgY = event.clientY;
     });
 
-    // Thêm class ready khi JS đã load xong
+    //Add ready class when JS is loaded
     requestAnimationFrame(() => {
         interBubble.classList.add('ready');
     });

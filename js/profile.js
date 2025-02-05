@@ -24,24 +24,24 @@ document.getElementById('applyAvatar').addEventListener('click', function () {
         })
             .then(response => {
                 if (response.ok) {
-                    document.getElementById('avatarPopup').style.display = 'none'; // Tắt popup sau khi click apply
-                    document.body.style.overflow = 'auto'; // Bật lại cuộn
+                    document.getElementById('avatarPopup').style.display = 'none'; // Close popup after clicking apply
+                    document.body.style.overflow = 'auto'; // Enable scrolling
 
                     // Show result popup after applying avatar
                     const resultPopup = document.getElementById('result');
-                    resultPopup.innerHTML = 'アバター変更しました!'; // Display success message
-                    resultPopup.classList.add('slidedown'); // Add class for animation
+                    resultPopup.innerHTML = 'アバター変更しました!';
+                    resultPopup.classList.add('slidedown');
 
                     // Set timeout to hide popup after 3 seconds
                     setTimeout(() => {
-                        resultPopup.classList.remove('slidedown'); // Remove slidedown class
-                        resultPopup.classList.add('slideup'); // Add class to hide animation
+                        resultPopup.classList.remove('slidedown');
+                        resultPopup.classList.add('slideup');
 
                         // Reset animation classes after slideup completes
                         setTimeout(() => {
-                            resultPopup.classList.remove('slideup'); // Remove slideup class for future displays
-                        }, 300); // Time needed to complete animation
-                    }, 4000); // 3 seconds
+                            resultPopup.classList.remove('slideup');
+                        }, 300);
+                    }, 4000);
 
                 } else {
                     console.error('アバター変更失敗しました');
@@ -53,13 +53,13 @@ document.getElementById('applyAvatar').addEventListener('click', function () {
 
 document.querySelectorAll('.avatar-option').forEach(option => {
     option.addEventListener('click', function () {
-        // Xóa lớp 'selected' và 'clicked' khỏi tất cả các tùy chọn
+        //Remove selected and clicked classes from all options
         document.querySelectorAll('.avatar-option').forEach(opt => {
             opt.classList.remove('selected');
-            opt.classList.remove('clicked'); // Remove clicked class as well
+            opt.classList.remove('clicked');
         });
-        // Thêm lớp 'selected' và 'clicked' cho tùy chọn hiện tại
+        // Add selected and clicked classes to current option
         this.classList.add('selected');
-        this.classList.add('clicked'); // Thêm lớp clicked để tạo hiệu ứng
+        this.classList.add('clicked');
     });
 });

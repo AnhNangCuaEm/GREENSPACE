@@ -1,11 +1,11 @@
 document.getElementById('editBtn').addEventListener('click', function () {
     document.getElementById('infoPopup').style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Vô hiệu hóa cuộn
+    document.body.style.overflow = 'hidden'; //Disable scrolling
 });
 
 document.getElementById('closeInfoPopup').addEventListener('click', function () {
     document.getElementById('infoPopup').style.display = 'none';
-    document.body.style.overflow = 'auto'; // Bật lại cuộn
+    document.body.style.overflow = 'auto'; //Enable scrolling
 });
 
 document.getElementById('editForm').addEventListener('submit', function (event) {
@@ -34,7 +34,7 @@ document.getElementById('editForm').addEventListener('submit', function (event) 
         }
     });
 
-    // Kiểm tra password riêng
+    // Check password separately
     const password = formData.get('password');
     const confirmPassword = formData.get('confirmPassword');
     
@@ -71,17 +71,17 @@ document.getElementById('editForm').addEventListener('submit', function (event) 
             return;
         }
 
-        // Nếu password hợp lệ, thêm flag và password vào data
-        data.updatePassword = true;  // Thêm flag này
+        // If password is valid, add flag and password to data
+        data.updatePassword = true;  // Add this flag
         data.password = password;
         hasChanges = true;
     }
 
-    // Nếu không có thay đổi, hiển thị thông báo và dừng lại
+    // If there are no changes, show message and stop
     if (!hasChanges) {
         document.getElementById('infoPopup').style.display = 'none';
         const resultPopup = document.getElementById('result');
-        resultPopup.innerHTML = '変更内容がありません'; // "Không có thay đổi nào"
+        resultPopup.innerHTML = '変更内容がありません';
         resultPopup.classList.add('slidedown');
 
         setTimeout(() => {
@@ -108,54 +108,54 @@ document.getElementById('editForm').addEventListener('submit', function (event) 
 
             // Show result popup after applying changes
             const resultPopup = document.getElementById('result');
-            resultPopup.innerHTML = 'プロフィールが更新されました!'; // Display success message
-            resultPopup.classList.add('slidedown'); // Add class for animation
+            resultPopup.innerHTML = 'プロフィールが更新されました!';
+            resultPopup.classList.add('slidedown');
 
             // Set timeout to hide popup after 3 seconds
             setTimeout(() => {
-                resultPopup.classList.remove('slidedown'); // Remove slidedown class
-                resultPopup.classList.add('slideup'); // Add class to hide animation
+                resultPopup.classList.remove('slidedown');
+                resultPopup.classList.add('slideup');
 
                 // Reset animation classes after slideup completes
                 setTimeout(() => {
-                    resultPopup.classList.remove('slideup'); // Remove slideup class for future displays
-                }, 300); // Time needed to complete animation
-            }, 4000); // 4 seconds
+                    resultPopup.classList.remove('slideup');
+                }, 300);
+            }, 4000);
 
         } else {
             // Handle error response
             const resultPopup = document.getElementById('result');
-            resultPopup.innerHTML = 'プロフィールの更新に失敗しました'; // Display error message
-            resultPopup.classList.add('slidedown'); // Add class for animation
+            resultPopup.innerHTML = 'プロフィールの更新に失敗しました';
+            resultPopup.classList.add('slidedown');
 
             // Set timeout to hide popup after 3 seconds
             setTimeout(() => {
-                resultPopup.classList.remove('slidedown'); // Remove slidedown class
-                resultPopup.classList.add('slideup'); // Add class to hide animation
+                resultPopup.classList.remove('slidedown');
+                resultPopup.classList.add('slideup');
 
                 // Reset animation classes after slideup completes
                 setTimeout(() => {
-                    resultPopup.classList.remove('slideup'); // Remove slideup class for future displays
-                }, 300); // Time needed to complete animation
-            }, 4000); // 4 seconds
+                    resultPopup.classList.remove('slideup');
+                }, 300);
+            }, 4000);
         }
     })
     .catch(error => {
         console.error('Fetch error:', error);
         const resultPopup = document.getElementById('result');
-        resultPopup.innerHTML = 'エラーが発生しました。もう一度お試しください。'; // Display fetch error message
-        resultPopup.classList.add('slidedown'); // Add class for animation
+        resultPopup.innerHTML = 'エラーが発生しました。もう一度お試しください。';
+        resultPopup.classList.add('slidedown');
 
         // Set timeout to hide popup after 3 seconds
         setTimeout(() => {
-            resultPopup.classList.remove('slidedown'); // Remove slidedown class
-            resultPopup.classList.add('slideup'); // Add class to hide animation
+            resultPopup.classList.remove('slidedown');
+            resultPopup.classList.add('slideup');
 
             // Reset animation classes after slideup completes
             setTimeout(() => {
-                resultPopup.classList.remove('slideup'); // Remove slideup class for future displays
-            }, 300); // Time needed to complete animation
-        }, 4000); // 4 seconds
+                resultPopup.classList.remove('slideup');
+            }, 300);
+        }, 4000);
     });
 });
 

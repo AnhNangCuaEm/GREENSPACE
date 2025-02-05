@@ -14,11 +14,7 @@ if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
 header('Content-Type: application/json');
 
 try {
-   // Get data from request
    $data = json_decode(file_get_contents('php://input'), true);
-   
-   // Debug log
-   error_log("Decoded data: " . print_r($data, true));
 
    if (!isset($data['title']) || !isset($data['content']) || !isset($data['target_type'])) {
       throw new Exception('Missing required fields: ' . 
@@ -30,7 +26,6 @@ try {
    $pdo = Database::getConnection();
    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-   // Start transaction
    $pdo->beginTransaction();
 
    try {

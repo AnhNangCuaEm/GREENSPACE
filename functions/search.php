@@ -6,8 +6,8 @@ if (isset($_GET['query'])) {
     $query = $_GET['query'];
     $results = [];
 
-    if (strlen($query) >= 1) { // Chỉ tìm kiếm khi có ít nhất 1 ký tự
-        // Tìm trong parks
+    if (strlen($query) >= 1) { //Only search when there is at least 1 character
+        //Search in parks
         $parks = ParkData::searchParks($query);
         foreach ($parks as $park) {
             $results[] = [
@@ -18,7 +18,7 @@ if (isset($_GET['query'])) {
             ];
         }
 
-        // Tìm trong events
+        //Search in events
         $events = EventData::searchEvents($query);
         foreach ($events as $event) {
             $results[] = [

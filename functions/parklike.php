@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 
 function updateLike($parkId, $userEmail)
 {
-    // Thêm hoặc xóa like cho một công viên
+    //Add or delete like for a specific park
     $pdo = Database::getConnection();
     $query = "SELECT * FROM park_likes WHERE park_id = ? AND user_email = ?";
     $stmt = $pdo->prepare($query);
@@ -39,12 +39,12 @@ function updateLike($parkId, $userEmail)
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($result) {
-        // Nếu đã like thì xóa like
+        //If already liked, delete like
         $query = "DELETE FROM park_likes WHERE park_id = ? AND user_email = ?";
         $stmt = $pdo->prepare($query);
         return $stmt->execute([$parkId, $userEmail]);
     } else {
-        // Nếu chưa like thì thêm like
+        //If not liked, add like
         $query = "INSERT INTO park_likes (park_id, user_email) VALUES (?, ?)";
         $stmt = $pdo->prepare($query);
         return $stmt->execute([$parkId, $userEmail]);
@@ -53,7 +53,7 @@ function updateLike($parkId, $userEmail)
 
 function countLikes($parkId)
 {
-    // Đếm số lượt like cho một công viên cụ thể
+    //Count likes for a specific park
     $pdo = Database::getConnection();
     $query = "SELECT COUNT(*) FROM park_likes WHERE park_id = ?";
     $stmt = $pdo->prepare($query);
@@ -63,7 +63,7 @@ function countLikes($parkId)
 
 function getLikedParks($userEmail)
 {
-    // Lấy danh sách các công viên đã like của người dùng
+    //Get list of parks liked by a user
     $pdo = Database::getConnection();
     $query = "SELECT park_id FROM park_likes WHERE user_email = ?";
     $stmt = $pdo->prepare($query);

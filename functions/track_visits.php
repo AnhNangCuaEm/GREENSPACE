@@ -18,7 +18,7 @@ function getClientIP() {
     else
         $ipaddress = 'UNKNOWN';
     
-    // Nếu là multiple IPs, lấy IP đầu tiên
+    //If multiple IPs, get the first one
     if (strpos($ipaddress, ',') !== false) {
         $ips = explode(',', $ipaddress);
         $ipaddress = trim($ips[0]);
