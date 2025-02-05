@@ -332,7 +332,16 @@ const notificationStore = new Map();
 
 function loadNotifications() {
    fetch('functions/get_user_notifications.php')
-      .then(response => response.json())
+      .then(response => {
+         if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+         }
+         return response.text(); // Đổi sang text() thay vì json() để kiểm tra response
+      })
+      .then(text => {
+         console.log('Raw response:', text); // Log response thô để debug
+         return JSON.parse(text);
+      })
       .then(data => {
          if (data.success) {
             // Update notification badges
@@ -382,6 +391,7 @@ function loadNotifications() {
       })
       .catch(error => {
          console.error('Error loading notifications:', error);
+         console.error('Error details:', error.message);
       });
 }
 
