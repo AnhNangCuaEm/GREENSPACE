@@ -233,16 +233,16 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.success) {
                // Remove from store
                notificationStore.delete(notificationId);
-               
+
                // Remove from UI
                const notificationElements = document.querySelectorAll(`[data-notification-id="${notificationId}"]`);
                notificationElements.forEach(el => el.remove());
-               
+
                // Close modal
                notificationModal.style.display = 'none';
                document.body.style.overflow = '';
                document.getElementById('overlay').style.display = 'none';
-               
+
                // Reload notifications
                loadNotifications();
             } else {
@@ -256,7 +256,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
    // Add event listener for delete button
    if (deleteButton) {
-      deleteButton.addEventListener('click', function() {
+      deleteButton.addEventListener('click', function () {
          const notificationId = this.getAttribute('data-notification-id');
          console.log('Deleting notification:', notificationId); // Debug log
          if (notificationId) {
@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function () {
       modalTitle.textContent = notification.title;
       modalContent.textContent = notification.content;
       modalMeta.textContent = new Date(notification.created_at).toLocaleString('ja-JP');
-      
+
       // Set notification ID for delete button
       if (deleteButton) {
          deleteButton.setAttribute('data-notification-id', notificationId);
@@ -332,16 +332,7 @@ const notificationStore = new Map();
 
 function loadNotifications() {
    fetch('functions/get_user_notifications.php')
-      .then(response => {
-         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-         }
-         return response.text(); // Đổi sang text() thay vì json() để kiểm tra response
-      })
-      .then(text => {
-         console.log('Raw response:', text); // Log response thô để debug
-         return JSON.parse(text);
-      })
+      .then(response => response.json())
       .then(data => {
          if (data.success) {
             // Update notification badges
@@ -369,17 +360,22 @@ function loadNotifications() {
                        </li>`
                : data.data.map(notification => {
                   notificationStore.set(notification.id, notification);
+                  // Truncate content if it's too long
+                  const shortContent = notification.short_content.length > 70 
+                     ? notification.short_content.substring(0, 70) + '...'
+                     : notification.short_content;
+                  
                   return `
-                            <li class="menu-li ${notification.is_read ? '' : 'unread'}" 
-                                data-notification-id="${notification.id}"
-                                onclick="showNotificationDetail(${notification.id})">
-                                <div class="notification-item">
-                                    <div class="notification-title">${notification.title}</div>
-                                    <div class="notification-preview">${notification.short_content}</div>
-                                    <div class="notification-time">${notification.created_at_formatted}</div>
-                                </div>
-                            </li>
-                        `;
+                        <li class="menu-li ${notification.is_read ? '' : 'unread'}" 
+                            data-notification-id="${notification.id}"
+                            onclick="showNotificationDetail(${notification.id})">
+                            <div class="notification-item">
+                                <div class="notification-title">${notification.title}</div>
+                                <div class="notification-preview">${shortContent}</div>
+                                <div class="notification-time">${notification.created_at_formatted}</div>
+                            </div>
+                        </li>
+                    `;
                }).join('');
 
             notificationMenus.forEach(menu => {

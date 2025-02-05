@@ -149,7 +149,7 @@ if (isset($_GET['id'])) {
 }
 
 ?>
-<html>
+<html lang=ja>
 
 <head>
     <?php include 'include/head.php' ?>

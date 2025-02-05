@@ -22,7 +22,7 @@ $_SESSION['email'] = $email;
 trackPageVisit('index.php');
 ?>
 
-<html>
+<html lang=ja>
 
 <head>
    <?php include 'include/head.php' ?>

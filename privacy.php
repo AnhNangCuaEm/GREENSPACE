@@ -16,7 +16,7 @@ $_SESSION['email'] = $email;
 trackPageVisit('privacy.php');
 ?>
 
-<html>
+<html lang=ja>
 
 <head>
     <?php include 'include/head.php' ?>

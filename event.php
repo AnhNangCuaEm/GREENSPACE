@@ -137,7 +137,7 @@ $nextId = ($currentIndex < count($eventIds) - 1) ? $eventIds[$currentIndex + 1] 
 
 ?>
 
-<html>
+<html lang=ja>
 
 <head>
     <?php include 'include/head.php' ?>

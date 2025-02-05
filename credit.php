@@ -15,7 +15,7 @@ $_SESSION['email'] = $email;
 
 trackPageVisit('credit.php');
 ?>
-<html>
+<html lang=ja>
 
 <head>
     <?php include 'include/head.php' ?>

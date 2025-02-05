@@ -24,7 +24,7 @@ $user = UserData::getProfile();
 
 ?>
 
-<html>
+<html lang=ja>
 
 <head>
     <?php include 'include/head.php' ?>
