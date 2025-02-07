@@ -515,8 +515,20 @@ ul li:hover {
     border-radius: 10px;
     cursor: pointer;
     background-color: rgb(255, 108, 46);
+    transition: all 0.3s ease;
 }
 
+#confirmCancel:hover {
+    background-color: rgb(50, 131, 178) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+#confirmOk:hover {
+    background-color: rgb(199, 85, 36) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
 
 @keyframes fadeIn {
     from {

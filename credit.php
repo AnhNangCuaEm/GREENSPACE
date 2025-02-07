@@ -434,7 +434,7 @@ trackPageVisit('credit.php');
                     </div>
                     <div>
                         <p>ポートフォリオ:</p>
-                        <a href="https://anhnangcuaem.github.io/Portfolio/">ポートフォリオ</a>
+                        <a href="https://anhnangcuaem.github.io/Portfolio/" style="color: #8bdb73">ポートフォリオ</a>
                     </div>
                     <div>
                         <p>連絡:</p>
