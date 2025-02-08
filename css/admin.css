@@ -1006,6 +1006,7 @@ input[type="url"]:focus {
 .status-badge.sent {
     background-color: #2ecc71;
     color: white;
+    text-wrap: nowrap;
 }
 
 .status-badge.pending {
