@@ -18,12 +18,14 @@ $_SESSION['email'] = $email;
 $user = UserData::getProfile();
 
 // Check admin role
-if (!isset($_SESSION['email']) || $user->role !== 'admin') {
+if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
     header('Content-Type: application/json');
     http_response_code(403);
     echo json_encode(['success' => false, 'message' => 'Unauthorized access try to login again']);
     exit();
 }
+$_SESSION['role'] = $user->role;
+
 
 ?>
 
