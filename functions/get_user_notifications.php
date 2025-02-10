@@ -1,18 +1,6 @@
 <?php
-// Enable error reporting
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-// Log the start of the script
-error_log("Starting get_user_notifications.php");
-
-// Start session and set headers
 session_start();
 header('Content-Type: application/json');
-
-// Debug session
-error_log("Session status: " . session_status());
-error_log("Session email: " . (isset($_SESSION['email']) ? $_SESSION['email'] : 'not set'));
 
 try {
     // Check session

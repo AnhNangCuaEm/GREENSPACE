@@ -5,27 +5,16 @@ require_once __DIR__ . '/../class/ParkData.php';
 require_once __DIR__ . '/../class/EventData.php';
 require_once __DIR__ . '/../class/ParkImageData.php';
 require_once __DIR__ . '/../functions/verify.php';
+require_once __DIR__ . '/../functions/auth.php';
 
 session_start();
 
-$email = verifyToken();
-if (!$email) {
-    header('Location: login.php');
-    exit();
-}
-
-$_SESSION['email'] = $email;
+checkAdmin();
+$email = $_SESSION['email'];
 $user = UserData::getProfile();
 
-// Check admin role
-if (!isset($_SESSION['email']) || $_SESSION['role'] !== 'admin') {
-    header('Content-Type: application/json');
-    http_response_code(403);
-    echo json_encode(['success' => false, 'message' => 'Unauthorized access try to login again']);
-    exit();
-}
+$_SESSION['email'] = $email;
 $_SESSION['role'] = $user->role;
-
 
 ?>
 

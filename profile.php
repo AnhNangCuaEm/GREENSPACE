@@ -7,20 +7,21 @@ require_once __DIR__ . '/functions/verify.php';
 require_once __DIR__ . '/functions/parklike.php';
 require_once __DIR__ . '/functions/eventsave.php';
 require_once __DIR__ . '/functions/track_visits.php';
+require_once __DIR__ . '/functions/auth.php';
 
 session_start();
 
-$email = verifyToken();
-if (!$email) {
-    header('Location: login.php');
-    exit();
-}
-
+$email = checkAuth();
 $_SESSION['email'] = $email;
 
-trackPageVisit('profile.php');
-$email = $_SESSION['email'];
 $user = UserData::getProfile();
+
+// Chỉ set role vào session khi mới login hoặc chưa có
+if (!isset($_SESSION['role'])) {
+    $_SESSION['role'] = $user->role;
+}
+
+trackPageVisit('profile.php');
 
 ?>
 
