@@ -19,6 +19,7 @@ trackPageVisit('credit.php');
 
 <head>
     <?php include 'include/head.php' ?>
+    <link href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" rel="stylesheet">
 </head>
 
 <body>
@@ -373,7 +374,7 @@ trackPageVisit('credit.php');
                         </a>
                     </div>
                     <div>
-                        <p>ホスティングサービス:</p>
+                        <p>VPS(仮想専用サーバー):</p>
                         <a href="https://www.digitalocean.com/">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="65.2 173.5 32 32" width="60px"
                                 height="60px" fill="#0080ff">
@@ -439,7 +440,14 @@ trackPageVisit('credit.php');
                     <div>
                         <p>連絡:</p>
                         <a href="https://www.linkedin.com/in/haile1302/" style="color: #8bdb73">LinkedIn</a>
-                        <a href="mailto:thanhhailth1302@gmail.com" style="color: #8bdb73">E-mail</a>
+                    </div>
+                    <div>
+                        <p>Github:</p>
+                        <a href="https://github.com/AnhNangCuaEm/GREENSPACE" style="color: #8bdb73">Github</a>
+                    </div>
+                    <div>
+                        <p>Email:</p>
+                        <p>thanhhailth1302@gmail.com</p>
                     </div>
                     <hr>
                     <div>
