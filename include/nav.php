@@ -8,14 +8,14 @@ $user = UserData::getProfile();
 <div class="navigation-div">
     <nav>
         <div class="navL">
-            <a href="#"><img class="navLogo" src="img/img/logo.png" alt=""></a>
+            <a href="#"><img class="navLogo" src="img/img/logo.png" alt="ホーム"></a>
             <ul>
-                <li><a href="index.php">ホーム</a></li>
-                <li><a href="all.php">探る</a></li>
-                <li><a href="all-event.php">イベント</a></li>
+                <li><a href="index.php" aria-label="ホーム">ホーム</a></li>
+                <li><a href="all.php" aria-label="探る">探る</a></li>
+                <li><a href="all-event.php" aria-label="イベント">イベント</a></li>
             </ul>
         </div>
-        <div id="search" class="searchBtn">
+        <div id="search" class="searchBtn" aria-label="検索">
             <div>
                 <input type="text" class="glow-on-focus" id="searchInput" placeholder="検索">
                 <svg class="search-icon" width="20px" height="20px" viewBox="0 -0.5 25 25" fill="none"
@@ -31,40 +31,40 @@ $user = UserData::getProfile();
         <div class="navR">
             <ul>
                 <li>
-                    <div class="notification-bell">
+                    <div class="notification-bell" aria-label="通知">
                         <i class="fas fa-bell"></i>
                         <span class="notification-badge" style="display: none;">0</span>
                     </div>
                 </li>
                 <li><a href="profile.php"><img src="<?php echo htmlspecialchars($user->avatar); ?>"
-                            alt="User Avatar"></a></li>
-                <div class="hamburger" id="hamburger">
+                            alt="User Avatar" aria-label="プロフィール"></a></li>
+                <div class="hamburger" id="hamburger" aria-label="メニュー">
                     <div class="menuLine"></div>
                 </div>
             </ul>
         </div>
     </nav>
-    <div class="notifications-menu" id="notifications-menu">
+    <div class="notifications-menu" id="notifications-menu" aria-label="通知メニュー">
         <ul class="menu-ul">
             <!-- Notifications will be loaded here -->
         </ul>
     </div>
-    <div class="menu" id="menu">
+    <div class="menu" id="menu" aria-label="メニュー">
         <ul class="menu-ul">
-            <li><a href="contact.php">問い合せ</a></li>
-            <li><a href="privacy.php">Privacy</a></li>
-            <li><a href="credit.php">Credit</a></li>
+            <li><a href="contact.php" aria-label="問い合せ">問い合せ</a></li>
+            <li><a href="privacy.php" aria-label="プライバシー">Privacy</a></li>
+            <li><a href="credit.php" aria-label="クレジット">Credit</a></li>
             <form id="logoutForm" action="logout.php" method="post">
-                <button id="logoutButton" type="submit">サインアウト</button>
+                <button id="logoutButton" type="submit" aria-label="サインアウト">サインアウト</button>
             </form>
         </ul>
     </div>
-    <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu" id="mobile-menu" aria-label="モバイルメニュー">
         <ul class="mobile-menu-ul">
             <li>
                 <div class="mobile-menu-icon">
                     <a href="profile.php"><img src="<?php echo htmlspecialchars($user->avatar); ?>"
-                            alt="User Avatar"></a>
+                            alt="User Avatar" aria-label="プロフィール"></a>
                 </div>
             </li>
             <li>
@@ -73,28 +73,28 @@ $user = UserData::getProfile();
                     <span class="notification-badge" style="display: none;">0</span>
                 </div>
             </li>
-            <li><a href="all.php">探る</a></li>
-            <li><a href="all-event.php">イベント</a></li>
-            <li><a href="contact.php">問い合せ</a></li>
-            <li><a href="privacy.php">Privacy</a></li>
-            <li><a href="credit.php">Credit</a></li>
+            <li><a href="all.php" aria-label="探る">探る</a></li>
+            <li><a href="all-event.php" aria-label="イベント">イベント</a></li>
+            <li><a href="contact.php" aria-label="問い合せ">問い合せ</a></li>
+            <li><a href="privacy.php" aria-label="プライバシー">Privacy</a></li>
+            <li><a href="credit.php" aria-label="クレジット">Credit</a></li>
             <form id="mobile-logoutForm" action="logout.php" method="post">
-                <button id="mobile-logoutButton" type="submit">サインアウト</button>
+                <button id="mobile-logoutButton" type="submit" aria-label="サインアウト">サインアウト</button>
             </form>
         </ul>
     </div>
-    <div class="mobile-notifications-menu" id="mobile-notifications-menu">
+    <div class="mobile-notifications-menu" id="mobile-notifications-menu" aria-label="モバイル通知メニュー">
         <ul class="menu-ul">
             <!-- Mobile notifications will be loaded here -->
         </ul>
     </div>
-    <div id="searchResults" class="search-results">
+    <div id="searchResults" class="search-results" aria-label="検索結果">
         <div class="glow-background"></div>
         <div class="results-content"></div>
     </div>
 </div>
 
-<div id="confirmationPopup" class="confirmation-popup" style="display: none">
+<div id="confirmationPopup" class="confirmation-popup" style="display: none" aria-label="確認ポップアップ">
     <div class="confirmation-popup-content">
         <p>ログアウトしますか？</p>
         <div>
@@ -104,14 +104,14 @@ $user = UserData::getProfile();
     </div>
 </div>
 
-<div id="notification-modal" class="confirmation-popup" style="display: none">
+<div id="notification-modal" class="confirmation-popup" style="display: none" aria-label="通知モーダル">
     <div class="confirmation-popup-content">
         <h3 class="notification-title"></h3>
         <p class="notification-content"></p>
         <div class="notification-meta"></div>
         <div class="notification-actions">
-            <button id="closeNotificationModal">閉じる</button>
-            <button class="delete-notification">
+            <button id="closeNotificationModal" aria-label="閉じる">閉じる</button>
+            <button class="delete-notification" aria-label="削除">
                 <i class="fas fa-trash"></i>
             </button>
         </div>

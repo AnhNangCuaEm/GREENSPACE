@@ -124,7 +124,7 @@
     </div>
     <hr class="footer-hr">
     <div class="footer-box">
-        <h3>サイトマップ</h3>
+        <h4>サイトマップ</h4>
         <ul>
             <li><a href="index.php">ホーム</a></li>
             <li><a href="all.php">公園一覧</a></li>
@@ -133,14 +133,14 @@
         </ul>
     </div>
     <div class="footer-box">
-        <h3>お問い合わせ</h3>
+        <h4>お問い合わせ</h4>
         <ul>
             <li><a href="contact.php">お問い合わせ</a></li>
             <li><a href="privacy.php">プライバシーポリシー</a></li>
         </ul>
     </div>
     <div class="footer-box">
-        <h3>About</h3>
+        <h4>About</h4>
         <ul>
             <li><a href="https://maps.app.goo.gl/BJPXd3uDSjy3JDXq6">
                     <div>

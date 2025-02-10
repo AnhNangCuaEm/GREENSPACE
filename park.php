@@ -149,7 +149,9 @@ if (isset($_GET['id'])) {
 }
 
 ?>
-<html lang=ja>
+
+<!DOCTYPE html>
+<html lang="ja">
 
 <head>
     <?php include 'include/head.php' ?>
@@ -195,7 +197,7 @@ if (isset($_GET['id'])) {
                     <p><span>特徴:</span>&nbsp;<?= $parks->special ?></p>
                     <p><?= htmlspecialchars($parks->description) ?></p>
                     <div class="park-detail-nav">
-                        <a href="?id=<?= $prevId ?>"><button><svg fill="#000000" height="24px" width="24px"
+                        <a href="?id=<?= $prevId ?>"><button aria-label="前へ"><svg fill="#000000" height="24px" width="24px"
                                     version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.753 55.753"
                                     xml:space="preserve">
@@ -209,7 +211,7 @@ if (isset($_GET['id'])) {
                                         </g>
                                     </g>
                                 </svg>前へ</button></a>
-                        <a href="?id=<?= $nextId ?>"><button>次へ<svg fill="#000000" height="24px" width="24px"
+                        <a href="?id=<?= $nextId ?>"><button aria-label="次へ"><svg fill="#000000" height="24px" width="24px"
                                     version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.752 55.752"
                                     xml:space="preserve">
@@ -267,7 +269,7 @@ if (isset($_GET['id'])) {
                         <?php else: ?>
                             <p>まだコメントがありません。</p>
                         <?php endif; ?>
-                        <button id="openCommentPopup" class="comment-button">コメントする</button>
+                        <button id="openCommentPopup" class="comment-button" aria-label="コメントする">コメントする</button>
                     </div>
                 </div>
                 <div class="park-map">
@@ -275,7 +277,7 @@ if (isset($_GET['id'])) {
                 </div>
                 <div class="park-images-list" id="imageSlider">
                     <?php foreach ($images as $image): ?>
-                        <div class="park-images-box" onclick="openModal('<?= htmlspecialchars($image['image_url']) ?>')">
+                        <div class="park-images-box" onclick="openModal('<?= htmlspecialchars($image['image_url']) ?>')" aria-label="公園の画像を拡大">
                             <div class="image-container loading">
                                 <div>
                                     <img src="<?= htmlspecialchars($image['image_url']) ?>" alt="公園の画像"
@@ -286,7 +288,7 @@ if (isset($_GET['id'])) {
                     <?php endforeach; ?>
                 </div>
             </div>
-            <div class="result-popup" id="result"></div>
+            <div class="result-popup" id="result" aria-label="送信結果"></div>
         </main>
         <div class="comment-popup">
             <div class="comment-popup-content">
@@ -343,7 +345,7 @@ if (isset($_GET['id'])) {
                     <button id="submitBtn" type="submit">コメントする</button>
                 </form>
             </div>
-            <span id="closeCommentPopup" class="close-comment-popup"><svg width="34px" height="34px" viewBox="0 0 24 24"
+            <span id="closeCommentPopup" class="close-comment-popup" aria-label="閉じる"><svg width="34px" height="34px" viewBox="0 0 24 24"
                     fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -361,7 +363,7 @@ if (isset($_GET['id'])) {
             <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
                 <img id="modalImage" class="modal-image">
             </div>
-            <span id="closeModalBtn" class="close">
+            <span id="closeModalBtn" class="close" aria-label="閉じる">
                 <svg width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>

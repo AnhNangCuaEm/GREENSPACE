@@ -56,7 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ?>
 
-<html lang=ja>
+<!DOCTYPE html>
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">

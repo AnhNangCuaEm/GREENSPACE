@@ -137,7 +137,8 @@ $nextId = ($currentIndex < count($eventIds) - 1) ? $eventIds[$currentIndex + 1] 
 
 ?>
 
-<html lang=ja>
+<!DOCTYPE html>
+<html lang="ja">
 
 <head>
     <?php include 'include/head.php' ?>
@@ -200,7 +201,7 @@ $nextId = ($currentIndex < count($eventIds) - 1) ? $eventIds[$currentIndex + 1] 
                                         </g>
                                     </g>
                                 </svg>前へ</button></a>
-                        <button class="save-button" data-event-id="<?= $event->id ?>">
+                        <button class="save-button" data-event-id="<?= $event->id ?>" aria-label="<?= $isSaved ? '保存を削除' : '保存する' ?>">
                             <svg class="save-icon" width="24px" height="24px" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

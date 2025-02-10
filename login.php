@@ -39,7 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ?>
 
-<html lang=ja>
+<!DOCTYPE html>
+<html lang="ja">
 
 <head>
     <meta charset="UTF-8">
@@ -201,13 +202,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div>
                         <label for="email">メールアドレス</label>
                         <input type="email" name="email" id="email" placeholder="abc@gmail.com"
-                            value="<?= htmlspecialchars($email ?? '') ?>">
+                            value="<?= htmlspecialchars($email ?? '') ?>" aria-label="メールアドレス">
                         <p><?= htmlspecialchars($errormessages['email'] ?? '') ?></p>
                     </div>
                     <div>
                         <label for="password">パスワード</label>
                         <input type="password" name="password" id="password" placeholder="********"
-                            value="<?= htmlspecialchars($password ?? '') ?>">
+                            value="<?= htmlspecialchars($password ?? '') ?>" aria-label="パスワード">
                         <p><?= htmlspecialchars($errormessages['password'] ?? '') ?></p>
                     </div>
                 </div>

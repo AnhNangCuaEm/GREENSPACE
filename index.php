@@ -22,7 +22,8 @@ $_SESSION['email'] = $email;
 trackPageVisit('index.php');
 ?>
 
-<html lang=ja>
+<!DOCTYPE html>
+<html lang="ja">
 
 <head>
    <?php include 'include/head.php' ?>
@@ -66,7 +67,7 @@ trackPageVisit('index.php');
             </div>
 
 
-            <a class="prev" onclick="prev()"><svg fill="#fcf8db" height="15px" width="15px" version="1.1" id="Capa_1"
+            <a class="prev" onclick="prev()" aria-label="前へ"><svg fill="#fcf8db" height="15px" width="15px" version="1.1" id="Capa_1"
                   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.753 55.753"
                   xml:space="preserve">
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -79,7 +80,7 @@ trackPageVisit('index.php');
                      </g>
                   </g>
                </svg></a>
-            <a class="next" onclick="next()"><svg fill="#fcf8db" height="15px" width="15px" version="1.1" id="Capa_1"
+            <a class="next" onclick="next()" aria-label="次へ"><svg fill="#fcf8db" height="15px" width="15px" version="1.1" id="Capa_1"
                   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.752 55.752"
                   xml:space="preserve">
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -121,7 +122,7 @@ trackPageVisit('index.php');
                </div>
             <?php endforeach; ?>
          </div>
-         <a href="all.php"><button class="view-more-btn">もっと見る</button></a>
+         <a href="all.php"><button class="view-more-btn" aria-label="もっと見る">もっと見る</button></a>
          <h2>イベント</h2>
          <div class="event-container">
             <?php foreach ($events as $event): ?>
@@ -143,7 +144,7 @@ trackPageVisit('index.php');
                   <?php
                   $isSaved = isset($_SESSION['email']) ? checkIfSaved($event->id, $_SESSION['email']) : false;
                   ?>
-                  <button class="save-button" data-event-id="<?= $event->id ?>">
+                  <button class="save-button" data-event-id="<?= $event->id ?>" aria-label="<?= $isSaved ? '保存を削除' : '保存する' ?>">
                      <svg class="save-icon" width="24px" height="24px" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -170,7 +171,7 @@ trackPageVisit('index.php');
                </div>
             <?php endforeach; ?>
          </div>
-         <a href="all-event.php"><button class="view-more-btn">もっと見る</button></a>
+         <a href="all-event.php"><button class="view-more-btn" aria-label="もっと見る">もっと見る</button></a>
       </main>
       <footer>
          <?php include 'include/footer.php' ?>
