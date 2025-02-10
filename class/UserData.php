@@ -75,16 +75,16 @@ if (!class_exists('UserData')) {
             $state->bindValue(':name', $user->name, PDO::PARAM_STR);
             $state->bindValue(':phone', $user->phone, PDO::PARAM_STR);
             $avatars = [
-                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Cat.jpg',
-                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Dog.jpg',
-                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Fox.jpg',
-                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Panda.jpg',
-                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Wolf.jpg',
-                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Lion.jpg',
-                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Deer.jpg',
-                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Bear.jpg',
-                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Rabbit.jpg',
-                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Pig.jpg',
+                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Cat.webp',
+                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Dog.webp',
+                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Fox.webp',
+                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Panda.webp',
+                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Wolf.webp',
+                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Lion.webp',
+                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Deer.webp',
+                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Bear.webp',
+                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Rabbit.webp',
+                'https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Pig.webp',
             ];
             $user->avatar = $avatars[array_rand($avatars)];
             $state->bindValue(':avatar', $user->avatar, PDO::PARAM_STR);

@@ -152,25 +152,25 @@ trackPageVisit('profile.php');
                 <div class="popup-content">
                     <h2>アバターを選択</h2>
                     <div class="avatar-options">
-                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Cat.jpg" alt="Bear"
+                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Cat.webp" alt="Bear"
                             class="avatar-option">
-                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Dog.jpg" alt="Cat"
+                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Dog.webp" alt="Cat"
                             class="avatar-option">
-                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Wolf.jpg" alt="Dear"
+                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Wolf.webp" alt="Dear"
                             class="avatar-option">
-                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Panda.jpg" alt="Dog"
+                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Panda.webp" alt="Dog"
                             class="avatar-option">
-                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Fox.jpg" alt="Fox"
+                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Fox.webp" alt="Fox"
                             class="avatar-option">
-                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Bear.jpg" alt="Lion"
+                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Bear.webp" alt="Lion"
                             class="avatar-option">
-                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Rabbit.jpg"
+                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Rabbit.webp"
                             alt="Panda" class="avatar-option">
-                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Pig.jpg" alt="Pig"
+                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Pig.webp" alt="Pig"
                             class="avatar-option">
-                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Deer.jpg" alt="Rabbit" 
+                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Deer.webp" alt="Rabbit"
                             class="avatar-option">
-                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Lion.jpg" alt="Wolf"
+                        <img src="https://greenspacestorage.sgp1.cdn.digitaloceanspaces.com/avatar/Lion.webp" alt="Wolf"
                             class="avatar-option">
                     </div>
                     <div class="avtBtn">
