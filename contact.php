@@ -60,39 +60,39 @@ trackPageVisit('contact.php');
                         <tbody>
                             <tr>
                                 <td>UI/UX</td>
-                                <td><input type="radio" name="uiux" value="1"></td>
-                                <td><input type="radio" name="uiux" value="2"></td>
-                                <td><input type="radio" name="uiux" value="3"></td>
-                                <td><input type="radio" name="uiux" value="4"></td>
-                                <td><input type="radio" name="uiux" value="5"></td>
+                                <td><input type="radio" name="uiux" value="1" aria-label="とても良くない"></td>
+                                <td><input type="radio" name="uiux" value="2" aria-label="良くない"></td>
+                                <td><input type="radio" name="uiux" value="3" aria-label="普通"></td>
+                                <td><input type="radio" name="uiux" value="4" aria-label="良かった"></td>
+                                <td><input type="radio" name="uiux" value="5" aria-label="とても良かった"></td>
                             </tr>
                             <tr>
                                 <td>内容</td>
-                                <td><input type="radio" name="content" value="1"></td>
-                                <td><input type="radio" name="content" value="2"></td>
-                                <td><input type="radio" name="content" value="3"></td>
-                                <td><input type="radio" name="content" value="4"></td>
-                                <td><input type="radio" name="content" value="5"></td>
+                                <td><input type="radio" name="content" value="1" aria-label="とても良くない"></td>
+                                <td><input type="radio" name="content" value="2" aria-label="良くない"></td>
+                                <td><input type="radio" name="content" value="3" aria-label="普通"></td>
+                                <td><input type="radio" name="content" value="4" aria-label="良かった"></td>
+                                <td><input type="radio" name="content" value="5" aria-label="とても良かった"></td>
                             </tr>
                             <tr>
                                 <td>全体的</td>
-                                <td><input type="radio" name="overall" value="1"></td>
-                                <td><input type="radio" name="overall" value="2"></td>
-                                <td><input type="radio" name="overall" value="3"></td>
-                                <td><input type="radio" name="overall" value="4"></td>
-                                <td><input type="radio" name="overall" value="5"></td>
+                                <td><input type="radio" name="overall" value="1" aria-label="とても良くない"></td>
+                                <td><input type="radio" name="overall" value="2" aria-label="良くない"></td>
+                                <td><input type="radio" name="overall" value="3" aria-label="普通"></td>
+                                <td><input type="radio" name="overall" value="4" aria-label="良かった"></td>
+                                <td><input type="radio" name="overall" value="5" aria-label="とても良かった"></td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <textarea name="content_text" placeholder="問い合わせ、フィードバックの内容..."></textarea>
+                    <textarea name="content_text" placeholder="問い合わせ、フィードバックの内容..." aria-label="問い合わせ、フィードバックの内容..."></textarea>
 
                     <div class="button-area">
-                        <button class="glow-on-hover" type="submit" name="submit-button">送信</button>
+                        <button class="glow-on-hover" type="submit" name="submit-button" aria-label="送信">送信</button>
                     </div>
                 </form>
             </div>
-            <div class="result-popup" id="result"></div>
+            <div class="result-popup" id="result" aria-label="送信結果"></div>
         </main>
         <div id="overlay"></div>
         <footer>

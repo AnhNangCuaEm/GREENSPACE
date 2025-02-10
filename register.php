@@ -213,7 +213,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </h1>
         </div>
         <div class="login-register-form">
-            <form action="register.php" method="post">
+            <form action="register.php" method="post" aria-label="新規登録フォーム">
                 <h2>新規登録</h2>
                 <div>
                     <div class="input-div">
@@ -230,9 +230,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </div>
                 </div>
                 <div class="button-area">
-                    <button class="glow-on-hover" type="submit" name="submit-button">登録</button>
+                    <button class="glow-on-hover" type="submit" name="submit-button" aria-label="登録">登録</button>
                 </div>
-                <div class="second-button"><a href="login.php">ログイン</a></div>
+                <div class="second-button"><a href="login.php" aria-label="ログイン">ログイン</a></div>
             </form>
         </div>
     </div>

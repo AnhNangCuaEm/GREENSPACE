@@ -195,7 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </h1>
         </div>
         <div class="login-register-form">
-            <form action="login.php" method="post">
+            <form action="login.php" method="post" aria-label="ログインフォーム">
                 <h2>ログイン</h2>
                 <div class="input-div">
                     <div>
@@ -213,9 +213,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <p><?= htmlspecialchars($errormessages['login'] ?? '') ?></p>
                 <div class="button-area">
-                    <button class="glow-on-hover" type="submit" name="submit-button">ログイン</button>
+                    <button class="glow-on-hover" type="submit" name="submit-button" aria-label="ログイン">ログイン</button>
                 </div>
-                <div class="second-button"><a href="register.php">アカウントを作成</a></div>
+                <div class="second-button"><a href="register.php" aria-label="アカウントを作成">アカウントを作成</a></div>
             </form>
         </div>
     </div>
