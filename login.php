@@ -45,6 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Green Spaceは、緑の空間を提供するサービスです。">
+    <meta name="keywords" content="緑の空間, 緑の空間を提供するサービス, イベント情報を提供するサービス">
+    <meta name="author" content="Green Space">
     <title>Green Space</title>
     <link rel="shortcut icon" href="img/img/logoNotext.png" type="image/x-icon">
     <link rel="stylesheet" href="css/login.css">
@@ -71,8 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div class="content-wrapper">
         <div class="logo">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400"
-                zoomAndPan="magnify" viewBox="95 100 180 180" height="300" preserveAspectRatio="xMidYMid meet"
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="350"
+                zoomAndPan="magnify" viewBox="95 100 180 180" height="250" preserveAspectRatio="xMidYMid meet"
                 version="1.0">
                 <defs>
                     <g />
@@ -202,13 +205,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div>
                         <label for="email">メールアドレス</label>
                         <input type="email" name="email" id="email" placeholder="abc@gmail.com"
-                            value="<?= htmlspecialchars($email ?? '') ?>" aria-label="メールアドレス">
+                            value="<?= htmlspecialchars($email ?? '') ?>" autocomplete="email" aria-label="メールアドレス">
                         <p><?= htmlspecialchars($errormessages['email'] ?? '') ?></p>
                     </div>
                     <div>
                         <label for="password">パスワード</label>
                         <input type="password" name="password" id="password" placeholder="********"
-                            value="<?= htmlspecialchars($password ?? '') ?>" aria-label="パスワード">
+                            value="<?= htmlspecialchars($password ?? '') ?>" autocomplete="current-password" aria-label="パスワード">
                         <p><?= htmlspecialchars($errormessages['password'] ?? '') ?></p>
                     </div>
                 </div>

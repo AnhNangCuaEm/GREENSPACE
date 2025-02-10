@@ -62,6 +62,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Green Spaceは、緑の空間を提供するサービスです。">
+    <meta name="keywords" content="緑の空間, 緑の空間を提供するサービス, イベント情報を提供するサービス">
+    <meta name="author" content="Green Space">
     <title>Green Space</title>
     <link rel="shortcut icon" href="img/img/logoNotext.png" type="image/x-icon">
     <link rel="stylesheet" href="css/login.css">
@@ -88,8 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <div class="content-wrapper">
         <div class="logo">
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="400"
-                zoomAndPan="magnify" viewBox="95 100 180 180" height="300" preserveAspectRatio="xMidYMid meet"
+            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="350"
+                zoomAndPan="magnify" viewBox="95 100 180 180" height="250" preserveAspectRatio="xMidYMid meet"
                 version="1.0">
                 <defs>
                     <g />
