@@ -211,7 +211,7 @@ if (isset($_GET['id'])) {
                                         </g>
                                     </g>
                                 </svg>前へ</button></a>
-                        <a href="?id=<?= $nextId ?>"><button aria-label="次へ"><svg fill="#000000" height="24px" width="24px"
+                        <a href="?id=<?= $nextId ?>"><button aria-label="次へ">次へ<svg fill="#000000" height="24px" width="24px"
                                     version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 55.752 55.752"
                                     xml:space="preserve">
