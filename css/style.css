@@ -101,38 +101,6 @@ body {
    height: 100%;
 }
 
-.g1 {
-   position: absolute;
-   background: radial-gradient(circle at center, rgba(var(--color1), 0.8) 0, rgba(var(--color1), 0) 50%) no-repeat;
-   mix-blend-mode: var(--blending);
-
-   width: var(--circle-size);
-   height: var(--circle-size);
-   top: calc(50% - var(--circle-size) / 2);
-   left: calc(50% - var(--circle-size) / 2);
-
-   transform-origin: calc(50% + 400px);
-   animation: moveInCircle 20s reverse infinite;
-
-   opacity: 1;
-}
-
-.g2 {
-   position: absolute;
-   background: radial-gradient(circle at center, rgba(var(--color2), 0.8) 0, rgba(var(--color2), 0) 50%) no-repeat;
-   mix-blend-mode: var(--blending);
-
-   width: var(--circle-size);
-   height: var(--circle-size);
-   top: calc(50% - var(--circle-size) / 2);
-   left: calc(50% - var(--circle-size) / 2);
-
-   transform-origin: calc(50% - 400px);
-   animation: moveInCircle 20s reverse infinite;
-
-   opacity: 1;
-}
-
 .interactive {
    position: absolute;
    background: radial-gradient(circle at center, rgba(var(--color-interactive), 0.8) 0, rgba(var(--color-interactive), 0) 50%) no-repeat;

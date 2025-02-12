@@ -67,8 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </defs>
         </svg>
         <div class="gradients-container">
-            <div class="g1"></div>
-            <div class="g2"></div>
             <div class="interactive"></div>
         </div>
     </div>
