@@ -369,6 +369,8 @@ hr {
    object-fit: cover;
    height: 100%;
    width: 100%;
+   min-height: 250px;
+   min-width: 300px;
    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -469,6 +471,7 @@ hr {
    border-radius: 25px;
    height: auto;
    width: 100%;
+   min-width: 300px;
    aspect-ratio: 16/9;
    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }

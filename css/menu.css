@@ -585,10 +585,9 @@ ul li:hover {
     }
 
     .search-results {
+        right: 0;
         max-width: fit-content;
-        right: 50%;
         text-wrap: nowrap;
-        transform: translateX(50%);
         max-height: 60vh;
     }
 

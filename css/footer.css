@@ -79,6 +79,10 @@ footer > div > div:nth-child(1) > svg {
         align-items: center;
     }
 
+    .footer-box h4 {
+        text-align: center;
+    }
+
     .footer-container {
         display: grid;
         max-width: 90%;
@@ -106,10 +110,6 @@ footer > div > div:nth-child(1) > svg {
     .footer-box:nth-child(4) {
         grid-row-start: 4;
         /* Fourth box spans full width */
-    }
-
-    .footer-box h3 {
-        text-align: center;
     }
     
     .footer-box ul {

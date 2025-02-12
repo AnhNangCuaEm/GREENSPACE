@@ -79,6 +79,7 @@
 .event-card img {
     width: 100%;
     height: auto;
+    min-width: 250px;
     aspect-ratio: 16/9;
     border-radius: 25px 25px 0 0;
     object-fit: cover;
