@@ -491,6 +491,7 @@ body>main>div>h2 {
 
 .privacy-container ul li:hover {
    text-shadow: none;
+   transform: none;
 }
 
 .credit-container svg {
