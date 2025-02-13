@@ -1,4 +1,3 @@
-
 document.getElementById('changeAvtBtn').addEventListener('click', function () {
     document.getElementById('avatarPopup').style.display = 'block';
     document.body.style.overflow = 'hidden';
@@ -12,9 +11,8 @@ document.getElementById('closePopup').addEventListener('click', function () {
 document.getElementById('applyAvatar').addEventListener('click', function () {
     const selectedAvatar = document.querySelector('.avatar-option.selected');
     if (selectedAvatar) {
-        const newAvatar = selectedAvatar.src; // Get the selected avatar URL
+        const newAvatar = selectedAvatar.src;
 
-        // Send AJAX request to update the avatar
         fetch('functions/update_avatar.php', {
             method: 'POST',
             headers: {
@@ -22,24 +20,27 @@ document.getElementById('applyAvatar').addEventListener('click', function () {
             },
             body: JSON.stringify({ avatar: newAvatar }),
         })
-            .then(response => {
-                if (response.ok) {
-                    document.getElementById('avatarPopup').style.display = 'none'; // Close popup after clicking apply
-                    document.body.style.overflow = 'auto'; // Enable scrolling
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Update avatar in the avatar-box
+                    document.querySelector('.avatar-box img').src = newAvatar;
 
-                    // Show result popup after applying avatar
+                    document.getElementById('avatarPopup').style.display = 'none';
+                    document.getElementById('overlay').style.display = 'none';
+                    document.body.style.overflow = 'auto';
+
                     const resultPopup = document.getElementById('result');
                     resultPopup.innerHTML = 'アバター変更しました!';
                     resultPopup.classList.add('slidedown');
 
-                    // Set timeout to hide popup after 3 seconds
                     setTimeout(() => {
                         resultPopup.classList.remove('slidedown');
                         resultPopup.classList.add('slideup');
 
-                        // Reset animation classes after slideup completes
                         setTimeout(() => {
                             resultPopup.classList.remove('slideup');
+                            resultPopup.innerHTML = '';
                         }, 300);
                     }, 4000);
 

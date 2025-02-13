@@ -24,6 +24,7 @@ document.getElementById('myForm').addEventListener('submit', function (e) {
                 // Reset animation classes after slideup completes
                 setTimeout(() => {
                     resultPopup.classList.remove('slideup');
+                    resultPopup.innerHTML = ''; // Clear the content
                 }, 300);
             }, 4000);
 

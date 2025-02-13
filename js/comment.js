@@ -56,6 +56,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 setTimeout(() => {
                     resultPopup.classList.remove('slideup');
+                    resultPopup.innerHTML = ''; // Clear the content
                     if (data.success) {
                     }
                 }, 300);
@@ -73,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 setTimeout(() => {
                     resultPopup.classList.remove('slideup');
+                    resultPopup.innerHTML = ''; // Clear the content
                 }, 300);
             }, 3000);
         });
@@ -111,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     setTimeout(() => {
                         resultPopup.classList.remove('slideup');
+                        resultPopup.innerHTML = ''; // Clear the content
                         if (data.success) {
                         }
                     }, 300);

@@ -116,9 +116,9 @@ document.getElementById('editForm').addEventListener('submit', function (event) 
                 resultPopup.classList.remove('slidedown');
                 resultPopup.classList.add('slideup');
 
-                // Reset animation classes after slideup completes
                 setTimeout(() => {
                     resultPopup.classList.remove('slideup');
+                    resultPopup.innerHTML = ''; // Clear the content
                 }, 300);
             }, 4000);
 
@@ -133,9 +133,9 @@ document.getElementById('editForm').addEventListener('submit', function (event) 
                 resultPopup.classList.remove('slidedown');
                 resultPopup.classList.add('slideup');
 
-                // Reset animation classes after slideup completes
                 setTimeout(() => {
                     resultPopup.classList.remove('slideup');
+                    resultPopup.innerHTML = ''; // Clear the content
                 }, 300);
             }, 4000);
         }
@@ -151,9 +151,9 @@ document.getElementById('editForm').addEventListener('submit', function (event) 
             resultPopup.classList.remove('slidedown');
             resultPopup.classList.add('slideup');
 
-            // Reset animation classes after slideup completes
             setTimeout(() => {
                 resultPopup.classList.remove('slideup');
+                resultPopup.innerHTML = ''; // Clear the content
             }, 300);
         }, 4000);
     });
