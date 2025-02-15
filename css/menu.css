@@ -585,7 +585,7 @@ ul li:hover {
     }
 
     .search-results {
-        right: 20px;
+        right: auto;
         max-width: fit-content;
         text-wrap: nowrap;
         max-height: 60vh;
