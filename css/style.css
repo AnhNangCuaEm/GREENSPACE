@@ -563,6 +563,10 @@ body>main>div>h2 {
    overflow: hidden;
 }
 
+.image-container > div {
+   display: flex;
+}
+
 .image-container.loading::before {
    content: "";
    position: absolute;
