@@ -11,7 +11,7 @@ $user = UserData::getProfile();
             <a href="#"><img class="navLogo" src="img/img/logo.png" alt="ホーム"></a>
             <ul>
                 <li><a href="index.php" aria-label="ホーム">ホーム</a></li>
-                <li><a href="all.php" aria-label="探る">探る</a></li>
+                <li><a href="all.php" aria-label="公園">公園</a></li>
                 <li><a href="all-event.php" aria-label="イベント">イベント</a></li>
             </ul>
         </div>
@@ -73,7 +73,7 @@ $user = UserData::getProfile();
                     <span class="notification-badge" style="display: none;">0</span>
                 </div>
             </li>
-            <li><a href="all.php" aria-label="探る">探る</a></li>
+            <li><a href="all.php" aria-label="公園">公園</a></li>
             <li><a href="all-event.php" aria-label="イベント">イベント</a></li>
             <li><a href="contact.php" aria-label="問い合せ">問い合せ</a></li>
             <li><a href="privacy.php" aria-label="プライバシー">Privacy</a></li>

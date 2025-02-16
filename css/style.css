@@ -567,6 +567,10 @@ body>main>div>h2 {
    display: flex;
 }
 
+.image-container > a {
+   display: flex;
+}
+
 .image-container.loading::before {
    content: "";
    position: absolute;

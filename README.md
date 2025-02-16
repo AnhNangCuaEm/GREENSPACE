@@ -1,4 +1,1 @@
-TODO:\
-add 404 page sau khi deploy\
-xắp xếp lại các code cho đẹp hơn\
-nút xóa traffic logs\
+GREENSPACEは、リラックスしたい方々のために、自然の中や街中の特定の場所やイベント情報を提供することを目的としたウェブサイトです。このプロジェクトは、学習の一環として開発され、ユーザーに心地よい体験を提供することを目指しています。
