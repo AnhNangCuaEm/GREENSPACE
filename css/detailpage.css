@@ -298,6 +298,7 @@ main>div>div.park-detail-info>div>a:nth-child(2)>button:hover svg {
 
 .nickname {
     margin-bottom: 10px;
+    font-size: 16px;
     padding: 10px;
     height: 35px;
     width: 200px;
@@ -307,6 +308,7 @@ main>div>div.park-detail-info>div>a:nth-child(2)>button:hover svg {
 }
 
 #comment {
+    font-size: 16px;
     padding: 10px;
     border-radius: 7px;
     color: black;
