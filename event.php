@@ -167,7 +167,7 @@ $nextId = ($currentIndex < count($eventIds) - 1) ? $eventIds[$currentIndex + 1] 
                     <p><span>場所</span>:&nbsp;<?= htmlspecialchars($event->location) ?></p>
                     <p><span>日付</span>:&nbsp;<?= htmlspecialchars($event->date) ?></p>
                     <p><span>時間</span>:&nbsp;<?= htmlspecialchars($event->time) ?></p>
-                    <p><span>料金</span>:&nbsp;<?= htmlspecialchars($event->price) ?></p>
+                    <p><span>料金</span>:&nbsp;<?= $event->price == 0 ? '無料' : htmlspecialchars($event->price) . '&yen;' ?></p>
                     <p><?= htmlspecialchars($event->description) ?></p>
                     <?php
                     $isSaved = isset($_SESSION['email']) ? checkIfSaved($event->id, $_SESSION['email']) : false;
