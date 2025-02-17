@@ -2,7 +2,7 @@
 function checkAuth()
 {
    if (!isset($_SESSION['email'])) {
-      header('Location: ' . dirname(__DIR__) . '/index.php');
+      header('Location: /index.php');
       exit();
    }
    return $_SESSION['email'];
@@ -18,7 +18,7 @@ function checkAdmin()
          http_response_code(403);
          echo json_encode(['success' => false, 'message' => 'Unauthorized access']);
       } else {
-         header('Location: ' . dirname(__DIR__) . '/index.php');
+         header('Location: /index.php');
       }
       exit();
    }
