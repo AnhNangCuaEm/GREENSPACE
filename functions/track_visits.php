@@ -31,10 +31,7 @@ function trackPageVisit($pageName) {
     try {
         $conn = Database::getConnection();
         
-        // Get visitor IP using new function
         $visitorIP = getClientIP();
-        
-        // Get user email if logged in
         $userEmail = isset($_SESSION['email']) ? $_SESSION['email'] : null;
         
         // Get device and browser info
@@ -46,7 +43,7 @@ function trackPageVisit($pageName) {
             $deviceType = 'tablet';
         }
         
-        // Get browser info
+        // Browser detection
         $browser = 'Unknown';
         if (preg_match('/MSIE/i', $userAgent)) {
             $browser = 'Internet Explorer';
@@ -60,12 +57,16 @@ function trackPageVisit($pageName) {
             $browser = 'Opera';
         }
         
-        // Insert visit record using PDO
-        $stmt = $conn->prepare("INSERT INTO page_visits (page_name, visitor_ip, user_email, device_type, browser) VALUES (?, ?, ?, ?, ?)");
+        // Sử dụng NOW() để lấy thời gian theo timezone đã set
+        $stmt = $conn->prepare("
+        INSERT INTO page_visits 
+        (page_name, visitor_ip, user_email, device_type, browser, visit_time) 
+        VALUES (?, ?, ?, ?, ?, CONVERT_TZ(NOW(), 'SYSTEM', '+09:00'))
+    ");
+        
         $stmt->execute([$pageName, $visitorIP, $userEmail, $deviceType, $browser]);
         
     } catch (PDOException $e) {
-        // Log error silently - don't want to break the page if tracking fails
         error_log("Track visit error: " . $e->getMessage());
     }
 }
