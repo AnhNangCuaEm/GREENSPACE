@@ -95,7 +95,7 @@ try {
     WHERE visit_time >= {$timeSQL}
     GROUP BY user_email
     ORDER BY visit_count DESC
-    LIMIT 5";
+    ";
 
     $stmt = $conn->prepare($visitorQuery);
     $stmt->execute();
