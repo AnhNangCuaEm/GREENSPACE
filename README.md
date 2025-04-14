@@ -3,4 +3,4 @@ GREENSPACEは、リラックスしたい方々のために、自然の中や街�
 4月30日までサイト公開中:green-space.tech\
 Admin専用のアカウント:\
 email:hal@gmail.com\
-pass:halhalhal\
+pass:halhalhal
